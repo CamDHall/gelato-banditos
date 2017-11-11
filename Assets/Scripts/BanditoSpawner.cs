@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class BanditoSpawner : MonoBehaviour {
 
-    public static GameManager Instance;
+    public static BanditoSpawner Instance;
 
 	void Start () {
         Instance = this;
 	}
 	
+	// Update is called once per frame
 	void Update () {
 		
 	}
