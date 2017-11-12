@@ -7,16 +7,16 @@ public class PlayerMovement : MonoBehaviour {
     public static PlayerMovement player;
     public float thrustSpeed;
 
+    public float pitch_speed, yaw_speed, roll_speed;
+
     float pitch, yaw, roll;
-    Quaternion _rotation;
     Vector3 vel;
 
     Rigidbody rb;
 
-	void Start () {
+	void Awake () {
         player = this;
         rb = GetComponent<Rigidbody>();
-        _rotation = Quaternion.identity;
 	}
 	
 	void Update () {
@@ -25,21 +25,22 @@ public class PlayerMovement : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        pitch = Input.GetAxis("Pitch");
-        yaw = Input.GetAxis("Yaw");
-        roll = Input.GetAxis("Roll");
+        pitch = Input.GetAxis("Pitch") * pitch_speed;
+        yaw = Input.GetAxis("Yaw") * yaw_speed;
+        roll = Input.GetAxis("Roll") * roll_speed;
 
-        _rotation.eulerAngles = new Vector3(pitch, yaw, roll);
-        rb.rotation *= _rotation;
-
-        Debug.Log(pitch);
-
+        transform.Rotate(pitch, yaw, roll);
+        if(Input.GetButton("Thrust"))
+        {
+            rb.MovePosition(transform.position + transform.forward);
+        };
+        /*
         if (Input.GetButton("Thrust"))
         {
             vel = (transform.position + Vector3.forward) * (thrustSpeed * Time.deltaTime);
             Debug.Log(vel);
             transform.Translate(vel);
             //rb.MovePosition(rb.position + Vector3.forward);
-        }
+        }*/
     }
 }
