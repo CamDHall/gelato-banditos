@@ -142,7 +142,7 @@ MonoBehaviour:
   prefab_quadrant: {fileID: 1034734971164400, guid: 81c9fad4f7c35624b92b15fa74f43f31,
     type: 2}
   size: 10
-  col_size: 501
+  col_size: 1000
 --- !u!4 &51157722
 Transform:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class AstroField : MonoBehaviour {
 
     bool populated = false;
+    bool turnedOff = false;
     List<GameObject> field = new List<GameObject>();
 
     public GameObject astroid;
@@ -15,26 +16,55 @@ public class AstroField : MonoBehaviour {
     BoxCollider box;
     float camDepth;
 
-
     private void Awake()
     {
         box = GetComponent<BoxCollider>();
-        numAstroids = Random.Range(20, 30);
+        numAstroids = Random.Range(40, 50);
         size = AstroSpawner.Instance.col_size;
+
         camDepth = Camera.main.farClipPlane;
-        Debug.Log(camDepth);
     }
 
     private void Update()
     {
-        if (!populated)
+        if(!populated)
         {
-            if (Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPointOnBounds(PlayerMovement.player.transform.position)) < (camDepth - box.bounds.size.x))
+            if(Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position)) < camDepth)
             {
                 populated = true;
                 Populate();
             }
+        } else
+        {
+            // Turn off if far away
+            if(Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position)) > camDepth)
+            {
+                if (!turnedOff)
+                {
+                    TurnOff();
+                }
+            }
+
+            // Turn on if retentering quadrant
+            if (Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position)) < camDepth)
+            {
+                if (turnedOff)
+                {
+                    turnedOff = false;
+                    Populate();
+                }
+            }
         }
+
+        /* if (!populated)
+        {
+            if (Vector3.Distance(PlayerMovement.player.transform.position, box.bounds.center) < (box.size.x / 2) + 200)
+            {
+                populated = true;
+                Populate();
+                Debug.Log(box.size.x / 2);
+            }
+        } */
     }
     /*
     private void OnTriggerEnter(Collider coll)
@@ -72,6 +102,16 @@ public class AstroField : MonoBehaviour {
             temp.transform.parent = transform;
             temp.transform.localPosition = Pos;
             field.Add(temp);
+        }
+    }
+
+    void TurnOff()
+    {
+        turnedOff = true;
+        Debug.Log("HERE");
+        foreach(GameObject astro in field)
+        {
+            astro.SetActive(false);
         }
     }
 }
