@@ -142,7 +142,7 @@ MonoBehaviour:
   prefab_quadrant: {fileID: 1034734971164400, guid: 81c9fad4f7c35624b92b15fa74f43f31,
     type: 2}
   size: 10
-  col_size: 201
+  col_size: 501
 --- !u!4 &51157722
 Transform:
   m_ObjectHideFlags: 0
@@ -280,7 +280,7 @@ Prefab:
     - target: {fileID: 114554589000543022, guid: b12399195b8195d4589a24a9ee08103d,
         type: 2}
       propertyPath: thrustSpeed
-      value: 0.1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b12399195b8195d4589a24a9ee08103d, type: 2}

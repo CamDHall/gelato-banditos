@@ -22,7 +22,7 @@ public class AstroSpawner : MonoBehaviour {
                 for (int x = 0; x < size; x++)
                 {
                     // Add one to avoid overlapping colliders
-                    Vector3 Pos = new Vector3(((-size / 2) + x) * col_size, ((-size / 2) + y) * col_size, ((-size / 2) + z)  * col_size);
+                    Vector3 Pos = new Vector3((((-size / 2) + x) * col_size) + x, (((-size / 2) + y) * col_size) + y, (((-size / 2)  + z) * col_size) + z);
                     GameObject quad = Instantiate(prefab_quadrant, Pos, Quaternion.identity, transform);
                     quadrants.Add(quad);
                 }

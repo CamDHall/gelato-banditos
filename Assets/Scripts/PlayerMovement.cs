@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Awake () {
         player = this;
         rb = GetComponent<Rigidbody>();
-	}
+    }
 	
 	void Update () {
         
@@ -30,17 +30,11 @@ public class PlayerMovement : MonoBehaviour {
         roll = Input.GetAxis("Roll") * roll_speed;
 
         transform.Rotate(pitch, yaw, roll);
-        if(Input.GetButton("Thrust"))
-        {
-            rb.MovePosition(transform.position + transform.forward);
-        };
-        /*
+        
         if (Input.GetButton("Thrust"))
         {
-            vel = (transform.position + Vector3.forward) * (thrustSpeed * Time.deltaTime);
-            Debug.Log(vel);
-            transform.Translate(vel);
-            //rb.MovePosition(rb.position + Vector3.forward);
-        }*/
+            //transform.Translate(vel);
+            rb.MovePosition(rb.position + transform.forward);
+        }
     }
 }
