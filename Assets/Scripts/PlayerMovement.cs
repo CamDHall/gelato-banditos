@@ -9,8 +9,12 @@ public class PlayerMovement : MonoBehaviour {
 
     public float pitch_speed, yaw_speed, roll_speed;
 
+    public bool rotating = false;
+
     float pitch, yaw, roll;
     Vector3 vel;
+
+    Vector3 centerPos;
 
     Rigidbody rb;
 
@@ -18,10 +22,6 @@ public class PlayerMovement : MonoBehaviour {
         player = this;
         rb = GetComponent<Rigidbody>();
     }
-	
-	void Update () {
-        
-	}
 
     private void FixedUpdate()
     {
@@ -31,9 +31,16 @@ public class PlayerMovement : MonoBehaviour {
 
         transform.Rotate(pitch, yaw, roll);
         
+        if(pitch == 0 && yaw == 0 && roll == 0)
+        {
+            rotating = true;
+        } else
+        {
+            rotating = false;
+        }
+
         if (Input.GetButton("Thrust"))
         {
-            //transform.Translate(vel);
             rb.MovePosition(rb.position + transform.forward);
         }
     }

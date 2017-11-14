@@ -16,6 +16,8 @@ public class AstroField : MonoBehaviour {
     BoxCollider box;
     float camDepth;
 
+    float playerDist = 0;
+
     private void Awake()
     {
         box = GetComponent<BoxCollider>();
@@ -27,17 +29,19 @@ public class AstroField : MonoBehaviour {
 
     private void Update()
     {
-        if(!populated)
+        playerDist = Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position));
+        if (!populated)
         {
-            if(Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position)) < camDepth)
+            if (playerDist < camDepth)
             {
                 populated = true;
                 Populate();
             }
-        } else
+        }
+        else
         {
             // Turn off if far away
-            if(Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position)) > camDepth)
+            if (playerDist > camDepth)
             {
                 if (!turnedOff)
                 {
@@ -53,42 +57,6 @@ public class AstroField : MonoBehaviour {
                     turnedOff = false;
                     Populate();
                 }
-            }
-        }
-
-        /* if (!populated)
-        {
-            if (Vector3.Distance(PlayerMovement.player.transform.position, box.bounds.center) < (box.size.x / 2) + 200)
-            {
-                populated = true;
-                Populate();
-                Debug.Log(box.size.x / 2);
-            }
-        } */
-    }
-    /*
-    private void OnTriggerEnter(Collider coll)
-    {
-        if(!populated && coll.tag == "Player")
-        {
-            populated = true;
-            Populate();
-        } else if(coll.tag == "Player")
-        {
-            foreach (GameObject astro in field)
-            {
-                astro.SetActive(true);
-            }
-        }
-    } */
-
-    private void OnTriggerExit(Collider coll)
-    {
-        if(coll.gameObject.tag == "Player")
-        {
-            foreach(GameObject astro in field)
-            {
-                astro.SetActive(false);
             }
         }
     }
