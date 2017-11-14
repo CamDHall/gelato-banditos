@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public bool rotating = false;
 
-    float pitch, yaw, roll;
+    public float pitch, yaw, roll;
     Vector3 vel;
 
     Vector3 centerPos;

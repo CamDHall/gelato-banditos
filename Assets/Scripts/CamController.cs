@@ -4,11 +4,37 @@ using UnityEngine;
 
 public class CamController : MonoBehaviour {
 
+    public GameObject container;
+    Quaternion og_Rot;
+
+    private void Start()
+    {
+        og_Rot = transform.localRotation;
+        Debug.Log(og_Rot);
+    }
+
     private void LateUpdate()
     {
-        /*transform.position = new Vector3(PlayerMovement.player.transform.position.x,
-            PlayerMovement.player.transform.position.y + 3, PlayerMovement.player.transform.position.z - 4);
-        transform.Rotate(PlayerMovement.player.transform.rotation.x * 0.3f, 
-        PlayerMovement.player.transform.rotation.y, PlayerMovement.player.transform.rotation.z); */
+        transform.localPosition = container.transform.position;
+
+        Quaternion newRot = PlayerMovement.player.transform.rotation;
+        newRot.x += transform.rotation.x;
+
+        if(PlayerMovement.player.pitch == 0)
+        {
+            newRot.x = PlayerMovement.player.transform.rotation.x + og_Rot.x;
+        }
+
+        if(PlayerMovement.player.yaw == 0)
+        {
+            newRot.y = PlayerMovement.player.transform.rotation.y;
+        }
+
+        if(PlayerMovement.player.roll == 0)
+        {
+            newRot.z = PlayerMovement.player.transform.rotation.z;
+        }
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, newRot, 0.5f);
     }
 }
