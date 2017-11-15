@@ -9,6 +9,7 @@ public class AstroSpawner : MonoBehaviour {
     public GameObject prefab_quadrant;
 
     List<GameObject> quadrants = new List<GameObject>();
+    public Dictionary<GameObject, int> astroids = new Dictionary<GameObject, int>();
 
     public int size;
     public int col_size;
@@ -30,7 +31,14 @@ public class AstroSpawner : MonoBehaviour {
         }
 	}
 	
-	void Update () {
-		
-	}
+	public void ReceiveDamage(GameObject astro)
+    {
+        if (astroids[astro] > 1)
+        {
+            astroids[astro] -= 1;
+        } else
+        {
+            Destroy(astro);
+        }
+    }
 }

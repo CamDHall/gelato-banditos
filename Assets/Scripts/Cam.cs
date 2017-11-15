@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Cam : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public GameObject container;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        transform.rotation = Quaternion.identity;
-	}
+        transform.localPosition = container.transform.position;
+    }
 }
