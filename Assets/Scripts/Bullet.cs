@@ -27,5 +27,9 @@ public class Bullet : MonoBehaviour {
             AstroSpawner.Instance.ReceiveDamage(coll.gameObject);
             Destroy(gameObject);
         }
+        if(coll.gameObject.tag == "IceCream")
+        {
+            GameManager.Instance.score++;
+        }
     }
 }

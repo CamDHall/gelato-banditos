@@ -6,29 +6,23 @@ public class CamController : MonoBehaviour {
 
     Quaternion og_Rot;
 
+    float pitch, yaw;
+    public float pitch_speed, yaw_speed;
+
     private void Start()
     {
         og_Rot = transform.localRotation;
-        Debug.Log(og_Rot);
     }
 
     private void LateUpdate()
-    {        
-        /*
-        if(PlayerMovement.player.pitch == 0)
-        {
-            newRot.x = PlayerMovement.player.transform.rotation.x + og_Rot.x;
-        }
+    {
+        pitch = (Input.GetAxis("CameraPitch") * pitch_speed) + 32;
+        yaw = Input.GetAxis("CameraYaw") * yaw_speed;
 
-        if(PlayerMovement.player.yaw == 0)
-        {
-            newRot.y = PlayerMovement.player.transform.rotation.y;
-        }
+        //transform.Rotate(pitch, yaw, 0);
 
-        if(PlayerMovement.player.roll == 0)
-        {
-            newRot.z = PlayerMovement.player.transform.rotation.z;
-        }*/
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, PlayerMovement.player.transform.rotation, 0.5f);
+        transform.localEulerAngles = new Vector3(Mathf.Clamp(pitch, 25f, 50f),
+    Mathf.Clamp(yaw, -8f, 8f), 0);
+
     }
 }

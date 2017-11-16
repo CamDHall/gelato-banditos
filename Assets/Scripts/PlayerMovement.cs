@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if(Input.GetButton("Thrust"))
+        if(Input.GetAxis("Thrust") != 0)
         {
             if (acceleration < maxSpeed)
             {
@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour {
 
         pitch = Input.GetAxis("Pitch") * pitch_speed;
         yaw = Input.GetAxis("Yaw") * yaw_speed;
-        roll = Input.GetAxis("Roll") * roll_speed;
+        roll = (-Input.GetAxis("RollRight") + Input.GetAxis("RollLeft")) * roll_speed;
 
         transform.Rotate(pitch, yaw, roll);
         
@@ -75,5 +75,13 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         rb.MovePosition(rb.position + (transform.forward * acceleration));
+    }
+
+    private void OnCollisionEnter(Collision coll)
+    {
+        if(coll.gameObject.tag == "Astro")
+        {
+            GameManager.Instance.Death();
+        }
     }
 }

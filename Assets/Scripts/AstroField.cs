@@ -21,10 +21,10 @@ public class AstroField : MonoBehaviour {
     private void Awake()
     {
         box = GetComponent<BoxCollider>();
-        numAstroids = Random.Range(30, 40);
+        numAstroids = Random.Range(20, 25);
         size = AstroSpawner.Instance.col_size;
 
-        camDepth = Camera.main.farClipPlane / 3;
+        camDepth = Camera.main.farClipPlane / 4;
     }
 
     private void Update()
@@ -70,13 +70,25 @@ public class AstroField : MonoBehaviour {
             temp.transform.parent = transform;
             temp.transform.localPosition = Pos;
             field.Add(temp);
-            AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
+            //AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
+            AstroSpawner.Instance.astroids.Add(temp, 1);
         }
     }
 
     void TurnOff()
     {
         turnedOff = true;
+
+        GameObject[] temp = field.ToArray();
+
+        foreach(GameObject obj in temp)
+        {
+            if(obj == null)
+            {
+                field.Remove(obj);
+            }
+        }
+
         foreach(GameObject astro in field)
         {
             astro.SetActive(false);

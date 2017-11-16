@@ -7,6 +7,7 @@ public class AstroSpawner : MonoBehaviour {
     public static AstroSpawner Instance;
 
     public GameObject prefab_quadrant;
+    public ParticleSystem ps;
 
     List<GameObject> quadrants = new List<GameObject>();
     public Dictionary<GameObject, int> astroids = new Dictionary<GameObject, int>();
@@ -39,6 +40,8 @@ public class AstroSpawner : MonoBehaviour {
         } else
         {
             Destroy(astro);
+            GameManager.Instance.score++;
+            //ps.Play();
         }
     }
 }

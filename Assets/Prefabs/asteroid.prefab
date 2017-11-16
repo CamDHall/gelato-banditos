@@ -52,10 +52,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4478695256694470}
   - component: {fileID: 54172979737947426}
-  - component: {fileID: 65915632767867858}
+  - component: {fileID: 65391883844248936}
   m_Layer: 0
   m_Name: asteroid
-  m_TagString: Untagged
+  m_TagString: Astro
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,7 @@ Transform:
   m_GameObject: {fileID: 1711912580956386}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.2247849, y: 3.7411928, z: 32.451508}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4479802222043120}
   m_Father: {fileID: 0}
@@ -229,7 +229,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65915632767867858
+--- !u!65 &65391883844248936
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -239,5 +239,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12.311137, y: 10.9634495, z: 14.378664}
-  m_Center: {x: 0.782866, y: -0.11004543, z: 1.994811}
+  m_Size: {x: 23.693142, y: 17.635857, z: 28.51157}
+  m_Center: {x: 0.6465893, y: 0, z: 2.8449001}

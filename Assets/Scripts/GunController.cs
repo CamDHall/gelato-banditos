@@ -21,7 +21,7 @@ public class GunController : MonoBehaviour {
             if (!pressed && fire_cooldown < Time.time)
             {
                 Instantiate(bullet, transform.position + (transform.forward * 2), Quaternion.identity, container.transform);
-                fire_cooldown = Time.time + 0.2f;
+                fire_cooldown = Time.time + 0.1f;
             }
             pressed = true;
         } else
