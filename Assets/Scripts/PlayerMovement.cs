@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour {
     public float accelRate, deccelTime, maxSpeed;
     public float acceleration = 0;
 
+    // Dashing
+    [SerializeField] float remainingDash = 0;
+    public float dashAmount, lenthOfDash;
+
     Vector3 centerPos;
 
     ParticleSystem ps;
@@ -36,11 +40,6 @@ public class PlayerMovement : MonoBehaviour {
             if (acceleration < maxSpeed)
             {
                 acceleration += (accelRate * Time.deltaTime);
-                /*if (ps.isStopped)
-                {
-                    ps.Play();
-                    ps.Simulate(1f, false, false);
-                }*/
             }
         } else
         {
@@ -49,10 +48,6 @@ public class PlayerMovement : MonoBehaviour {
                 if(acceleration < 0.01f)
                 {
                     acceleration = 0;
-                    /*if(ps.isPlaying)
-                    {
-                        ps.Stop();
-                    }*/
                 } else
                 {
                     acceleration = Mathf.Lerp(acceleration, 0, deccelTime * Time.deltaTime);
@@ -62,7 +57,7 @@ public class PlayerMovement : MonoBehaviour {
 
         pitch = Input.GetAxis("Pitch") * pitch_speed;
         yaw = Input.GetAxis("Yaw") * yaw_speed;
-        roll = (-Input.GetAxis("RollRight") + Input.GetAxis("RollLeft")) * roll_speed;
+        roll = Input.GetAxis("Roll") * roll_speed;
 
         transform.Rotate(pitch, yaw, roll);
         
@@ -74,7 +69,39 @@ public class PlayerMovement : MonoBehaviour {
             rotating = false;
         }
 
-        rb.MovePosition(rb.position + (transform.forward * acceleration));
+        // Dash
+        if(Input.GetButtonDown("DashRight"))
+        {
+            if(remainingDash == 0)
+            {
+                remainingDash = dashAmount;
+            }
+        }
+        if(Input.GetButtonDown("DashLeft"))
+        {
+            if(remainingDash == 0)
+            {
+                Debug.Log("HERE");
+                remainingDash = -dashAmount;
+            }
+        }
+
+        if (remainingDash == 0)
+        {
+            rb.MovePosition(rb.position + (transform.forward * acceleration));
+        } else
+        {
+            Vector3 vDash = rb.position + (transform.right * (remainingDash / lenthOfDash));
+            //Vector3 vDash = new Vector3(rb.position.x + (remainingDash / lenthOfDash), 0, 0);
+            rb.MovePosition(vDash);
+            if (remainingDash < 0)
+            {
+                remainingDash += dashAmount / lenthOfDash;
+            } else
+            {
+                remainingDash -= dashAmount / lenthOfDash;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision coll)
