@@ -669,7 +669,7 @@ Prefab:
     - target: {fileID: 114554589000543022, guid: b12399195b8195d4589a24a9ee08103d,
         type: 2}
       propertyPath: dashAmount
-      value: 80
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 114554589000543022, guid: b12399195b8195d4589a24a9ee08103d,
         type: 2}

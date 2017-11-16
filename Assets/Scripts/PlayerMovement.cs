@@ -19,18 +19,13 @@ public class PlayerMovement : MonoBehaviour {
 
     // Dashing
     [SerializeField] float remainingDash = 0;
-    public float dashAmount, lenthOfDash;
-
-    Vector3 centerPos;
-
-    ParticleSystem ps;
+    public float dashAmount;
 
     Rigidbody rb;
 
 	void Awake () {
         player = this;
         rb = GetComponent<Rigidbody>();
-        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     private void FixedUpdate()
@@ -81,7 +76,6 @@ public class PlayerMovement : MonoBehaviour {
         {
             if(remainingDash == 0)
             {
-                Debug.Log("HERE");
                 remainingDash = -dashAmount;
             }
         }
@@ -91,15 +85,14 @@ public class PlayerMovement : MonoBehaviour {
             rb.MovePosition(rb.position + (transform.forward * acceleration));
         } else
         {
-            Vector3 vDash = rb.position + (transform.right * (remainingDash / lenthOfDash));
-            //Vector3 vDash = new Vector3(rb.position.x + (remainingDash / lenthOfDash), 0, 0);
+            remainingDash = Mathf.Lerp(remainingDash, 0, 0.2f);
+            Vector3 vDash = rb.position + (transform.right * remainingDash);
+
             rb.MovePosition(vDash);
-            if (remainingDash < 0)
+
+            if(Mathf.Abs(remainingDash) < 0.1f)
             {
-                remainingDash += dashAmount / lenthOfDash;
-            } else
-            {
-                remainingDash -= dashAmount / lenthOfDash;
+                remainingDash = 0;
             }
         }
     }
