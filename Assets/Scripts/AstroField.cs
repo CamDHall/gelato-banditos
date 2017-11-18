@@ -21,10 +21,10 @@ public class AstroField : MonoBehaviour {
     private void Awake()
     {
         box = GetComponent<BoxCollider>();
-        numAstroids = Random.Range(20, 25);
+        numAstroids = Random.Range(30, 40);
         size = AstroSpawner.Instance.col_size;
 
-        camDepth = Camera.main.farClipPlane / 4;
+        camDepth = Camera.main.farClipPlane;
     }
 
     private void Update()
@@ -50,7 +50,7 @@ public class AstroField : MonoBehaviour {
             }
 
             // Turn on if retentering quadrant
-            if (Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position)) < camDepth)
+            if (Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position)) < (camDepth + 100))
             {
                 if (turnedOff)
                 {
@@ -72,6 +72,11 @@ public class AstroField : MonoBehaviour {
             field.Add(temp);
             //AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
             AstroSpawner.Instance.astroids.Add(temp, 1);
+
+            if(Random.Range(0, 100) > 90)
+            {
+                BanditoSpawner.Instance.SpawnEnemies(temp);
+            }
         }
     }
 

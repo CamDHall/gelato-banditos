@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4873722630114124}
   - component: {fileID: 33835950069255964}
   - component: {fileID: 23175558844456548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default_MeshPart1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4479802222043120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4478695256694470}
   - component: {fileID: 54172979737947426}
   - component: {fileID: 65391883844248936}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: asteroid
   m_TagString: Astro
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4498047231376976}
   - component: {fileID: 33566032891050432}
   - component: {fileID: 23835110444094406}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default_MeshPart0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,5 +239,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 23.693142, y: 17.635857, z: 28.51157}
-  m_Center: {x: 0.6465893, y: 0, z: 2.8449001}
+  m_Size: {x: 69.42265, y: 60.575325, z: 80.80982}
+  m_Center: {x: 5.873351, y: -0.55387115, z: 11.881588}

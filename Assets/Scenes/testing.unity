@@ -5,8 +5,8 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 5
-    smallestHole: 0.25
+    smallestOccluder: 1
+    smallestHole: 0.1
     backfaceThreshold: 100
   m_SceneGUID: 00000000000000000000000000000000
   m_OcclusionCullingData: {fileID: 0}
@@ -195,6 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 51157722}
   - component: {fileID: 51157721}
+  - component: {fileID: 51157723}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -215,9 +216,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab_quadrant: {fileID: 1034734971164400, guid: 81c9fad4f7c35624b92b15fa74f43f31,
     type: 2}
-  ps: {fileID: 0}
-  size: 10
-  col_size: 500
+  size: 1
+  col_size: 2000
 --- !u!4 &51157722
 Transform:
   m_ObjectHideFlags: 0
@@ -231,6 +231,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &51157723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 51157720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93642a5fd8e881f4983ce6b5edbca2fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bandito: {fileID: 1683100508550454, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
 --- !u!1 &65781628 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1641004479708902, guid: b12399195b8195d4589a24a9ee08103d,
@@ -945,7 +957,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1322299801}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!124 &1322299803
 Behaviour:
   m_ObjectHideFlags: 0
@@ -970,7 +982,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 2000
   field of view: 60
   orthographic: 0
   orthographic size: 5
