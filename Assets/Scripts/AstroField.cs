@@ -73,7 +73,7 @@ public class AstroField : MonoBehaviour {
             //AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
             AstroSpawner.Instance.astroids.Add(temp, 1);
 
-            if(Random.Range(0, 100) > 90)
+            if(Random.Range(0, 100) > 50)
             {
                 BanditoSpawner.Instance.SpawnEnemies(temp);
             }

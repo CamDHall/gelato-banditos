@@ -86,6 +86,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4290668461765336}
   - component: {fileID: 65115202136818200}
+  - component: {fileID: 114522755678471828}
+  - component: {fileID: 54575163231764258}
   m_Layer: 0
   m_Name: bandito
   m_TagString: Untagged
@@ -178,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 1683100508550454}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.28, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4325566681093270}
   m_Father: {fileID: 0}
@@ -501,6 +503,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1670840158191672}
   m_Mesh: {fileID: 4300000, guid: 29c94a34d34f48543bc03222b80628ce, type: 3}
+--- !u!54 &54575163231764258
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1683100508550454}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65115202136818200
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -511,5 +528,18 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 14.1011505, z: 10.49184}
-  m_Center: {x: 0, y: 2.0505753, z: -0.24592018}
+  m_Size: {x: 2.9211602, y: 3.5015676, z: 2.2144315}
+  m_Center: {x: 0.18450841, y: 0.28660908, z: -0.23260278}
+--- !u!114 &114522755678471828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1683100508550454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9952d934c36f09e4881ab73b68752c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  currentSate: {fileID: 11400000, guid: 4ac71ee59985165409c1597085c2115f, type: 2}

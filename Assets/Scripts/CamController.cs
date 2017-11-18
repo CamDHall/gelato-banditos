@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class CamController : MonoBehaviour {
 
-    Quaternion og_Rot;
-
     float pitch, yaw;
     public float pitch_speed, yaw_speed;
-
-    private void Start()
-    {
-        og_Rot = transform.localRotation;
-    }
 
     private void LateUpdate()
     {
