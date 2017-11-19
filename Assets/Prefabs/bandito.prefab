@@ -542,4 +542,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  currentSate: {fileID: 11400000, guid: 4ac71ee59985165409c1597085c2115f, type: 2}
+  currentSate: {fileID: 11400000, guid: 3ceb2f529b9ce5746abe20dda86e5d4b, type: 2}
+  fireCooldown: 2

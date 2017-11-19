@@ -11,4 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2040280f47eac1f42a470a1abcce52d4, type: 3}
   m_Name: EnemyState
   m_EditorClassIdentifier: 
-  actions: []
+  actions:
+  - {fileID: 11400000, guid: 68af63393836600489b6e813eb7b6f84, type: 2}
+  - {fileID: 11400000, guid: 65e45c90e37dff84cb1dc0819578147e, type: 2}

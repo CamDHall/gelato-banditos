@@ -26,7 +26,6 @@ public class StateController : MonoBehaviour {
         } else
         {
             aiActive = false;
-            Debug.Log("AIACTIVE FALSE");
         }
 
 		if(!aiActive)

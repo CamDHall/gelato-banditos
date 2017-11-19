@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     public static PlayerMovement player;
+    public int health;
     public float thrustSpeed;
 
     public float pitch_speed, yaw_speed, roll_speed;
@@ -94,6 +95,15 @@ public class PlayerMovement : MonoBehaviour {
             {
                 remainingDash = 0;
             }
+        }
+    }
+
+    public void TakeDamge(int amount)
+    {
+        health -= amount;
+        if(health <= 0)
+        {
+            GameManager.Instance.Death();
         }
     }
 

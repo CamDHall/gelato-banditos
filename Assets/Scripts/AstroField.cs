@@ -21,7 +21,7 @@ public class AstroField : MonoBehaviour {
     private void Awake()
     {
         box = GetComponent<BoxCollider>();
-        numAstroids = Random.Range(30, 40);
+        numAstroids = Random.Range(10, 15);
         size = AstroSpawner.Instance.col_size;
 
         camDepth = Camera.main.farClipPlane;
@@ -73,7 +73,7 @@ public class AstroField : MonoBehaviour {
             //AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
             AstroSpawner.Instance.astroids.Add(temp, 1);
 
-            if(Random.Range(0, 100) > 50)
+            if(Random.Range(0, 100) > 95)
             {
                 BanditoSpawner.Instance.SpawnEnemies(temp);
             }
@@ -98,5 +98,10 @@ public class AstroField : MonoBehaviour {
         {
             astro.SetActive(false);
         }
+    }
+
+    private void OnTriggerEnter(Collider coll)
+    {
+        Debug.Log(coll.gameObject);
     }
 }

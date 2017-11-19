@@ -15,7 +15,7 @@ public class ShootAction : Action
         if(controller.fireCooldown < Time.time)
         {
             GameObject prefab = Resources.Load("Rocket") as GameObject;
-            GameObject rocket = Instantiate(prefab, controller.transform.position, Quaternion.identity);
+            GameObject rocket = Instantiate(prefab, controller.transform.position, controller.transform.localRotation);
 
             controller.fireCooldown = Time.time + 5;
         }
