@@ -6,18 +6,16 @@ public class Bullet : MonoBehaviour {
 
     Rigidbody rb;
     float speed;
-    Vector3 direction;
     public float bullet_speed;
 
 	void Awake () {
         rb = GetComponent<Rigidbody>();
         speed = bullet_speed + PlayerMovement.player.acceleration;
-        direction = PlayerMovement.player.transform.forward;
         Destroy(gameObject, 10);
     }
 	
 	void FixedUpdate () {
-        rb.MovePosition(transform.position + (direction * speed));
+        rb.MovePosition(transform.position + (PlayerMovement.player.transform.forward * speed));
 	}
 
     private void OnCollisionEnter(Collision coll)

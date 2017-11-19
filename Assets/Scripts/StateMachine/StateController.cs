@@ -6,6 +6,8 @@ public class StateController : MonoBehaviour {
 
     public Rigidbody rb;
     public EnemyState currentSate;
+    public float fireCooldown;
+
     bool aiActive = false;
 
     private void Awake()
@@ -18,12 +20,13 @@ public class StateController : MonoBehaviour {
 	}
 	
 	void Update () {
-        if(Vector3.Distance(transform.position, PlayerMovement.player.transform.position) < 100)
+        if(Vector3.Distance(transform.position, PlayerMovement.player.transform.position) < 200)
         {
             aiActive = true;
         } else
         {
             aiActive = false;
+            Debug.Log("AIACTIVE FALSE");
         }
 
 		if(!aiActive)

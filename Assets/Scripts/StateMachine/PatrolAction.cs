@@ -21,19 +21,27 @@ public class PatrolAction : Action
         {
             if(hit.transform.gameObject.tag == "Player")
             {
-                Move(controller);
+                if (Vector3.Distance(hit.transform.position, controller.transform.position) > 8)
+                {
+                    MoveForward(controller);
+                }
             } else
             {
-                Debug.Log("BLOCKED");
+                MoveAround(controller, hit.transform.gameObject);
             }
         } else
         {
-            Move(controller);
+            MoveForward(controller);
         }
     }
 
-    void Move(StateController controller)
+    void MoveForward(StateController controller)
     {
         controller.rb.MovePosition(controller.transform.position + (controller.transform.forward * Time.deltaTime));
+    }
+
+    void MoveAround(StateController controller, GameObject obstacle)
+    {
+        controller.rb.MovePosition(controller.transform.position + (controller.transform.right * (Time.deltaTime * 10)));
     }
 }

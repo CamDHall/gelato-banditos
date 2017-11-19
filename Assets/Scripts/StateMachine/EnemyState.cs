@@ -10,6 +10,7 @@ public class EnemyState : ScriptableObject {
 	public void UpdateState(StateController controller)
     {
         DoActions(controller);
+        Debug.Log("UPDATE");
     }
 
     private void DoActions(StateController controller)
