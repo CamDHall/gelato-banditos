@@ -32,27 +32,25 @@ public class AstroField : MonoBehaviour {
     private void Update()
     {
         playerDist = Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position));
-        if (!populated)
+
+        // Turn off if far away
+        if (playerDist > camDepth)
         {
-            if (playerDist < camDepth)
+            if (!turnedOff)
             {
-                populated = true;
-                Populate();
+                TurnOff();
             }
         }
-        else
-        {
-            // Turn off if far away
-            if (playerDist > camDepth)
-            {
-                if (!turnedOff)
-                {
-                    TurnOff();
-                }
-            }
 
-            // Turn on if retentering quadrant
-            if (Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position)) < camDepth)
+        // Turn on if retentering quadrant
+        if (playerDist < camDepth)
+        {
+            if (!populated)
+            {
+                Populate();
+                populated = true;
+            }
+            else
             {
                 if (turnedOff)
                 {
