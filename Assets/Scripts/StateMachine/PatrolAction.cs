@@ -37,7 +37,7 @@ public class PatrolAction : Action
 
     void MoveForward(StateController controller)
     {
-        controller.rb.MovePosition(controller.transform.position + (controller.transform.forward * Time.deltaTime));
+        controller.rb.MovePosition(controller.transform.position + (controller.transform.forward * controller.speed));
     }
 
     void MoveAround(StateController controller, GameObject obstacle)

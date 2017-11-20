@@ -7,7 +7,10 @@ public class ShootAction : Action
 {
     public override void Act(StateController controller)
     {
-        Attack(controller);
+        if (Vector3.Distance(controller.transform.position, PlayerMovement.player.transform.position) < 10)
+        {
+            Attack(controller);
+        }
     }
 
     private void Attack(StateController controller)

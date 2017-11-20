@@ -19,16 +19,17 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void Update () {
-       /* timeLeft.text = "Time: " + System.Math.Round(timeGoal - Time.time, 2);
-        if(Input.GetButton("Start"))
+        /* timeLeft.text = "Time: " + System.Math.Round(timeGoal - Time.time, 2);
+         if(timeGoal < Time.time)
+         {
+             End();
+         }*/
+
+        if (Input.GetButton("Start"))
         {
             SceneManager.LoadScene("testing");
         }
-        if(timeGoal < Time.time)
-        {
-            End();
-        }*/
-	}
+    }
 
     void End()
     {

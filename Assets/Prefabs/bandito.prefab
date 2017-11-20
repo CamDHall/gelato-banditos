@@ -516,7 +516,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &65115202136818200
 BoxCollider:
@@ -543,4 +543,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   currentSate: {fileID: 11400000, guid: 3ceb2f529b9ce5746abe20dda86e5d4b, type: 2}
+  speed: 5
   fireCooldown: 2

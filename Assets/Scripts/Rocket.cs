@@ -28,7 +28,7 @@ public class Rocket : MonoBehaviour {
         }
         if(coll.gameObject.tag == "Player")
         {
-            PlayerMovement.player.TakeDamge(5);
+            PlayerMovement.player.TakeDamge(1);
         }
     }
 }

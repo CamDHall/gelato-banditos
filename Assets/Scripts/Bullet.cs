@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour {
 	void Awake () {
         rb = GetComponent<Rigidbody>();
         speed = bullet_speed + PlayerMovement.player.acceleration;
-        Destroy(gameObject, 10);
+        Destroy(gameObject, 15);
     }
 	
 	void FixedUpdate () {
@@ -23,11 +23,17 @@ public class Bullet : MonoBehaviour {
         if(coll.gameObject.tag == "Astro")
         {
             AstroSpawner.Instance.ReceiveDamage(coll.gameObject);
-            Destroy(gameObject);
         }
         if(coll.gameObject.tag == "IceCream")
         {
             GameManager.Instance.score++;
         }
+        if(coll.gameObject.tag == "Bandito")
+        {
+            Destroy(coll.gameObject);
+            GameManager.Instance.score++;
+        }
+
+        Destroy(gameObject);
     }
 }

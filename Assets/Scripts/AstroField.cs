@@ -16,12 +16,14 @@ public class AstroField : MonoBehaviour {
     BoxCollider box;
     float camDepth;
 
+    public List<GameObject> enemies = new List<GameObject>();
+
     float playerDist = 0;
 
     private void Awake()
     {
         box = GetComponent<BoxCollider>();
-        numAstroids = Random.Range(10, 15);
+        numAstroids = Random.Range(90, 100);
         size = AstroSpawner.Instance.col_size;
 
         camDepth = Camera.main.farClipPlane;
@@ -50,12 +52,12 @@ public class AstroField : MonoBehaviour {
             }
 
             // Turn on if retentering quadrant
-            if (Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position)) < (camDepth + 100))
+            if (Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position)) < camDepth)
             {
                 if (turnedOff)
                 {
                     turnedOff = false;
-                    Populate();
+                    TurnOn();
                 }
             }
         }
@@ -75,7 +77,7 @@ public class AstroField : MonoBehaviour {
 
             if(Random.Range(0, 100) > 95)
             {
-                BanditoSpawner.Instance.SpawnEnemies(temp);
+                BanditoSpawner.Instance.SpawnEnemies(temp, gameObject);
             }
         }
     }
@@ -98,10 +100,35 @@ public class AstroField : MonoBehaviour {
         {
             astro.SetActive(false);
         }
+
+        foreach(GameObject enemy in enemies)
+        {
+            enemy.SetActive(false);
+        }
     }
 
-    private void OnTriggerEnter(Collider coll)
+    void TurnOn()
     {
-        Debug.Log(coll.gameObject);
+        turnedOff = true;
+
+        GameObject[] temp = field.ToArray();
+
+        foreach (GameObject obj in temp)
+        {
+            if (obj == null)
+            {
+                field.Remove(obj);
+            }
+        }
+
+        foreach (GameObject astro in field)
+        {
+            astro.SetActive(false);
+        }
+
+        foreach(GameObject enemy in enemies)
+        {
+            enemy.SetActive(true);
+        }
     }
 }

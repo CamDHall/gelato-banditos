@@ -15,7 +15,7 @@ public class BanditoSpawner : MonoBehaviour {
         Instance = this;
 	}
 
-    public void SpawnEnemies(GameObject astro)
+    public void SpawnEnemies(GameObject astro, GameObject quad)
     {
         BoxCollider bc = astro.GetComponent<BoxCollider>();
         int num = Random.Range(1, 3);
@@ -28,7 +28,10 @@ public class BanditoSpawner : MonoBehaviour {
             temp.transform.localPosition = Pos;
             temp.transform.parent = null;
             enemies.Add(temp);
+            quad.GetComponent<AstroField>().enemies.Add(temp);
         }
+
+
 
     }
 }
