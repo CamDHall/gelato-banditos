@@ -53,9 +53,9 @@ public class PlayerMovement : MonoBehaviour {
 
         pitch = Input.GetAxis("Pitch") * pitch_speed;
         yaw = Input.GetAxis("Yaw") * yaw_speed;
-        roll = Input.GetAxis("Roll") * roll_speed;
+        //roll = Input.GetAxis("Roll") * roll_speed;
 
-        transform.Rotate(pitch, yaw, roll);
+        transform.Rotate(pitch, yaw, 0);
         
         if(pitch == 0 && yaw == 0 && roll == 0)
         {

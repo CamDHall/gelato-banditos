@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour {
     }
 	
 	void FixedUpdate () {
-        rb.MovePosition(transform.position + (PlayerMovement.player.transform.forward * speed));
+        rb.MovePosition(transform.position + (Camera.main.transform.forward * speed));
 	}
 
     private void OnCollisionEnter(Collision coll)

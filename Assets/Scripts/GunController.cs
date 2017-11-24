@@ -11,13 +11,15 @@ public class GunController : MonoBehaviour {
     float fire_cooldown = 0;
 
     public GameObject container;
+    public GameObject crosshair;
 
     void Update () {
         if(Input.GetAxis("Fire") != 0)
         {
             if (!pressed && fire_cooldown < Time.time)
             {
-                Instantiate(bullet, transform.position + (transform.forward * 2), Quaternion.identity);
+                //Vector3 Pos = new Vector3(crosshair.transform.position.x, crosshair.transform.position.y, crosshair.transform.position.z) + transform.forward;
+                Instantiate(bullet, crosshair.transform.position + (crosshair.transform.forward * 2), Quaternion.identity);
                 fire_cooldown = Time.time + 0.1f;
             }
             pressed = true;
