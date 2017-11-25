@@ -33,7 +33,6 @@ public class Bullet : MonoBehaviour {
             Destroy(coll.gameObject);
             GameManager.Instance.score++;
         }
-
         Destroy(gameObject);
     }
 }
