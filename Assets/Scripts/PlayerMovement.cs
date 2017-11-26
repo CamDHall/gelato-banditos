@@ -24,9 +24,15 @@ public class PlayerMovement : MonoBehaviour {
 
     Rigidbody rb;
 
+    public BoxCollider[] colliders;
+
 	void Awake () {
+        accelRate *= 10;
+
         player = this;
         rb = GetComponent<Rigidbody>();
+
+        colliders = GetComponents<BoxCollider>();
     }
 
     private void FixedUpdate()

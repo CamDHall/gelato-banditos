@@ -543,5 +543,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   currentSate: {fileID: 11400000, guid: 3ceb2f529b9ce5746abe20dda86e5d4b, type: 2}
-  speed: 5
+  speed: 3
   fireCooldown: 2
+  reachedPlayer: 0

@@ -21,9 +21,23 @@ public class PatrolAction : Action
         {
             if(hit.transform.gameObject.tag == "Player")
             {
-                if (Vector3.Distance(hit.transform.position, controller.transform.position) > 8)
+                float dist = Vector3.Distance(hit.transform.position, controller.transform.position);
+
+                if (dist > 10)
                 {
-                    MoveForward(controller);
+                    if (!controller.reachedPlayer)
+                    {
+                        MoveForward(controller);
+                    }
+                }
+                else
+                {
+                    controller.reachedPlayer = true;
+                }
+
+                if(controller.reachedPlayer && dist > 400)
+                {
+                    controller.reachedPlayer = false;
                 }
             } else
             {

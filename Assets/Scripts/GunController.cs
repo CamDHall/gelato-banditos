@@ -19,7 +19,10 @@ public class GunController : MonoBehaviour {
             if (!pressed && fire_cooldown < Time.time)
             {
                 //Vector3 Pos = new Vector3(crosshair.transform.position.x, crosshair.transform.position.y, crosshair.transform.position.z) + transform.forward;
-                Instantiate(bullet, crosshair.transform.position + (crosshair.transform.forward * 2), Quaternion.identity);
+                GameObject temp = Instantiate(bullet);
+                temp.transform.parent = container.transform;
+                temp.transform.position = transform.position + (transform.forward * 6);
+
                 fire_cooldown = Time.time + 0.1f;
             }
             pressed = true;

@@ -10,6 +10,8 @@ public class StateController : MonoBehaviour {
     public float speed;
     public float fireCooldown;
 
+    public bool reachedPlayer;
+
     bool aiActive = false;
 
     private void Awake()
@@ -22,7 +24,7 @@ public class StateController : MonoBehaviour {
 	}
 	
 	void Update () {
-        if(Vector3.Distance(transform.position, PlayerMovement.player.transform.position) < 1000)
+        if(Vector3.Distance(transform.position, PlayerMovement.player.transform.position) < 500)
         {
             aiActive = true;
         } else

@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
 
     public void Indicator(string side)
     {
+        Debug.Log(side);
         if(side == "Left")
         {
             i_left.color = new Color(i_left.color.r, i_left.color.g, i_left.color.b, 1);
@@ -56,12 +57,12 @@ public class GameManager : MonoBehaviour {
             i_right.color = new Color(i_right.color.r, i_right.color.g, i_right.color.b, 1);
         }
 
-        if(side == "Top")
+        if(side == "Top" || side == "Front")
         {
             i_top.color = new Color(i_top.color.r, i_top.color.g, i_top.color.b, 1);
         }
 
-        if(side == "Bottom")
+        if(side == "Bottom" || side == "Back")
         {
             i_bottom.color = new Color(i_bottom.color.r, i_bottom.color.g, i_bottom.color.b, 1);
         }
