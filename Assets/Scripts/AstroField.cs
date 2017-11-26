@@ -42,19 +42,16 @@ public class AstroField : MonoBehaviour {
             }
         }
 
-        // Turn on if retentering quadrant
         if (playerDist < camDepth)
         {
             if (!populated)
             {
                 Populate();
-                populated = true;
             }
             else
             {
                 if (turnedOff)
                 {
-                    turnedOff = false;
                     TurnOn();
                 }
             }
@@ -63,6 +60,7 @@ public class AstroField : MonoBehaviour {
 
     void Populate()
     {
+        populated = true;
         for (int i = 0; i < numAstroids; i++)
         {
             Vector3 Pos = new Vector3((float)Random.Range(-size/2, size/2), (float)Random.Range(-size/2, size/2), (float)Random.Range(-size/2, size/2));
@@ -78,6 +76,8 @@ public class AstroField : MonoBehaviour {
                 BanditoSpawner.Instance.SpawnEnemies(temp, gameObject);
             }
         }
+
+        TurnOn();
     }
 
     void TurnOff()
@@ -107,7 +107,7 @@ public class AstroField : MonoBehaviour {
 
     void TurnOn()
     {
-        turnedOff = true;
+        turnedOff = false;
 
         GameObject[] temp = field.ToArray();
 
@@ -121,7 +121,7 @@ public class AstroField : MonoBehaviour {
 
         foreach (GameObject astro in field)
         {
-            astro.SetActive(false);
+            astro.SetActive(true);
         }
 
         foreach(GameObject enemy in enemies)
