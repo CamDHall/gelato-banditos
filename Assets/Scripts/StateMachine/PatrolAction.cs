@@ -23,12 +23,15 @@ public class PatrolAction : Action
             {
                 float dist = Vector3.Distance(hit.transform.position, controller.transform.position);
 
-                if (dist > 10)
+                if (dist > 20)
                 {
                     if (!controller.reachedPlayer)
                     {
                         MoveForward(controller);
                     }
+                } else if(dist < 30)
+                {
+                    Circle(controller);
                 }
                 else
                 {
@@ -57,5 +60,12 @@ public class PatrolAction : Action
     void MoveAround(StateController controller, GameObject obstacle)
     {
         controller.rb.MovePosition(controller.transform.position + (controller.transform.right * (Time.deltaTime * 10)));
+    }
+
+    void Circle(StateController controller)
+    {
+        Vector3 dest = (controller.transform.forward + controller.transform.right) * (controller.speed / 2);
+
+        controller.rb.MovePosition(controller.transform.position + dest);
     }
 }

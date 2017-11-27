@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     public static PlayerMovement player;
+    public Transform front;
     public int health;
     public float thrustSpeed;
 

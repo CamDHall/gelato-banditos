@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour {
 
-    public Rigidbody rb;
-    public EnemyState currentSate;
-
     public float speed;
     public float fireCooldown;
+    public int attentionDist;
 
+    [HideInInspector]
+    public Rigidbody rb;
+    public EnemyState currentSate;
     public bool reachedPlayer;
 
     bool aiActive = false;
@@ -24,7 +25,7 @@ public class StateController : MonoBehaviour {
 	}
 	
 	void Update () {
-        if(Vector3.Distance(transform.position, PlayerMovement.player.transform.position) < 1000)
+        if(Vector3.Distance(transform.position, PlayerMovement.player.front.position) < attentionDist)
         {
             aiActive = true;
         } else

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class AstroField : MonoBehaviour {
 
-    bool populated = false;
-    bool turnedOff = false;
+    public int numLow, numHigh, spawnChance;
+
+    public bool populated = false;
+    public bool turnedOff = false;
     List<GameObject> field = new List<GameObject>();
 
     public GameObject astroid;
@@ -23,7 +25,7 @@ public class AstroField : MonoBehaviour {
     private void Awake()
     {
         box = GetComponent<BoxCollider>();
-        numAstroids = Random.Range(90, 100);
+        numAstroids = Random.Range(numLow, numHigh);
         size = AstroSpawner.Instance.col_size;
 
         camDepth = Camera.main.farClipPlane;
@@ -31,7 +33,7 @@ public class AstroField : MonoBehaviour {
 
     private void Update()
     {
-        playerDist = Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position));
+        /*playerDist = Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position));
 
         // Turn off if far away
         if (playerDist > camDepth)
@@ -55,10 +57,10 @@ public class AstroField : MonoBehaviour {
                     TurnOn();
                 }
             }
-        }
+        }*/
     }
 
-    void Populate()
+    public void Populate()
     {
         populated = true;
         for (int i = 0; i < numAstroids; i++)
@@ -71,7 +73,7 @@ public class AstroField : MonoBehaviour {
             //AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
             AstroSpawner.Instance.astroids.Add(temp, 1);
 
-            if(Random.Range(0, 100) > 80)
+            if(Random.Range(0, 100) > spawnChance)
             {
                 BanditoSpawner.Instance.SpawnEnemies(temp, gameObject);
             }
@@ -80,7 +82,7 @@ public class AstroField : MonoBehaviour {
         TurnOn();
     }
 
-    void TurnOff()
+    public void TurnOff()
     {
         turnedOff = true;
 
@@ -105,7 +107,7 @@ public class AstroField : MonoBehaviour {
         }
     }
 
-    void TurnOn()
+    public void TurnOn()
     {
         turnedOff = false;
 

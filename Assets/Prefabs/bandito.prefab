@@ -541,8 +541,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9952d934c36f09e4881ab73b68752c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  currentSate: {fileID: 11400000, guid: 3ceb2f529b9ce5746abe20dda86e5d4b, type: 2}
   speed: 20
   fireCooldown: 2
+  attentionDist: 800
+  rb: {fileID: 0}
+  currentSate: {fileID: 11400000, guid: 3ceb2f529b9ce5746abe20dda86e5d4b, type: 2}
   reachedPlayer: 0
