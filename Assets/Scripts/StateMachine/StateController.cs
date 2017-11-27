@@ -24,7 +24,7 @@ public class StateController : MonoBehaviour {
 	}
 	
 	void Update () {
-        if(Vector3.Distance(transform.position, PlayerMovement.player.transform.position) < 500)
+        if(Vector3.Distance(transform.position, PlayerMovement.player.transform.position) < 1000)
         {
             aiActive = true;
         } else

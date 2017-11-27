@@ -16,8 +16,13 @@ public class GameManager : MonoBehaviour {
 
     public Image i_left, i_right, i_top, i_bottom;
 
+    bool leftActive, rightActive, topActive, bottomActive;
+    Color bc;
+
 	void Start () {
         Instance = this;
+
+        bc = i_left.color;
 	}
 	
 	void Update () {
@@ -31,6 +36,39 @@ public class GameManager : MonoBehaviour {
         {
             SceneManager.LoadScene("testing");
         }
+
+        if(leftActive && i_left.color.a > 0)
+        {
+            i_left.color = new Color(bc.r, bc.g, bc.b, i_left.color.a - Time.deltaTime);
+        } else
+        {
+            leftActive = false;
+        }
+        if (rightActive && i_right.color.a > 0)
+        {
+            i_right.color = new Color(bc.r, bc.g, bc.b, i_right.color.a - Time.deltaTime);
+        }
+        else
+        {
+            rightActive = false;
+        }
+        if (topActive && i_top.color.a > 0)
+        {
+            i_top.color = new Color(bc.r, bc.g, bc.b, i_top.color.a - Time.deltaTime);
+        }
+        else
+        {
+            topActive = false;
+        }
+        if (bottomActive && i_bottom.color.a > 0)
+        {
+            i_bottom.color = new Color(bc.r, bc.g, bc.b, i_bottom.color.a - Time.deltaTime);
+        }
+        else
+        {
+            bottomActive = false;
+        }
+
     }
 
     void End()
@@ -46,25 +84,28 @@ public class GameManager : MonoBehaviour {
 
     public void Indicator(string side)
     {
-        Debug.Log(side);
-        if(side == "Left")
+        if (side == "Left" && !leftActive)
         {
-            i_left.color = new Color(i_left.color.r, i_left.color.g, i_left.color.b, 1);
+            i_left.color = new Color(bc.r, bc.g, bc.b, 1);
+            leftActive = true;
         }
 
-        if(side == "Right")
+        if(side == "Right" && !rightActive)
         {
-            i_right.color = new Color(i_right.color.r, i_right.color.g, i_right.color.b, 1);
+            i_right.color = new Color(bc.r, bc.g, bc.b, 1);
+            rightActive = true;
         }
 
-        if(side == "Top" || side == "Front")
+        if((side == "Top" || side == "Front") && !topActive)
         {
-            i_top.color = new Color(i_top.color.r, i_top.color.g, i_top.color.b, 1);
+            i_top.color = new Color(bc.r, bc.g, bc.b, 1);
+            topActive = true;
         }
 
-        if(side == "Bottom" || side == "Back")
+        if((side == "Bottom" || side == "Back") && !bottomActive)
         {
-            i_bottom.color = new Color(i_bottom.color.r, i_bottom.color.g, i_bottom.color.b, 1);
+            i_bottom.color = new Color(bc.r, bc.g, bc.b, 1);
+            bottomActive = true;
         }
     }
 }

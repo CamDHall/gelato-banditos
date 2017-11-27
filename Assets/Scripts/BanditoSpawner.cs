@@ -18,10 +18,10 @@ public class BanditoSpawner : MonoBehaviour {
     public void SpawnEnemies(GameObject astro, GameObject quad)
     {
         BoxCollider bc = astro.GetComponent<BoxCollider>();
-        int num = Random.Range(1, 3);
+        //int num = Random.Range(1, 3);
         Vector3 Pos = new Vector3((bc.size.x / 2), (bc.size.y / 2), (bc.size.z / 2));
 
-        for(int i = 0; i < num; i++)
+        for(int i = 0; i < 1; i++)
         {
             GameObject temp = Instantiate(bandito);
             temp.transform.parent = astro.transform;

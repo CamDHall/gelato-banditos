@@ -180,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 1683100508550454}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.28, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4325566681093270}
   m_Father: {fileID: 0}
@@ -543,6 +543,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   currentSate: {fileID: 11400000, guid: 3ceb2f529b9ce5746abe20dda86e5d4b, type: 2}
-  speed: 3
+  speed: 20
   fireCooldown: 2
   reachedPlayer: 0

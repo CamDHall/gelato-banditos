@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
-  thrustSpeed: 1
+  thrustSpeed: 0.8
   pitch_speed: 1.5
   yaw_speed: 1.5
   roll_speed: 1.5
@@ -392,8 +392,8 @@ MonoBehaviour:
   yaw: 0
   roll: 0
   accelRate: 1
-  deccelTime: 3
-  maxSpeed: 24
+  deccelTime: 0.01
+  maxSpeed: 20
   acceleration: 0
   remainingDash: 0
   dashAmount: 50
