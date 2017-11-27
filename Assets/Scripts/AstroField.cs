@@ -96,7 +96,17 @@ public class AstroField : MonoBehaviour {
             }
         }
 
-        foreach(GameObject astro in field)
+        GameObject[] tempEnemies = enemies.ToArray();
+
+        foreach (GameObject obj in tempEnemies)
+        {
+            if (obj == null)
+            {
+                enemies.Remove(obj);
+            }
+        }
+
+        foreach (GameObject astro in field)
         {
             astro.SetActive(false);
         }

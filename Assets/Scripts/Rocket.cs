@@ -25,32 +25,12 @@ public class Rocket : MonoBehaviour {
         if(coll.gameObject.tag == "Player")
         {
             PlayerMovement.player.TakeDamge(1);
-
-            Vector3 contactPoint = coll.contacts[0].point;
-            Vector3 center = coll.collider.bounds.center;
-
-            /*if (contactPoint.z >= Mathf.Abs(center.z * 2) - .2f)
-            {
-                GameManager.Instance.Indicator("Top");
-            } else if (contactPoint.z <= (center.z * 2) - .2f)
-            {
-                GameManager.Instance.Indicator("Bottom");
-            } else if (contactPoint.y < center.y - coll.collider.bounds.extents.y)
-            {
-                GameManager.Instance.Indicator("Bottom");
-            } else if (contactPoint.y > center.y + coll.collider.bounds.extents.y)
-            {
-                GameManager.Instance.Indicator("Top");
-            } else if (contactPoint.x < center.x)
-            {
-                GameManager.Instance.Indicator("Left");
-            } else if (contactPoint.x > center.x)
-            {
-                GameManager.Instance.Indicator("Right");
-            }*/
-
-            Destroy(gameObject);
+        } else if(coll.gameObject.tag == "Astro" || coll.gameObject.tag == "Bandito")
+        {
+            Destroy(coll.gameObject);
         }
+
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider coll)

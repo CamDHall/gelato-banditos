@@ -528,7 +528,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.9211602, y: 3.5015676, z: 2.2144315}
+  m_Size: {x: 4, y: 4, z: 4}
   m_Center: {x: 0.18450841, y: 0.28660908, z: -0.23260278}
 --- !u!114 &114522755678471828
 MonoBehaviour:
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   fireCooldown: 2
-  attentionDist: 800
+  attentionDist: 600
   rb: {fileID: 0}
   currentSate: {fileID: 11400000, guid: 3ceb2f529b9ce5746abe20dda86e5d4b, type: 2}
   reachedPlayer: 0

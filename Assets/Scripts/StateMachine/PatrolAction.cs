@@ -17,38 +17,33 @@ public class PatrolAction : Action
         RaycastHit hit;
 
 
-        if(Physics.Raycast(controller.transform.position, controller.transform.forward, out hit))
+        if(Physics.Raycast(controller.transform.position, controller.transform.forward, out hit, 10))
         {
-            if(hit.transform.gameObject.tag == "Player")
-            {
-                float dist = Vector3.Distance(hit.transform.position, controller.transform.position);
-
-                if (dist > 20)
-                {
-                    if (!controller.reachedPlayer)
-                    {
-                        MoveForward(controller);
-                    }
-                } else if(dist < 30)
-                {
-                    Circle(controller);
-                }
-                else
-                {
-                    controller.reachedPlayer = true;
-                }
-
-                if(controller.reachedPlayer && dist > 400)
-                {
-                    controller.reachedPlayer = false;
-                }
-            } else
-            {
-                MoveAround(controller, hit.transform.gameObject);
-            }
+            MoveAround(controller, hit.transform.gameObject);
         } else
         {
-            MoveForward(controller);
+            float dist = Vector3.Distance(PlayerMovement.player.front.position, controller.transform.position);
+
+            if (dist > 20)
+            {
+                if (!controller.reachedPlayer)
+                {
+                    MoveForward(controller);
+                }
+            }
+            else if (dist < 30)
+            {
+                Circle(controller);
+            }
+            else
+            {
+                controller.reachedPlayer = true;
+            }
+
+            if (controller.reachedPlayer && dist > 400)
+            {
+                controller.reachedPlayer = false;
+            }
         }
     }
 
@@ -64,7 +59,8 @@ public class PatrolAction : Action
 
     void Circle(StateController controller)
     {
-        Vector3 dest = (controller.transform.forward + controller.transform.right) * (controller.speed / 2);
+        int direction = Random.Range(-1, 1);
+        Vector3 dest = (controller.transform.forward + (controller.transform.right * direction)) * (controller.speed / 100);
 
         controller.rb.MovePosition(controller.transform.position + dest);
     }
