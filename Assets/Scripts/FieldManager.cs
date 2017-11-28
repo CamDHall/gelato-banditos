@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FieldManager : MonoBehaviour {
 
-    private void OnTriggerEnter(Collider coll)
+    /*private void OnTriggerEnter(Collider coll)
     {
         if(coll.tag != "Quad")
         {
@@ -21,8 +21,8 @@ public class FieldManager : MonoBehaviour {
                 af.TurnOn();
             }
         }
-    }
-
+    }*/
+    /*
     private void OnTriggerExit(Collider coll)
     {
         if(coll.gameObject.tag != "Quad")
@@ -36,5 +36,5 @@ public class FieldManager : MonoBehaviour {
                 af.TurnOff();
             }
         }
-    }
+    }*/
 }

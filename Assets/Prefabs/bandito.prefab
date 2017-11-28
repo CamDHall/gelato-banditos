@@ -536,14 +536,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1683100508550454}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9952d934c36f09e4881ab73b68752c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
   fireCooldown: 2
-  attentionDist: 600
+  attentionDist: 500
   rb: {fileID: 0}
   currentSate: {fileID: 11400000, guid: 3ceb2f529b9ce5746abe20dda86e5d4b, type: 2}
   reachedPlayer: 0

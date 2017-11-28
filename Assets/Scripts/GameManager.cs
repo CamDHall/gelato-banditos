@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour {
              End();
          }*/
 
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Application.Quit();
+        }
+
         if (Input.GetButton("Start"))
         {
             SceneManager.LoadScene("testing");

@@ -15,25 +15,24 @@ public class AstroField : MonoBehaviour {
 
     int numAstroids;
 
-    BoxCollider box;
+    float playerDist;
     float camDepth;
+    BoxCollider box;
 
     public List<GameObject> enemies = new List<GameObject>();
 
-    float playerDist = 0;
-
     private void Awake()
     {
-        box = GetComponent<BoxCollider>();
         numAstroids = Random.Range(numLow, numHigh);
         size = AstroSpawner.Instance.col_size;
 
         camDepth = Camera.main.farClipPlane;
+        box = GetComponent<BoxCollider>();
     }
 
     private void Update()
     {
-        /*playerDist = Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position));
+        playerDist = Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position));
 
         // Turn off if far away
         if (playerDist > camDepth)
@@ -57,7 +56,7 @@ public class AstroField : MonoBehaviour {
                     TurnOn();
                 }
             }
-        }*/
+        }
     }
 
     public void Populate()

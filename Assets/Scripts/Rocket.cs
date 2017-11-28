@@ -25,7 +25,7 @@ public class Rocket : MonoBehaviour {
         if(coll.gameObject.tag == "Player")
         {
             PlayerMovement.player.TakeDamge(1);
-        } else if(coll.gameObject.tag == "Astro" || coll.gameObject.tag == "Bandito")
+        } else if(coll.gameObject.tag == "Astro")
         {
             Destroy(coll.gameObject);
         }
