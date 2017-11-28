@@ -64,10 +64,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674cdf3fb83520649a6f50e9688d37ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLow: 45
-  numHigh: 55
+  numLow: 20
+  numHigh: 25
   spawnChance: 1
   populated: 0
   turnedOff: 0
-  astroid: {fileID: 1711912580956386, guid: 243b73711bfdbd246a8d87dbd9869f27, type: 2}
+  astroid: {fileID: 1419812017553790, guid: 0346c028ab9a19340aa2da3432eb2b75, type: 2}
   enemies: []
