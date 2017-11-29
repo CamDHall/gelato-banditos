@@ -18,6 +18,7 @@ public class AstroField : MonoBehaviour {
     float playerDist;
     float camDepth;
     BoxCollider box;
+    Vector3 Pos;
 
     public List<GameObject> enemies = new List<GameObject>();
 
@@ -30,9 +31,14 @@ public class AstroField : MonoBehaviour {
         box = GetComponent<BoxCollider>();
     }
 
+    private void Start()
+    {
+        Pos = transform.position;
+    }
+
     private void Update()
     {
-        playerDist = Vector3.Distance(PlayerMovement.player.transform.position, box.ClosestPoint(PlayerMovement.player.transform.position));
+        playerDist = Vector3.Distance(PlayerMovement.player.transform.position, Pos);
 
         // Turn off if far away
         if (playerDist > camDepth)
@@ -74,7 +80,7 @@ public class AstroField : MonoBehaviour {
 
             if(Random.Range(0, 100) > spawnChance)
             {
-                BanditoSpawner.Instance.SpawnEnemies(temp, gameObject);
+                //BanditoSpawner.Instance.SpawnEnemies(temp, gameObject);
             }
         }
 

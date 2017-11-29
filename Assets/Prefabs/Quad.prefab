@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4485448353368018}
-  - component: {fileID: 65572040898222462}
   - component: {fileID: 114111972957987776}
   m_Layer: 9
   m_Name: Quad
@@ -41,18 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65572040898222462
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1034734971164400}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3000, y: 3000, z: 3000}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114111972957987776
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,9 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674cdf3fb83520649a6f50e9688d37ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLow: 20
-  numHigh: 25
-  spawnChance: 1
+  numLow: 60
+  numHigh: 70
+  spawnChance: 0
   populated: 0
   turnedOff: 0
   astroid: {fileID: 1419812017553790, guid: 0346c028ab9a19340aa2da3432eb2b75, type: 2}
