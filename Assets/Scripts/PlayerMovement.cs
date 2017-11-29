@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
 
         colliders = GetComponents<BoxCollider>();
+
+        accelRate *= Time.deltaTime;
     }
 
     private void FixedUpdate()
