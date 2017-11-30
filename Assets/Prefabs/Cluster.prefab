@@ -51,11 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46b403da5abf964b9763404a8076d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLow: 0
-  numHigh: 0
+  numLow: 150
+  numHigh: 160
   spawnChance: 0
   populated: 0
   turnedOff: 0
   astroid: {fileID: 1419812017553790, guid: 0346c028ab9a19340aa2da3432eb2b75, type: 2}
-  bigAstro: {fileID: 1493984350666806, guid: 60fe9d47f8d14524b9a54be0ad7147dc, type: 2}
+  bigAstro: {fileID: 1982008802831842, guid: 60fe9d47f8d14524b9a54be0ad7147dc, type: 2}
   enemies: []

@@ -7,7 +7,7 @@ public class AstroField : Field {
     private void Awake()
     {
         numAstroids = Random.Range(numLow, numHigh);
-        size = AstroSpawner.Instance.col_size;
+        size = AstroSpawner.Instance.col_size / 2;
 
         camDepth = Camera.main.farClipPlane + 100;
         box = GetComponent<BoxCollider>();

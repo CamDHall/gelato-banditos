@@ -23,7 +23,7 @@ public class AstroSpawner : MonoBehaviour {
             {
                 for (int x = 0; x < size; x++)
                 {
-                    if ((x == 5 && y == 6 && z == 5) ||Random.Range(0, 100) > 95)
+                    if ((x == 5 && y == 5 && z == 5) ||Random.Range(0, 100) > 95)
                     {
                         // cluster
                         Vector3 Pos = new Vector3((((-size / 2) + x) * col_size) + x, (((-size / 2) + y) * col_size) + y, (((-size / 2) + z) * col_size) + z);
@@ -39,7 +39,7 @@ public class AstroSpawner : MonoBehaviour {
                 }
             }
         }
-	}
+    }
 	
 	public void ReceiveDamage(GameObject astro)
     {

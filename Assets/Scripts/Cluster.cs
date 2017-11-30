@@ -7,11 +7,16 @@ public class Cluster : Field {
     private void Awake()
     {
         numAstroids = Random.Range(numLow, numHigh);
-        size = AstroSpawner.Instance.col_size;
+        size = AstroSpawner.Instance.col_size / 2;
 
         camDepth = Camera.main.farClipPlane + 100;
         box = GetComponent<BoxCollider>();
         astroSize = bigAstro.GetComponent<BoxCollider>().size.x;
+    }
+
+    private void Start()
+    {
+        Pos = transform.position;
     }
 
     private void Update()
@@ -46,10 +51,10 @@ public class Cluster : Field {
     public override void Populate()
     {
         base.Populate();
-        /*for (int i = 0; i < numAstroids; i++)
+        for (int i = 0; i < numAstroids; i++)
         {
-            Vector3 Pos = new Vector3((float)Random.Range(-size / 10, size / 10), (float)Random.Range(-size / 10, size / 10), 
-                (float)Random.Range(-size / 10, size / 10));
+            Vector3 Pos = new Vector3((float)Random.Range(-size / 1.5f, size / 1.5f), (float)Random.Range(-size / 3, size / 3), 
+                (float)Random.Range(-size / 2, size / 2));
             GameObject temp = Instantiate(bigAstro);
             temp.transform.parent = transform;
             temp.transform.localPosition = Pos;
@@ -61,6 +66,6 @@ public class Cluster : Field {
             {
                 //BanditoSpawner.Instance.SpawnEnemies(temp, gameObject);
             }
-        }*/
+        }
     }
 }
