@@ -293,7 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   front: {fileID: 0}
   health: 5
-  thrustSpeed: 1.5
+  thrustSpeed: 4
   pitch_speed: 1.5
   yaw_speed: 1.5
   roll_speed: 1.5
@@ -444,6 +444,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab_quadrant: {fileID: 1034734971164400, guid: 81c9fad4f7c35624b92b15fa74f43f31,
     type: 2}
+  prefab_cluster: {fileID: 1693798285929202, guid: 99900919fa7f1ef439676a4a465500e5,
+    type: 2}
   size: 10
   col_size: 3000
 --- !u!4 &51157722
@@ -465,7 +467,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 51157720}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93642a5fd8e881f4983ce6b5edbca2fc, type: 3}
   m_Name: 
@@ -1479,7 +1481,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 1
-  far clip plane: 4000
+  far clip plane: 3500
   field of view: 60
   orthographic: 0
   orthographic size: 5

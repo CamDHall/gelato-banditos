@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AstroField : Field {
+public class Cluster : Field {
 
     private void Awake()
     {
@@ -11,12 +11,7 @@ public class AstroField : Field {
 
         camDepth = Camera.main.farClipPlane + 100;
         box = GetComponent<BoxCollider>();
-        astroSize = astroid.GetComponent<BoxCollider>().size.x;
-    }
-
-    private void Start()
-    {
-        Pos = transform.position;
+        astroSize = bigAstro.GetComponent<BoxCollider>().size.x;
     }
 
     private void Update()
@@ -51,12 +46,11 @@ public class AstroField : Field {
     public override void Populate()
     {
         base.Populate();
-        for (int i = 0; i < numAstroids; i++)
+        /*for (int i = 0; i < numAstroids; i++)
         {
-            Vector3 Pos = new Vector3((float)Random.Range(-size + astroSize, size - astroSize), 
-                (float)Random.Range(-size + astroSize, size - astroSize), 
-                (float)Random.Range(-size + astroSize, size - astroSize));
-            GameObject temp = Instantiate(astroid);
+            Vector3 Pos = new Vector3((float)Random.Range(-size / 10, size / 10), (float)Random.Range(-size / 10, size / 10), 
+                (float)Random.Range(-size / 10, size / 10));
+            GameObject temp = Instantiate(bigAstro);
             temp.transform.parent = transform;
             temp.transform.localPosition = Pos;
             field.Add(temp);
@@ -67,6 +61,6 @@ public class AstroField : Field {
             {
                 //BanditoSpawner.Instance.SpawnEnemies(temp, gameObject);
             }
-        }
+        }*/
     }
 }
