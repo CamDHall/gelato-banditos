@@ -31,7 +31,6 @@ public class Bullet : MonoBehaviour {
         if(coll.gameObject.tag == "Bandito")
         {
             Destroy(coll.gameObject);
-            Debug.Log("BANDITO");
             GameManager.Instance.score++;
         }
         Destroy(gameObject);

@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 47949844}
   - component: {fileID: 47949843}
   - component: {fileID: 47949841}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ship
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   front: {fileID: 0}
   health: 5
-  thrustSpeed: 4
+  thrustSpeed: 8
   pitch_speed: 1.5
   yaw_speed: 1.5
   roll_speed: 1.5
@@ -423,7 +423,6 @@ GameObject:
   m_Component:
   - component: {fileID: 51157722}
   - component: {fileID: 51157721}
-  - component: {fileID: 51157723}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -457,22 +456,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 935315512}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &51157723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 51157720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93642a5fd8e881f4983ce6b5edbca2fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bandito: {fileID: 1683100508550454, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
 --- !u!1 &111686788
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,6 +894,47 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 924585963}
+--- !u!1 &935315511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 935315512}
+  - component: {fileID: 935315513}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &935315512
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935315511}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 51157722}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &935315513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935315511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93642a5fd8e881f4983ce6b5edbca2fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bandito: {fileID: 1683100508550454, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
 --- !u!1 &1188508648
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,6 +1214,7 @@ MonoBehaviour:
   i_right: {fileID: 1543671}
   i_top: {fileID: 633716105}
   i_bottom: {fileID: 924585965}
+  bulletContainer: {fileID: 797958431}
 --- !u!4 &1392433488
 Transform:
   m_ObjectHideFlags: 0
@@ -1209,7 +1239,7 @@ GameObject:
   - component: {fileID: 1735443857}
   - component: {fileID: 1735443859}
   - component: {fileID: 1735443858}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCube16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1282,7 +1312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1749738691}
   - component: {fileID: 1749738692}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1355,7 +1385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1990791190}
   - component: {fileID: 1990791191}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1425,7 +1455,7 @@ GameObject:
   - component: {fileID: 2128606542}
   - component: {fileID: 2128606545}
   - component: {fileID: 2128606546}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

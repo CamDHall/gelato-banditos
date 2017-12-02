@@ -59,14 +59,9 @@ public class AstroField : Field {
             GameObject temp = Instantiate(astroid);
             temp.transform.parent = transform;
             temp.transform.localPosition = Pos;
-            field.Add(temp);
-            //AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
-            AstroSpawner.Instance.astroids.Add(temp, 1);
+            AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
 
-            if (Random.Range(0, 100) > spawnChance)
-            {
-                //BanditoSpawner.Instance.SpawnEnemies(temp, gameObject);
-            }
+            field.Add(temp);
         }
     }
 }

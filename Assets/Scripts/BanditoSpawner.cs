@@ -18,6 +18,8 @@ public class BanditoSpawner : MonoBehaviour {
     public void SpawnEnemies(GameObject astro, GameObject quad)
     {
         BoxCollider bc = astro.GetComponent<BoxCollider>();
+        Cluster cluster = quad.GetComponent<Cluster>();
+
         //int num = Random.Range(1, 3);
         Vector3 Pos = new Vector3((bc.size.x / 2), (bc.size.y / 2), (bc.size.z / 2));
 
@@ -26,9 +28,9 @@ public class BanditoSpawner : MonoBehaviour {
             GameObject temp = Instantiate(bandito);
             temp.transform.parent = astro.transform;
             temp.transform.localPosition = Pos;
-            temp.transform.parent = null;
+            temp.transform.SetParent(transform);
             enemies.Add(temp);
-            quad.GetComponent<AstroField>().enemies.Add(temp);
+            cluster.enemies.Add(temp);
         }
 
 

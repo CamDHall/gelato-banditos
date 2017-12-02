@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour {
 
-    public float speed;
+    public float speed, rotationSpeed;
     public float fireCooldown;
-    public int attentionDist;
-
+    public int attentionDist, range;
+    public LayerMask playerMask;
     [HideInInspector]
     public Rigidbody rb;
     public EnemyState currentSate;
@@ -25,7 +25,7 @@ public class StateController : MonoBehaviour {
 	}
 	
 	void Update () {
-        if(Vector3.Distance(transform.position, PlayerMovement.player.front.position) < attentionDist)
+        if(Vector3.Distance(transform.position, PlayerMovement.player.transform.position) < attentionDist)
         {
             aiActive = true;
         } else
@@ -33,11 +33,9 @@ public class StateController : MonoBehaviour {
             aiActive = false;
         }
 
-		if(!aiActive)
+		if(aiActive)
         {
-            return;
+            currentSate.UpdateState(this);
         }
-
-        currentSate.UpdateState(this);
 	}
 }

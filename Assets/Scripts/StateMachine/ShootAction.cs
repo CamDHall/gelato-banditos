@@ -7,7 +7,7 @@ public class ShootAction : Action
 {
     public override void Act(StateController controller)
     {
-        if (Vector3.Distance(controller.transform.position, PlayerMovement.player.transform.position) < 30)
+        if (Vector3.Distance(controller.transform.position, PlayerMovement.player.transform.position) < controller.attentionDist)
         {
             Attack(controller);
         }
@@ -17,10 +17,15 @@ public class ShootAction : Action
     {
         if(controller.fireCooldown < Time.time)
         {
-            GameObject prefab = Resources.Load("Rocket") as GameObject;
-            Instantiate(prefab, controller.transform.position, controller.transform.localRotation);
+            RaycastHit hit;
+            if(Physics.Raycast(controller.transform.position, controller.transform.forward, out hit, controller.range, controller.playerMask))
+            {
+                Debug.Log("HERE");
+                GameObject prefab = Resources.Load("Rocket") as GameObject;
+                Instantiate(prefab, controller.transform.position + (controller.transform.forward * 12), controller.transform.localRotation, GameManager.Instance.bulletContainer.transform);
 
-            controller.fireCooldown = Time.time + 5;
+                controller.fireCooldown = Time.time + 1;
+            }
         }
     }
 }

@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour {
     bool leftActive, rightActive, topActive, bottomActive;
     Color bc;
 
+    public GameObject bulletContainer;
+
 	void Start () {
         Instance = this;
 

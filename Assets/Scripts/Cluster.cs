@@ -62,9 +62,9 @@ public class Cluster : Field {
             //AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
             AstroSpawner.Instance.astroids.Add(temp, 1);
 
-            if (Random.Range(0, 100) > spawnChance)
+            if (Random.Range(0, 100) < spawnChance)
             {
-                //BanditoSpawner.Instance.SpawnEnemies(temp, gameObject);
+                BanditoSpawner.Instance.SpawnEnemies(temp, gameObject);
             }
         }
     }

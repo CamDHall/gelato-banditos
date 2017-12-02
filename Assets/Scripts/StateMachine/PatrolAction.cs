@@ -12,8 +12,10 @@ public class PatrolAction : Action
 
     private void Patrol(StateController controller)
     {
-        controller.transform.LookAt(PlayerMovement.player.transform);
+        Quaternion targetRotation = Quaternion.LookRotation(PlayerMovement.player.transform.position - controller.transform.position);
 
+        controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, targetRotation, Time.deltaTime * controller.rotationSpeed);
+        /*
         RaycastHit hit;
 
 
@@ -22,7 +24,7 @@ public class PatrolAction : Action
             MoveAround(controller, hit.transform.gameObject);
         } else
         {
-            float dist = Vector3.Distance(PlayerMovement.player.front.position, controller.transform.position);
+            float dist = Vector3.Distance(PlayerMovement.player.transform.position, controller.transform.position);
 
             if (dist > 30)
             {
@@ -43,7 +45,7 @@ public class PatrolAction : Action
             {
                 controller.reachedPlayer = false;
             }
-        }
+        }*/
     }
 
     void MoveForward(StateController controller)
