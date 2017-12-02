@@ -6,21 +6,33 @@ public class CamController : MonoBehaviour {
 
     float pitch = 0, yaw = 0;
     public float pitch_speed, yaw_speed;
+    public float deadZone;
 
     Quaternion newRotation;
 
     private void LateUpdate()
     {
-        if (Input.GetAxis("CameraPitch") != 0)
+        // Deadzone
+        Vector2 stickInput = new Vector2(Input.GetAxis("CameraPitch"), Input.GetAxis("CameraYaw"));
+        if (stickInput.magnitude <= deadZone)
         {
-            pitch += (Input.GetAxis("CameraPitch") * pitch_speed);
+            stickInput = Vector2.zero;
+        }
+        else
+        {
+            stickInput = stickInput.normalized * ((stickInput.magnitude - deadZone) / (1 - deadZone));
+        }
+
+        if (stickInput.x != 0)
+        {
+            pitch += (stickInput.x * pitch_speed);
         } else
         {
             pitch = 0;
         }
-        if (Input.GetAxis("CameraYaw") != 0)
+        if (stickInput.y != 0)
         {
-            yaw += Input.GetAxis("CameraYaw") * yaw_speed;
+            yaw += stickInput.y * yaw_speed;
         } else
         {
             yaw = 0;

@@ -17,15 +17,10 @@ public class ShootAction : Action
     {
         if(controller.fireCooldown < Time.time)
         {
-            RaycastHit hit;
-            if(Physics.Raycast(controller.transform.position, controller.transform.forward, out hit, controller.range, controller.playerMask))
-            {
-                Debug.Log("HERE");
-                GameObject prefab = Resources.Load("Rocket") as GameObject;
-                Instantiate(prefab, controller.transform.position + (controller.transform.forward * 12), controller.transform.localRotation, GameManager.Instance.bulletContainer.transform);
+            GameObject prefab = Resources.Load("Rocket") as GameObject;
+            Instantiate(prefab, controller.transform.position + (controller.transform.forward * 12), controller.transform.localRotation, GameManager.Instance.bulletContainer.transform);
 
-                controller.fireCooldown = Time.time + 1;
-            }
+            controller.fireCooldown = Time.time + 1;
         }
     }
 }

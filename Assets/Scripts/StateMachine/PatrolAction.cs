@@ -15,54 +15,36 @@ public class PatrolAction : Action
         Quaternion targetRotation = Quaternion.LookRotation(PlayerMovement.player.transform.position - controller.transform.position);
 
         controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, targetRotation, Time.deltaTime * controller.rotationSpeed);
-        /*
-        RaycastHit hit;
 
-
-        if(Physics.Raycast(controller.transform.position, controller.transform.forward, out hit, 15))
+        if(controller.timer < Time.time)
         {
-            MoveAround(controller, hit.transform.gameObject);
-        } else
-        {
-            float dist = Vector3.Distance(PlayerMovement.player.transform.position, controller.transform.position);
+            controller.destination = PlayerMovement.player.transform.position;
+            controller.timer = Time.time + 10;
+        }
 
-            if (dist > 30)
+        if (controller.reachedTimer < Time.time)
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(controller.transform.position, controller.transform.forward, out hit, 15))
             {
-                if (!controller.reachedPlayer)
-                {
-                    MoveForward(controller);
-                }
-            } else if (dist < 25 && dist > 15)
-            {
-                Circle(controller);
+                controller.rb.MovePosition(controller.transform.position + (controller.transform.right * (Time.deltaTime * 10)));
             }
             else
             {
-                controller.reachedPlayer = true;
+                float dist = Vector3.Distance(controller.destination, controller.transform.position);
+                float playerDist = Vector3.Distance(PlayerMovement.player.transform.position, controller.transform.position);
+
+                if (dist > 100 && playerDist > 80)
+                {
+                    controller.rb.MovePosition(controller.transform.position + (controller.transform.forward * controller.speed));
+                } else
+                {
+                    controller.reachedTimer = Time.time + 10;
+                }
             }
-
-            if (controller.reachedPlayer && dist > 400)
-            {
-                controller.reachedPlayer = false;
-            }
-        }*/
+        }
     }
 
-    void MoveForward(StateController controller)
-    {
-        controller.rb.MovePosition(controller.transform.position + (controller.transform.forward * controller.speed));
-    }
 
-    void MoveAround(StateController controller, GameObject obstacle)
-    {
-        controller.rb.MovePosition(controller.transform.position + (controller.transform.right * (Time.deltaTime * 10)));
-    }
-
-    void Circle(StateController controller)
-    {
-        int direction = Random.Range(-1, 1);
-        Vector3 dest = (controller.transform.right * direction) * (controller.speed / 500);
-
-        controller.rb.MovePosition(controller.transform.position + dest);
-    }
 }

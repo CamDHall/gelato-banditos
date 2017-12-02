@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour {
     public int health;
     public float thrustSpeed;
 
+    public float deadZone;
+
     public float pitch_speed, yaw_speed, roll_speed;
 
     public bool rotating = false;
@@ -40,6 +42,16 @@ public class PlayerMovement : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        // Deadzone
+        Vector2 stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
+        if(stickInput.magnitude <= deadZone)
+        {
+            stickInput = Vector2.zero;
+        } else
+        {
+            stickInput = stickInput.normalized * ((stickInput.magnitude - deadZone) / (1 - deadZone));
+        }
+
         if(Input.GetAxis("Thrust") != 0)
         {
             if (acceleration < maxSpeed)
@@ -60,8 +72,8 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
-        pitch = Input.GetAxis("Pitch") * pitch_speed;
-        yaw = Input.GetAxis("Yaw") * yaw_speed;
+        pitch = stickInput.x * pitch_speed;
+        yaw = stickInput.y * yaw_speed;
         //roll = Input.GetAxis("Roll") * roll_speed;
 
         transform.Rotate(pitch, yaw, 0);

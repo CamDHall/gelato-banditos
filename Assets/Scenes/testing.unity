@@ -293,7 +293,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   front: {fileID: 0}
   health: 5
-  thrustSpeed: 8
+  thrustSpeed: 16
+  deadZone: 0.25
   pitch_speed: 1.5
   yaw_speed: 1.5
   roll_speed: 1.5
@@ -1542,6 +1543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pitch_speed: 10
   yaw_speed: 10
+  deadZone: 0.25
 --- !u!114 &2128606546
 MonoBehaviour:
   m_ObjectHideFlags: 0

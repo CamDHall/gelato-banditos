@@ -15,6 +15,9 @@ public class StateController : MonoBehaviour {
 
     bool aiActive = false;
 
+    public Vector3 destination;
+    public float timer = 0, reachedTimer = 0;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
