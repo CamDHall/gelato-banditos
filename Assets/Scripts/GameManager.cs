@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
     Color bc;
 
     public GameObject bulletContainer;
+    public bool game_over = false;
 
 	void Start () {
         Instance = this;
@@ -28,52 +29,56 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void Update () {
-        /* timeLeft.text = "Time: " + System.Math.Round(timeGoal - Time.time, 2);
-         if(timeGoal < Time.time)
-         {
-             End();
-         }*/
-
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             Application.Quit();
         }
 
         if (Input.GetButton("Start"))
         {
-            SceneManager.LoadScene("testing");
+            SceneManager.LoadScene("main");
         }
 
-        if(leftActive && i_left.color.a > 0)
+        if (!game_over)
         {
-            i_left.color = new Color(bc.r, bc.g, bc.b, i_left.color.a - Time.deltaTime);
-        } else
-        {
-            leftActive = false;
-        }
-        if (rightActive && i_right.color.a > 0)
-        {
-            i_right.color = new Color(bc.r, bc.g, bc.b, i_right.color.a - Time.deltaTime);
-        }
-        else
-        {
-            rightActive = false;
-        }
-        if (topActive && i_top.color.a > 0)
-        {
-            i_top.color = new Color(bc.r, bc.g, bc.b, i_top.color.a - Time.deltaTime);
-        }
-        else
-        {
-            topActive = false;
-        }
-        if (bottomActive && i_bottom.color.a > 0)
-        {
-            i_bottom.color = new Color(bc.r, bc.g, bc.b, i_bottom.color.a - Time.deltaTime);
-        }
-        else
-        {
-            bottomActive = false;
+            timeLeft.text = "Time: " + System.Math.Round(timeGoal - Time.time, 2);
+            if (timeGoal < Time.time)
+            {
+                End();
+            }
+
+            if (leftActive && i_left.color.a > 0)
+            {
+                i_left.color = new Color(bc.r, bc.g, bc.b, i_left.color.a - Time.deltaTime);
+            }
+            else
+            {
+                leftActive = false;
+            }
+            if (rightActive && i_right.color.a > 0)
+            {
+                i_right.color = new Color(bc.r, bc.g, bc.b, i_right.color.a - Time.deltaTime);
+            }
+            else
+            {
+                rightActive = false;
+            }
+            if (topActive && i_top.color.a > 0)
+            {
+                i_top.color = new Color(bc.r, bc.g, bc.b, i_top.color.a - Time.deltaTime);
+            }
+            else
+            {
+                topActive = false;
+            }
+            if (bottomActive && i_bottom.color.a > 0)
+            {
+                i_bottom.color = new Color(bc.r, bc.g, bc.b, i_bottom.color.a - Time.deltaTime);
+            }
+            else
+            {
+                bottomActive = false;
+            }
         }
 
     }
@@ -82,11 +87,13 @@ public class GameManager : MonoBehaviour {
     {
         finalScore.GetComponent<Text>().text = "Final score: " + score;
         finalScore.SetActive(true);
+        game_over = true;
     }
 
     public void Death()
     {
         death.SetActive(true);
+        game_over = true;
     }
 
     public void Indicator(string side)

@@ -42,79 +42,87 @@ public class PlayerMovement : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        // Deadzone
-        Vector2 stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
-        if(stickInput.magnitude <= deadZone)
+        if (!GameManager.Instance.game_over)
         {
-            stickInput = Vector2.zero;
-        } else
-        {
-            stickInput = stickInput.normalized * ((stickInput.magnitude - deadZone) / (1 - deadZone));
-        }
-
-        if(Input.GetAxis("Thrust") != 0)
-        {
-            if (acceleration < maxSpeed)
+            // Deadzone
+            Vector2 stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
+            if (stickInput.magnitude <= deadZone)
             {
-                acceleration += (accelRate * Time.deltaTime);
+                stickInput = Vector2.zero;
             }
-        } else
-        {
-            if(acceleration > 0)
+            else
             {
-                if(acceleration < 0.01f)
+                stickInput = stickInput.normalized * ((stickInput.magnitude - deadZone) / (1 - deadZone));
+            }
+
+            if (Input.GetAxis("Thrust") != 0)
+            {
+                if (acceleration < maxSpeed)
                 {
-                    acceleration = 0;
-                } else
-                {
-                    acceleration = Mathf.Lerp(acceleration, 0, deccelTime * Time.deltaTime);
+                    acceleration += (accelRate * Time.deltaTime);
                 }
             }
-        }
-
-        pitch = stickInput.x * pitch_speed;
-        yaw = stickInput.y * yaw_speed;
-        //roll = Input.GetAxis("Roll") * roll_speed;
-
-        transform.Rotate(pitch, yaw, 0);
-        
-        if(pitch == 0 && yaw == 0 && roll == 0)
-        {
-            rotating = true;
-        } else
-        {
-            rotating = false;
-        }
-
-        // Dash
-        if(Input.GetButtonDown("DashRight"))
-        {
-            if(remainingDash == 0)
+            else
             {
-                remainingDash = dashAmount;
+                if (acceleration > 0)
+                {
+                    if (acceleration < 0.01f)
+                    {
+                        acceleration = 0;
+                    }
+                    else
+                    {
+                        acceleration = Mathf.Lerp(acceleration, 0, deccelTime * Time.deltaTime);
+                    }
+                }
             }
-        }
-        if(Input.GetButtonDown("DashLeft"))
-        {
-            if(remainingDash == 0)
+
+            pitch = stickInput.x * pitch_speed;
+            yaw = stickInput.y * yaw_speed;
+            //roll = Input.GetAxis("Roll") * roll_speed;
+
+            transform.Rotate(pitch, yaw, 0);
+
+            if (pitch == 0 && yaw == 0 && roll == 0)
             {
-                remainingDash = -dashAmount;
+                rotating = true;
             }
-        }
-
-        if (remainingDash == 0)
-        {
-            rb.MovePosition(rb.position + (transform.forward * acceleration));
-        } else
-        {
-            remainingDash = Mathf.Lerp(remainingDash, 0, 0.2f);
-            Vector3 vDash = rb.position + (transform.right * remainingDash);
-
-            rb.MovePosition(vDash);
-
-            if(Mathf.Abs(remainingDash) < 0.1f)
+            else
             {
-                remainingDash = 0;
+                rotating = false;
+            }
+
+            // Dash
+            if (Input.GetButtonDown("DashRight"))
+            {
+                if (remainingDash == 0)
+                {
+                    remainingDash = dashAmount;
+                }
+            }
+            if (Input.GetButtonDown("DashLeft"))
+            {
+                if (remainingDash == 0)
+                {
+                    remainingDash = -dashAmount;
+                }
+            }
+
+            if (remainingDash == 0)
+            {
+                rb.MovePosition(rb.position + (transform.forward * acceleration));
+            }
+            else
+            {
+                remainingDash = Mathf.Lerp(remainingDash, 0, 0.2f);
+                Vector3 vDash = rb.position + (transform.right * remainingDash);
+
+                rb.MovePosition(vDash);
+
+                if (Mathf.Abs(remainingDash) < 0.1f)
+                {
+                    remainingDash = 0;
+                }
             }
         }
     }

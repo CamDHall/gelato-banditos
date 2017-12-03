@@ -28,17 +28,21 @@ public class StateController : MonoBehaviour {
 	}
 	
 	void Update () {
-        if(Vector3.Distance(transform.position, PlayerMovement.player.transform.position) < attentionDist)
+        if (!GameManager.Instance.game_over)
         {
-            aiActive = true;
-        } else
-        {
-            aiActive = false;
-        }
+            if (Vector3.Distance(transform.position, PlayerMovement.player.transform.position) < attentionDist)
+            {
+                aiActive = true;
+            }
+            else
+            {
+                aiActive = false;
+            }
 
-		if(aiActive)
-        {
-            currentSate.UpdateState(this);
+            if (aiActive)
+            {
+                currentSate.UpdateState(this);
+            }
         }
 	}
 }
