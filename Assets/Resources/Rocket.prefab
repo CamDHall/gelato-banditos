@@ -137,3 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rocket_speed: 4
+  finalScale: {x: 5, y: 5, z: 5}

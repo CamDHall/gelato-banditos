@@ -14,17 +14,13 @@ public class PatrolAction : Action
     {
         float dist = Vector3.Distance(PlayerMovement.player.transform.position, controller.transform.position);
 
-
-        Debug.Log(Quaternion.FromToRotation(Vector3.up, PlayerMovement.player.transform.position - controller.transform.position).eulerAngles.z);
-
         PathFinding(controller);
         if (dist > controller.paddingDist)
         {
             Move(controller);
-        } else if(Quaternion.FromToRotation(Vector3.up, PlayerMovement.player.transform.position - controller.transform.position).eulerAngles.z <= 90 ||
-            Quaternion.FromToRotation(Vector3.up, PlayerMovement.player.transform.position - controller.transform.position).eulerAngles.z >= 270)
+        } else
         {
-            Strafe(controller);
+            Turn(controller);
         }
     }
 
@@ -38,14 +34,6 @@ public class PatrolAction : Action
         Vector3 Pos = PlayerMovement.player.transform.position - controller.transform.position;
         Quaternion newRotation = Quaternion.LookRotation(Pos);
         Quaternion rotation = Quaternion.Slerp(controller.transform.rotation, newRotation, Time.deltaTime * controller.rotationSpeed);
-        controller.rb.MoveRotation(rotation);
-    }
-
-    void Turn(StateController controller, float modifier)
-    {
-        Vector3 Pos = PlayerMovement.player.transform.position - controller.transform.position;
-        Quaternion newRotation = Quaternion.LookRotation(Pos);
-        Quaternion rotation = Quaternion.Slerp(controller.transform.rotation, newRotation, Time.deltaTime * (controller.rotationSpeed * modifier));
         controller.rb.MoveRotation(rotation);
     }
 
@@ -68,16 +56,10 @@ public class PatrolAction : Action
 
             rotation = Quaternion.Euler(euler);
             controller.rb.rotation = Quaternion.Slerp(controller.rb.rotation, rotation, Time.deltaTime);
-            controller.turning = Time.time + 1.2f;
-        }
-        else if(controller.turning < Time.time)
+            controller.turning = Time.time + 0.4f;
+        } else if(controller.turning < Time.time)
         {
-            Turn(controller, 2);
+            Turn(controller);
         }
-    }
-
-    void Strafe(StateController controller)
-    {
-        controller.rb.MovePosition(controller.rb.position + (controller.transform.right * controller.speed));
     }
 }

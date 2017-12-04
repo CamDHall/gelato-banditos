@@ -7,12 +7,18 @@ public class Rocket : MonoBehaviour {
     Rigidbody rb;
     float speed;
     public float rocket_speed;
+    public Vector3 finalScale;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         speed = rocket_speed;
         Destroy(gameObject, 10);
+    }
+
+    private void Update()
+    {
+        transform.localScale = Vector3.Slerp(transform.localScale, finalScale, 0.1f);
     }
 
     void FixedUpdate()
