@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyState : ScriptableObject {
 
     public Action[] actions;
+    public Action[] fixed_actions;
 
 	public void UpdateState(StateController controller)
     {
@@ -17,6 +18,14 @@ public class EnemyState : ScriptableObject {
         for(int i = 0; i < actions.Length; i++)
         {
             actions[i].Act(controller);
+        }
+    }
+
+    public void FixedActions(StateController controller)
+    {
+        for(int i = 0; i < fixed_actions.Length; i++)
+        {
+            fixed_actions[i].Act(controller);
         }
     }
 }

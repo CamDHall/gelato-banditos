@@ -9,7 +9,7 @@ public class ShootAction : Action
     {
         if (Vector3.Distance(controller.transform.position, PlayerMovement.player.transform.position) < controller.attentionDist)
         {
-            Attack(controller);
+            //Attack(controller);
         }
     }
 

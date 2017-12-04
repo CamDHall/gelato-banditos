@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour {
 
-    public float speed, rotationSpeed;
+    public float speed, rotationSpeed, rotationAvoid, paddingDist;
     public float fireCooldown;
     public int attentionDist, range;
+    public float rayCastOffset, detectionDist;
     public LayerMask playerMask;
     [HideInInspector]
     public Rigidbody rb;
@@ -15,17 +16,15 @@ public class StateController : MonoBehaviour {
 
     bool aiActive = false;
 
-    public Vector3 destination;
-    public float timer = 0, reachedTimer = 0;
+    float test = 5;
+
+    [HideInInspector]
+    public float timer = 0, reachedTimer = 0, turning = 0;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
-
-    void Start () {
-		
-	}
 	
 	void Update () {
         if (!GameManager.Instance.game_over)
@@ -45,4 +44,12 @@ public class StateController : MonoBehaviour {
             }
         }
 	}
+
+    private void FixedUpdate()
+    {
+        if(!GameManager.Instance.game_over && aiActive)
+        {
+            currentSate.FixedActions(this);
+        }
+    }
 }
