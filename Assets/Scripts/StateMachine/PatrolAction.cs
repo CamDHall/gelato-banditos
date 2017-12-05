@@ -22,6 +22,7 @@ public class PatrolAction : Action
         Vector3 newDest = centerPoint + (Random.insideUnitSphere * 5);
 
         controller.destination = newDest;
+        Debug.Log(centerPoint);
         controller.patrolResetTimer = Time.time + 5;
     }
 
@@ -39,28 +40,27 @@ public class PatrolAction : Action
 
         Debug.DrawRay(right, transform.forward * controller.detectionDist, Color.white);
 
-        if(Physics.Raycast(right, transform.forward, out hit, controller.detectionDist))
+        if(Physics.Raycast(left, transform.forward, out hit, controller.detectionDist))
         {
-            offset += -transform.right * 10;
+            offset += transform.right;
             controller.lastHit = transform.right;
-        } else if(Physics.Raycast(left, transform.forward, out hit, controller.detectionDist))
+        } else if(Physics.Raycast(right, transform.forward, out hit, controller.detectionDist))
         {
-            offset += transform.right * 10;
+            offset -= transform.right;
             controller.lastHit = -transform.right;
         } else if(Physics.Raycast(up, transform.forward, out hit, controller.detectionDist))
         {
-            offset += -transform.up * 10;
+            offset -= transform.up;
             controller.lastHit = transform.up;
         } else if(Physics.Raycast(down, transform.forward, out hit, controller.detectionDist))
         {
-            offset += transform.up * 10;
+            offset += transform.up;
             controller.lastHit = -transform.up;
         }
 
         if(offset != Vector3.zero)
         {
-            controller.transform.Rotate(offset * 0.1f);
-            Debug.Log("HERE");
+            controller.transform.Rotate(offset * controller.rotationAvoid);
             //controller.rb.MoveRotation(Quaternion.FromToRotation(controller.rb.position, offset * 5f * Time.deltaTime));
         }
         else if(controller.lastHit == Vector3.zero ||
@@ -70,6 +70,7 @@ public class PatrolAction : Action
             Quaternion newRotation = Quaternion.LookRotation(controller.destination - Pos);
             controller.rb.rotation = Quaternion.Slerp(controller.rb.rotation, newRotation, Time.deltaTime * controller.rotationSpeed);
         }
+
         controller.rb.MovePosition(controller.rb.position + (transform.forward * controller.speed));
     }
 }
