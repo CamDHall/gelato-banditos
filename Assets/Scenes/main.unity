@@ -291,8 +291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd24a7394b2db84aaafe3f03a44ec1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
-  thrustSpeed: 32
+  health: 10
+  thrustSpeed: 35
   deadZone: 0.25
   pitch_speed: 1.5
   yaw_speed: 1.5
@@ -591,6 +591,52 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 376547658}
+--- !u!1001 &526083533
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4006203714974392, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006203714974392, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006203714974392, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 174.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006203714974392, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006203714974392, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006203714974392, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006203714974392, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006203714974392, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006203714974392, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &537054646
 GameObject:
   m_ObjectHideFlags: 0

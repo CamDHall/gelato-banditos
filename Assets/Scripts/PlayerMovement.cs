@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour {
 
         colliders = GetComponents<BoxCollider>();
 
-        accelRate *= Time.deltaTime;
+        accelRate = thrustSpeed * Time.deltaTime;
     }
 
     private void FixedUpdate()
