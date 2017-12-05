@@ -8,6 +8,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4687aa08c96968d4593394eed5639da6, type: 3}
-  m_Name: Patrol
+  m_Script: {fileID: 11500000, guid: dec6ffdf1e1b56745adc9b005a1a8f06, type: 3}
+  m_Name: PatrolAction
   m_EditorClassIdentifier: 

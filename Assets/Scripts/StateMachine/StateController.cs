@@ -11,15 +11,16 @@ public class StateController : MonoBehaviour {
     public LayerMask playerMask;
     [HideInInspector]
     public Rigidbody rb;
-    public EnemyState currentSate;
+    public State currentSate;
     public bool reachedPlayer;
+    public Vector3 destination, lastHit;
 
     bool aiActive = false;
 
     float test = 5;
 
     [HideInInspector]
-    public float timer = 0, reachedTimer = 0, turning = 0;
+    public float patrolResetTimer = 0, reachedTimer = 0, turning = 0;
 
     private void Awake()
     {
@@ -49,7 +50,7 @@ public class StateController : MonoBehaviour {
     {
         if(!GameManager.Instance.game_over && aiActive)
         {
-            currentSate.FixedActions(this);
+            currentSate.UpdateFixedState(this);
         }
     }
 }

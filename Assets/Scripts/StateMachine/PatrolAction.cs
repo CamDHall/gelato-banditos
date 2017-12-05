@@ -2,64 +2,74 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PluggableAI/Actions/Patrol")]
+[CreateAssetMenu(menuName = "PluggableAI/Actions/PatrolAction")]
 public class PatrolAction : Action
 {
     public override void Act(StateController controller)
     {
-        Patrol(controller);
-    }
-
-    private void Patrol(StateController controller)
-    {
-        float dist = Vector3.Distance(PlayerMovement.player.transform.position, controller.transform.position);
-
-        PathFinding(controller);
-        if (dist > controller.paddingDist)
+        if(controller.patrolResetTimer < Time.time)
         {
-            Move(controller);
+            PickDestination(controller);
         } else
         {
-            Turn(controller);
+            PathFinding(controller);
         }
     }
 
-    void Move(StateController controller)
+    void PickDestination(StateController controller)
     {
-        controller.rb.MovePosition(controller.transform.position + (controller.transform.forward * controller.speed));
-    }
+        Vector3 centerPoint = (PlayerMovement.player.transform.position - controller.transform.position) * 0.5f;
+        Vector3 newDest = centerPoint + (Random.insideUnitSphere * 5);
 
-    void Turn(StateController controller)
-    {
-        Vector3 Pos = PlayerMovement.player.transform.position - controller.transform.position;
-        Quaternion newRotation = Quaternion.LookRotation(Pos);
-        Quaternion rotation = Quaternion.Slerp(controller.transform.rotation, newRotation, Time.deltaTime * controller.rotationSpeed);
-        controller.rb.MoveRotation(rotation);
+        controller.destination = newDest;
+        controller.patrolResetTimer = Time.time + 5;
     }
 
     void PathFinding(StateController controller)
     {
+        Transform transform = controller.transform;
+        Vector3 Pos = controller.rb.position;
+        Vector3 offset = Vector3.zero;
+
         RaycastHit hit;
-        Transform cPos = controller.transform;
+        Vector3 up = Pos + (controller.transform.up * controller.rayCastOffset);
+        Vector3 down = Pos - (controller.transform.up * controller.rayCastOffset);
+        Vector3 left = Pos - (controller.transform.right * controller.rayCastOffset);
+        Vector3 right = Pos + (controller.transform.right * controller.rayCastOffset);
 
-        Debug.DrawRay(controller.rb.position + (cPos.right * controller.rayCastOffset), controller.transform.forward * controller.detectionDist, Color.white);
+        Debug.DrawRay(right, transform.forward * controller.detectionDist, Color.white);
 
-        if (Physics.Raycast(controller.rb.position + (cPos.right * controller.rayCastOffset), cPos.forward, out hit, controller.detectionDist) ||
-            Physics.Raycast(controller.rb.position - (cPos.right * controller.rayCastOffset), cPos.forward, out hit, controller.detectionDist) ||
-            Physics.Raycast(controller.rb.position + (cPos.up * controller.rayCastOffset), cPos.forward, out hit, controller.detectionDist) ||
-            Physics.Raycast(controller.rb.position - (cPos.up * controller.rayCastOffset), cPos.forward, out hit, controller.detectionDist))
+        if(Physics.Raycast(right, transform.forward, out hit, controller.detectionDist))
         {
-            Vector3 target = hit.transform.position - controller.transform.position;
-            Quaternion rotation = Quaternion.LookRotation(target);
-            Vector3 euler = rotation.eulerAngles;
-            euler.y -= 180;
-
-            rotation = Quaternion.Euler(euler);
-            controller.rb.rotation = Quaternion.Slerp(controller.rb.rotation, rotation, Time.deltaTime);
-            controller.turning = Time.time + 0.4f;
-        } else if(controller.turning < Time.time)
+            offset += -transform.right * 10;
+            controller.lastHit = transform.right;
+        } else if(Physics.Raycast(left, transform.forward, out hit, controller.detectionDist))
         {
-            Turn(controller);
+            offset += transform.right * 10;
+            controller.lastHit = -transform.right;
+        } else if(Physics.Raycast(up, transform.forward, out hit, controller.detectionDist))
+        {
+            offset += -transform.up * 10;
+            controller.lastHit = transform.up;
+        } else if(Physics.Raycast(down, transform.forward, out hit, controller.detectionDist))
+        {
+            offset += transform.up * 10;
+            controller.lastHit = -transform.up;
         }
+
+        if(offset != Vector3.zero)
+        {
+            controller.transform.Rotate(offset * 0.1f);
+            Debug.Log("HERE");
+            //controller.rb.MoveRotation(Quaternion.FromToRotation(controller.rb.position, offset * 5f * Time.deltaTime));
+        }
+        else if(controller.lastHit == Vector3.zero ||
+            !Physics.Raycast(controller.lastHit * controller.rayCastOffset, controller.lastHit, out hit, controller.detectionDist))
+        {
+            controller.lastHit = Vector3.zero;
+            Quaternion newRotation = Quaternion.LookRotation(controller.destination - Pos);
+            controller.rb.rotation = Quaternion.Slerp(controller.rb.rotation, newRotation, Time.deltaTime * controller.rotationSpeed);
+        }
+        controller.rb.MovePosition(controller.rb.position + (transform.forward * controller.speed));
     }
 }
