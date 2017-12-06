@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1106562315767368}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -385.86}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 46.4, y: 0, z: 419.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -123,9 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9952d934c36f09e4881ab73b68752c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  rotationSpeed: 10
-  rotationAvoid: 0.5
+  speed: 2
+  rotationSpeed: 5
+  rotationAvoid: 2.1
   paddingDist: 150
   fireCooldown: 2
   attentionDist: 800
@@ -136,8 +136,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   rb: {fileID: 0}
-  currentSate: {fileID: 11400000, guid: 3ceb2f529b9ce5746abe20dda86e5d4b, type: 2}
+  currentSate: {fileID: 11400000, guid: af0323c064c9e5d4793c59a13482170a, type: 2}
   reachedPlayer: 0
-  timer: 0
+  destination: {x: 0, y: 0, z: 0}
+  lastHit: {x: 0, y: 0, z: 0}
+  patrolResetTimer: 0
   reachedTimer: 0
   turning: 0

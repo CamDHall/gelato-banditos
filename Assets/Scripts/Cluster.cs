@@ -9,7 +9,7 @@ public class Cluster : Field {
         numAstroids = Random.Range(numLow, numHigh);
         size = AstroSpawner.Instance.col_size / 2;
 
-        camDepth = Camera.main.farClipPlane + 100;
+        camDepth = Camera.main.farClipPlane;
         box = GetComponent<BoxCollider>();
         astroSize = bigAstro.GetComponent<BoxCollider>().size.x;
     }
@@ -59,8 +59,8 @@ public class Cluster : Field {
             temp.transform.parent = transform;
             temp.transform.localPosition = Pos;
             field.Add(temp);
-            AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
-            //AstroSpawner.Instance.astroids.Add(temp, 1);
+            //AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
+            AstroSpawner.Instance.astroids.Add(temp, 1);
 
             if (Random.Range(0, 100) < spawnChance)
             {

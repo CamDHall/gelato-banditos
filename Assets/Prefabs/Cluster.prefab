@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46b403da5abf964b9763404a8076d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLow: 150
-  numHigh: 160
+  numLow: 140
+  numHigh: 145
   spawnChance: 10
   populated: 0
   turnedOff: 0
