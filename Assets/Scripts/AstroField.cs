@@ -10,7 +10,6 @@ public class AstroField : Field {
         size = AstroSpawner.Instance.col_size / 2;
 
         camDepth = Camera.main.farClipPlane + 100;
-        box = GetComponent<BoxCollider>();
         astroSize = astroid.GetComponent<BoxCollider>().size.x;
     }
 

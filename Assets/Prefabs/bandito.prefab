@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1106562315767368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.4, y: 0, z: 419.7}
+  m_LocalPosition: {x: 5.4053454, y: -41, z: 570}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,8 +110,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 27.204304, y: 31.63311, z: 21.080822}
-  m_Center: {x: 0.0018949509, y: 3.1246724, z: -0.8109813}
+  m_Size: {x: 68.01076, y: 79.08278, z: 52.70205}
+  m_Center: {x: 0.0047359467, y: 7.8116817, z: -2.0274534}
 --- !u!114 &114519197625938256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,23 +123,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9952d934c36f09e4881ab73b68752c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 300
   rotationSpeed: 5
   rotationAvoid: 2.1
   paddingDist: 150
+  strafeStrength: 1.001
   fireCooldown: 2
-  attentionDist: 800
-  range: 300
+  attentionDist: 1000
+  maxRange: 500
   rayCastOffset: 15
   detectionDist: 150
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 1024
   rb: {fileID: 0}
   currentSate: {fileID: 11400000, guid: af0323c064c9e5d4793c59a13482170a, type: 2}
-  reachedPlayer: 0
-  destination: {x: 0, y: 0, z: 0}
-  lastHit: {x: 0, y: 0, z: 0}
-  patrolResetTimer: 0
-  reachedTimer: 0
-  turning: 0
+  strafePos: {x: 0, y: 0, z: 0}
+  lastDirection: {x: 0, y: 0, z: 0}
+  strafeTimer: 0

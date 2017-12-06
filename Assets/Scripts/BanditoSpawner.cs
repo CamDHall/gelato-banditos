@@ -17,11 +17,11 @@ public class BanditoSpawner : MonoBehaviour {
 
     public void SpawnEnemies(GameObject astro, GameObject quad)
     {
-        BoxCollider bc = astro.GetComponent<BoxCollider>();
+        SphereCollider sc = astro.GetComponent<SphereCollider>();
         Cluster cluster = quad.GetComponent<Cluster>();
 
         //int num = Random.Range(1, 3);
-        Vector3 Pos = new Vector3((bc.size.x / 2), (bc.size.y / 2), (bc.size.z / 2));
+        Vector3 Pos = new Vector3((sc.radius / 2), (sc.radius / 2), (sc.radius / 2));
 
         for(int i = 0; i < 1; i++)
         {

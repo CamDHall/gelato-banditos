@@ -17,7 +17,6 @@ public class Field : MonoBehaviour {
 
     protected float playerDist;
     protected float camDepth;
-    protected BoxCollider box;
     protected float astroSize = 0;
     protected Vector3 Pos;
 

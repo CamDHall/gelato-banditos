@@ -1,23 +1,22 @@
 fileFormatVersion: 2
-guid: cd46e05135cb9174cba8f98e8286666c
-timeCreated: 1512012482
+guid: 5284a963e60347745b167bac248b8a23
+timeCreated: 1512524961
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: default
     400000: //RootNode
-    400002: default
-    2300000: default
-    3300000: default
-    4300000: default
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: asteroid
+    9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: defaultMat
-    second: {fileID: 2100000, guid: 9e02d7d3a67b856418c4a9257ed5483b, type: 2}
+      name: _null_
+    second: {fileID: 2100000, guid: 8cc2415159be6c84ea08a20fc6389dc2, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -47,7 +46,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 50
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -89,7 +88,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

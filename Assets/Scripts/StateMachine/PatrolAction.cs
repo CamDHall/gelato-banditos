@@ -7,22 +7,44 @@ public class PatrolAction : Action
 {
     public override void Act(StateController controller)
     {
-        if(controller.patrolResetTimer < Time.time)
+        /*if(controller.paddingDist < Vector3.Distance(PlayerMovement.player.transform.position, controller.transform.position))
         {
             PickDestination(controller);
+        }*/
+
+        PathFinding(controller);
+
+        float dist = Vector3.Distance(PlayerMovement.player.transform.position, controller.transform.position);
+
+        if(dist > controller.maxRange)
+        {
+            controller.rb.MovePosition(controller.rb.position + (controller.transform.forward * controller.speed));
         } else
         {
-            PathFinding(controller);
+            Vector3 newPos = controller.transform.forward * -PlayerMovement.player.acceleration;
+            controller.rb.MovePosition(controller.rb.position + newPos + Strafe(controller));
         }
     }
 
-    void PickDestination(StateController controller)
+    Vector3 Strafe(StateController controller)
     {
-        Vector3 centerPoint = (PlayerMovement.player.transform.position - controller.transform.position) * 0.5f;
-        Vector3 newDest = centerPoint + (Random.insideUnitSphere * 5);
+        if (controller.strafePos == Vector3.zero)
+        {
+            controller.strafePos = controller.transform.right * (1 + (controller.strafeStrength * Time.deltaTime));
+            controller.lastDirection = controller.strafePos;
+        } else {
+            if (controller.strafeTimer < Time.time)
+            {
+                controller.strafePos = -controller.lastDirection;
+                controller.lastDirection = controller.strafePos;
+                controller.strafeTimer = Time.time + 1.25f;
+            } else
+            {
+                controller.strafePos *= (1 + (controller.strafeStrength * Time.deltaTime));
+            }
+        }
 
-        controller.destination = newDest;
-        controller.patrolResetTimer = Time.time + 5;
+        return controller.strafePos;
     }
 
     void PathFinding(StateController controller)
@@ -48,10 +70,9 @@ public class PatrolAction : Action
 
         } else
         {
-            newRotation = Quaternion.LookRotation(controller.destination - Pos);
+            newRotation = Quaternion.LookRotation(PlayerMovement.player.transform.position - controller.transform.position);
         }
 
         controller.rb.rotation = Quaternion.Slerp(controller.rb.rotation, newRotation, Time.deltaTime * controller.rotationSpeed);
-        controller.rb.MovePosition(controller.rb.position + (transform.forward * controller.speed));
     }
 }

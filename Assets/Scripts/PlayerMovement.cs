@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] float remainingDash = 0;
     public float dashAmount;
 
-    Rigidbody rb;
+    public Rigidbody rb;
 
     public BoxCollider[] colliders;
 

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Cluster : Field {
 
+    public float xWidth, yWidth, zDepth;
+
     private void Awake()
     {
         numAstroids = Random.Range(numLow, numHigh);
         size = AstroSpawner.Instance.col_size / 2;
 
         camDepth = Camera.main.farClipPlane;
-        box = GetComponent<BoxCollider>();
-        astroSize = bigAstro.GetComponent<BoxCollider>().size.x;
+        astroSize = bigAstro.GetComponent<SphereCollider>().radius;
     }
 
     private void Start()
@@ -53,8 +54,8 @@ public class Cluster : Field {
         base.Populate();
         for (int i = 0; i < numAstroids; i++)
         {
-            Vector3 Pos = new Vector3((float)Random.Range(-size / 1.5f, size / 1.5f), (float)Random.Range(-size / 3, size / 3), 
-                (float)Random.Range(-size / 2, size / 2));
+            Vector3 Pos = new Vector3((float)Random.Range(-size / xWidth, size / xWidth), (float)Random.Range(-size / yWidth, size / yWidth), 
+                (float)Random.Range(-size / zDepth, size / zDepth));
             GameObject temp = Instantiate(bigAstro);
             temp.transform.parent = transform;
             temp.transform.localPosition = Pos;

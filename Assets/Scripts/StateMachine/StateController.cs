@@ -5,26 +5,23 @@ using UnityEngine;
 public class StateController : MonoBehaviour {
 
     public float speed, rotationSpeed, rotationAvoid, paddingDist;
+    public float strafeStrength;
     public float fireCooldown;
-    public int attentionDist, range;
+    public int attentionDist, maxRange;
     public float rayCastOffset, detectionDist;
-    public LayerMask playerMask;
+
     [HideInInspector]
     public Rigidbody rb;
     public State currentSate;
-    public bool reachedPlayer;
-    public Vector3 destination, lastHit;
+    public Vector3 strafePos, lastDirection;
+    public float strafeTimer = -1;
 
     bool aiActive = false;
-
-    float test = 5;
-
-    [HideInInspector]
-    public float patrolResetTimer = 0, reachedTimer = 0, turning = 0;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        speed *= Time.deltaTime;
     }
 	
 	void Update () {

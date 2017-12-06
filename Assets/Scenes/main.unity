@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  thrustSpeed: 35
+  thrustSpeed: 40
   deadZone: 0.25
   pitch_speed: 1.5
   yaw_speed: 1.5
@@ -307,6 +307,7 @@ MonoBehaviour:
   acceleration: 0
   remainingDash: 0
   dashAmount: 50
+  rb: {fileID: 0}
   colliders: []
 --- !u!65 &47949839
 BoxCollider:

@@ -17,7 +17,6 @@ public class AstroSpawner : MonoBehaviour {
 
 	void Start () {
         Instance = this;
-
         for (int z = 0; z < size; z++) {
             for (int y = 0; y < size; y++)
             {
