@@ -12,16 +12,34 @@ public class GunController : MonoBehaviour {
 
     public GameObject container;
     public GameObject crosshair;
+    public LineRenderer prefab_laser;
+
+    private void Start()
+    {
+        
+    }
 
     void Update () {
         if(Input.GetAxis("Fire") != 0)
         {
             if (!pressed && fire_cooldown < Time.time)
             {
-                //Vector3 Pos = new Vector3(crosshair.transform.position.x, crosshair.transform.position.y, crosshair.transform.position.z) + transform.forward;
-                GameObject temp = Instantiate(bullet);
-                temp.transform.parent = container.transform;
-                temp.transform.position = transform.position + (transform.forward * 6);
+                LineRenderer laser = Instantiate(prefab_laser);
+                RaycastHit hit;
+                if(Physics.Raycast(transform.position, transform.forward, out hit))
+                {
+                    laser.SetPosition(0, transform.position);
+                    laser.SetPosition(1, hit.transform.position);
+
+                    laser.enabled = true;
+                } else
+                {
+                    laser.SetPosition(0, transform.position);
+                    laser.SetPosition(1, transform.position + (transform.forward * 100));
+                }
+                //GameObject temp = Instantiate(bullet);
+                //temp.transform.parent = container.transform;
+                //temp.transform.position = transform.position + (transform.forward * 6);
 
                 fire_cooldown = Time.time + 0.1f;
             }

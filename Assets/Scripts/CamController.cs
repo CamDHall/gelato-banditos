@@ -14,6 +14,9 @@ public class CamController : MonoBehaviour {
     {
         // Deadzone
         Vector2 stickInput = new Vector2(Input.GetAxis("CameraPitch"), Input.GetAxis("CameraYaw"));
+        if (stickInput.magnitude <= deadZone) stickInput = Vector2.zero;
+
+
         if (stickInput.magnitude <= deadZone)
         {
             stickInput = Vector2.zero;
@@ -37,8 +40,10 @@ public class CamController : MonoBehaviour {
         {
             yaw = 0;
         }
+        pitch = Mathf.Clamp(pitch, -15, 10);
+        yaw = Mathf.Clamp(yaw, -18, 18);
 
-        newRotation = Quaternion.Euler(Mathf.Clamp(pitch, -15, 10), Mathf.Clamp(yaw, -18, 18), 0);
+        newRotation = Quaternion.Euler(pitch, yaw, 0);
 
         transform.localRotation = Quaternion.Slerp(transform.localRotation, newRotation, 0.1f);
 

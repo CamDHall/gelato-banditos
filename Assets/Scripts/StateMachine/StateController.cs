@@ -12,7 +12,7 @@ public class StateController : MonoBehaviour {
 
     [HideInInspector]
     public Rigidbody rb;
-    public State currentSate;
+    public State[] currentSates;
     public Vector3 strafePos, lastDirection;
     public float strafeTimer = -1;
 
@@ -38,7 +38,10 @@ public class StateController : MonoBehaviour {
 
             if (aiActive)
             {
-                currentSate.UpdateState(this);
+                foreach (State state in currentSates)
+                {
+                    state.UpdateState(this);
+                }
             }
         }
 	}
@@ -47,7 +50,10 @@ public class StateController : MonoBehaviour {
     {
         if(!GameManager.Instance.game_over && aiActive)
         {
-            currentSate.UpdateFixedState(this);
+            foreach (State state in currentSates)
+            {
+                state.UpdateFixedState(this);
+            }
         }
     }
 }

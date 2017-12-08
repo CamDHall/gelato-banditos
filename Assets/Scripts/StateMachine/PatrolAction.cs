@@ -7,11 +7,6 @@ public class PatrolAction : Action
 {
     public override void Act(StateController controller)
     {
-        /*if(controller.paddingDist < Vector3.Distance(PlayerMovement.player.transform.position, controller.transform.position))
-        {
-            PickDestination(controller);
-        }*/
-
         PathFinding(controller);
 
         float dist = Vector3.Distance(PlayerMovement.player.transform.position, controller.transform.position);

@@ -59,6 +59,6 @@ MonoBehaviour:
   astroid: {fileID: 1536017236734666, guid: 0346c028ab9a19340aa2da3432eb2b75, type: 2}
   bigAstro: {fileID: 1860803422955760, guid: 8d0c0cb69266f8140bd21fb5c3c0cf44, type: 2}
   enemies: []
-  xWidth: 0.8
-  yWidth: 1.2
-  zDepth: 0.8
+  xWidth: 1.1
+  yWidth: 1
+  zDepth: 1.5

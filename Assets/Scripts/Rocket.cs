@@ -13,7 +13,7 @@ public class Rocket : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody>();
         speed = rocket_speed;
-        Destroy(gameObject, 10);
+        Destroy(gameObject, 6);
     }
 
     private void Update()

@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1106562315767368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.4053454, y: -41, z: 570}
+  m_LocalPosition: {x: 3.3, y: -15.6, z: 798}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -127,14 +127,16 @@ MonoBehaviour:
   rotationSpeed: 5
   rotationAvoid: 2.1
   paddingDist: 150
-  strafeStrength: 1.001
-  fireCooldown: 2
+  strafeStrength: 0
+  fireCooldown: 4
   attentionDist: 1000
-  maxRange: 500
+  maxRange: 400
   rayCastOffset: 15
   detectionDist: 150
   rb: {fileID: 0}
-  currentSate: {fileID: 11400000, guid: af0323c064c9e5d4793c59a13482170a, type: 2}
+  currentSates:
+  - {fileID: 11400000, guid: af0323c064c9e5d4793c59a13482170a, type: 2}
+  - {fileID: 11400000, guid: 506f47f925df36d41a584d49d91e9337, type: 2}
   strafePos: {x: 0, y: 0, z: 0}
   lastDirection: {x: 0, y: 0, z: 0}
-  strafeTimer: 0
+  strafeTimer: -1
