@@ -6,6 +6,6 @@ public class Laser : MonoBehaviour {
 
     private void Start()
     {
-        Destroy(gameObject, Time.deltaTime * 2);
+        Destroy(gameObject, Time.deltaTime * 5);
     }
 }
