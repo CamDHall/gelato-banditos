@@ -16,7 +16,11 @@ public class PatrolAction : Action
             controller.rb.MovePosition(controller.rb.position + (controller.transform.forward * controller.speed));
         } else
         {
-            Vector3 newPos = controller.transform.forward * -PlayerMovement.player.acceleration;
+            Vector3 newPos = Vector3.zero;
+            if (dist < controller.minRange)
+            {
+                newPos = controller.transform.forward * -PlayerMovement.player.acceleration;
+            }
             controller.rb.MovePosition(controller.rb.position + newPos + Strafe(controller));
         }
     }
@@ -26,18 +30,24 @@ public class PatrolAction : Action
         if (controller.strafePos == Vector3.zero)
         {
             controller.strafePos = controller.transform.right * (1 + (controller.strafeStrength * Time.deltaTime));
-            controller.lastDirection = controller.strafePos;
+            //controller.lastDirection = controller.strafePos;
         } else {
-            if (controller.strafeTimer < Time.time)
+            if (controller.strafeTimer < Time.timeSinceLevelLoad)
             {
-                controller.strafePos = -controller.lastDirection;
-                controller.lastDirection = controller.strafePos;
-                controller.strafeTimer = Time.time + 1.25f;
+                controller.strafePos = new Vector3(Random.Range(-1f, 1f) * Time.deltaTime
+                    , Random.Range(-1f, 1f) * Time.deltaTime, 0);
+                //controller.strafePos = -controller.lastDirection;
+                //controller.lastDirection = controller.strafePos;
+                controller.strafeTimer = Time.timeSinceLevelLoad + 1f;
             } else
             {
                 controller.strafePos *= (1 + (controller.strafeStrength * Time.deltaTime));
             }
         }
+
+        //Vector3 newPos = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
+
+        //controller.strafePos += (newPos * (controller.strafeStrength * Time.deltaTime));
 
         return controller.strafePos;
     }

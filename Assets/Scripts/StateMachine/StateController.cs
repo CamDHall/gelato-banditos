@@ -7,14 +7,15 @@ public class StateController : MonoBehaviour {
     public float speed, rotationSpeed, rotationAvoid, paddingDist;
     public float strafeStrength;
     public float fireCooldown;
-    public int attentionDist, maxRange;
+    public int attentionDist, maxRange, minRange;
     public float rayCastOffset, detectionDist;
 
     [HideInInspector]
     public Rigidbody rb;
     public State[] currentSates;
-    public Vector3 strafePos, lastDirection;
-    public float strafeTimer = -1;
+    public Vector3 strafePos, destination;
+    public float strafeTimer = 0, travelTimer = 0;
+    public float timer;
 
     bool aiActive = false;
 
@@ -22,6 +23,7 @@ public class StateController : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody>();
         speed *= Time.deltaTime;
+        timer = fireCooldown;
     }
 	
 	void Update () {

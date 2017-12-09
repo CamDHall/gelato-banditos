@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour {
 
         if (!game_over)
         {
-            timeLeft.text = "Time: " + System.Math.Round(timeGoal - Time.time, 2);
-            if (timeGoal < Time.time)
+            timeLeft.text = "Time: " + System.Math.Round(timeGoal - Time.timeSinceLevelLoad, 2);
+            if (timeGoal < Time.timeSinceLevelLoad)
             {
                 End();
             }

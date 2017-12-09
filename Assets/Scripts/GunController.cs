@@ -8,7 +8,9 @@ public class GunController : MonoBehaviour {
     public GameObject bullet;
 
     bool pressed = false;
-    float fire_cooldown = 0;
+    public float fire_cooldown = 0;
+
+    float timer;
 
     public Transform container;
     public Transform origin;
@@ -19,24 +21,24 @@ public class GunController : MonoBehaviour {
 
     private void Start()
     {
-        
+        timer = 0;
     }
 
     void Update () {
         if(Input.GetAxis("Fire") != 0)
         {
-            if (!pressed && fire_cooldown < Time.time)
+            if (!pressed && timer < Time.timeSinceLevelLoad)
             {
                 LineRenderer laser = Instantiate(prefab_laser);
-                laser.transform.position = transform.position;
-                laser.transform.SetParent(container);
+                laser.transform.SetParent(transform);
                 Ray ray = new Ray(transform.position, transform.forward);
                 RaycastHit hit;
                 if(Physics.Raycast(transform.position, transform.forward, out hit))
                 {
                     laser.SetPosition(0, origin.position);
                     laser.SetPosition(1, hit.point);
-                    Debug.Log(origin.position);
+
+                    Destroy(hit.transform.gameObject, Time.deltaTime * 5);
 
                     laser.enabled = true;
                 } else
@@ -45,11 +47,7 @@ public class GunController : MonoBehaviour {
                     laser.SetPosition(1, ray.GetPoint(10000));
                 }
 
-                //GameObject temp = Instantiate(laser);
-                //temp.transform.SetParent(container.transform);
-                //temp.transform.position = transform.position + (transform.forward * 6);
-
-                fire_cooldown = Time.time + 0.1f;
+                timer = Time.timeSinceLevelLoad + fire_cooldown;
             }
             pressed = true;
         } else

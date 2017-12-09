@@ -9,18 +9,18 @@ public class ShootAction : Action
     {
         if (Vector3.Distance(controller.transform.position, PlayerMovement.player.transform.position) < controller.attentionDist)
         {
-            Attack(controller);
+            //Attack(controller);
         }
     }
 
     private void Attack(StateController controller)
     {
-        if(controller.fireCooldown < Time.time)
+        if(controller.timer < Time.timeSinceLevelLoad)
         {
             GameObject prefab = Resources.Load("Rocket") as GameObject;
             Instantiate(prefab, controller.transform.position + (controller.transform.forward * 25), controller.transform.localRotation, GameManager.Instance.bulletContainer.transform);
 
-            controller.fireCooldown = Time.time + 1;
+            controller.timer = Time.timeSinceLevelLoad + (Random.Range(controller.fireCooldown, controller.fireCooldown + 2));
         }
     }
 }
