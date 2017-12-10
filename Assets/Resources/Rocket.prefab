@@ -136,5 +136,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7575b35750e2504e82f674f3a8c73ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocket_speed: 16
-  finalScale: {x: 30, y: 30, z: 50}
+  rocket_speed: 18
+  finalScale: {x: 25, y: 25, z: 50}

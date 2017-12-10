@@ -45,10 +45,11 @@ public class PatrolAction : Action
             {
                 controller.strafePos = new Vector3(Random.Range(-1f, 1f) * Time.deltaTime
                     , Random.Range(-1f, 1f) * Time.deltaTime, 0);
-                controller.strafeTimer = Time.timeSinceLevelLoad + 2f;
+                controller.strafeTimer = Time.timeSinceLevelLoad + 1.5f;
             } else
             {
-                controller.strafePos *= (1 + (controller.strafeStrength * Time.deltaTime));
+                controller.strafePos += new Vector3((-controller.strafePos.x / -controller.strafePos.x) * (controller.strafeStrength * Time.deltaTime),
+                    (-controller.strafePos.y / -controller.strafePos.y) * (controller.strafeStrength * Time.deltaTime), 0);
             }
         }
 
@@ -69,6 +70,7 @@ public class PatrolAction : Action
         {
             newRotation = Quaternion.LookRotation(Vector3.Cross(controller.transform.position,
                 colls[1].transform.position));
+
             avoiding = true;
         }
         else
@@ -80,7 +82,7 @@ public class PatrolAction : Action
         controller.rb.rotation = Quaternion.Slerp(controller.rb.rotation, newRotation, Time.deltaTime * controller.rotationSpeed);
         if (avoiding)
         {
-            controller.rb.MovePosition(controller.rb.position + (controller.transform.forward * controller.speed));
+            controller.rb.MovePosition(controller.rb.position + (-colls[1].transform.forward * controller.speed));
         }
         return avoiding;
     }

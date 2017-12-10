@@ -111,15 +111,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9952d934c36f09e4881ab73b68752c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 250
+  gelato: {fileID: 0}
+  speed: 200
   rotationSpeed: 3
   rotationAvoid: 5
   paddingDist: 150
-  strafeStrength: 3
-  fireCooldown: 2
+  strafeStrength: 2
+  fireCooldown: 3
   attentionDist: 2000
-  maxRange: 800
-  minRange: 400
+  maxRange: 1000
+  minRange: 500
   rayCastOffset: 8
   detectionDist: 200
   rb: {fileID: 0}

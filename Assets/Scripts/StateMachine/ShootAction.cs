@@ -7,9 +7,9 @@ public class ShootAction : Action
 {
     public override void Act(StateController controller)
     {
-        if (Vector3.Distance(controller.transform.position, PlayerMovement.player.transform.position) < controller.attentionDist)
+        if (Vector3.Distance(controller.transform.position, PlayerMovement.player.transform.position) < controller.maxRange)
         {
-            Attack(controller);
+            //Attack(controller);
         }
     }
 

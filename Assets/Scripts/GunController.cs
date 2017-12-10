@@ -37,7 +37,10 @@ public class GunController : MonoBehaviour {
                 {
                     laser.SetPosition(0, origin.position);
                     laser.SetPosition(1, hit.point);
+                    if(hit.transform.tag == "Bandito")
+                    {
 
+                    }
                     Destroy(hit.transform.gameObject, Time.deltaTime * 5);
 
                     laser.enabled = true;

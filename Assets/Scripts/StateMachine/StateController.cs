@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour {
 
+    public GameObject gelato;
     public float speed, rotationSpeed, rotationAvoid, paddingDist;
     public float strafeStrength;
     public float fireCooldown;
@@ -61,6 +62,14 @@ public class StateController : MonoBehaviour {
             {
                 state.UpdateFixedState(this);
             }
+        }
+    }
+
+    public void Die()
+    {
+        if(Random.Range(0, 10) > 9)
+        {
+            Instantiate(gelato, transform.position, Quaternion.identity);
         }
     }
 }
