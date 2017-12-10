@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9952d934c36f09e4881ab73b68752c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gelato: {fileID: 0}
+  gelato: {fileID: 1183398549117688, guid: 4f6d85bfc7c368348861db4fcb959641, type: 2}
   speed: 200
   rotationSpeed: 3
   rotationAvoid: 5
@@ -144,5 +144,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 39.54139
+  m_Radius: 40
   m_Center: {x: 0.0047359467, y: 7.8116817, z: -2.0274534}

@@ -67,9 +67,11 @@ public class StateController : MonoBehaviour {
 
     public void Die()
     {
-        if(Random.Range(0, 10) > 9)
+        if(Random.Range(0, 10) > 1)
         {
             Instantiate(gelato, transform.position, Quaternion.identity);
         }
+
+        Destroy(gameObject, Time.deltaTime * 5);
     }
 }

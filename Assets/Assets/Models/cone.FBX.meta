@@ -1,84 +1,22 @@
 fileFormatVersion: 2
 guid: 2b03557061d55b94fadedd1274e1297f
-timeCreated: 1512868078
+timeCreated: 1512922388
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     100002: pCone1
-    100004: pSphere1
-    100006: pSphere10
-    100008: pSphere11
-    100010: pSphere12
-    100012: pSphere13
-    100014: pSphere2
-    100016: pSphere3
-    100018: pSphere4
-    100020: pSphere5
-    100022: pSphere6
-    100024: pSphere7
-    100026: pSphere8
-    100028: pSphere9
+    100004: pSphere3
     400000: //RootNode
     400002: pCone1
-    400004: pSphere1
-    400006: pSphere10
-    400008: pSphere11
-    400010: pSphere12
-    400012: pSphere13
-    400014: pSphere2
-    400016: pSphere3
-    400018: pSphere4
-    400020: pSphere5
-    400022: pSphere6
-    400024: pSphere7
-    400026: pSphere8
-    400028: pSphere9
+    400004: pSphere3
     2300000: pCone1
-    2300002: pSphere1
-    2300004: pSphere10
-    2300006: pSphere11
-    2300008: pSphere12
-    2300010: pSphere13
-    2300012: pSphere2
-    2300014: pSphere3
-    2300016: pSphere4
-    2300018: pSphere5
-    2300020: pSphere6
-    2300022: pSphere7
-    2300024: pSphere8
-    2300026: pSphere9
-    2300028: //RootNode
+    2300002: pSphere3
     3300000: pCone1
-    3300002: pSphere1
-    3300004: pSphere10
-    3300006: pSphere11
-    3300008: pSphere12
-    3300010: pSphere13
-    3300012: pSphere2
-    3300014: pSphere3
-    3300016: pSphere4
-    3300018: pSphere5
-    3300020: pSphere6
-    3300022: pSphere7
-    3300024: pSphere8
-    3300026: pSphere9
-    3300028: //RootNode
+    3300002: pSphere3
     4300000: pCone1
-    4300002: pSphere1
-    4300004: pSphere2
-    4300006: pSphere3
-    4300008: pSphere4
-    4300010: pSphere5
-    4300012: pSphere6
-    4300014: pSphere7
-    4300016: pSphere8
-    4300018: pSphere9
-    4300020: pSphere10
-    4300022: pSphere11
-    4300024: pSphere12
-    4300026: pSphere13
+    4300002: pSphere3
     7400000: Take 001
     9500000: //RootNode
   externalObjects:
@@ -116,7 +54,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1000
+    globalScale: 10
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

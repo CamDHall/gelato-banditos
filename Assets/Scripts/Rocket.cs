@@ -35,7 +35,7 @@ public class Rocket : MonoBehaviour {
         {
             Destroy(coll.gameObject);
         }
-        Debug.Log(coll.gameObject);
+
         Destroy(gameObject);
     }
 

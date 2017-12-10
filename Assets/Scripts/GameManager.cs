@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour {
     public GameObject bulletContainer;
     public bool game_over = false;
 
+    [HideInInspector]
+    public Queue<GameObject> cones = new Queue<GameObject>();
+
 	void Start () {
         Instance = this;
 
