@@ -15,7 +15,10 @@ public class StateController : MonoBehaviour {
     public State[] currentSates;
     public Vector3 strafePos, destination;
     public float strafeTimer = 0, travelTimer = 0;
+    public Quaternion newRotation;
     public float timer;
+
+    public SphereCollider sc;
 
     bool aiActive = false;
 
@@ -24,6 +27,8 @@ public class StateController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         speed *= Time.deltaTime;
         timer = fireCooldown;
+
+        sc = GetComponent<SphereCollider>();
     }
 	
 	void Update () {
