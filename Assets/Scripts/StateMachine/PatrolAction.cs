@@ -7,7 +7,7 @@ public class PatrolAction : Action
 {
     public override void Act(StateController controller)
     {
-        if (!PathFinding(controller))
+        if (!controller.isFriend && !PathFinding(controller))
         {
 
             float dist = Vector3.Distance(PlayerMovement.player.transform.position, controller.transform.position);

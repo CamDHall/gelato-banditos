@@ -13,11 +13,13 @@ public class StateController : MonoBehaviour {
 
     [HideInInspector]
     public Rigidbody rb;
-    public State[] currentSates;
+    public List<State> currentSates;
     public Vector3 strafePos, destination;
     public float strafeTimer = 0, travelTimer = 0;
     public Quaternion newRotation;
     public float timer;
+    public GameObject target;
+    public bool isFriend = false;
 
     public SphereCollider sc;
 

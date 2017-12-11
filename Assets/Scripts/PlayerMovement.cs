@@ -81,7 +81,9 @@ public class PlayerMovement : MonoBehaviour {
             yaw = stickInput.y * yaw_speed;
             //roll = Input.GetAxis("Roll") * roll_speed;
 
-            transform.Rotate(pitch, yaw, 0);
+            //transform.Rotate(pitch, yaw, 0);
+            Quaternion rot = Quaternion.Euler(pitch, yaw, 0);
+            rb.MoveRotation(rb.rotation * rot);
 
             if (pitch == 0 && yaw == 0 && roll == 0)
             {

@@ -5,12 +5,10 @@ using UnityEngine;
 public class Gelato : MonoBehaviour {
 
     bool moving = true;
-    public bool launched = false;
-    public Transform dir;
+    public float speed, scaleSpeed;
 
-	void Start () {
-		
-	}
+    [HideInInspector] public bool launched = false;
+    [HideInInspector] public Vector3 dir;
 	
 	void Update () {
         if(moving)
@@ -18,8 +16,16 @@ public class Gelato : MonoBehaviour {
 
         if(launched)
         {
-            Debug.Log(dir);
-            transform.Translate(dir.forward);
+            if(transform.parent != null)
+            {
+                transform.SetParent(null);
+            }
+
+            transform.position += (dir * (PlayerMovement.player.acceleration + speed));
+            if(transform.localScale.x < 500)
+            {
+                transform.localScale += new Vector3(Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed);
+            }
         }
 	}
 
@@ -29,6 +35,16 @@ public class Gelato : MonoBehaviour {
         {
             moving = false;
             Place();
+        }
+
+        if(coll.gameObject.tag == "Bandito" && launched)
+        {
+            BanditoSpawner.Instance.enemies.Remove(coll.gameObject);
+            BanditoSpawner.Instance.friends.Add(coll.gameObject);
+
+            coll.gameObject.GetComponent<StateController>().isFriend = true;
+            Destroy(gameObject);
+
         }
     }
 

@@ -31,7 +31,7 @@ public class Rocket : MonoBehaviour {
         if(coll.gameObject.tag == "Player")
         {
             PlayerMovement.player.TakeDamge(1);
-        } else if(coll.gameObject.tag == "Astro")
+        } else
         {
             Destroy(coll.gameObject);
         }

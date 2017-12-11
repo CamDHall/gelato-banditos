@@ -8,8 +8,8 @@ public class BanditoSpawner : MonoBehaviour {
     public static BanditoSpawner Instance;
     public GameObject bandito;
 
-    List<GameObject> enemies = new List<GameObject>();
-    List<GameObject> friends = new List<GameObject>();
+    public List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> friends = new List<GameObject>();
 
 	void Start () {
         Instance = this;

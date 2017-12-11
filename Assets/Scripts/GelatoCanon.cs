@@ -20,13 +20,12 @@ public class GelatoCanon : MonoBehaviour {
             holding = false;
             Gelato g = currentCone.GetComponent<Gelato>();
             g.launched = true;
-            g.dir = PlayerMovement.player.transform;
+            g.dir = transform.forward;
         }
 
         if(holding && Input.GetButton("Cannon") && holdTimer > Time.timeSinceLevelLoad)
         {
             currentCone.transform.localScale += new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
-            //currentCone.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane + 5));
             currentCone.transform.localPosition = new Vector3(0, 0, currentCone.transform.localScale.z);
         }
 	}
