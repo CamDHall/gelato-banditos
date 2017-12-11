@@ -8,6 +8,7 @@ TagManager:
   - IceCream
   - Bandito
   - Quad
+  - Cluster
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Quad
   - Player
   - Bandito
-  - 
+  - Cluster
   - 
   - 
   - 

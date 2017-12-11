@@ -24,14 +24,14 @@ public class Gelato : MonoBehaviour {
 
             if (target != null)
             {
-                transform.position = Vector3.Lerp(transform.position, target.transform.position, 0.1f);
+                transform.position = Vector3.Lerp(transform.position, target.transform.position, 0.15f);
             }
             else
             {
 
                 transform.position += (dir * (PlayerMovement.player.acceleration + speed));
             }
-            if(transform.localScale.x < 500)
+            if(transform.localScale.x < 600)
             {
                 transform.localScale += new Vector3(Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed);
             }

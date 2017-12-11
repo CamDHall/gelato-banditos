@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour {
     public Rigidbody rb;
 
     public BoxCollider[] colliders;
+    [HideInInspector] public float startHealth;
 
 	void Awake () {
         accelRate *= 10;
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour {
         colliders = GetComponents<BoxCollider>();
 
         accelRate = thrustSpeed * Time.deltaTime;
+        startHealth = health;
     }
 
     private void FixedUpdate()

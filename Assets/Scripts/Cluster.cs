@@ -69,4 +69,17 @@ public class Cluster : Field {
             }
         }
     }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if(GameManager.Instance.currentCluser != this)
+        {
+            GameManager.Instance.currentCluser = this;
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        GameManager.Instance.currentCluser = null;
+    }
 }

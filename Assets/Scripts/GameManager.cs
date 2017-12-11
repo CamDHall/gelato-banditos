@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
 
     [HideInInspector]
     public Queue<GameObject> cones = new Queue<GameObject>();
+    public Cluster currentCluser;
 
 	void Start () {
         Instance = this;
