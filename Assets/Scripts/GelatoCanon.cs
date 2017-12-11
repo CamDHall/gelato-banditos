@@ -19,8 +19,17 @@ public class GelatoCanon : MonoBehaviour {
         {
             holding = false;
             Gelato g = currentCone.GetComponent<Gelato>();
+            RaycastHit hit;
+
+            if(Physics.SphereCast(transform.position, 50, transform.forward, out hit) && hit.transform.tag == "Bandito")
+            {
+                g.target = hit.transform;
+            } else
+            {
+                g.dir = transform.forward;
+            }
+
             g.launched = true;
-            g.dir = transform.forward;
         }
 
         if(holding && Input.GetButton("Cannon") && holdTimer > Time.timeSinceLevelLoad)

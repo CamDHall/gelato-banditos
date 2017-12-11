@@ -9,6 +9,7 @@ public class Gelato : MonoBehaviour {
 
     [HideInInspector] public bool launched = false;
     [HideInInspector] public Vector3 dir;
+    [HideInInspector] public Transform target;
 	
 	void Update () {
         if(moving)
@@ -21,7 +22,15 @@ public class Gelato : MonoBehaviour {
                 transform.SetParent(null);
             }
 
-            transform.position += (dir * (PlayerMovement.player.acceleration + speed));
+            if (target != null)
+            {
+                transform.position = Vector3.Lerp(transform.position, target.transform.position, 0.1f);
+            }
+            else
+            {
+
+                transform.position += (dir * (PlayerMovement.player.acceleration + speed));
+            }
             if(transform.localScale.x < 500)
             {
                 transform.localScale += new Vector3(Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed);

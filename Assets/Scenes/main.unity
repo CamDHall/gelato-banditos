@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gelatoContainer: {fileID: 1379284603}
-  health: 10
+  health: 20
   thrustSpeed: 46
   deadZone: 0.25
   pitch_speed: 1.5
@@ -1042,6 +1042,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bandito: {fileID: 1106562315767368, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
+  enemies: []
+  friends: []
 --- !u!1 &1188508648
 GameObject:
   m_ObjectHideFlags: 0
