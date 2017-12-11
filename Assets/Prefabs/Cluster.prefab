@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numLow: 130
   numHigh: 135
-  spawnChance: 10
+  spawnChance: 12
   populated: 0
   turnedOff: 0
   astroid: {fileID: 1536017236734666, guid: 0346c028ab9a19340aa2da3432eb2b75, type: 2}

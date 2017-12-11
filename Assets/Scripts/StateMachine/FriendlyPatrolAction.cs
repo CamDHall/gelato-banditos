@@ -48,8 +48,6 @@ public class FriendlyPatrolAction : Action {
 
     void Aim(StateController controller)
     {
-        Debug.Log(controller.target.transform.position);
         controller.transform.LookAt(controller.target.transform.position);
-        //controller.rb.MoveRotation(Quaternion.FromToRotation(controller.rb.position, controller.target.transform.position));
     }
 }

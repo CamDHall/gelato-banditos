@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class GelatoCanon : MonoBehaviour {
 
-    bool holding = false;
+    public static GelatoCanon Instance;
+
+    public bool holding = false;
     GameObject currentCone;
     float holdTimer = 0;
-	
-	void Update () {
+
+    private void Start()
+    {
+        Instance = this;
+    }
+
+    void Update () {
 		if(Input.GetButtonDown("Cannon") && GameManager.Instance.cones.Count > 0 && !holding)
         {
             PlaceCone();

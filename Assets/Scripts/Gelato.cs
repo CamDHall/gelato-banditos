@@ -45,15 +45,21 @@ public class Gelato : MonoBehaviour {
             moving = false;
             Place();
         }
-
-        if(coll.gameObject.tag == "Bandito" && launched)
+        else
         {
-            BanditoSpawner.Instance.enemies.Remove(coll.gameObject);
-            BanditoSpawner.Instance.friends.Add(coll.gameObject);
+            if (coll.gameObject.tag == "Bandito" && launched)
+            {
+                BanditoSpawner.Instance.enemies.Remove(coll.gameObject);
+                BanditoSpawner.Instance.friends.Add(coll.gameObject);
 
-            coll.gameObject.GetComponent<StateController>().isFriend = true;
-            Destroy(gameObject);
-
+                coll.gameObject.GetComponent<StateController>().isFriend = true;
+                coll.gameObject.GetComponentInChildren<Light>().color = Color.white;
+                Destroy(gameObject);
+            }
+            if (coll.gameObject.tag == "Astro")
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

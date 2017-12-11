@@ -25,7 +25,7 @@ public class GunController : MonoBehaviour {
     }
 
     void Update () {
-        if(Input.GetAxis("Fire") != 0)
+        if(Input.GetAxis("Fire") != 0 && !GelatoCanon.Instance.holding)
         {
             if (!pressed && timer < Time.timeSinceLevelLoad)
             {
