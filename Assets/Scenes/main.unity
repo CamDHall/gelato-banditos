@@ -1804,7 +1804,7 @@ MonoBehaviour:
     type: 2}
   clust:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
 --- !u!114 &1749738694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2013,4 +2013,4 @@ MonoBehaviour:
   yaw_speed: 2
   deadZone: 0.25
   shakeLength: 3
-  shakeInt: 0.000000001
+  shakeInt: 0.1
