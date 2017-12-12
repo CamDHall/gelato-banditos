@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour {
             timeLeft.text = "Time: " + System.Math.Round(timeGoal - Time.timeSinceLevelLoad, 2);
             if (timeGoal < Time.timeSinceLevelLoad)
             {
-                //End();
+                End();
             }
 
             if (leftActive && i_left.color.a > 0)

@@ -30,6 +30,7 @@ public class GelatoCanon : MonoBehaviour {
 
             if(Physics.SphereCast(transform.position, 50, transform.forward, out hit) && hit.transform.tag == "Bandito")
             {
+                AudioManager.Instance.Whip();
                 g.target = hit.transform;
             } else
             {

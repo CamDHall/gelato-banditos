@@ -13,12 +13,10 @@ public class CamController : MonoBehaviour {
 
     Quaternion newRotation;
     Vector3 _hitPos;
-    Vector3 ogPos;
 
     private void Start()
     {
         Instance = this;
-        ogPos = transform.position;
     }
 
     private void Update()
@@ -28,8 +26,6 @@ public class CamController : MonoBehaviour {
             Quaternion temp = Quaternion.LookRotation(transform.position, _hitPos);
             temp = Quaternion.Euler(Random.Range(-temp.x / 2, temp.x / 2), Random.Range(-temp.y / 2, temp.y / 2), temp.z);
             transform.rotation = Quaternion.Slerp(transform.rotation, temp, shakeInt);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.position, _hitPos), 0.1f);
-            Debug.Log(shakeTimer - Time.timeSinceLevelLoad);
         }
     }
 

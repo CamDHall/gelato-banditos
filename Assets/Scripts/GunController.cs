@@ -18,7 +18,6 @@ public class GunController : MonoBehaviour {
     public GameObject laser;
     
     public LineRenderer prefab_laser;
-    public LayerMask clust = (1 << 12);
 
     private void Start()
     {
@@ -30,20 +29,29 @@ public class GunController : MonoBehaviour {
         {
             if (!pressed && timer < Time.timeSinceLevelLoad)
             {
+                AudioManager.Instance.Laser();
                 LineRenderer laser = Instantiate(prefab_laser);
                 laser.transform.SetParent(transform);
                 Ray ray = new Ray(transform.position, transform.forward);
                 RaycastHit hit;
                 if(Physics.Raycast(transform.position, transform.forward, out hit))
                 {
+                    AudioManager.Instance.ChangeVolume(Vector3.Distance(hit.transform.position, transform.position));
                     laser.SetPosition(0, origin.position);
                     laser.SetPosition(1, hit.point);
                     if (hit.transform.tag == "Bandito")
                     {
+                        AudioManager.Instance.BanditoSplat();
                         hit.transform.GetComponent<StateController>().Die();
+                        GameManager.Instance.score += 5;
                     }
                     else
                     {
+                        if(hit.transform.tag == "Astro")
+                        {
+                            GameManager.Instance.score++;
+                            AudioManager.Instance.AstroCrack();
+                        }
                         Destroy(hit.transform.gameObject, Time.deltaTime * 5);
                     }
                     laser.enabled = true;
