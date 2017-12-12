@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class FieldManager : MonoBehaviour {
 
-    /*private void OnTriggerEnter(Collider coll)
+    private void OnTriggerEnter(Collider coll)
     {
-        if(coll.tag != "Quad")
+        if(coll.gameObject.tag == "Quad")
         {
-            return;
-        } else
-        {
-            AstroField af = coll.transform.GetComponent<AstroField>();
+            AstroField af = coll.gameObject.GetComponent<AstroField>();
 
             if(!af.populated)
             {
@@ -21,20 +18,18 @@ public class FieldManager : MonoBehaviour {
                 af.TurnOn();
             }
         }
-    }*/
-    /*
+    }
+
     private void OnTriggerExit(Collider coll)
     {
-        if(coll.gameObject.tag != "Quad")
+        if (coll.gameObject.tag == "Quad")
         {
-            return;
-        } else
-        {
-            AstroField af = coll.transform.GetComponent<AstroField>();
-            if(!af.turnedOff)
+            AstroField af = coll.gameObject.GetComponent<AstroField>();
+
+            if (!af.turnedOff)
             {
                 af.TurnOff();
             }
         }
-    }*/
+    }
 }

@@ -68,10 +68,13 @@ public class PatrolAction : Action
 
         if (colls.Length > 1)
         {
-            newRotation = Quaternion.LookRotation(Vector3.Cross(controller.transform.position,
-                colls[1].transform.position));
+            if (Vector3.Cross(controller.transform.position, colls[1].transform.position) != Vector3.zero)
+            {
+                newRotation = Quaternion.LookRotation(Vector3.Cross(controller.transform.position,
+                    colls[1].transform.position));
 
-            avoiding = true;
+                avoiding = true;
+            }
         }
         else
         {

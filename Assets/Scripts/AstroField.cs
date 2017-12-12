@@ -37,7 +37,7 @@ public class AstroField : Field {
             {
                 Populate();
             }
-            else
+           else
             {
                 if (turnedOff)
                 {
