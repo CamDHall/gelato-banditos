@@ -1674,7 +1674,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 002c3c9a4f7b7c641b8d4049aa2beac2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.009
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2020,6 +2020,7 @@ MonoBehaviour:
   laser: {fileID: 8300000, guid: cf95ba3c95579824b970581434e2f16d, type: 3}
   astroCrack: {fileID: 8300000, guid: 7d7d8ed71c2e94a44a5868de508830ae, type: 3}
   splat: {fileID: 8300000, guid: 4512cdac24d948f4babfbb9807090bba, type: 3}
+  whip: {fileID: 8300000, guid: 16c7e39be2fda494895914d0bfd1339d, type: 3}
 --- !u!1 &1828500544
 GameObject:
   m_ObjectHideFlags: 0

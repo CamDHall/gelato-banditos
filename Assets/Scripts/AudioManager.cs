@@ -32,7 +32,8 @@ public class AudioManager : MonoBehaviour {
 
     public void Whip()
     {
-
+        source.volume = 2;
+        source.PlayOneShot(whip);
     }
 
     public void ChangeVolume(float dist)
