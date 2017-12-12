@@ -3,12 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CamController : MonoBehaviour {
+    public static CamController Instance;
 
     float pitch = 0, yaw = 0;
     public float pitch_speed, yaw_speed;
     public float deadZone;
+    public float shakeLength, shakeInt;
+    float shakeTimer = 0;
 
+    Vector3 _hitPos;
     Quaternion newRotation;
+
+    private void Start()
+    {
+        Instance = this;
+    }
+
+    private void Update()
+    {
+        if(shakeTimer > Time.timeSinceLevelLoad)
+        {
+            //transform.LookAt((Time.deltaTime * Time.deltaTime * Time.deltaTime) * (transform.position - _hitPos));
+        }
+    }
 
     private void LateUpdate()
     {
@@ -47,14 +64,14 @@ public class CamController : MonoBehaviour {
 
         transform.localRotation = Quaternion.Slerp(transform.localRotation, newRotation, 0.1f);
 
-        //Vector3 newRotation = new Vector3(Mathf.Clamp(pitch, -50f, 50f),
-            //Mathf.Clamp(yaw, -30f, 30f), 0);
+    }
 
-        //transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, newRotation, 0.1f);
-        
-        /*
-        transform.localEulerAngles = new Vector3(Mathf.Clamp(pitch, -50f, 50f),
-    Mathf.Clamp(yaw, -20f, 20f), 0);*/
-
+    public void ShakeCamera(Vector3 hitPos)
+    {
+        if (shakeTimer < Time.timeSinceLevelLoad)
+        {
+            _hitPos = hitPos;
+            shakeTimer = Time.timeSinceLevelLoad + (shakeLength * Time.deltaTime);
+        }
     }
 }

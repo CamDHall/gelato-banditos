@@ -18,6 +18,7 @@ public class GunController : MonoBehaviour {
     public GameObject laser;
     
     public LineRenderer prefab_laser;
+    public LayerMask clust = (1 << 12);
 
     private void Start()
     {

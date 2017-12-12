@@ -31,6 +31,7 @@ public class Rocket : MonoBehaviour {
         if(coll.gameObject.tag == "Player")
         {
             PlayerMovement.player.TakeDamge(1);
+            CamController.Instance.ShakeCamera(transform.position);
         } else
         {
             Destroy(coll.gameObject);
@@ -60,5 +61,7 @@ public class Rocket : MonoBehaviour {
         {
             GameManager.Instance.Indicator("Bottom");
         }
+
+        Destroy(gameObject);
     }
 }

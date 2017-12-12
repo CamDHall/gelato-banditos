@@ -34,6 +34,9 @@ public class Gelato : MonoBehaviour {
             if(transform.localScale.x < 600)
             {
                 transform.localScale += new Vector3(Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed);
+            } else
+            {
+                Destroy(gameObject);
             }
         }
 	}
