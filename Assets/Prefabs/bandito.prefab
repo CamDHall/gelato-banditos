@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 54043859425084592}
   - component: {fileID: 114519197625938256}
   - component: {fileID: 135414457967160298}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: bandito
   m_TagString: Bandito
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4762480421399482}
   - component: {fileID: 108837936362556412}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Area Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
