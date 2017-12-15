@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4786738542274718}
   - component: {fileID: 114529915571845048}
+  - component: {fileID: 65173702789769374}
   m_Layer: 12
   m_Name: Cluster
   m_TagString: Cluster
@@ -40,6 +41,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65173702789769374
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1693798285929202}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6000, y: 6000, z: 6000}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114529915571845048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,6 +67,7 @@ MonoBehaviour:
   numLow: 130
   numHigh: 135
   spawnChance: 12
+  clustSize: 3000
   populated: 0
   turnedOff: 0
   astroid: {fileID: 1536017236734666, guid: 0346c028ab9a19340aa2da3432eb2b75, type: 2}

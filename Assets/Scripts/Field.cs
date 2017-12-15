@@ -5,6 +5,7 @@ using UnityEngine;
 public class Field : MonoBehaviour {
 
     public int numLow, numHigh, spawnChance;
+    public int clustSize;
 
     public bool populated = false;
     public bool turnedOff = false;

@@ -4,32 +4,77 @@ using UnityEngine;
 
 public class FieldManager : MonoBehaviour {
 
-    private void OnTriggerEnter(Collider coll)
-    {
-        if(coll.gameObject.tag == "Quad")
-        {
-            AstroField af = coll.gameObject.GetComponent<AstroField>();
+    public static FieldManager Instance;
 
-            if(!af.populated)
+    public int rayOffset;
+    public float checkWaitLength;
+    float checkTimer;
+
+    [HideInInspector] public List<GameObject> activeClust = new List<GameObject>();
+    [HideInInspector] public Dictionary<Transform, GameObject> clusters = new Dictionary<Transform, GameObject>();
+    [HideInInspector] public float camDepth;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        camDepth = Camera.main.farClipPlane + 100;
+    }
+
+    private void Update()
+    {
+        RaycastHit hit;
+
+        Vector3 right = transform.position + (transform.right * rayOffset);
+        Vector3 left = transform.position - (transform.right * rayOffset);
+        Vector3 up = transform.position + (transform.up * rayOffset);
+        Vector3 down = transform.position - (transform.up * rayOffset);
+
+        Debug.DrawRay(right, transform.forward * camDepth, Color.white);
+
+        if(Physics.Raycast(transform.position, transform.forward, out hit, camDepth, LayerMask.GetMask("Cluster"), QueryTriggerInteraction.Collide) ||
+            Physics.Raycast(left, transform.forward, out hit, camDepth, LayerMask.GetMask("Cluster"), QueryTriggerInteraction.Collide) ||
+            Physics.Raycast(right, transform.forward, out hit, camDepth, LayerMask.GetMask("Cluster"), QueryTriggerInteraction.Collide) ||
+            Physics.Raycast(up, transform.forward, out hit, camDepth, LayerMask.GetMask("Cluster"), QueryTriggerInteraction.Collide) ||
+            Physics.Raycast(down, transform.forward, out hit, camDepth, LayerMask.GetMask("Cluster"), QueryTriggerInteraction.Collide))
+        {
+            Cluster field = hit.transform.GetComponent<Cluster>();
+
+            if(!field.populated)
             {
-                af.Populate();
-            } else if(af.turnedOff)
+                field.Populate();
+            } else if(field.turnedOff)
             {
-                af.TurnOn();
+                field.TurnOn();
             }
+
+            activeClust.Add(hit.transform.gameObject);
+        }
+
+        if(Time.timeSinceLevelLoad > checkTimer)
+        {
+            Check();
+            checkTimer = Time.timeSinceLevelLoad + checkWaitLength;
         }
     }
 
-    private void OnTriggerExit(Collider coll)
+    void Check()
     {
-        if (coll.gameObject.tag == "Quad")
+        List<GameObject> newActive = new List<GameObject>();
+        foreach(GameObject chunk in activeClust)
         {
-            AstroField af = coll.gameObject.GetComponent<AstroField>();
-
-            if (!af.turnedOff)
+            if(Vector3.Distance(chunk.transform.position, transform.position) > 10000)
             {
-                af.TurnOff();
+                chunk.GetComponent<Cluster>().TurnOff();
+            } else
+            {
+                newActive.Add(chunk);
             }
         }
+
+        activeClust = newActive;
     }
 }

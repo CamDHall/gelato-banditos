@@ -11,7 +11,7 @@ public class BanditoSpawner : MonoBehaviour {
     public List<GameObject> enemies = new List<GameObject>();
     public List<GameObject> friends = new List<GameObject>();
 
-	void Start () {
+	void Awake () {
         Instance = this;
 	}
 

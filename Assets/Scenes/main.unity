@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 47949844}
   - component: {fileID: 47949843}
   - component: {fileID: 47949841}
+  - component: {fileID: 47949837}
   m_Layer: 10
   m_Name: Ship
   m_TagString: Player
@@ -279,6 +280,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &47949837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 47949836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8495ab33af8fa504194fe2b8e5d8b67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayOffset: 20
+  checkWaitLength: 3
+  activeClust: []
+  camDepth: 0
 --- !u!114 &47949838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gelatoContainer: {fileID: 1379284603}
   health: 10
-  thrustSpeed: 46
+  thrustSpeed: 50
   deadZone: 0.25
   pitch_speed: 1.5
   yaw_speed: 1.5
@@ -447,12 +463,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876026b8ef5e6b24d83d02dce04d69f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab_quadrant: {fileID: 1034734971164400, guid: 81c9fad4f7c35624b92b15fa74f43f31,
-    type: 2}
   prefab_cluster: {fileID: 1693798285929202, guid: 99900919fa7f1ef439676a4a465500e5,
     type: 2}
   size: 10
-  col_size: 3000
+  col_size: 6000
 --- !u!4 &51157722
 Transform:
   m_ObjectHideFlags: 0
@@ -1093,7 +1107,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 826148256}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2030,7 +2044,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1828500545}
   - component: {fileID: 1828500546}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Spotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
