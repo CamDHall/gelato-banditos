@@ -7,12 +7,10 @@ public class State : ScriptableObject
 {
     public Action[] actions;
     public Action[] fixedActions;
-    //public Transition[] transitions;
     
     public void UpdateState(StateController controller)
     {
         DoActions(controller);
-        //CheckTransitions(controller);
     }
 
     public void UpdateFixedState(StateController controller)
@@ -28,6 +26,7 @@ public class State : ScriptableObject
         }
     }
 
+    // For physics movement
     void DoFixedActions(StateController controller)
     {
         for (int i = 0; i < fixedActions.Length; i++)

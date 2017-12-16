@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Using inheretence for clusters so in the future I can have different patterns and types of asteroid fields
+/// </summary>
+
 public class Field : MonoBehaviour {
 
     public int numLow, numHigh, spawnChance;
@@ -27,6 +31,7 @@ public class Field : MonoBehaviour {
     {
         turnedOff = true;
 
+        // Arraty seems to be slightly faster than list, and the temp array doesn't have to change
         GameObject[] temp = field.ToArray();
 
         foreach (GameObject obj in temp)
@@ -39,6 +44,7 @@ public class Field : MonoBehaviour {
 
         GameObject[] tempEnemies = enemies.ToArray();
 
+        // Remove any enemies that have been killed
         foreach (GameObject obj in tempEnemies)
         {
             if (obj == null)
@@ -47,6 +53,7 @@ public class Field : MonoBehaviour {
             }
         }
 
+        // Set new astro list and enemy list
         foreach (GameObject astro in field)
         {
             astro.SetActive(false);
@@ -83,6 +90,7 @@ public class Field : MonoBehaviour {
         }
     }
 
+    // Different clusters will/had different algorithims
     public virtual void Populate()
     {
         populated = true;

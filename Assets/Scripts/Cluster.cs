@@ -11,7 +11,6 @@ public class Cluster : Field {
         numAstroids = Random.Range(numLow, numHigh);
         size = clustSize / 2;
 
-        camDepth = Camera.main.farClipPlane;
         astroSize = bigAstro.GetComponent<SphereCollider>().radius;
     }
 
@@ -23,6 +22,10 @@ public class Cluster : Field {
     public override void Populate()
     {
         base.Populate();
+
+        ///
+        /// The cluster is random, but I'm using xWidth, yWidth, and zDepth to modify the general shape so that it is wide and short
+        ///
         for (int i = 0; i < numAstroids; i++)
         {
             Vector3 Pos = new Vector3((float)Random.Range(-size / xWidth, size / xWidth), (float)Random.Range(-size / yWidth, size / yWidth), 
@@ -31,26 +34,15 @@ public class Cluster : Field {
             temp.transform.parent = transform;
             temp.transform.localPosition = Pos;
             field.Add(temp);
+
             //AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
             AstroSpawner.Instance.astroids.Add(temp, 1);
 
+            // For every astero, randomly choice to spawn a bandito
             if (Random.Range(0, 100) < spawnChance)
             {
                 BanditoSpawner.Instance.SpawnEnemies(temp, gameObject);
             }
         }
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if(GameManager.Instance.currentCluser != this)
-        {
-            GameManager.Instance.currentCluser = this;
-        }
-    }
-
-    private void OnTriggerExit(Collider col)
-    {
-        GameManager.Instance.currentCluser = null;
     }
 }

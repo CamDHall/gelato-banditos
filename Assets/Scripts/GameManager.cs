@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
     public bool game_over = false;
 
     [HideInInspector]
+    // Using a queue so that the Galto is FIFO
     public Queue<GameObject> cones = new Queue<GameObject>();
     public Cluster currentCluser;
 

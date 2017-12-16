@@ -20,8 +20,9 @@ public class BanditoSpawner : MonoBehaviour {
         SphereCollider sc = astro.GetComponent<SphereCollider>();
         Cluster cluster = quad.GetComponent<Cluster>();
 
+        // In the future I want to randomize their local position and have posse's of bandits
         //int num = Random.Range(1, 3);
-        Vector3 Pos = new Vector3((sc.radius / 2), (sc.radius / 2), (sc.radius / 2));
+        Vector3 Pos = new Vector3((sc.radius / 1.75f), (sc.radius / 1.75f), (sc.radius / 1.75f));
 
         for(int i = 0; i < 1; i++)
         {

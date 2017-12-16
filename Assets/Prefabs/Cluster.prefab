@@ -64,15 +64,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46b403da5abf964b9763404a8076d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLow: 130
-  numHigh: 135
-  spawnChance: 12
+  numLow: 85
+  numHigh: 90
+  spawnChance: 10
   clustSize: 3000
   populated: 0
   turnedOff: 0
   astroid: {fileID: 1536017236734666, guid: 0346c028ab9a19340aa2da3432eb2b75, type: 2}
   bigAstro: {fileID: 1860803422955760, guid: 8d0c0cb69266f8140bd21fb5c3c0cf44, type: 2}
   enemies: []
-  xWidth: 1.1
-  yWidth: 1
-  zDepth: 1.5
+  xWidth: 1.25
+  yWidth: 1.75
+  zDepth: 1.25

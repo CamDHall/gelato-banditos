@@ -291,10 +291,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8495ab33af8fa504194fe2b8e5d8b67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayOffset: 20
+  rayOffset: 10
   checkWaitLength: 3
   activeClust: []
-  camDepth: 0
+  depth: 0
 --- !u!114 &47949838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gelatoContainer: {fileID: 1379284603}
   health: 10
-  thrustSpeed: 50
+  thrustSpeed: 56
   deadZone: 0.25
   pitch_speed: 1.5
   yaw_speed: 1.5
@@ -319,8 +319,8 @@ MonoBehaviour:
   yaw: 0
   roll: 0
   accelRate: 1
-  deccelTime: 1
-  maxSpeed: 18
+  deccelTime: 0.5
+  maxSpeed: 22
   acceleration: 0
   remainingDash: 0
   dashAmount: 50
@@ -1688,7 +1688,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 002c3c9a4f7b7c641b8d4049aa2beac2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.09
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2197,8 +2197,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 1
-  far clip plane: 3500
+  near clip plane: 1.9
+  far clip plane: 4500
   field of view: 60
   orthographic: 0
   orthographic size: 5
