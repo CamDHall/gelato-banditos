@@ -28,11 +28,12 @@ public class Cluster : Field {
         ///
         for (int i = 0; i < numAstroids; i++)
         {
-            Vector3 Pos = new Vector3((float)Random.Range(-size / xWidth, size / xWidth), (float)Random.Range(-size / yWidth, size / yWidth), 
-                (float)Random.Range(-size / zDepth, size / zDepth));
             GameObject temp = Instantiate(bigAstro);
-            temp.transform.parent = transform;
-            temp.transform.localPosition = Pos;
+            temp.transform.SetParent( transform);
+            temp.transform.localPosition = AsteroidUtil.Placement(size, xWidth, yWidth, zDepth);
+            temp.transform.localRotation = AsteroidUtil.Rotation();
+            temp.transform.localScale = AsteroidUtil.Scale();
+
             field.Add(temp);
 
             //AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));

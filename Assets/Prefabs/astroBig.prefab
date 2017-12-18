@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4033677003422500}
   - component: {fileID: 33352381607122902}
   - component: {fileID: 23575796917182590}
-  - component: {fileID: 135754574056802090}
   - component: {fileID: 54789164538028466}
+  - component: {fileID: 135559812557506754}
   m_Layer: 8
   m_Name: astroBig
   m_TagString: Astro
@@ -99,7 +99,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &135754574056802090
+--- !u!135 &135559812557506754
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
