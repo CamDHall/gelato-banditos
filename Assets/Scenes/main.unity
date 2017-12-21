@@ -316,9 +316,6 @@ MonoBehaviour:
   yaw_speed: 1.5
   roll_speed: 2
   rotating: 0
-  pitch: 0
-  yaw: 0
-  roll: 0
   accelRate: 1
   deccelTime: 0.5
   maxSpeed: 22

@@ -10,8 +10,6 @@ public class Cluster : Field {
     {
         numAstroids = Random.Range(numLow, numHigh);
         size = clustSize / 2;
-
-        astroSize = bigAstro.GetComponent<SphereCollider>().radius;
     }
 
     private void Start()
@@ -30,9 +28,19 @@ public class Cluster : Field {
         {
             GameObject temp = Instantiate(bigAstro);
             temp.transform.SetParent( transform);
-            temp.transform.localPosition = AsteroidUtil.Placement(size, xWidth, yWidth, zDepth);
+
+            if (transform.position.x == 5 && transform.position.y == 5 && transform.position.z == 5)
+            {
+                temp.transform.localPosition = AsteroidUtil.CenterPlace(size, xWidth, yWidth, zDepth);
+            } else
+            {
+                temp.transform.localPosition = AsteroidUtil.Placement(size, xWidth, yWidth, zDepth);
+            }
+
             temp.transform.localRotation = AsteroidUtil.Rotation();
             temp.transform.localScale = AsteroidUtil.Scale();
+
+            AsteroidUtil.DetermineCollider(temp);
 
             field.Add(temp);
 
