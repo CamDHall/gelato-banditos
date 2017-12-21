@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class GunController : MonoBehaviour {
 
-    public GameObject bullet;
-
     bool pressed = false;
     public float fire_cooldown = 0;
 

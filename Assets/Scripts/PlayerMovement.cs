@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public bool rotating = false;
 
-    public float pitch, yaw, roll;
+    float pitch, yaw, roll;
     Vector3 vel;
 
     public float accelRate, deccelTime, maxSpeed;
@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public BoxCollider[] colliders;
     [HideInInspector] public float startHealth;
+    public bool rolling = true;
 
 	void Awake () {
         accelRate *= 10;
@@ -40,6 +41,18 @@ public class PlayerMovement : MonoBehaviour {
 
         accelRate = thrustSpeed * Time.deltaTime;
         startHealth = health;
+    }
+
+    private void Update()
+    {
+        // Switch between rolling and camera
+        if (Input.GetButton("CameraSwitch"))
+        {
+            if (rolling)
+                rolling = false;
+            else
+                rolling = true;
+        }
     }
 
     private void FixedUpdate()
@@ -81,10 +94,15 @@ public class PlayerMovement : MonoBehaviour {
 
             pitch = stickInput.x * pitch_speed;
             yaw = stickInput.y * yaw_speed;
-            //roll = Input.GetAxis("Roll") * roll_speed;
 
-            //transform.Rotate(pitch, yaw, 0);
-            Quaternion rot = Quaternion.Euler(pitch, yaw, 0);
+            if (rolling)
+            {
+                roll = Input.GetAxis("Roll") * roll_speed;
+            } else
+            {
+                roll = 0;
+            }
+            Quaternion rot = Quaternion.Euler(pitch, yaw, roll);
             rb.MoveRotation(rb.rotation * rot);
 
             if (pitch == 0 && yaw == 0 && roll == 0)
