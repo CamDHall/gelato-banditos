@@ -44,7 +44,6 @@ public static class AsteroidUtil {
     public static void DetermineCollider(GameObject obj)
     {
         Vector3 scale = obj.transform.localScale;
-        Collider col = new Collider();
 
         if(Mathf.Abs(scale.x - scale.y) > 0.25f || Mathf.Abs(scale.y - scale.z) > 0.25f ||
             Mathf.Abs(scale.x - scale.z) > 0.25f)

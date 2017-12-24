@@ -64,8 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46b403da5abf964b9763404a8076d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLow: 85
-  numHigh: 90
+  numLow: 80
+  numHigh: 85
   spawnChance: 10
   clustSize: 3000
   populated: 0
