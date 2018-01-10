@@ -31,6 +31,9 @@ public class PlayerMovement : MonoBehaviour {
     [HideInInspector] public float startHealth;
     public bool rolling = true;
 
+    float deflectionTimer = 0;
+    Quaternion deflectedAngle;
+    Vector3 deflectedPos;
 	void Awake () {
         accelRate *= 10;
 
@@ -59,6 +62,13 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (!GameManager.Instance.game_over)
         {
+            if(deflectionTimer > Time.timeSinceLevelLoad)
+            {
+                Vector3 tempPos = Vector3.Slerp(rb.position, rb.position + deflectedPos, 0.25f);
+                rb.MovePosition(tempPos);
+                Quaternion temp = Quaternion.Slerp(rb.rotation, deflectedAngle, Time.deltaTime);
+                rb.MoveRotation(temp);
+            }
             // Deadzone
             Vector2 stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
             if (stickInput.magnitude <= deadZone)
@@ -162,7 +172,22 @@ public class PlayerMovement : MonoBehaviour {
     {
         if(coll.gameObject.tag == "Astro")
         {
-            GameManager.Instance.Death();
+            TakeDamge(1);
+            Vector3 dir = coll.contacts[0].point - rb.position;
+            dir = -dir.normalized;
+            DeflectPlayer(dir);
         }
+    }
+
+    void DeflectPlayer(Vector3 reflectPos)
+    {
+        float scale = acceleration;
+
+        Quaternion newAngle = Quaternion.Euler(rb.rotation.x * scale,
+            rb.rotation.y * scale, rb.rotation.y * scale);
+
+        deflectedPos = reflectPos * scale * 5;
+        deflectionTimer = Time.timeSinceLevelLoad + 1;
+        deflectedAngle = newAngle;
     }
 }
