@@ -10,11 +10,12 @@ public class StateController : MonoBehaviour {
     public float fireCooldown;
     public int attentionDist, maxRange, minRange;
     public float rayCastOffset, detectionDist;
+    public List<State> states;
 
-    [HideInInspector]
-    public Rigidbody rb;
-    public List<State> currentSates;
-    public Vector3 strafePos, destination;
+    [HideInInspector] public Rigidbody rb;
+    [HideInInspector] public Vector3 strafePos, destination;
+    [HideInInspector] List<State> currentStates = new List<State>();
+
     public float strafeTimer = 0, travelTimer = 0;
     public Quaternion newRotation;
     public float timer;
@@ -48,7 +49,7 @@ public class StateController : MonoBehaviour {
 
             if (aiActive)
             {
-                foreach (State state in currentSates)
+                foreach (State state in states)
                 {
                     state.UpdateState(this);
                 }
@@ -60,7 +61,7 @@ public class StateController : MonoBehaviour {
     {
         if(!GameManager.Instance.game_over && aiActive)
         {
-            foreach (State state in currentSates)
+            foreach (State state in states)
             {
                 state.UpdateFixedState(this);
             }
