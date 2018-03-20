@@ -6,8 +6,11 @@ public class PlayerMovement : MonoBehaviour {
 
     public static PlayerMovement player;
     public Transform gelatoContainer;
-    public int health;
+    public float health, shield;
     public float thrustSpeed;
+
+    public float shieldTimerAmount;
+    float shieldTimer;
 
     public float deadZone;
 
@@ -28,7 +31,7 @@ public class PlayerMovement : MonoBehaviour {
     public Rigidbody rb;
 
     public BoxCollider[] colliders;
-    [HideInInspector] public float startHealth;
+    [HideInInspector] public float startHealth, startShield;
     public bool rolling = true;
 
     float deflectionTimer = 0;
@@ -37,6 +40,7 @@ public class PlayerMovement : MonoBehaviour {
 
     Vector3 addedPos;
     Quaternion addedRot;
+
 	void Awake () {
         accelRate *= 10;
 
@@ -47,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {
 
         accelRate = thrustSpeed * Time.deltaTime;
         startHealth = health;
+        startShield = shield;
     }
 
     private void Update()
@@ -65,6 +70,8 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (!GameManager.Instance.game_over)
         {
+            if (shield <= 0 && shieldTimer < Time.timeSinceLevelLoad) shield = startShield;
+
             if(deflectionTimer > Time.timeSinceLevelLoad)
             {
                 Vector3 tempPos = Vector3.Slerp(rb.position, rb.position + deflectedPos, 0.25f);
@@ -163,10 +170,19 @@ public class PlayerMovement : MonoBehaviour {
 
     public void TakeDamge(int amount)
     {
-        health -= amount;
-        if(health <= 0)
+        if (shield > 0)
         {
-            GameManager.Instance.Death();
+            Debug.Log(amount);
+            shield -= amount;
+        }
+        else
+        {
+            shieldTimer = Time.timeSinceLevelLoad + shieldTimer;
+            health -= amount;
+            if (health <= 0)
+            {
+                GameManager.Instance.Death();
+            }
         }
     }
 

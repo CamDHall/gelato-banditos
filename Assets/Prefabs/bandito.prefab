@@ -189,11 +189,10 @@ MonoBehaviour:
   minRange: 500
   rayCastOffset: 8
   detectionDist: 200
-  rb: {fileID: 0}
-  currentSates:
+  states:
   - {fileID: 11400000, guid: af0323c064c9e5d4793c59a13482170a, type: 2}
   - {fileID: 11400000, guid: 506f47f925df36d41a584d49d91e9337, type: 2}
-  - {fileID: 11400000, guid: 056028c360f937f479b68e0aa9b20c0c, type: 2}
+  rb: {fileID: 0}
   strafePos: {x: 0, y: 0, z: 0}
   destination: {x: 0, y: 0, z: 0}
   strafeTimer: -1

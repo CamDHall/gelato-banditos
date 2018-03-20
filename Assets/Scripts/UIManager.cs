@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour {
 
     public Text coneCount;
     public Image health;
+    public Image shield;
 
 	void Start () {
 		
@@ -15,6 +16,13 @@ public class UIManager : MonoBehaviour {
 	void Update () {
         coneCount.text = "x" + GameManager.Instance.cones.Count;
 
-        health.fillAmount = PlayerMovement.player.health / PlayerMovement.player.startHealth;
+        if (PlayerMovement.player.shield > 0)
+        {
+            shield.fillAmount = PlayerMovement.player.shield / PlayerMovement.player.startShield;
+        }
+        else
+        {
+            health.fillAmount = PlayerMovement.player.health / PlayerMovement.player.startHealth;
+        }
 	}
 }
