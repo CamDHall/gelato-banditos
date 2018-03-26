@@ -6749,6 +6749,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -6856,21 +6857,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd24a7394b2db84aaafe3f03a44ec1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gelatoContainer: {fileID: 0}
   health: 5
+  shield: 0
   thrustSpeed: 0
+  shieldTimerAmount: 0
+  deadZone: 0
   pitch_speed: 0
   yaw_speed: 0
   roll_speed: 0
   rotating: 0
-  pitch: 0
-  yaw: 0
-  roll: 0
   accelRate: 0
   deccelTime: 0
   maxSpeed: 0
   acceleration: 0
   remainingDash: 0
   dashAmount: 0
+  rb: {fileID: 0}
+  colliders: []
+  startHealth: 0
+  startShield: 0
+  rolling: 1
 --- !u!124 &124419452653423666
 Behaviour:
   m_ObjectHideFlags: 1
