@@ -172,7 +172,6 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (shield > 0)
         {
-            Debug.Log(amount);
             shield -= amount;
         }
         else

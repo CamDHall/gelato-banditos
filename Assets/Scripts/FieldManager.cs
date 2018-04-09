@@ -8,7 +8,6 @@ public class FieldManager : MonoBehaviour {
 
     public int rayOffset;
     public float checkWaitLength;
-    float turnOffTimer, turnOnTimer;
 
     [HideInInspector] public List<GameObject> activeClust = new List<GameObject>();
     [HideInInspector] public Dictionary<Transform, GameObject> clusters = new Dictionary<Transform, GameObject>();
@@ -22,47 +21,37 @@ public class FieldManager : MonoBehaviour {
     private void Start()
     {
         depth = 2000;
-        turnOnTimer = Time.timeSinceLevelLoad + checkWaitLength;
     }
 
     private void Update()
     {
         // Check turn on and turn off every 3 seconds, offset the turn on and turn off check
-        if (turnOnTimer < Time.timeSinceLevelLoad)
+        RaycastHit hit;
+
+        // Set ray checks to be wider than ship
+        Vector3 right = transform.position + (transform.right * rayOffset);
+        Vector3 left = transform.position - (transform.right * rayOffset);
+
+        // If the raycast hits a cluster's collider, either populate or turn it on
+        if (Physics.Raycast(transform.position, transform.forward, out hit, depth, LayerMask.GetMask("Cluster"), QueryTriggerInteraction.Collide) ||
+            Physics.Raycast(left, transform.forward, out hit, depth, LayerMask.GetMask("Cluster"), QueryTriggerInteraction.Collide) ||
+            Physics.Raycast(right, transform.forward, out hit, depth, LayerMask.GetMask("Cluster"), QueryTriggerInteraction.Collide))
         {
-            RaycastHit hit;
+            Cluster field = hit.transform.GetComponent<Cluster>();
 
-            // Set ray checks to be wider than ship
-            Vector3 right = transform.position + (transform.right * rayOffset);
-            Vector3 left = transform.position - (transform.right * rayOffset);
-
-            // If the raycast hits a cluster's collider, either populate or turn it on
-            if (Physics.Raycast(transform.position, transform.forward, out hit, depth, LayerMask.GetMask("Cluster"), QueryTriggerInteraction.Collide) ||
-                Physics.Raycast(left, transform.forward, out hit, depth, LayerMask.GetMask("Cluster"), QueryTriggerInteraction.Collide) ||
-                Physics.Raycast(right, transform.forward, out hit, depth, LayerMask.GetMask("Cluster"), QueryTriggerInteraction.Collide))
+            if (!field.populated)
             {
-                Cluster field = hit.transform.GetComponent<Cluster>();
-
-                if (!field.populated)
-                {
-                    field.Populate();
-                }
-                else if (field.turnedOff)
-                {
-                    field.TurnOn();
-                }
-
-                activeClust.Add(hit.transform.gameObject);
+                field.Populate();
+            }
+            else if (field.turnedOff)
+            {
+                field.TurnOn();
             }
 
-            turnOnTimer = Time.timeSinceLevelLoad + checkWaitLength;
+            activeClust.Add(hit.transform.gameObject);
         }
 
-        if (Time.timeSinceLevelLoad > turnOffTimer)
-        {
-            Check();
-            turnOffTimer = Time.timeSinceLevelLoad + checkWaitLength;
-        }
+        Check();
     }
 
     // Turn off clusters that are far away
