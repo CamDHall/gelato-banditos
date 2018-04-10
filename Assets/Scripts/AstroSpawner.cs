@@ -7,7 +7,8 @@ public class AstroSpawner : MonoBehaviour {
     public static AstroSpawner Instance;
 
     public GameObject prefab_cluster;
-    
+    public GameObject loadingTxt;
+
     // Use dictionary so I can add health later
     public Dictionary<GameObject, int> astroids = new Dictionary<GameObject, int>();
 
@@ -17,10 +18,17 @@ public class AstroSpawner : MonoBehaviour {
     private void Awake()
     {
         Instance = this;
+        loadingTxt.SetActive(true);
     }
 
     void Start () {
-        for (int z = 0; z < size; z++) {
+        StartCoroutine("InitSpawn");
+    }
+
+    IEnumerator InitSpawn()
+    {
+        for (int z = 0; z < size; z++)
+        {
             for (int y = 0; y < size; y++)
             {
                 for (int x = 0; x < size; x++)
@@ -28,19 +36,29 @@ public class AstroSpawner : MonoBehaviour {
                     // Set position of cluster in 3D grid
                     Vector3 Pos = new Vector3((((-size / 2) + x) * col_size) + x, (((-size / 2) + y) * col_size) + y, (((-size / 2) + z) * col_size) + z);
                     GameObject quad = Instantiate(prefab_cluster, Pos, Quaternion.identity, transform);
-                    FieldManager.Instance.clusters.Add(quad.transform, quad);
-                    FieldManager.Instance.activeClust.Add(quad);
 
-                    if((x == 5 && y == 5 && z == 5))
+                    quad.GetComponent<Cluster>().Populate();
+
+                    if ((x == 5 && y == 5 && z == 5))
                     {
-                        // Make sure the first cluster is populated 
-                        quad.GetComponent<Cluster>().Populate();
+                        FieldManager.Instance.activeClust.Add(quad.transform, quad);
                     }
+                    else
+                    {
+                        FieldManager.Instance.inactiveClusters.Add(quad.transform, quad);
+                        quad.SetActive(false);
+                    }
+
+                    yield return new WaitForEndOfFrame();
                 }
             }
         }
+
+        // Set scene to play after all the spawning is finished
+        loadingTxt.SetActive(false);
+        GameManager.Instance.StartGame();
     }
-	
+
 	public void ReceiveDamage(GameObject astro)
     {
         if (astroids[astro] > 1)

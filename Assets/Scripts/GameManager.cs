@@ -95,6 +95,13 @@ public class GameManager : MonoBehaviour {
         game_over = true;
     }
 
+    public void StartGame()
+    {
+        timeGoal += Time.timeSinceLevelLoad;
+        FieldManager.Instance.enabled = true;
+        PlayerMovement.player.enabled = true;
+    }
+
     public void Death()
     {
         death.SetActive(true);
