@@ -9,7 +9,7 @@ public class Cluster : Field {
     private void Awake()
     {
         numAstroids = Random.Range(numLow, numHigh);
-        size = clustSize / 2;
+        size = clustSize * 0.8f;
     }
 
     private void Start()

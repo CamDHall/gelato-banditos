@@ -51,7 +51,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6000, y: 6000, z: 6000}
+  m_Size: {x: 10000, y: 10000, z: 10000}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114529915571845048
 MonoBehaviour:
@@ -64,10 +64,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46b403da5abf964b9763404a8076d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLow: 80
-  numHigh: 85
-  spawnChance: 10
-  clustSize: 3000
+  numLow: 4200
+  numHigh: 4300
+  spawnChance: 5
+  clustSize: 10000
   populated: 0
   turnedOff: 0
   astroid: {fileID: 1536017236734666, guid: 0346c028ab9a19340aa2da3432eb2b75, type: 2}

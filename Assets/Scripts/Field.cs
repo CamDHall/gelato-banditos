@@ -16,7 +16,7 @@ public class Field : MonoBehaviour {
     protected List<GameObject> field = new List<GameObject>();
 
     public GameObject astroid, bigAstro;
-    protected int size;
+    protected float size;
 
     protected int numAstroids;
 

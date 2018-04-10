@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class AsteroidUtil {
 
-    public static Vector3 Placement(int size, float xWidth, float yWidth, float zDepth)
+    public static Vector3 Placement(float size, float xWidth, float yWidth, float zDepth)
     {
         Vector3 Pos = new Vector3((float)Random.Range(-size / xWidth, size / xWidth), (float)Random.Range(-size / yWidth, size / yWidth),
                 (float)Random.Range(-size / zDepth, size / zDepth));
@@ -12,15 +12,11 @@ public static class AsteroidUtil {
         return Pos;
     }
 
-    public static Vector3 CenterPlace(int size, float xWidth, float yWidth, float zDepth)
+    public static Vector3 CenterPlace(float size, float xWidth, float yWidth, float zDepth)
     {
         float x = Random.Range(-size / xWidth, size / xWidth);
         float y = Random.Range(-size / yWidth, size / yWidth);
         float z = Random.Range(-size / zDepth, size / zDepth);
-
-        //x = ClampAwayZero(x, 300);
-        //y = ClampAwayZero(y, 300);
-        //z = ClampAwayZero(z, 300);
 
         Vector3 Pos = new Vector3(x, y, z);
 
