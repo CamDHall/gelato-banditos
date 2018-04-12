@@ -39,15 +39,8 @@ public class AstroSpawner : MonoBehaviour {
 
                     quad.GetComponent<Cluster>().Populate();
 
-                    if ((x == 5 && y == 5 && z == 5))
-                    {
-                        FieldManager.Instance.activeClust.Add(quad.transform, quad);
-                    }
-                    else
-                    {
-                        FieldManager.Instance.inactiveClusters.Add(quad.transform, quad);
-                        quad.SetActive(false);
-                    }
+                    FieldManager.Instance.inactiveClusters.Add(quad.transform.position, quad);
+                    quad.SetActive(false);
 
                     yield return new WaitForEndOfFrame();
                 }

@@ -8,8 +8,7 @@ public class BanditoSpawner : MonoBehaviour {
     public static BanditoSpawner Instance;
     public GameObject bandito;
 
-    public List<GameObject> enemies = new List<GameObject>();
-    public List<GameObject> friends = new List<GameObject>();
+    public Dictionary<Vector3, List<GameObject>> _enemies = new Dictionary<Vector3, List<GameObject>>();
 
 	void Awake () {
         Instance = this;
@@ -17,7 +16,7 @@ public class BanditoSpawner : MonoBehaviour {
 
     public void SpawnEnemies(GameObject astro, GameObject quad)
     {
-        Cluster cluster = quad.GetComponent<Cluster>();
+        Field field = quad.GetComponent<Field>();
 
         // In the future I want to randomize their local position and have posse's of bandits
         //int num = Random.Range(1, 3);
@@ -29,12 +28,10 @@ public class BanditoSpawner : MonoBehaviour {
             GameObject temp = Instantiate(bandito);
             temp.transform.parent = astro.transform;
             temp.transform.localPosition = Pos;
-            temp.transform.SetParent(transform);
-            enemies.Add(temp);
-            cluster.enemies.Add(temp);
+            temp.transform.SetParent(quad.transform);
+
+            field.enemies.Add(temp);
+            temp.SetActive(false);
         }
-
-
-
     }
 }

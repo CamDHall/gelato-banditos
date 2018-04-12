@@ -52,8 +52,9 @@ public class Gelato : MonoBehaviour {
         {
             if (coll.gameObject.tag == "Bandito" && launched)
             {
-                BanditoSpawner.Instance.enemies.Remove(coll.gameObject);
-                BanditoSpawner.Instance.friends.Add(coll.gameObject);
+                coll.transform.parent.GetComponent<Field>().enemies.Remove(coll.gameObject);
+                //BanditoSpawner.Instance.enemies.Remove(coll.gameObject);
+                GameManager.Instance.friends.Add(coll.gameObject);
 
                 coll.gameObject.GetComponent<StateController>().isFriend = true;
                 coll.gameObject.GetComponentInChildren<Light>().color = Color.white;

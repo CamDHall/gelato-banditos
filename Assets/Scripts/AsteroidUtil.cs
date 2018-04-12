@@ -44,7 +44,6 @@ public static class AsteroidUtil {
         if(Mathf.Abs(scale.x - scale.y) > 0.25f || Mathf.Abs(scale.y - scale.z) > 0.25f ||
             Mathf.Abs(scale.x - scale.z) > 0.25f)
         {
-            obj.GetComponent<SphereCollider>().Equals(null);
             obj.AddComponent<BoxCollider>();
         } else
         {

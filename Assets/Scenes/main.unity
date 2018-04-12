@@ -292,7 +292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8495ab33af8fa504194fe2b8e5d8b67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkDist: 8000
+  checkDist: 9000
+  requiredDist: 150
   depth: 0
 --- !u!114 &47949838
 MonoBehaviour:
@@ -1266,8 +1267,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bandito: {fileID: 1106562315767368, guid: eae7ce5a9a61e974f83dfb6938d63b34, type: 2}
-  enemies: []
-  friends: []
 --- !u!1 &1010839420
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,7 +1351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1073707908
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1369,8 +1368,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -11.6}
-  m_SizeDelta: {x: 0, y: 23.2}
+  m_AnchoredPosition: {x: -0.000054955788, y: -11.6}
+  m_SizeDelta: {x: 40, y: 23.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1073707909
 MonoBehaviour:
@@ -1533,7 +1532,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 51fa551e3cb81f345b163d9abb5a3821, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1859,6 +1858,7 @@ MonoBehaviour:
   bulletContainer: {fileID: 797958431}
   game_over: 0
   currentCluser: {fileID: 0}
+  friends: []
 --- !u!4 &1392433488
 Transform:
   m_ObjectHideFlags: 0

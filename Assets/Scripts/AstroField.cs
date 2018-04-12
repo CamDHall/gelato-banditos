@@ -9,42 +9,12 @@ public class AstroField : Field {
         numAstroids = Random.Range(numLow, numHigh);
         size = AstroSpawner.Instance.col_size / 2;
 
-        camDepth = Camera.main.farClipPlane + 100;
         astroSize = astroid.GetComponent<BoxCollider>().size.x;
     }
 
     private void Start()
     {
         Pos = transform.position;
-    }
-
-    private void Update()
-    {
-        playerDist = Vector3.Distance(PlayerMovement.player.transform.position, Pos);
-
-        // Turn off if far away
-        if (playerDist > camDepth)
-        {
-            if (!turnedOff)
-            {
-                TurnOff();
-            }
-        }
-
-        if (playerDist < camDepth)
-        {
-            if (!populated)
-            {
-                Populate();
-            }
-           else
-            {
-                if (turnedOff)
-                {
-                    TurnOn();
-                }
-            }
-        }
     }
 
     public override void Populate()

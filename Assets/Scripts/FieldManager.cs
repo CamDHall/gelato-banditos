@@ -5,12 +5,15 @@ using UnityEngine;
 public class FieldManager : MonoBehaviour {
 
     public static FieldManager Instance;
-
     public int checkDist;
+    public float requiredDist;
 
-    [HideInInspector] public Dictionary<Transform, GameObject> activeClust = new Dictionary<Transform, GameObject>();
-    [HideInInspector] public Dictionary<Transform, GameObject> inactiveClusters = new Dictionary<Transform, GameObject>();
+    [HideInInspector] public Dictionary<Vector3, GameObject> activeClust = new Dictionary<Vector3, GameObject>();
+    [HideInInspector] public Dictionary<Vector3, GameObject> inactiveClusters = new Dictionary<Vector3, GameObject>();
     [HideInInspector] public float depth;
+
+    List<Vector3> neighbors = new List<Vector3>();
+    Vector3 lastPos;
 
     private void Awake()
     {
@@ -19,37 +22,73 @@ public class FieldManager : MonoBehaviour {
 
     private void Start()
     {
-        depth = Camera.main.farClipPlane;
+        lastPos = transform.position;
+        GetNeighbors();
+        Check();
     }
 
     private void Update()
     {
-        Check();
+        if (Vector3.Distance(lastPos, transform.position) > requiredDist)
+        {
+            GetNeighbors();
+            Check();
+        }
     }
 
     // Turn off clusters that are far away
     void Check()
     {
-        List<Transform> inactiveRemoved = new List<Transform>();
-        List<Transform> activeRemove = new List<Transform>();
-        foreach (Transform pos in inactiveClusters.Keys)
+        foreach(Vector3 pos in neighbors)
         {
-            float distance = Vector3.Distance(transform.position, pos.position);
-            if (distance < checkDist)
+            float distance = Vector3.Distance(transform.position, pos);
+
+   
+            if(distance < checkDist && inactiveClusters.ContainsKey(pos))
             {
-                inactiveRemoved.Add(pos);
-                inactiveClusters[pos].SetActive(true);
+                GameObject clust = inactiveClusters[pos];
+                activeClust.Add(pos, clust);
+                clust.SetActive(true);
+                inactiveClusters.Remove(pos);
             }
         }
 
-        foreach(Transform pos in activeClust.Keys)
+        List<Vector3> activeKeys = new List<Vector3>(activeClust.Keys);
+
+        foreach (Vector3 pos in activeKeys)
         {
-            float distance = Vector3.Distance(transform.position, pos.position);
+            float distance = Vector3.Distance(transform.position, pos);
+            
             if(distance >= checkDist)
             {
-                activeRemove.Add(pos);
-                activeClust[pos].SetActive(false);
+                GameObject clust = activeClust[pos];
+                activeClust.Remove(pos);
+                inactiveClusters.Add(pos, clust);
+                clust.SetActive(false);
             }
         }
+    }
+
+    void GetNeighbors()
+    {
+        List<Vector3> temp = new List<Vector3>();
+
+        foreach(Vector3 pos in inactiveClusters.Keys)
+        {
+            if(Vector3.Distance(pos, transform.position) <= (checkDist * 2))
+            {
+                temp.Add(pos);
+            }
+        }
+
+        foreach (Vector3 pos in activeClust.Keys)
+        {
+            if (Vector3.Distance(pos, transform.position) <= (checkDist * 2))
+            {
+                temp.Add(pos);
+            }
+        }
+
+        neighbors = temp;
     }
 }

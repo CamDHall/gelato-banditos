@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour {
     // Using a queue so that the Galto is FIFO
     public Queue<GameObject> cones = new Queue<GameObject>();
     public Cluster currentCluser;
+    public List<GameObject> friends = new List<GameObject>();
 
 	void Start () {
         Instance = this;
