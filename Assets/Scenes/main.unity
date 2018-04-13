@@ -467,8 +467,8 @@ MonoBehaviour:
   prefab_cluster: {fileID: 1693798285929202, guid: 99900919fa7f1ef439676a4a465500e5,
     type: 2}
   loadingTxt: {fileID: 1073707907}
-  size: 5
-  col_size: 10000
+  size: 1
+  col_size: 15000
 --- !u!4 &51157722
 Transform:
   m_ObjectHideFlags: 0
@@ -2435,7 +2435,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 1.5
-  far clip plane: 3500
+  far clip plane: 2500
   field of view: 60
   orthographic: 0
   orthographic size: 5
