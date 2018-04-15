@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cluster : Field {
+public class Cluster : AsteroidField {
 
     public float xWidth, yWidth, zDepth;
 

@@ -16,7 +16,7 @@ public class BanditoSpawner : MonoBehaviour {
 
     public void SpawnEnemies(GameObject astro, GameObject quad)
     {
-        Field field = quad.GetComponent<Field>();
+        AsteroidField field = quad.GetComponent<AsteroidField>();
 
         // In the future I want to randomize their local position and have posse's of bandits
         //int num = Random.Range(1, 3);

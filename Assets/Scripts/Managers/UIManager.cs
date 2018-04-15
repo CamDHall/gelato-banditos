@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
@@ -25,4 +27,11 @@ public class UIManager : MonoBehaviour {
             health.fillAmount = PlayerMovement.player.health / PlayerMovement.player.startHealth;
         }
 	}
+
+    public void LoadGalaxy()
+    {
+        GameObject clicked = EventSystem.current.currentSelectedGameObject;
+
+        SceneManager.LoadScene(clicked.name);
+    }
 }

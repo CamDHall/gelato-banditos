@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AstroSpawner : MonoBehaviour {
 
+    public GalaxyName galaxy;
     public static AstroSpawner Instance;
 
-    public GameObject prefab_cluster;
+    public GameObject gal_Starting, gal_Juarez;
     public GameObject loadingTxt;
 
     // Use dictionary so I can add health later
@@ -34,11 +35,18 @@ public class AstroSpawner : MonoBehaviour {
                 for (int x = 0; x < size; x++)
                 {
                     // Set position of cluster in 3D grid
-                    Vector3 Pos = new Vector3((((-size / 2) + x) * col_size) + x, (((-size / 2) + y) * col_size) + y, (((-size / 2) + z) * col_size) + z);
-                    GameObject quad = Instantiate(prefab_cluster, Pos, Quaternion.identity, transform);
+                    GameObject quad;
 
-                    quad.GetComponent<Cluster>().Populate();
-                    ChunkManager.Instance.currentClust = quad;
+                    if (galaxy == GalaxyName.Starting)
+                    {
+                        quad = Instantiate(gal_Starting, transform);
+                        quad.GetComponent<Cluster>().Populate();
+                    } else if(galaxy == GalaxyName.Juarez)
+                    {
+                        quad = Instantiate(gal_Juarez, transform);
+                        
+                    }
+
                     yield return new WaitForEndOfFrame();
                 }
             }

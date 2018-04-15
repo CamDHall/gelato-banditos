@@ -6,8 +6,8 @@ using UnityEngine;
 /// Using inheretence for clusters so in the future I can have different patterns and types of asteroid fields
 /// </summary>
 
-public class Field : MonoBehaviour {
-
+public class AsteroidField : MonoBehaviour
+{
     public int numLow, numHigh, spawnChance;
     public int clustSize;
 

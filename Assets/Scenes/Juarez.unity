@@ -265,6 +265,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 47949842}
+  - component: {fileID: 47949837}
   - component: {fileID: 47949838}
   - component: {fileID: 47949840}
   - component: {fileID: 47949839}
@@ -273,7 +274,6 @@ GameObject:
   - component: {fileID: 47949844}
   - component: {fileID: 47949843}
   - component: {fileID: 47949841}
-  - component: {fileID: 47949837}
   m_Layer: 9
   m_Name: Ship
   m_TagString: Player
@@ -444,7 +444,6 @@ GameObject:
   m_Component:
   - component: {fileID: 51157722}
   - component: {fileID: 51157721}
-  - component: {fileID: 51157723}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -458,18 +457,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 51157720}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 876026b8ef5e6b24d83d02dce04d69f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 57f5e99bf702b5a4cb08de4fe69afb0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  galaxy: 0
-  gal_Starting: {fileID: 1693798285929202, guid: 99900919fa7f1ef439676a4a465500e5,
-    type: 2}
-  gal_Juarez: {fileID: 0}
+  galaxy: 1
+  cluster: {fileID: 1374857120491304, guid: 1fb5a3f1f495caa4ca3a24bf753c6fcc, type: 2}
   loadingTxt: {fileID: 1073707907}
-  size: 2
-  col_size: 15000
+  planet: {fileID: 1491885141740140, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
 --- !u!4 &51157722
 Transform:
   m_ObjectHideFlags: 0
@@ -484,20 +480,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &51157723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 51157720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f353a3d21648e4493d2fadace57766, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  galaxy: 0
-  cluster: {fileID: 1693798285929202, guid: 99900919fa7f1ef439676a4a465500e5, type: 2}
-  loadingTxt: {fileID: 1073707907}
 --- !u!1 &111686788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,8 +1076,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000085831, y: 0}
-  m_SizeDelta: {x: 40, y: 0}
+  m_AnchoredPosition: {x: 9.999964, y: 0}
+  m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &707635250
 MonoBehaviour:
