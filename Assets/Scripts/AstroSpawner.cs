@@ -38,10 +38,7 @@ public class AstroSpawner : MonoBehaviour {
                     GameObject quad = Instantiate(prefab_cluster, Pos, Quaternion.identity, transform);
 
                     quad.GetComponent<Cluster>().Populate();
-
-                    FieldManager.Instance.inactiveClusters.Add(quad.transform.position, quad);
-                    quad.SetActive(false);
-
+                    ChunkManager.Instance.currentClust = quad;
                     yield return new WaitForEndOfFrame();
                 }
             }

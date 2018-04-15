@@ -99,7 +99,6 @@ public class GameManager : MonoBehaviour {
     public void StartGame()
     {
         timeGoal += Time.timeSinceLevelLoad;
-        FieldManager.Instance.enabled = true;
         PlayerMovement.player.enabled = true;
     }
 
