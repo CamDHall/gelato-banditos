@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GunController : MonoBehaviour {
 
+    public static GunController Instance;
     bool pressed = false;
     public float fire_cooldown = 0;
 
@@ -16,6 +17,11 @@ public class GunController : MonoBehaviour {
     public GameObject laser;
     
     public LineRenderer prefab_laser;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -50,7 +56,9 @@ public class GunController : MonoBehaviour {
                             GameManager.Instance.score++;
                             AudioManager.Instance.AstroCrack();
                         }
-                        Destroy(hit.transform.gameObject, Time.deltaTime * 5);
+
+                        if(hit.transform.tag != "Planet")
+                            Destroy(hit.transform.gameObject, Time.deltaTime * 5);
                     }
                     laser.enabled = true;
                 } else

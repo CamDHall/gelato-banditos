@@ -463,9 +463,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   galaxy: 1
-  cluster: {fileID: 1374857120491304, guid: 1fb5a3f1f495caa4ca3a24bf753c6fcc, type: 2}
+  cluster: {fileID: 1693798285929202, guid: 99900919fa7f1ef439676a4a465500e5, type: 2}
+  planets:
+  - {fileID: 755844136}
   loadingTxt: {fileID: 1073707907}
-  planet: {fileID: 1491885141740140, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
 --- !u!4 &51157722
 Transform:
   m_ObjectHideFlags: 0
@@ -1242,6 +1243,11 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &755844136 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1491885141740140, guid: 2faa1125200aa5b42bc466ce7164c6f6,
+    type: 2}
+  m_PrefabInternal: {fileID: 1811901496}
 --- !u!1 &788375778
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,7 +1731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1073707908
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2733,6 +2739,52 @@ MonoBehaviour:
   astroCrack: {fileID: 8300000, guid: 7d7d8ed71c2e94a44a5868de508830ae, type: 3}
   splat: {fileID: 8300000, guid: 4512cdac24d948f4babfbb9807090bba, type: 3}
   whip: {fileID: 8300000, guid: 16c7e39be2fda494895914d0bfd1339d, type: 3}
+--- !u!1001 &1811901496
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4807333168431042, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807333168431042, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807333168431042, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807333168431042, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807333168431042, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807333168431042, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807333168431042, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807333168431042, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491885141740140, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2faa1125200aa5b42bc466ce7164c6f6, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1828500544
 GameObject:
   m_ObjectHideFlags: 0

@@ -497,6 +497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   galaxy: 0
   cluster: {fileID: 1693798285929202, guid: 99900919fa7f1ef439676a4a465500e5, type: 2}
+  planets: []
   loadingTxt: {fileID: 1073707907}
 --- !u!1 &111686788
 GameObject:

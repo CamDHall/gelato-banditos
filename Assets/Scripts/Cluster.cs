@@ -29,23 +29,34 @@ public class Cluster : AsteroidField {
             GameObject temp = Instantiate(bigAstro);
             temp.transform.SetParent( transform);
 
-            if (transform.position.x == 5 && transform.position.y == 5 && transform.position.z == 5)
-            {
-                temp.transform.localPosition = AsteroidUtil.CenterPlace(size, xWidth, yWidth, zDepth);
-            } else
-            {
-                temp.transform.localPosition = AsteroidUtil.Placement(size, xWidth, yWidth, zDepth);
-            }
+            temp.transform.localPosition = AsteroidUtil.Placement(size, xWidth, yWidth, zDepth);
 
             temp.transform.localRotation = AsteroidUtil.Rotation();
             temp.transform.localScale = AsteroidUtil.Scale();
+
+            float largestScale;
+            if (temp.transform.localScale.x >= temp.transform.localScale.y && 
+                temp.transform.localScale.x >= temp.transform.localScale.z)
+                largestScale = transform.localScale.x;
+            else if (transform.localScale.y > transform.localScale.z)
+                largestScale = transform.localScale.y;
+            else
+                largestScale = transform.localScale.z;
+
+            RaycastHit[] colls = Physics.SphereCastAll(temp.transform.position, largestScale, temp.transform.forward);
+
+            if(colls.Length > 0)
+            {
+                Destroy(temp);
+                continue;
+            }
 
             AsteroidUtil.DetermineCollider(temp);
 
             field.Add(temp);
 
             //AstroSpawner.Instance.astroids.Add(temp, Random.Range(2, 5));
-            AstroSpawner.Instance.astroids.Add(temp, 1);
+            //AstroSpawner.Instance.astroids.Add(temp, 1);
 
             // For every astero, randomly choice to spawn a bandito
             if (Random.Range(0, 100) < spawnChance)

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114529915571845048}
   - component: {fileID: 65397538317911758}
   - component: {fileID: 114325977108872618}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cluster
   m_TagString: Cluster
   m_Icon: {fileID: 0}
@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c577af03bcc9d841814f64e6b6d2f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  galaxyMap: {fileID: 0}
 --- !u!114 &114529915571845048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,10 +77,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46b403da5abf964b9763404a8076d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLow: 18000
-  numHigh: 19000
+  numLow: 17000
+  numHigh: 18000
   spawnChance: 1
-  clustSize: 14000
+  clustSize: 15000
   populated: 0
   astroid: {fileID: 1536017236734666, guid: 0346c028ab9a19340aa2da3432eb2b75, type: 2}
   bigAstro: {fileID: 1860803422955760, guid: 8d0c0cb69266f8140bd21fb5c3c0cf44, type: 2}
