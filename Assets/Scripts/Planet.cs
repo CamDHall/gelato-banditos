@@ -16,8 +16,7 @@ public class Planet : MonoBehaviour {
 
     public void ClearField()
     {
-        Debug.DrawRay(transform.position, transform.forward * 2500, Color.red, 5000);
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, 2500, transform.forward, 1 << LayerMask.NameToLayer("Astro"));
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, 1000, transform.forward, 1 << LayerMask.NameToLayer("Astro"));
         int count = hits.Length;
 
         for(int i = 0; i < count; i++)
