@@ -10,7 +10,6 @@ public class Cluster : AsteroidField {
     private void Awake()
     {
         numAstroids = Random.Range(numLow, numHigh);
-        size = clustSize * 0.8f;
     }
 
     private void Start()
@@ -32,7 +31,7 @@ public class Cluster : AsteroidField {
             GameObject temp = Instantiate(astro_choices[choice]);
             temp.transform.SetParent( transform);
 
-            temp.transform.localPosition = AsteroidUtil.Placement(size, xWidth, yWidth, zDepth);
+            temp.transform.localPosition = AsteroidUtil.Placement(size);
 
             temp.transform.localRotation = AsteroidUtil.Rotation();
             temp.transform.localScale = AsteroidUtil.Scale();

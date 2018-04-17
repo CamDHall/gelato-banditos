@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4763355357824320}
+  - component: {fileID: 114228322383025020}
   - component: {fileID: 33311289065552130}
   - component: {fileID: 65676249799733722}
   - component: {fileID: 23346324370061546}
@@ -36,8 +37,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1155128866423006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0729034, y: -0.41106772, z: -698}
-  m_LocalScale: {x: 200, y: 200, z: 200}
+  m_LocalPosition: {x: -5433, y: -1023, z: 1103}
+  m_LocalScale: {x: 250, y: 250, z: 250}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,3 +96,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114228322383025020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1155128866423006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729a398a8fc8e3442bdb69d699807c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spaceStation_affil: 0

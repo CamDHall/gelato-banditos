@@ -4,10 +4,11 @@ using UnityEngine;
 
 public static class AsteroidUtil {
 
-    public static Vector3 Placement(float size, float xWidth, float yWidth, float zDepth)
+    public static Vector3 Placement(float size)
     {
-        Vector3 Pos = new Vector3((float)Random.Range(-size / xWidth, size / xWidth), (float)Random.Range(-size / yWidth, size / yWidth),
-                (float)Random.Range(-size / zDepth, size / zDepth));
+        size /= 2;
+        Vector3 Pos = new Vector3((float)Random.Range(-size, size), (float)Random.Range(-size, size),
+                (float)Random.Range(-size, size));
 
         return Pos;
     }

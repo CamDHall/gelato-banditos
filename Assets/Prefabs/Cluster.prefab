@@ -52,7 +52,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 15000, y: 15000, z: 15000}
+  m_Size: {x: 20000, y: 20000, z: 20000}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114325977108872618
 MonoBehaviour:
@@ -80,13 +80,13 @@ MonoBehaviour:
   numLow: 17000
   numHigh: 18000
   spawnChance: 1
-  clustSize: 15000
   populated: 0
   astroid: {fileID: 1305643977014616, guid: 154fd8872cbed6c47b15f1dba1934471, type: 2}
+  size: 20000
   enemies: []
-  xWidth: 1.8
-  yWidth: 1.8
-  zDepth: 1.8
+  xWidth: 1
+  yWidth: 1
+  zDepth: 1
   astro_choices:
   - {fileID: 1695658754500540, guid: 819aaf4cb9054734cb72f5cfef03fd21, type: 2}
   - {fileID: 1088672847223136, guid: 4dceb9f61d55ec8428f1cffabbbbc249, type: 2}

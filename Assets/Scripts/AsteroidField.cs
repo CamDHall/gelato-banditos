@@ -9,14 +9,13 @@ using UnityEngine;
 public class AsteroidField : MonoBehaviour
 {
     public int numLow, numHigh, spawnChance;
-    public int clustSize;
 
     public bool populated = false;
     protected List<GameObject> field = new List<GameObject>();
 
     public GameObject astroid;
 
-    protected float size;
+    public float size;
 
     protected int numAstroids;
 
