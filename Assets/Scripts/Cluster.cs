@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cluster : AsteroidField {
 
     public float xWidth, yWidth, zDepth;
+    public List<GameObject> astro_choices;
 
     private void Awake()
     {
@@ -26,7 +27,9 @@ public class Cluster : AsteroidField {
         ///
         for (int i = 0; i < numAstroids; i++)
         {
-            GameObject temp = Instantiate(bigAstro);
+            int choice = Random.Range(0, astro_choices.Count);
+
+            GameObject temp = Instantiate(astro_choices[choice]);
             temp.transform.SetParent( transform);
 
             temp.transform.localPosition = AsteroidUtil.Placement(size, xWidth, yWidth, zDepth);
@@ -43,7 +46,7 @@ public class Cluster : AsteroidField {
             else
                 largestScale = transform.localScale.z;
 
-            RaycastHit[] colls = Physics.SphereCastAll(temp.transform.position, largestScale, temp.transform.forward);
+            Collider[] colls = Physics.OverlapSphere(temp.transform.position, largestScale);
 
             if(colls.Length > 0)
             {

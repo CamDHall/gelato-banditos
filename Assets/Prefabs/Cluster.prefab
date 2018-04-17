@@ -82,9 +82,11 @@ MonoBehaviour:
   spawnChance: 1
   clustSize: 15000
   populated: 0
-  astroid: {fileID: 1536017236734666, guid: 0346c028ab9a19340aa2da3432eb2b75, type: 2}
-  bigAstro: {fileID: 1860803422955760, guid: 8d0c0cb69266f8140bd21fb5c3c0cf44, type: 2}
+  astroid: {fileID: 1305643977014616, guid: 154fd8872cbed6c47b15f1dba1934471, type: 2}
   enemies: []
   xWidth: 1.8
   yWidth: 1.8
   zDepth: 1.8
+  astro_choices:
+  - {fileID: 1695658754500540, guid: 819aaf4cb9054734cb72f5cfef03fd21, type: 2}
+  - {fileID: 1088672847223136, guid: 4dceb9f61d55ec8428f1cffabbbbc249, type: 2}

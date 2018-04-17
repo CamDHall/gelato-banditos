@@ -57,9 +57,13 @@ public class GunController : MonoBehaviour {
                             AudioManager.Instance.AstroCrack();
                         }
 
-                        if(hit.transform.tag != "Planet")
+                        if (hit.transform.tag == "Astro")
+                        {
                             Destroy(hit.transform.gameObject, Time.deltaTime * 5);
+                            Utilts.GetResources(hit.transform.gameObject);
+                        }
                     }
+
                     laser.enabled = true;
                 } else
                 {

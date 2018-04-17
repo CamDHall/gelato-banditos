@@ -9,6 +9,7 @@ public class Galaxy : MonoBehaviour {
     public GameObject cluster;
 
     public List<GameObject> planets;
+    public List<GameObject> spaceStations;
 
     public GameObject loadingTxt;
 
@@ -23,7 +24,12 @@ public class Galaxy : MonoBehaviour {
 
         foreach(GameObject planet in planets)
         {
-            planet.GetComponent<Planet>().ClearField();
+            Utilts.ClearField(planet.transform.position, 1500);
+        }
+
+        foreach (GameObject station in spaceStations)
+        {
+            Utilts.ClearField(station.transform.position, 750);
         }
         //else if(galaxy == GalaxyName.Juarez)
 

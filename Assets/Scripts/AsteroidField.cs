@@ -14,7 +14,7 @@ public class AsteroidField : MonoBehaviour
     public bool populated = false;
     protected List<GameObject> field = new List<GameObject>();
 
-    public GameObject astroid, bigAstro;
+    public GameObject astroid;
 
     protected float size;
 
