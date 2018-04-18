@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour {
         }
         else
         {
+            shield.fillAmount = 0;
             health.fillAmount = PlayerMovement.player.health / PlayerMovement.player.startHealth;
         }
 	}

@@ -26,10 +26,11 @@ public class StationState : ScriptableObject {
     {
         foreach(StationTransition transition in transitions)
         {
-            bool val = transition.decision.Decide(controller);
+            int val = transition.decision.StandingDecision(controller);
 
-            if (val) controller.TransitionToState(transition.trueState);
-            else controller.TransitionToState(transition.falseState);
+            if (val == 0) controller.TransitionToState(transition.gaurdState);
+            else if (val < 0) controller.TransitionToState(transition.attackstate);
+            else controller.TransitionToState(transition.receiveState);
         }
     }
 }

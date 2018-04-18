@@ -14,7 +14,8 @@ public class CinematicUI : MonoBehaviour {
 
     public void Attack()
     {
-        Debug.Log("ATTACK STATION");
+        CharacterManager.Instance.standings[GameManager.Instance.nearestStation.GetComponent<SpaceStation>().spaceStation_affil] = -1;
+        CameraManager.Instance.Reset();
     }
 
     public void Leave()

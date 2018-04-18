@@ -8,11 +8,13 @@ public class StationController : MonoBehaviour {
     public StationState remainState;
     [HideInInspector] public bool aiActive;
     [HideInInspector] public bool cutScene;
-
+    [HideInInspector] public bool weaponsActive;
+    [HideInInspector] public SpaceStation stationObj;
     [HideInInspector] public Affilation station_afil;
 
 	void Start () {
-        station_afil = GetComponent<SpaceStation>().spaceStation_affil;
+        stationObj = GetComponent<SpaceStation>();
+        station_afil = stationObj.spaceStation_affil;
         aiActive = false;
         cutScene = false;
 	}

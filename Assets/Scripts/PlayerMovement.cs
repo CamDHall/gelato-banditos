@@ -170,13 +170,14 @@ public class PlayerMovement : MonoBehaviour {
 
     public void TakeDamge(int amount)
     {
+        shieldTimer = Time.timeSinceLevelLoad + shieldTimer;
+
         if (shield > 0)
         {
             shield -= amount;
         }
         else
         {
-            shieldTimer = Time.timeSinceLevelLoad + shieldTimer;
             health -= amount;
             if (health <= 0)
             {

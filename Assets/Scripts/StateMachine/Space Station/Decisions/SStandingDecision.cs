@@ -5,10 +5,17 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Station AI/Decisions/Standing")]
 public class SStandingDecision : StationDecision {
 
-    public override bool Decide(StationController controller)
+    public override int StandingDecision(StationController controller)
     {
-        if (CharacterManager.Instance.standings[controller.station_afil] == 0) return true;
+        int val = CharacterManager.Instance.standings[controller.station_afil];
+        if (val == 0) return 0;
+        else if (val < 0) return -1;
 
-        return false;
+        return 1;
+    }
+
+    public override bool Decision(StationController controller)
+    {
+        throw new System.NotImplementedException();
     }
 }

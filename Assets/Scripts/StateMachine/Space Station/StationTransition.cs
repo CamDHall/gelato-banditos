@@ -5,6 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class StationTransition {
     public StationDecision decision;
-    public StationState trueState, falseState;
+    public StationState gaurdState, attackstate, receiveState;
 
 }

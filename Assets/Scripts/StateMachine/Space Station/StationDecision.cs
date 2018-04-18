@@ -4,5 +4,6 @@ using UnityEngine;
 
 public abstract class StationDecision : ScriptableObject {
 
-    public abstract bool Decide(StationController controller);
+    public abstract int StandingDecision(StationController controller);
+    public abstract bool Decision(StationController controller);
 }
