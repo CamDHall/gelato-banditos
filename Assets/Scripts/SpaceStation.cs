@@ -7,9 +7,10 @@ public class SpaceStation : MonoBehaviour {
 
     public Affilation spaceStation_affil;
     public List<GameObject> weapons;
+    StationController sc;
 
 	void Start () {
-		
+        sc = GetComponent<StationController>();
 	}
 	
 	void Update () {
@@ -20,17 +21,10 @@ public class SpaceStation : MonoBehaviour {
     {
         if (coll.tag == "Player")
         {
-            int value = CharacterManager.Instance.standings[spaceStation_affil];
-
-            if (value < 0)
+            if (!sc.aiActive)
             {
-                Debug.Log("ATTACK");
-            } else if(value == 0)
-            {
-                Debug.Log("Approach");
-            } else
-            {
-                Debug.Log("DO NOTHING");
+                GameManager.Instance.nearestStation = gameObject;
+                sc.aiActive = true;
             }
         }
     }
