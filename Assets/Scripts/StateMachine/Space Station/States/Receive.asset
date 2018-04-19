@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 831ee4fa11da871408dda008c7e5e967, type: 3}
-  m_Name: Guard
+  m_Name: Receive
   m_EditorClassIdentifier: 
   actions:
-  - {fileID: 11400000, guid: 41ff8f4dd7421234fbb97d6e58f8edd4, type: 2}
+  - {fileID: 11400000, guid: 92ca31aeeea1b5b42a0bbcc740bec437, type: 2}
   transitions:
   - decision: {fileID: 11400000, guid: 1696923597b4a714d8fe7ac0c3747680, type: 2}
-    gaurdState: {fileID: 11400000}
+    gaurdState: {fileID: 11400000, guid: a386793044e4a07469ed27add6502297, type: 2}
     attackstate: {fileID: 11400000, guid: c295b4938896f604bb94ecd90bc34b6f, type: 2}
-    receiveState: {fileID: 11400000, guid: 9a4e2d35fdecc3b4abc69caf371ed486, type: 2}
+    receiveState: {fileID: 11400000}

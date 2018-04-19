@@ -5,10 +5,17 @@ using UnityEngine.UI;
 
 public class CinematicUI : MonoBehaviour {
 
+    public static CinematicUI Instance;
     public RectTransform flavor_prefab;
-    public RectTransform panel;
+    public RectTransform givePanel;
+    public RectTransform storePanel;
 
-	void Start () {
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    void Start () {
 		
 	}
 	
@@ -59,13 +66,15 @@ public class CinematicUI : MonoBehaviour {
 
         PlayerInventory.Instance.standings[aff] = Utilts.ChangeInStanding(temp, aff);
         Utilts.RemoveGelato(temp);
+
+        givePanel.gameObject.SetActive(false);
     }
 
     public void GiveGelato()
     {
         SpaceStation station = GameManager.Instance.nearestStation;
 
-        panel.gameObject.SetActive(true);
+        givePanel.gameObject.SetActive(true);
 
         List<Flavors> flavors = new List<Flavors>(PlayerInventory.Instance.gelato_inventory.Keys);
 
@@ -79,7 +88,7 @@ public class CinematicUI : MonoBehaviour {
             {
                 count++;
                 RectTransform temp = (RectTransform)Instantiate(flavor_prefab);
-                temp.transform.SetParent(CameraManager.Instance.cinematicCanvas.transform, false);
+                temp.transform.SetParent(givePanel.transform, false);
                 temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 150, y * 100) + padding;
 
                 temp.GetComponentInChildren<Text>().text = flavors[count - 1].ToString();
