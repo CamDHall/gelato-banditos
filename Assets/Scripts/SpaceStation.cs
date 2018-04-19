@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Affilation { ChihuahuaFederation }
+public enum Affilation { ChihuahuaFederation, Juarez }
 public class SpaceStation : MonoBehaviour {
 
     public Affilation spaceStation_affil;
@@ -23,7 +23,7 @@ public class SpaceStation : MonoBehaviour {
         {
             if (!sc.aiActive)
             {
-                GameManager.Instance.nearestStation = gameObject;
+                GameManager.Instance.nearestStation = this;
                 sc.aiActive = true;
             }
         }

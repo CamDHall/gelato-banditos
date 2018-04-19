@@ -16,11 +16,11 @@ public class GelatoCanon : MonoBehaviour {
     }
 
     void Update () {
-		if(Input.GetButtonDown("Cannon") && GameManager.Instance.cones.Count > 0 && !holding)
+		/*if(Input.GetButtonDown("Cannon") && PlayerInventory.Instance.cones.Count > 0 && !holding)
         {
             PlaceCone();
             holdTimer = Time.timeSinceLevelLoad + 1;
-        }
+        }*/
 
         if(Input.GetButtonUp("Cannon") && holding)
         {
@@ -49,7 +49,7 @@ public class GelatoCanon : MonoBehaviour {
 
     void PlaceCone()
     {
-        currentCone = GameManager.Instance.cones.Dequeue();
+        /*currentCone = PlayerInventory.Instance.cones[PlayerInventory.Instance.cones.Count - 1];
 
         currentCone.transform.SetParent(transform);
         currentCone.transform.localPosition = Vector3.zero;
@@ -60,6 +60,6 @@ public class GelatoCanon : MonoBehaviour {
 
         currentCone.transform.localRotation = Quaternion.Euler(rot);
 
-        holding = true;
+        holding = true;*/
     }
 }

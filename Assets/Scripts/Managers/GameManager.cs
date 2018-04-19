@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     public static GameManager Instance;
-    public Text timeLeft;
-    public float timeGoal;
 
     public GameObject finalScore, death;
 
@@ -23,16 +21,25 @@ public class GameManager : MonoBehaviour {
     public bool game_over = false;
 
     [HideInInspector]
-    // Using a queue so that the Galto is FIFO
-    public Queue<GameObject> cones = new Queue<GameObject>();
     public List<GameObject> friends = new List<GameObject>();
 
-    [HideInInspector] public GameObject nearestStation;
+    [HideInInspector] public SpaceStation nearestStation;
+    public Dictionary<Affilation, List<Flavors>> affilation_preferences = new Dictionary<Affilation, List<Flavors>>();
 
 	void Start () {
         Instance = this;
 
         bc = i_left.color;
+
+        List<Flavors> _chFed = new List<Flavors>();
+        List<Flavors> _juarez = new List<Flavors>();
+
+        _chFed.Add(Flavors.Lemon);
+        _juarez.Add(Flavors.Mango);
+        _juarez.Add(Flavors.Chocolate);
+
+        affilation_preferences.Add(Affilation.ChihuahuaFederation, _chFed);
+        affilation_preferences.Add(Affilation.Juarez, _juarez);
 	}
 	
 	void Update () {
@@ -48,12 +55,6 @@ public class GameManager : MonoBehaviour {
 
         if (!game_over)
         {
-            timeLeft.text = "Time: " + System.Math.Round(timeGoal - Time.timeSinceLevelLoad, 2);
-            if (timeGoal < Time.timeSinceLevelLoad)
-            {
-                End();
-            }
-
             if (leftActive && i_left.color.a > 0)
             {
                 i_left.color = new Color(bc.r, bc.g, bc.b, i_left.color.a - Time.deltaTime);
@@ -99,7 +100,6 @@ public class GameManager : MonoBehaviour {
 
     public void StartGame()
     {
-        timeGoal += Time.timeSinceLevelLoad;
         PlayerMovement.player.enabled = true;
     }
 

@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour {
     Rigidbody rb;
 	void Start () {
         rb = GetComponent<Rigidbody>();
+        Destroy(gameObject, 5);
 	}
 	
 	void FixedUpdate () {

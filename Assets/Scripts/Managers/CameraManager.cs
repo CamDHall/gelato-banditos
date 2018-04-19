@@ -10,7 +10,6 @@ public class CameraManager : MonoBehaviour {
     GameObject[] bandits;
 
     bool playGuardScene = false;
-    bool reached = false;
 
     private void Awake()
     {
@@ -32,16 +31,8 @@ public class CameraManager : MonoBehaviour {
                     Vector3 newPos = (cam.transform.position - bandit.transform.position) * .10f;
 
                     bandit.transform.position += newPos;
-                } else
-                {
-                    reached = true;
                 }
             }
-        }
-
-        if(reached)
-        {
-
         }
 	}
 

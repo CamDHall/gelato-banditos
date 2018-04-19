@@ -10,6 +10,7 @@ TagManager:
   - Quad
   - Cluster
   - Planet
+  - StationWeapons
   layers:
   - Default
   - TransparentFX

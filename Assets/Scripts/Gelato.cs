@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Flavors { Vanilla, Chocolate, Lemon, Mango, Strawberry }
 public class Gelato : MonoBehaviour {
 
     bool moving = true;
+    public Flavors flavor;
     public float speed, scaleSpeed;
 
     [HideInInspector] public bool launched = false;
     [HideInInspector] public Vector3 dir;
     [HideInInspector] public Transform target;
-	
+
 	void Update () {
         if(moving)
             transform.position = Vector3.Lerp(transform.position, PlayerMovement.player.transform.position, Time.deltaTime * 10);
@@ -43,7 +45,7 @@ public class Gelato : MonoBehaviour {
 
     private void OnTriggerEnter(Collider coll)
     {
-        if (coll.gameObject.tag == "Player" && moving)
+        /*if (coll.gameObject.tag == "Player" && moving)
         {
             moving = false;
             Place();
@@ -64,15 +66,15 @@ public class Gelato : MonoBehaviour {
             {
                 Destroy(gameObject);
             }
-        }
+        }*/
     }
 
-    void Place()
+    /*void Place()
     {
         transform.SetParent(PlayerMovement.player.gelatoContainer);
         transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         transform.position = PlayerMovement.player.gelatoContainer.position;
 
-        GameManager.Instance.cones.Enqueue(gameObject);
-    }
+        PlayerInventory.Instance.cones.Remove(gameObject);
+    }*/
 }

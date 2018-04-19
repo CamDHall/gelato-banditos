@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour {
 	}
 	
 	void Update () {
-        coneCount.text = "x" + GameManager.Instance.cones.Count;
+        //coneCount.text = "x" + PlayerInventory.Instance.cones.Count;
 
         if (PlayerMovement.player.shield > 0)
         {

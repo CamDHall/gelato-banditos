@@ -20,7 +20,44 @@ public class Utilts {
     {
         int amount = Mathf.CeilToInt(obj.transform.localScale.x + obj.transform.localScale.y + obj.transform.localScale.z);
         string name = obj.name.Replace("(Clone)", "");
-        if (name == "Copper") CharacterManager.Instance.copper += amount;
-        else if (name == "Iron") CharacterManager.Instance.iron += amount;
+        if (name == "Copper") PlayerInventory.Instance.copper += amount;
+        else if (name == "Iron") PlayerInventory.Instance.iron += amount;
+    }
+
+    public static int ChangeInStanding(Dictionary<Flavors, int> changes, Affilation group)
+    {
+        int val = 0;
+
+        foreach(Flavors flavor in changes.Keys)
+        {
+            int count = changes[flavor];
+
+            if(GameManager.Instance.affilation_preferences[group].Contains(flavor))
+            {
+                val += count;
+            } else
+            {
+                val -= count;
+            }
+        }
+
+
+        return val;
+    }
+
+    public static void RemoveGelato(Dictionary<Flavors, int> changes)
+    {
+        foreach(Flavors flavor in changes.Keys)
+        {
+            int difference = PlayerInventory.Instance.gelato_inventory[flavor] - changes[flavor];
+
+            if(difference > 0)
+            {
+                PlayerInventory.Instance.gelato_inventory[flavor] = difference;
+            } else if(difference == 0)
+            {
+                PlayerInventory.Instance.gelato_inventory.Remove(flavor);
+            }
+        }
     }
 }
