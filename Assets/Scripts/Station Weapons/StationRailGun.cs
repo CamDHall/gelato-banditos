@@ -4,11 +4,30 @@ using UnityEngine;
 
 public class StationRailGun : StationWeapon {
 
+    float angle;
+    Vector3 dir;
+
     private void Update()
     {
         base.Update();
+
+        dir = transform.position - PlayerMovement.player.transform.position;
+
+        angle = Vector3.Angle(dir, PlayerMovement.player.transform.forward);
+
+        if(angle <= 100)
+        {
+            Debug.Log("IN FRONT OR BESIDE");
+        }
+        else
+        {
+            Debug.Log("BEHIND");
+        }
+
         target = Quaternion.LookRotation(PlayerMovement.player.transform.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, target, rotationSpeed);
+
+
     }
 
     void FixedUpdate () {
