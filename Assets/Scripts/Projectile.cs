@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour {
             PlayerMovement.player.TakeDamge(5);
             CamController.Instance.ShakeCamera(transform.position);
         }
-        else
+        else if(coll.gameObject.tag != "SpaceStation")
         {
             Destroy(coll.gameObject);
         }

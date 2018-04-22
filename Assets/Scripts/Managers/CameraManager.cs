@@ -75,9 +75,6 @@ public class CameraManager : MonoBehaviour {
             Destroy(bandits[i]);
         }
 
-        StationController sc = GameManager.Instance.nearestStation.GetComponent<StationController>();
-        sc.cutScene = false;
-        sc.aiActive = false;
         PlayerMovement.player.enabled = true;
         PlayerMovement.player.acceleration = 0;
         GunController.Instance.enabled = true;

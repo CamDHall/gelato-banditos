@@ -28,4 +28,16 @@ public class SpaceStation : MonoBehaviour {
             }
         }
     }
+
+    private void OnTriggerExit(Collider coll)
+    {
+        if(coll.tag == "Player")
+        {
+            if(sc.aiActive)
+            {
+                sc.cutScene = false;
+                sc.aiActive = false;
+            }
+        }
+    }
 }

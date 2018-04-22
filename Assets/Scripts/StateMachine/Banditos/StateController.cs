@@ -73,7 +73,6 @@ public class StateController : MonoBehaviour {
         if(Random.Range(0, 10) > 3)
         {
             Instantiate(gelato, transform.position, Quaternion.identity);
-            GameManager.Instance.score += 5;
         }
 
         Destroy(gameObject, Time.deltaTime * 5);

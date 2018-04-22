@@ -11,12 +11,13 @@ public class UIManager : MonoBehaviour {
     public Image health;
     public Image shield;
 
+    public Image indicator;
+
 	void Start () {
 		
 	}
 	
 	void Update () {
-        //coneCount.text = "x" + PlayerInventory.Instance.cones.Count;
 
         if (PlayerMovement.player.shield > 0)
         {

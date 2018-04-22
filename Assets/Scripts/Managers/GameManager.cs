@@ -8,9 +8,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager Instance;
 
-    public GameObject finalScore, death;
-
-    public int score;
+    public GameObject death;
 
     public Image i_left, i_right, i_top, i_bottom;
 
@@ -93,8 +91,6 @@ public class GameManager : MonoBehaviour {
 
     void End()
     {
-        finalScore.GetComponent<Text>().text = "Final score: " + score;
-        finalScore.SetActive(true);
         game_over = true;
     }
 

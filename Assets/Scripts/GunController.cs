@@ -47,17 +47,22 @@ public class GunController : MonoBehaviour {
                     {
                         AudioManager.Instance.BanditoSplat();
                         hit.transform.GetComponent<StateController>().Die();
-                        GameManager.Instance.score += 5;
                     }
                     else
                     {
-                        if(hit.transform.tag == "Astro")
+                        string hTag = hit.transform.tag;
+
+                        if (hTag == "Astro" || hTag == "StationWeapons")
                         {
-                            GameManager.Instance.score++;
                             AudioManager.Instance.AstroCrack();
                         }
 
-                        if (hit.transform.tag == "Astro")
+                        if(hTag == "StationWeapons")
+                        {
+                            hit.transform.GetComponent<StationRailGun>().TakeDamage(1);
+                        }
+
+                        if (hTag == "Astro")
                         {
                             Destroy(hit.transform.gameObject, Time.deltaTime * 5);
                             Utilts.GetResources(hit.transform.gameObject);
