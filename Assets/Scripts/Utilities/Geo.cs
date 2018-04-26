@@ -138,37 +138,6 @@ public class Geo {
         }
     }
 
-    /*static Vector2 PerpVect(Vector2 v0, Vector2 v1, Vector2 myPos) {
-        if(v0.x == v1.x) {
-            if(myPos.x>v0.x) {
-                return new Vector2(-1, 0);
-            }
-            else {
-                return new Vector2(1, 0);
-            }
-        }
-        else if(v0.y == v1.y) {
-            if(myPos.y>v0.y) {
-                return new Vector2(0, - 1);
-            }
-            else {
-                return new Vector2(0, 1);
-            }
-        }
-
-        tmp =(v0 - v1).normalized;
-        slope = tmp.y / tmp.x;
-        nrecip = -(1 / slope);
-        y1 = nrecip;
-        tmp = new Vector2(1, y1).normalized;
-        if(IsLeft(v0, v1, myPos) == IsLeft(v0, v1, v0 + tmp)) {
-            return new Vector2(tmp.x * - 1, tmp.y * - 1);
-        }
-        else {
-            return tmp;
-        }
-    }*/
-
     public static Vector3 SideMost(Vector3[] vts, Vector2 viewPos, Vector2 myPos, bool right) {
         float ang = Geo.ToAng(myPos - viewPos);
         int i = 0;

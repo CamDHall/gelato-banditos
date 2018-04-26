@@ -4,25 +4,79 @@ using UnityEngine;
 
 public class StationRailGun : StationWeapon {
 
-    float angle;
-    Vector3 dir;
+    public float moveSpeed;
+    float difAngle;
+    int side;
+    float dist;
+    Vector3 modPos, heightMod;
+
+    float posTimer;
+
+    bool collided = false;
+
+    private void Start()
+    {
+        base.Start();
+        posTimer = Time.timeSinceLevelLoad;
+        heightMod = transform.up * moveSpeed * Time.deltaTime;
+    }
 
     private void Update()
     {
         base.Update();
+        difAngle = Vector3.Angle(transform.forward, PlayerMovement.player.transform.forward);
+        side = Utilts.AngleDir(transform.forward, PlayerMovement.player.transform.forward, transform.up);
 
-        dir = transform.position - PlayerMovement.player.transform.position;
+        Vector3 oldPos = transform.position;
 
-        angle = Vector3.Angle(dir, PlayerMovement.player.transform.forward);
-
-        if(angle <= 100)
+        if (difAngle > 142)
         {
-            Debug.Log("IN FRONT OR BESIDE");
-        }
-        else
+            if(side == -1)
+            {
+                modPos = transform.right * moveSpeed * Time.deltaTime;
+            } else
+            {
+                modPos = -transform.right * moveSpeed * Time.deltaTime;
+            }
+        } else if(difAngle > 60)
         {
-            Debug.Log("BEHIND");
+            dist = Vector3.Distance(transform.position, PlayerMovement.player.transform.position);
+            if (dist <= 500)
+            {
+                if (side == -1)
+                {
+                    modPos = transform.right * 10 * moveSpeed * Time.deltaTime;
+                }
+                else
+                {
+                    modPos = transform.right * -10 * moveSpeed * Time.deltaTime;
+                }
+            }
+        } else
+        {
+            modPos = transform.forward * moveSpeed * Time.deltaTime;
         }
+
+        if(posTimer < Time.timeSinceLevelLoad)
+        {
+            posTimer = Time.timeSinceLevelLoad + 5;
+            heightMod *= -1;
+        }
+
+        Collider[] hits = Physics.OverlapSphere(transform.position, 75);
+
+        foreach(Collider col in hits)
+        {
+            if (col.tag == "SpaceStation")
+            {
+                collided = true;
+                Vector3 dir = col.ClosestPoint(transform.position);
+                transform.position -= dir * moveSpeed * Time.deltaTime;
+            }
+        }
+
+        if(!collided)
+            transform.position += (modPos + heightMod);
 
         target = Quaternion.LookRotation(PlayerMovement.player.transform.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, target, rotationSpeed);

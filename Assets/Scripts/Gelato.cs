@@ -13,7 +13,7 @@ public class Gelato : MonoBehaviour {
     [HideInInspector] public Vector3 dir;
     [HideInInspector] public Transform target;
 
-	void Update () {
+    void Update () {
         if(moving)
             transform.position = Vector3.Lerp(transform.position, PlayerMovement.player.transform.position, Time.deltaTime * 10);
 

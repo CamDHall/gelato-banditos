@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance;
 
     public GameObject death;
+    public Canvas ingame_menu;
 
     public Image i_left, i_right, i_top, i_bottom;
 
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         Instance = this;
 
+        ingame_menu.gameObject.SetActive(false);
+
         bc = i_left.color;
 
         List<Flavors> _chFed = new List<Flavors>();
@@ -41,9 +44,10 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (Input.GetButton("Quit"))
+        if (Input.GetButton("Back"))
         {
-            Application.Quit();
+            ingame_menu.gameObject.SetActive(true);
+            //Application.Quit();
         }
 
         if (Input.GetButton("Start"))

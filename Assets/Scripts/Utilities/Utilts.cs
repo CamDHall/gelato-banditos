@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class Utilts {
@@ -58,6 +59,25 @@ public class Utilts {
             {
                 PlayerInventory.Instance.gelato_inventory.Remove(flavor);
             }
+        }
+    }
+
+    public static int AngleDir(Vector3 fwd, Vector3 targetDir, Vector3 up)
+    {
+        Vector3 perp = Vector3.Cross(fwd, targetDir);
+        float dir = Vector3.Dot(perp, up);
+
+        if (dir > 0f)
+        {
+            return 1;
+        }
+        else if (dir < 0f)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
         }
     }
 }

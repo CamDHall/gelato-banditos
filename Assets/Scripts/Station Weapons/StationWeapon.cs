@@ -19,7 +19,7 @@ public class StationWeapon : MonoBehaviour {
     protected Material mat;
     protected Color og;
 
-    private void Start()
+    protected void Start()
     {
         mat = GetComponent<MeshRenderer>().material;
         og = mat.color;
@@ -29,7 +29,7 @@ public class StationWeapon : MonoBehaviour {
         sp = transform.parent.GetComponentInChildren<SpaceStation>();
     }
 
-    public void Update()
+    protected void Update()
     {
         ///
         /// Temp
