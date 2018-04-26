@@ -80,4 +80,17 @@ public class Utilts {
             return 0;
         }
     }
+
+    public static bool CanMakeRecipe(Flavor flav)
+    {
+        foreach(Ingredients ing in flav.ingredientsNeeded.Keys)
+        {
+            if (!PlayerInventory.Instance.ingredientsHeld.ContainsKey(ing))
+                return false;
+
+            if(PlayerInventory.Instance.ingredientsHeld[ing] < flav.ingredientsNeeded[ing]) return false;
+        }   
+
+        return true;
+    }
 }

@@ -28,8 +28,6 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         Instance = this;
 
-        ingame_menu.gameObject.SetActive(false);
-
         bc = i_left.color;
 
         List<Flavors> _chFed = new List<Flavors>();
