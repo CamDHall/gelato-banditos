@@ -42,10 +42,22 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (Input.GetButton("Back"))
+        if (Input.GetButtonDown("Back"))
         {
-            ingame_menu.gameObject.SetActive(true);
-            //Application.Quit();
+            if (ingame_menu.gameObject.activeSelf)
+            {
+                ingame_menu.gameObject.SetActive(false);
+            }
+            else
+            {
+                PlayerMovement.player.acceleration = 0;
+                ingame_menu.gameObject.SetActive(true);
+            }
+        }
+
+        if(Input.GetKeyUp(KeyCode.Q))
+        {
+            Application.Quit();
         }
 
         if (Input.GetButton("Start"))

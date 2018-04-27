@@ -13,6 +13,8 @@ public class StationRailGun : StationWeapon {
     float posTimer;
 
     bool collided = false;
+    float collidedTimer;
+    Vector3 dir;
 
     private void Start()
     {
@@ -55,6 +57,7 @@ public class StationRailGun : StationWeapon {
         } else
         {
             modPos = transform.forward * moveSpeed * Time.deltaTime;
+            heightMod = Vector3.zero;
         }
 
         if(posTimer < Time.timeSinceLevelLoad)
@@ -70,13 +73,24 @@ public class StationRailGun : StationWeapon {
             if (col.tag == "SpaceStation")
             {
                 collided = true;
-                Vector3 dir = col.ClosestPoint(transform.position);
-                transform.position -= dir * moveSpeed * Time.deltaTime;
+                dir = col.ClosestPoint(transform.position);
+                collidedTimer = Time.timeSinceLevelLoad + 3;
+                break;
             }
         }
 
-        if(!collided)
+        if (!collided)
+        {
             transform.position += (modPos + heightMod);
+        }
+
+        if(collidedTimer > Time.timeSinceLevelLoad)
+        {
+            transform.position -= dir.normalized * (moveSpeed * 2) * Time.deltaTime;
+        } else
+        {
+            collided = false;
+        }
 
         target = Quaternion.LookRotation(PlayerMovement.player.transform.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, target, rotationSpeed);

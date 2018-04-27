@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour {
 
     public GameObject gelatoSub;
     public GameObject gelatoContainer;
+    public Text gelatoInfo;
     Flavor[] possibleFlavors;
 
     List<Button> flavBtns = new List<Button>();
@@ -37,6 +38,8 @@ public class MenuManager : MonoBehaviour {
                 temp.transform.SetParent(gelatoSub.transform, false);
                 temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 150, y * 100) + padding;
 
+                gelatoSub.SetActive(false);
+
                 if (x <= 2)
                 {
                     x++;
@@ -61,12 +64,26 @@ public class MenuManager : MonoBehaviour {
 
     public void DisplayRecipes()
     {
+        gelatoSub.SetActive(true);
         foreach(Button btn in flavBtns)
         {
             btn.gameObject.SetActive(true);
         }
 
         UpdateCraftableRecipes();
+        UpdateGelatoMenu();
+    }
+
+    public void UpdateGelatoMenu()
+    {
+        string info = "";
+
+        foreach (Flavors flav in PlayerInventory.Instance.gelato_inventory.Keys)
+        {
+            info += flav.ToString() + "\t" + PlayerInventory.Instance.gelato_inventory[flav] + "\t\t";
+        }
+
+        gelatoInfo.text = info;
     }
 
     public void UpdateCraftableRecipes()
@@ -145,5 +162,6 @@ public class MenuManager : MonoBehaviour {
         }
 
         UpdateCraftableRecipes();
+        UpdateGelatoMenu();
     }
 }

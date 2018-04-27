@@ -28,9 +28,18 @@ public class StationState : ScriptableObject {
         {
             int val = transition.decision.StandingDecision(controller);
 
-            if (val == 0) controller.TransitionToState(transition.gaurdState);
-            else if (val < 0) controller.TransitionToState(transition.attackstate);
-            else controller.TransitionToState(transition.receiveState);
+            if (val == 0)
+            {
+                controller.TransitionToState(transition.gaurdState);
+            }
+            else if (val < 0)
+            {
+                controller.TransitionToState(transition.attackstate);
+            }
+            else
+            {
+                controller.TransitionToState(transition.receiveState);
+            }
         }
     }
 }

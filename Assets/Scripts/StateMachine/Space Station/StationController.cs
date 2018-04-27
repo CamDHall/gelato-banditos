@@ -26,8 +26,9 @@ public class StationController : MonoBehaviour {
 
     public void TransitionToState(StationState nextState)
     {
-        if(remainState != nextState)
+        if(currentState != nextState)
         {
+            CameraManager.Instance.Reset();
             currentState = nextState;
         }
     }
