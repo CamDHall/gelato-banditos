@@ -81,16 +81,47 @@ public class Utilts {
         }
     }
 
-    public static bool CanMakeRecipe(Flavor flav)
+    public static int CanMakeRecipe(Flavor flav)
     {
-        foreach(Ingredients ing in flav.ingredientsNeeded.Keys)
+        Dictionary<Ingredients, int> temp = new Dictionary<Ingredients, int>();
+
+        foreach(Ingredients ing in PlayerInventory.Instance.ingredientsHeld.Keys)
         {
-            if (!PlayerInventory.Instance.ingredientsHeld.ContainsKey(ing))
-                return false;
+            temp.Add(ing, PlayerInventory.Instance.ingredientsHeld[ing]);
+        }
 
-            if(PlayerInventory.Instance.ingredientsHeld[ing] < flav.ingredientsNeeded[ing]) return false;
-        }   
+        int amount = 0;
+        bool t = true;
+        while (t)
+        {
+            foreach (Ingredients ing in flav.ingredientsNeeded.Keys)
+            {
+                if (!temp.ContainsKey(ing))
+                {
+                    t = false;
+                    break;
+                }
 
-        return true;
+                int amountRemoved = flav.ingredientsNeeded[ing];
+                int amountHeld = temp[ing];
+
+                if (amountHeld - amountRemoved < 0)
+                {
+                    t = false;
+                }
+                else if (amountHeld - amountRemoved == 0)
+                {
+                    temp.Remove(ing);
+                }
+                else
+                {
+                    temp[ing] -= amountRemoved;
+                }
+            }
+
+            if(t) amount++;
+        }
+
+        return amount;
     }
 }

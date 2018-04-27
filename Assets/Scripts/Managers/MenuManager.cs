@@ -54,14 +54,7 @@ public class MenuManager : MonoBehaviour {
 
                 temp.GetComponent<FlavGetter>().associatedFlav = flav;
 
-                if (!Utilts.CanMakeRecipe(flav))
-                {
-                    temp.enabled = false;
-                    temp.image.color = Color.red;
-                }
-
                 flavBtns.Add(temp);
-                temp.gameObject.SetActive(false);
             }
         }
     }
@@ -72,6 +65,8 @@ public class MenuManager : MonoBehaviour {
         {
             btn.gameObject.SetActive(true);
         }
+
+        UpdateCraftableRecipes();
     }
 
     public void UpdateCraftableRecipes()
@@ -79,11 +74,28 @@ public class MenuManager : MonoBehaviour {
         foreach(Button btn in flavBtns)
         {
             Flavor flav = btn.GetComponent<FlavGetter>().associatedFlav;
+            int amountCanBeMade = Utilts.CanMakeRecipe(flav);
 
-            if (!Utilts.CanMakeRecipe(flav))
+            Dropdown dp = btn.GetComponentInChildren<Dropdown>();
+
+            if (amountCanBeMade == 0)
             {
                 btn.enabled = false;
                 btn.GetComponent<Image>().color = Color.red;
+                if(dp != null) dp.gameObject.SetActive(false);
+            } else
+            {
+                dp.gameObject.SetActive(true);
+                btn.GetComponent<Image>().color = Color.white;
+                dp.ClearOptions();
+                List<string> num = new List<string>();
+
+                for (int i = 0; i < amountCanBeMade; i++)
+                {
+                    num.Add((i + 1).ToString());
+                }
+
+                dp.AddOptions(num);
             }
         }
     }
@@ -94,16 +106,20 @@ public class MenuManager : MonoBehaviour {
         string name = go.name;
 
         Flavors flav;
+
+        Dropdown dp = go.GetComponentInChildren<Dropdown>();
+        int amount = int.Parse(dp.options[dp.value].text);
+
         try
         {
             flav = (Flavors)System.Enum.Parse(typeof(Flavors), name);
 
-            if(PlayerInventory.Instance.gelato_inventory.ContainsKey(flav))
+            if (PlayerInventory.Instance.gelato_inventory.ContainsKey(flav))
             {
-                PlayerInventory.Instance.gelato_inventory[flav]++;
+                PlayerInventory.Instance.gelato_inventory[flav] += amount;
             } else
             {
-                PlayerInventory.Instance.gelato_inventory.Add(flav, 1);
+                PlayerInventory.Instance.gelato_inventory.Add(flav, amount);
             }
         } catch
         {
@@ -114,9 +130,9 @@ public class MenuManager : MonoBehaviour {
 
         Ingredients[] ingredients = flavClass.ingredientsNeeded.Keys.ToArray();
 
-        foreach(Ingredients ing in flavClass.ingredientsNeeded.Keys)
+        foreach(Ingredients ing in ingredients)
         {
-            int removeAmount = flavClass.ingredientsNeeded[ing];
+            int removeAmount = flavClass.ingredientsNeeded[ing] * amount;
             int amountHeld = PlayerInventory.Instance.ingredientsHeld[ing];
 
             if(amountHeld - removeAmount == 0)
