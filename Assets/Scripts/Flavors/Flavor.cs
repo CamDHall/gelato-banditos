@@ -10,6 +10,7 @@ using UnityEngine;
 /// </summary>
 
 public enum FlavorQualities { Sweat, Fruity, Savory, Classic, Light, Variety }
+public enum Flavors { Vanilla, Chocolate, Lemon, Mango, Strawberry }
 public class Flavor : SerializedMonoBehaviour
 {
     /// <summary>

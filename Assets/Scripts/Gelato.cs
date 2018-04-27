@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Flavors { Vanilla, Chocolate, Lemon, Mango, Strawberry }
 public class Gelato : MonoBehaviour {
 
     bool moving = true;

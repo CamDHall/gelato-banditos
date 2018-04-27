@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 222607786871858854}
   - component: {fileID: 114106944868293316}
   - component: {fileID: 114262295778476566}
+  - component: {fileID: 114054512340263298}
   m_Layer: 5
   m_Name: RecipeSlot
   m_TagString: Untagged
@@ -47,6 +48,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114054512340263298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978083438797764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a65ef901fa07f42914560fbd9cdb7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  associatedFlav: {fileID: 0}
 --- !u!114 &114066480149302984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,6 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flavorRecipe: {fileID: 0}
+  gelatoSub: {fileID: 0}
   gelatoContainer: {fileID: 0}
 --- !u!114 &114106944868293316
 MonoBehaviour:
