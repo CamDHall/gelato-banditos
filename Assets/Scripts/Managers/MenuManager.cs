@@ -124,8 +124,7 @@ public class MenuManager : MonoBehaviour {
 
         Flavors flav;
 
-        Dropdown dp = go.GetComponentInChildren<Dropdown>();
-        int amount = int.Parse(dp.options[dp.value].text);
+        int amount = Utilts.GetDropDownVal(go);
 
         try
         {
@@ -145,9 +144,9 @@ public class MenuManager : MonoBehaviour {
 
         Flavor flavClass = go.GetComponent<FlavGetter>().associatedFlav;
 
-        Ingredients[] ingredients = flavClass.ingredientsNeeded.Keys.ToArray();
+        Ingredient[] ingredients = flavClass.ingredientsNeeded.Keys.ToArray();
 
-        foreach(Ingredients ing in ingredients)
+        foreach(Ingredient ing in ingredients)
         {
             int removeAmount = flavClass.ingredientsNeeded[ing] * amount;
             int amountHeld = PlayerInventory.Instance.ingredientsHeld[ing];

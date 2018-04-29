@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : SerializedMonoBehaviour
+{
 
     public static GameManager Instance;
 
@@ -19,26 +21,18 @@ public class GameManager : MonoBehaviour {
     public GameObject bulletContainer;
     public bool game_over = false;
 
+    public Dictionary<Affilation, Dictionary<FlavorQualities, int>> aff_prefs;
+
     [HideInInspector]
     public List<GameObject> friends = new List<GameObject>();
 
     [HideInInspector] public SpaceStation nearestStation;
-    public Dictionary<Affilation, List<Flavors>> affilation_preferences = new Dictionary<Affilation, List<Flavors>>();
+    //public Dictionary<Affilation, List<Flavors>> affilation_preferences = new Dictionary<Affilation, List<Flavors>>();
 
 	void Start () {
         Instance = this;
 
         bc = i_left.color;
-
-        List<Flavors> _chFed = new List<Flavors>();
-        List<Flavors> _juarez = new List<Flavors>();
-
-        _chFed.Add(Flavors.Lemon);
-        _juarez.Add(Flavors.Mango);
-        _juarez.Add(Flavors.Chocolate);
-
-        affilation_preferences.Add(Affilation.ChihuahuaFederation, _chFed);
-        affilation_preferences.Add(Affilation.Juarez, _juarez);
 	}
 	
 	void Update () {

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
 
 public class Utilts {
 
@@ -21,25 +23,41 @@ public class Utilts {
     {
         int amount = Mathf.CeilToInt(obj.transform.localScale.x + obj.transform.localScale.y + obj.transform.localScale.z);
         string name = obj.name.Replace("(Clone)", "");
-        if (name == "Copper") PlayerInventory.Instance.copper += amount;
-        else if (name == "Iron") PlayerInventory.Instance.iron += amount;
+
+        ResourceType res = (ResourceType)System.Enum.Parse(typeof(ResourceType), name);
+        if (!PlayerInventory.Instance.resources.ContainsKey(res)) PlayerInventory.Instance.resources.Add(res, amount);
+
+        PlayerInventory.Instance.resources[res] += amount;
     }
 
     public static int ChangeInStanding(Dictionary<Flavors, int> changes, Affilation group)
     {
         int val = 0;
 
+        List<Flavor> flavClasses = PlayerInventory.Instance.gelatoContainer.GetComponents<Flavor>().ToList();
+        Debug.Log(flavClasses.Count);
         foreach(Flavors flavor in changes.Keys)
         {
-            int count = changes[flavor];
+            Flavor tempFlavClass = null;
 
-            if(GameManager.Instance.affilation_preferences[group].Contains(flavor))
+            foreach(Flavor flavClass in flavClasses)
             {
-                val += count;
-            } else
-            {
-                val -= count;
+                if(flavClass.flavor == flavor)
+                {
+                    tempFlavClass = flavClass;
+                    break;
+                }
             }
+
+            Debug.Log(tempFlavClass);
+
+            foreach(FlavorQualities fv in tempFlavClass.flavQualities)
+            {
+                val += GameManager.Instance.aff_prefs[group][fv] * changes[flavor];
+                Debug.Log(val);
+            }
+
+            flavClasses.Remove(tempFlavClass);
         }
 
 
@@ -83,9 +101,9 @@ public class Utilts {
 
     public static int CanMakeRecipe(Flavor flav)
     {
-        Dictionary<Ingredients, int> temp = new Dictionary<Ingredients, int>();
+        Dictionary<Ingredient, int> temp = new Dictionary<Ingredient, int>();
 
-        foreach(Ingredients ing in PlayerInventory.Instance.ingredientsHeld.Keys)
+        foreach(Ingredient ing in PlayerInventory.Instance.ingredientsHeld.Keys)
         {
             temp.Add(ing, PlayerInventory.Instance.ingredientsHeld[ing]);
         }
@@ -94,7 +112,7 @@ public class Utilts {
         bool t = true;
         while (t)
         {
-            foreach (Ingredients ing in flav.ingredientsNeeded.Keys)
+            foreach (Ingredient ing in flav.ingredientsNeeded.Keys)
             {
                 if (!temp.ContainsKey(ing))
                 {
@@ -123,5 +141,16 @@ public class Utilts {
         }
 
         return amount;
+    }
+
+    public static int GetDropDownVal(GameObject go)
+    {
+        Dropdown dp = go.GetComponentInChildren<Dropdown>();
+        return int.Parse(dp.options[dp.value].text);
+    }
+
+    public static int GetDropDownVal(Dropdown dp)
+    {
+        return int.Parse(dp.options[dp.value].text);
     }
 }

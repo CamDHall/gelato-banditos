@@ -1,15 +1,19 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Ingredients { VanillaBean, CocoaBean }
-public class PlayerInventory : MonoBehaviour
+
+public enum Ingredient { VanillaBean, CocoaBean, Lemon, Mango, Strawberry }
+public enum ResourceType { Copper, Iron }
+public class PlayerInventory : SerializedMonoBehaviour
 {
 
     public static PlayerInventory Instance;
 
-    public int copper, iron;
-    public Dictionary<Ingredients, int> ingredientsHeld = new Dictionary<Ingredients, int>();
+    public Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
+
+    public Dictionary<Ingredient, int> ingredientsHeld = new Dictionary<Ingredient, int>();
     public Dictionary<Affilation, int> standings = new Dictionary<Affilation, int>();
     public Dictionary<Flavors, int> gelato_inventory = new Dictionary<Flavors, int>();
 
@@ -31,8 +35,8 @@ public class PlayerInventory : MonoBehaviour
         gelato_inventory.Add(Flavors.Strawberry, 10);
         gelato_inventory.Add(Flavors.Vanilla, 10);
 
-        ingredientsHeld.Add(Ingredients.VanillaBean, 10);
-        ingredientsHeld.Add(Ingredients.CocoaBean, 5);
+        ingredientsHeld.Add(Ingredient.VanillaBean, 10);
+        ingredientsHeld.Add(Ingredient.CocoaBean, 5);
         /// Temp
         /// 
 

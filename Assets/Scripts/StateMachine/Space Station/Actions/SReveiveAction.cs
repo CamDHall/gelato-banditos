@@ -8,6 +8,8 @@ public class SReveiveAction : StationAction {
     public override void Act(StationController controller)
     {
         if (!CinematicUI.Instance.storePanel.gameObject.activeSelf)
-            CinematicUI.Instance.storePanel.gameObject.SetActive(true);
+        {
+            CinematicUI.Instance.SetupStore(controller.station_afil);
+        }
     }
 }

@@ -19,5 +19,5 @@ public class Flavor : SerializedMonoBehaviour
     /// 
     public Flavors flavor;
     public List<FlavorQualities> flavQualities;
-    public Dictionary<Ingredients, int> ingredientsNeeded;
+    public Dictionary<Ingredient, int> ingredientsNeeded;
 }
