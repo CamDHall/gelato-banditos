@@ -1828,7 +1828,8 @@ MonoBehaviour:
   projectile: {fileID: 1394817010049872, guid: b4225f5a292812d48a267efe44e6172a, type: 2}
   firingRate: 6
   rotationSpeed: 0.05
-  moveSpeed: 1
+  resAmount: 10
+  moveSpeed: 10
 --- !u!23 &585897661
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2194,6 +2195,7 @@ MonoBehaviour:
   projectile: {fileID: 1394817010049872, guid: b4225f5a292812d48a267efe44e6172a, type: 2}
   firingRate: 6
   rotationSpeed: 0.05
+  resAmount: 10
   moveSpeed: 10
 --- !u!23 &679086616
 MeshRenderer:
@@ -2855,7 +2857,8 @@ MonoBehaviour:
   projectile: {fileID: 1394817010049872, guid: b4225f5a292812d48a267efe44e6172a, type: 2}
   firingRate: 6
   rotationSpeed: 0.05
-  moveSpeed: 1
+  resAmount: 10
+  moveSpeed: 10
 --- !u!23 &785055303
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3885,12 +3888,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spaceStation_affil: 0
+  health: 100
   weapons:
   - {fileID: 679086613}
   - {fileID: 785055300}
   - {fileID: 1635307068}
   - {fileID: 585897658}
   - {fileID: 1193544168}
+  resValue: 100
 --- !u!4 &1111612799
 Transform:
   m_ObjectHideFlags: 0
@@ -4090,7 +4095,8 @@ MonoBehaviour:
   projectile: {fileID: 1394817010049872, guid: b4225f5a292812d48a267efe44e6172a, type: 2}
   firingRate: 6
   rotationSpeed: 0.05
-  moveSpeed: 1
+  resAmount: 10
+  moveSpeed: 10
 --- !u!23 &1193544171
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5701,7 +5707,8 @@ MonoBehaviour:
   projectile: {fileID: 1394817010049872, guid: b4225f5a292812d48a267efe44e6172a, type: 2}
   firingRate: 6
   rotationSpeed: 0.05
-  moveSpeed: 1
+  resAmount: 10
+  moveSpeed: 10
 --- !u!23 &1635307071
 MeshRenderer:
   m_ObjectHideFlags: 0

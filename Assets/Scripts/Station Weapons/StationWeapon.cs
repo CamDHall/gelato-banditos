@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StationWeapon : MonoBehaviour {
+public class StationWeapon : MonoBehaviour, IDamageable, IDeath {
 
     public float health;
     public GameObject projectile;
     public float firingRate;
     public float rotationSpeed;
+
+    public int resAmount;
 
     protected float timer;
     protected Quaternion target;
@@ -57,10 +59,29 @@ public class StationWeapon : MonoBehaviour {
 
         if (health <= 0)
         {
-            sp.weapons.Remove(gameObject);
-            Destroy(gameObject);
+            Death();
         }
 
         hitTimer = Time.timeSinceLevelLoad + hitTimerAmount;
+    }
+
+    public void Death()
+    {
+        ResourceType res = (ResourceType)Random.Range(0, System.Enum.GetValues(typeof(ResourceType)).Length);
+
+        Debug.Log(res);
+
+        if (PlayerInventory.Instance.resources.ContainsKey(res))
+        {
+            PlayerInventory.Instance.resources[res] += resAmount;
+        }
+        else
+        {
+            PlayerInventory.Instance.resources.Add(res, resAmount);
+        }
+
+        sp.weapons.Remove(gameObject);
+        transform.parent.gameObject.GetComponentInChildren<SpaceStation>().TakeDamage(20);
+        Destroy(gameObject);
     }
 }

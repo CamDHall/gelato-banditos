@@ -62,6 +62,11 @@ public class GunController : MonoBehaviour {
                             hit.transform.GetComponent<StationRailGun>().TakeDamage(1);
                         }
 
+                        if(hTag == "SpaceStation")
+                        {
+                            hit.transform.GetComponent<SpaceStation>().TakeDamage(1);
+                        }
+
                         if (hTag == "Astro")
                         {
                             Destroy(hit.transform.gameObject, Time.deltaTime * 5);
