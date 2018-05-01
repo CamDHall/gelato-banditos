@@ -123,8 +123,8 @@ public class CinematicUI : MonoBehaviour {
         foreach(string s in ing)
         {
             RectTransform temp = Instantiate(storeItem as RectTransform);
-            temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 175, y * 100) + padding;
             temp.GetComponent<RectTransform>().SetParent(storePanel.transform, false);
+            temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 175, y * 100) + padding;
 
             temp.GetComponentInChildren<Text>().text = s;
             temp.gameObject.name = s;
@@ -139,15 +139,14 @@ public class CinematicUI : MonoBehaviour {
             si.cost = cost;
             si.resType = res;
 
-            if (x <= 2)
+            if (x < 1)
             {
                 x++;
             }
             else
             {
-                x = 0;
-                if (y <= 2) y++;
-                else y = -2;
+                x = -2;
+                y++;
             }
 
             if (PlayerInventory.Instance.resources.ContainsKey(res))

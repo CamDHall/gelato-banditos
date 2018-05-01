@@ -69,8 +69,6 @@ public class StationWeapon : MonoBehaviour, IDamageable, IDeath {
     {
         ResourceType res = (ResourceType)Random.Range(0, System.Enum.GetValues(typeof(ResourceType)).Length);
 
-        Debug.Log(res);
-
         if (PlayerInventory.Instance.resources.ContainsKey(res))
         {
             PlayerInventory.Instance.resources[res] += resAmount;

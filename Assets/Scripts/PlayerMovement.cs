@@ -6,10 +6,11 @@ public class PlayerMovement : MonoBehaviour {
 
     public static PlayerMovement player;
     public Transform gelatoContainer;
-    public float health, shield;
+    public float startHealth, startShield;
     public float thrustSpeed;
 
     public float shieldTimerAmount;
+    public float rechargeRate;
     float shieldTimer;
 
     public float deadZone;
@@ -26,12 +27,12 @@ public class PlayerMovement : MonoBehaviour {
 
     // Dashing
     [SerializeField] float remainingDash = 0;
+    [HideInInspector] public float health, shield;
     public float dashAmount;
 
     public Rigidbody rb;
 
     public BoxCollider[] colliders;
-    [HideInInspector] public float startHealth, startShield;
     public bool rolling = true;
 
     float deflectionTimer = 0;
@@ -50,8 +51,8 @@ public class PlayerMovement : MonoBehaviour {
         colliders = GetComponents<BoxCollider>();
 
         accelRate = thrustSpeed * Time.deltaTime;
-        startHealth = health;
-        startShield = shield;
+        health = startHealth;
+        shield = startShield;
     }
 
     private void Update()
@@ -63,6 +64,20 @@ public class PlayerMovement : MonoBehaviour {
                 rolling = false;
             else
                 rolling = true;
+        }
+
+        //Shield recharge
+        if(shieldTimer < Time.timeSinceLevelLoad && shield < startShield)
+        {
+            float newAmount = shield + (Time.deltaTime * rechargeRate);
+
+            if(newAmount < startShield)
+            {
+                shield = newAmount;
+            } else
+            {
+                shield = startShield;
+            }
         }
     }
 
@@ -170,7 +185,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public void TakeDamge(int amount)
     {
-        shieldTimer = Time.timeSinceLevelLoad + shieldTimer;
+        shieldTimer = Time.timeSinceLevelLoad + shieldTimerAmount;
 
         if (shield > 0)
         {

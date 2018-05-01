@@ -35,7 +35,7 @@ public class Utilts {
         int val = 0;
 
         List<Flavor> flavClasses = PlayerInventory.Instance.gelatoContainer.GetComponents<Flavor>().ToList();
-        Debug.Log(flavClasses.Count);
+
         foreach(Flavors flavor in changes.Keys)
         {
             Flavor tempFlavClass = null;
@@ -49,12 +49,9 @@ public class Utilts {
                 }
             }
 
-            Debug.Log(tempFlavClass);
-
             foreach(FlavorQualities fv in tempFlavClass.flavQualities)
             {
                 val += GameManager.Instance.aff_prefs[group][fv] * changes[flavor];
-                Debug.Log(val);
             }
 
             flavClasses.Remove(tempFlavClass);
