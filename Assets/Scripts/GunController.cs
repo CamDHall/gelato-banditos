@@ -46,7 +46,7 @@ public class GunController : MonoBehaviour {
                     if (hit.transform.tag == "Bandito")
                     {
                         AudioManager.Instance.BanditoSplat();
-                        hit.transform.GetComponent<StateController>().Die();
+                        Destroy(hit.transform.gameObject);
                     }
                     else
                     {

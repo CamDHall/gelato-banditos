@@ -183,7 +183,7 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public void TakeDamge(int amount)
+    public void TakeDamge(float amount)
     {
         shieldTimer = Time.timeSinceLevelLoad + shieldTimerAmount;
 
