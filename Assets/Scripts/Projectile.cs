@@ -24,6 +24,7 @@ public class Projectile : MonoBehaviour {
         }
         else if(coll.gameObject.tag != "SpaceStation")
         {
+            Debug.Log(coll.gameObject);
             Destroy(coll.gameObject);
         }
 

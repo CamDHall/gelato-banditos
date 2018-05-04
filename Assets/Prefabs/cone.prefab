@@ -209,8 +209,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flavor: 0
-  speed: 18
-  scaleSpeed: 15
+  speed: 60
+  scaleSpeed: 1
   launched: 1
   dir: {x: 0.67794526, y: 0.15414044, z: -0.7187703}
   target: {fileID: 0}

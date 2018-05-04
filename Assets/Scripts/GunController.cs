@@ -52,7 +52,6 @@ public class GunController : MonoBehaviour {
                         {
                             FlockingParent fp = hit.transform.GetComponent<Flocking>().fp;
                             fp.flock.Remove(hit.transform.gameObject);
-                            Debug.Log(fp.leader);
                             fp.RemoveLeader();
                         }
                     }

@@ -93,9 +93,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1553384095788606}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 9999999
+  m_Drag: 9999999
+  m_AngularDrag: 9999999
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -129,9 +129,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08fc87fc91e5be4eba4a5348793d128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neighborDist: 0
+  attackRate: 3
+  bullet: {fileID: 1962816236066636, guid: 0bc0ac0ab8b676241a2b8744f5992511, type: 2}
   leaderDead: 0
   friendly: 0
+  fp: {fileID: 0}
 --- !u!135 &135996336430113398
 SphereCollider:
   m_ObjectHideFlags: 1

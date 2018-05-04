@@ -150,4 +150,33 @@ public class Utilts {
     {
         return int.Parse(dp.options[dp.value].text);
     }
+
+    public static GameObject FindTarget(Transform obj)
+    {
+        Collider[] colls = Physics.OverlapSphere(obj.position, 1000);
+        List<GameObject> banditos = new List<GameObject>();
+
+        foreach (Collider col in colls)
+        {
+            if (col.gameObject.tag == "Bandito" && col.gameObject != obj.gameObject)
+            {
+                banditos.Add(col.gameObject);
+            }
+        }
+
+        float closestDist = 50000;
+        GameObject closest = null;
+
+        foreach (GameObject bandit in banditos)
+        {
+            float dist = Vector3.Distance(obj.position, bandit.transform.position);
+            if (dist < closestDist)
+            {
+                closest = bandit;
+                closestDist = dist;
+            }
+        }
+
+        return closest;
+    }
 }

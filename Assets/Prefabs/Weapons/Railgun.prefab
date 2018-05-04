@@ -188,9 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a45dd7c98d2154c88fe4f8a9e1b4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 1
   projectile: {fileID: 1394817010049872, guid: b4225f5a292812d48a267efe44e6172a, type: 2}
-  firingRate: 6
-  rotationSpeed: 0.075
+  firingRate: 60
+  rotationSpeed: 0.025
   resAmount: 10
-  moveSpeed: 10
+  moveSpeed: 2

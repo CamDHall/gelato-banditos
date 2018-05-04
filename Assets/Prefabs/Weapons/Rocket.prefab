@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23659211782655176}
   - component: {fileID: 54965526891207954}
   - component: {fileID: 65705996096310874}
-  - component: {fileID: 114068654292919966}
+  - component: {fileID: 114025945676414574}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -38,8 +38,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1962816236066636}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6, y: 0.69, z: 6.12}
+  m_LocalRotation: {x: 0.10001973, y: 0.82435644, z: -0.15398209, w: 0.53546435}
+  m_LocalPosition: {x: -747.54956, y: -242.72787, z: -3945.1968}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,7 +97,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -125,7 +125,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114068654292919966
+--- !u!114 &114025945676414574
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -133,8 +133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1962816236066636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7575b35750e2504e82f674f3a8c73ba, type: 3}
+  m_Script: {fileID: 11500000, guid: acda937a83fcc2e4e869c99c56ed0652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocket_speed: 18
-  finalScale: {x: 25, y: 25, z: 50}
+  speed: 2

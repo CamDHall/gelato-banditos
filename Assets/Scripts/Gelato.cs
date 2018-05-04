@@ -17,6 +17,8 @@ public class Gelato : MonoBehaviour {
         launched = false;
         bc = GetComponent<BoxCollider>();
         bc.enabled = false;
+        scaleSpeed *= Time.deltaTime;
+        speed *= Time.deltaTime;
     }
 
     void Update () {
@@ -24,46 +26,20 @@ public class Gelato : MonoBehaviour {
         {
             if (transform.parent != null) transform.SetParent(null);
 
-            transform.position += (transform.forward * speed);
-            if (!markedForDeath)
+            if(target !=null)
             {
-                speed += PlayerMovement.player.acceleration;
-                Destroy(gameObject, 3);
-                markedForDeath = true;
-            }
-
-            if (transform.localScale.x < 50)
+                transform.position = Vector3.MoveTowards(transform.position, target.position, speed);
+            } else
             {
-                transform.localScale += new Vector3(Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed);
-
+                if(!markedForDeath)
+                {
+                    markedForDeath = true;
+                    Destroy(gameObject, 0.5f);
+                }
+                transform.position += (transform.forward * (speed + PlayerMovement.player.acceleration));
             }
         }
-
-            /*if (launched)
-            {
-                if(transform.parent != null)
-                {
-                    transform.SetParent(null);
-                }
-
-                if (target != null)
-                {
-                    transform.position = Vector3.Lerp(transform.position, target.transform.position, 0.15f);
-                }
-                else
-                {
-
-                    transform.position += (dir * (PlayerMovement.player.acceleration + speed));
-                }
-                if(transform.localScale.x < 500)
-                {
-                    transform.localScale += new Vector3(Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed);
-                } else
-                {
-                    Destroy(gameObject);
-                }
-            }*/
-        }
+       }
 
     private void OnTriggerEnter(Collider coll)
     {

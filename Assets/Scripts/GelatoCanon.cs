@@ -39,7 +39,7 @@ public class GelatoCanon : MonoBehaviour {
             Gelato g = currentCone.GetComponent<Gelato>();
             RaycastHit hit;
 
-            if(Physics.SphereCast(transform.position, 50, transform.forward, out hit) && hit.transform.tag == "Bandito")
+            if (Physics.Raycast(PlayerMovement.player.transform.position, Camera.main.transform.forward, out hit) && hit.transform.tag == "Bandito")
             {
                 AudioManager.Instance.Whip();
                 g.target = hit.transform;
