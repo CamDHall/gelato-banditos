@@ -37,6 +37,8 @@ public class PlayerInventory : SerializedMonoBehaviour
 
         ingredientsHeld.Add(Ingredient.VanillaBean, 10);
         ingredientsHeld.Add(Ingredient.CocoaBean, 5);
+
+        GelatoCanon.Instance.UpdateCounter(Flavors.Lemon);
         /// Temp
         /// 
 

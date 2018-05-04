@@ -12,6 +12,7 @@ TagManager:
   - Planet
   - StationWeapons
   - SpaceStation
+  - Cone
   layers:
   - Default
   - TransparentFX
