@@ -383,17 +383,17 @@ MonoBehaviour:
   gelatoContainer: {fileID: 1379284603}
   startHealth: 20
   startShield: 15
-  thrustSpeed: 56
+  thrustSpeed: 48
   shieldTimerAmount: 5
   rechargeRate: 0.8
-  deadZone: 0.5
-  pitch_speed: 1.1
-  yaw_speed: 1.1
-  roll_speed: 1.25
+  deadZone: 0.4
+  pitch_speed: 0.6
+  yaw_speed: 0.6
+  roll_speed: 2.5
   rotating: 0
   accelRate: 1
-  deccelTime: 0.5
-  maxSpeed: 14
+  deccelTime: 0.75
+  maxSpeed: 12
   acceleration: 0
   remainingDash: 0
   health: 10
@@ -3520,15 +3520,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: a386793044e4a07469ed27add6502297, type: 2}
   remainState: {fileID: 0}
+  fighterPrefab: {fileID: 1573666783426316, guid: 0d9d097d6543c47409a7c8cca6986af1,
+    type: 2}
   flockParent: {fileID: 1978775905448898, guid: 9cd04e2f2f0722148a22ce83b723a9e5,
     type: 2}
   flockRate: 300
+  fighterSpawnRate: 50
   aiActive: 1
   cutScene: 0
   weaponsActive: 0
   stationObj: {fileID: 0}
   station_afil: 0
   flockTimer: 0
+  fighterSpawnTimer: 0
 --- !u!23 &1111612795
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4287,7 +4291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9485294, g: 0.86069906, b: 0.3696475, a: 1}
+  m_Color: {r: 0.36040223, g: 0.64774483, b: 0.74264705, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

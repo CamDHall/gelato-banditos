@@ -13,21 +13,40 @@ public class SAttackAction : StationAction {
             {
                 weapon.SetActive(true);
             }
+
+            controller.flockTimer = Time.timeSinceLevelLoad + 3;
+            controller.fighterSpawnTimer = Time.timeSinceLevelLoad + 10;
+            controller.weaponsActive = true;
         }
+
         if (controller.flockTimer < Time.timeSinceLevelLoad)
         {
             controller.flockTimer = Time.timeSinceLevelLoad + controller.flockRate;
             SpawnFlock(controller);
         }
+
+        if(controller.fighterSpawnTimer < Time.timeSinceLevelLoad)
+        {
+            SpawnFighters(controller);
+            controller.fighterSpawnTimer = Time.timeSinceLevelLoad + controller.fighterSpawnRate;
+        }
     }
 
     void SpawnFlock(StationController controller)
     {
-        float dist = Vector3.Distance(PlayerMovement.player.transform.position, controller.transform.localPosition);
         Vector3 Pos = controller.transform.position +
             (controller.transform.forward * (controller.GetComponent<Collider>().bounds.size.x / 1.5f));
 
         GameObject temp = Instantiate(controller.flockParent, Pos, Quaternion.identity);
         temp.transform.LookAt(Camera.main.transform);
+    }
+
+    void SpawnFighters(StationController controller)
+    {
+        for(int i = 0; i < 10; i++)
+        {
+            Vector3 Pos = (controller.transform.parent.transform.position - (PlayerMovement.player.transform.forward * 250)) + Random.insideUnitSphere * 50;
+            GameObject temp = Instantiate(controller.fighterPrefab, Pos, Quaternion.identity, controller.transform.parent);
+        }
     }
 }

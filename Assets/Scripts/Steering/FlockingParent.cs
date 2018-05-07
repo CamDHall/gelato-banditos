@@ -10,8 +10,6 @@ public class FlockingParent : MonoBehaviour {
     public GameObject leader;
     public Material mat;
 
-    bool active = true;
-
     void Start () {
         leader = Instantiate(bandit, transform);
 

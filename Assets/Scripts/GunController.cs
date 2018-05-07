@@ -46,14 +46,7 @@ public class GunController : MonoBehaviour {
                     if (hit.transform.tag == "Bandito")
                     {
                         AudioManager.Instance.BanditoSplat();
-                        Destroy(hit.transform.gameObject);
-
-                        if (hit.transform.name.Contains("Leader"))
-                        {
-                            FlockingParent fp = hit.transform.GetComponent<Flocking>().fp;
-                            fp.flock.Remove(hit.transform.gameObject);
-                            fp.RemoveLeader();
-                        }
+                        hit.transform.GetComponent<Flocking>().Death();
                     }
                     else
                     {

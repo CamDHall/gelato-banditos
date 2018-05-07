@@ -7,15 +7,16 @@ public class StationController : MonoBehaviour {
     public StationState currentState;
     public StationState remainState;
 
+    public GameObject fighterPrefab;
     public GameObject flockParent;
-    public float flockRate;
+    public float flockRate, fighterSpawnRate;
 
     [HideInInspector] public bool aiActive;
     [HideInInspector] public bool cutScene;
     [HideInInspector] public bool weaponsActive;
     [HideInInspector] public SpaceStation stationObj;
     [HideInInspector] public Affilation station_afil;
-    [HideInInspector] public float flockTimer;
+    [HideInInspector] public float flockTimer, fighterSpawnTimer;
 
 	void Start () {
         stationObj = GetComponent<SpaceStation>();

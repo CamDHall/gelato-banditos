@@ -40,13 +40,13 @@ public class MenuManager : MonoBehaviour {
 
                 gelatoSub.SetActive(false);
 
-                if (x <= 2)
+                if (x < 1)
                 {
                     x++;
                 }
                 else
                 {
-                    x = 0;
+                    x = -2;
                     if (y <= 2) y++;
                     else y = -2;
                 }
@@ -58,6 +58,7 @@ public class MenuManager : MonoBehaviour {
                 temp.GetComponent<FlavGetter>().associatedFlav = flav;
 
                 flavBtns.Add(temp);
+                DisplayRecipes();
             }
         }
     }

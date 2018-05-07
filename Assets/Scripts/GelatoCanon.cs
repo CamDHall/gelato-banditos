@@ -14,7 +14,6 @@ public class GelatoCanon : MonoBehaviour {
     public bool holding = false;
     public Material mat;
     GameObject currentCone;
-    float holdTimer = 0;
 
     private void Awake()
     {
@@ -30,7 +29,6 @@ public class GelatoCanon : MonoBehaviour {
 		if(Input.GetButtonDown("Cannon") && inHand.Count > 0 && !holding)
         {
             PlaceCone();
-            holdTimer = Time.timeSinceLevelLoad + 1;
         }
 
         if(Input.GetButtonUp("Cannon") && holding)

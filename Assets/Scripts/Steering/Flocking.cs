@@ -47,10 +47,21 @@ public class Flocking : MonoBehaviour {
             if (attackTimer < Time.timeSinceLevelLoad)
             {
                 attackTimer = Time.timeSinceLevelLoad + attackRate;
-                GameObject temp = Instantiate(bullet, transform.position + transform.forward * 3, transform.rotation);
+                Instantiate(bullet, transform.position + transform.forward * 3, transform.rotation);
             }
         }
 	}
+
+    public void Death()
+    {
+        if(gameObject.name.Contains("Leader"))
+        {
+            fp.RemoveLeader();
+        }
+
+        fp.flock.Remove(gameObject);
+        Destroy(gameObject);
+    }
 
     private void OnCollisionEnter(Collision coll)
     {

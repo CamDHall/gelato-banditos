@@ -40,7 +40,6 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 deflectedPos;
 
     Vector3 addedPos;
-    Quaternion addedRot;
 
 	void Awake () {
         accelRate *= 10;
@@ -91,7 +90,6 @@ public class PlayerMovement : MonoBehaviour {
             {
                 Vector3 tempPos = Vector3.Slerp(rb.position, rb.position + deflectedPos, 0.25f);
                 rb.MovePosition(tempPos);
-                addedRot = Quaternion.Slerp(rb.rotation, deflectedAngle, Time.deltaTime);
             }
             // Deadzone
             Vector2 stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
