@@ -80,7 +80,6 @@ public class GunController : MonoBehaviour {
                 {
                     laser.SetPosition(0, origin.position);
                     laser.SetPosition(1, ray.GetPoint(10000));
-                    Debug.Log(ray);
                 }
 
                 timer = Time.timeSinceLevelLoad + fire_cooldown;
