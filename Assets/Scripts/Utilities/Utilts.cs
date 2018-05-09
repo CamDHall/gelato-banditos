@@ -179,4 +179,59 @@ public class Utilts {
 
         return closest;
     }
+
+    public static void FireLaser(Transform obj, LineRenderer prefab_laser)
+    {
+        Ray ray = new Ray(obj.transform.position, obj.transform.forward);
+        RaycastHit[] hits = Physics.RaycastAll(ray);
+        LineRenderer laser = UnityEngine.MonoBehaviour.Instantiate(prefab_laser);
+        laser.transform.SetParent(obj);
+
+        bool foundTarget = false;
+
+        foreach (RaycastHit hit in hits) {
+            if (hit.transform.gameObject == obj.gameObject) continue;
+
+            laser.enabled = true;
+            foundTarget = true;
+
+            string hTag = hit.transform.tag;
+            laser.SetPosition(0, obj.position);
+            laser.SetPosition(1, hit.point);
+            if (hTag == "Player")
+            {
+                PlayerMovement.player.TakeDamge(1);
+                foundTarget = true;
+                break;
+            } else
+            {
+                if (hTag == "Astro" || hTag == "StationWeapons")
+                {
+                    AudioManager.Instance.AstroCrack();
+                    break;
+                }
+
+                IDamageable _IDamage = hit.transform.GetComponent<IDamageable>();
+                if(_IDamage == null)
+                {
+                    _IDamage = hit.transform.parent.GetComponent<IDamageable>();
+                }
+
+                if (_IDamage != null) _IDamage.TakeDamage(1);
+
+                if (hTag == "Astro")
+                {
+                    UnityEngine.MonoBehaviour.Destroy(hit.transform.gameObject, Time.deltaTime * 5);
+                    Utilts.GetResources(hit.transform.gameObject);
+                    break;
+                }
+            }
+        }
+
+        if(!foundTarget)
+        {
+            laser.SetPosition(0, obj.position);
+            laser.SetPosition(1, ray.GetPoint(10000));
+        }
+    }
 }

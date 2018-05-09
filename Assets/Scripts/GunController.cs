@@ -14,7 +14,6 @@ public class GunController : MonoBehaviour {
     public Transform container;
     public Transform origin;
     public GameObject crosshair;
-    public GameObject laser;
     
     public LineRenderer prefab_laser;
 
@@ -38,7 +37,7 @@ public class GunController : MonoBehaviour {
                 laser.transform.SetParent(transform);
                 Ray ray = new Ray(transform.position, transform.forward);
                 RaycastHit hit;
-                if(Physics.Raycast(transform.position, transform.forward, out hit))
+                if(Physics.Raycast(ray, out hit))
                 {
                     AudioManager.Instance.ChangeVolume(Vector3.Distance(hit.transform.position, transform.position));
                     laser.SetPosition(0, origin.position);
@@ -57,14 +56,16 @@ public class GunController : MonoBehaviour {
                             AudioManager.Instance.AstroCrack();
                         }
 
-                        if(hTag == "StationWeapons")
+                        IDamageable Idamage = hit.transform.gameObject.GetComponent<IDamageable>();
+                        
+                        if(Idamage == null && hit.transform.parent != null)
                         {
-                            hit.transform.GetComponent<StationRailGun>().TakeDamage(1);
+                            Idamage = hit.transform.parent.gameObject.GetComponent<IDamageable>();
                         }
 
-                        if(hTag == "SpaceStation")
+                        if(Idamage!= null)
                         {
-                            hit.transform.GetComponent<SpaceStation>().TakeDamage(1);
+                            Idamage.TakeDamage(1);
                         }
 
                         if (hTag == "Astro")
@@ -79,6 +80,7 @@ public class GunController : MonoBehaviour {
                 {
                     laser.SetPosition(0, origin.position);
                     laser.SetPosition(1, ray.GetPoint(10000));
+                    Debug.Log(ray);
                 }
 
                 timer = Time.timeSinceLevelLoad + fire_cooldown;

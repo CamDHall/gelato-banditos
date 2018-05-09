@@ -12,12 +12,19 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
 
     StationController sc;
 
+    bool leftArea = false;
+    float leftTimer;
+
 	void Start () {
         sc = GetComponent<StationController>();
 	}
 	
 	void Update () {
-		
+		if(sc.aiActive && leftArea && leftTimer < Time.timeSinceLevelLoad)
+        {
+            sc.cutScene = false;
+            sc.aiActive = false;
+        }
 	}
 
     public void TakeDamage(int amount)
@@ -63,11 +70,8 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
     {
         if(coll.tag == "Player")
         {
-            if(sc.aiActive)
-            {
-                sc.cutScene = false;
-                sc.aiActive = false;
-            }
+            leftArea = true;
+            leftTimer = Time.timeSinceLevelLoad + 10;
         }
     }
 }
