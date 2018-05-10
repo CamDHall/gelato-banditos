@@ -9,48 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1350291593522620}
+  m_RootGameObject: {fileID: 1701036499629878}
   m_IsPrefabParent: 1
---- !u!1 &1350291593522620
+--- !u!1 &1701036499629878
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4516655490141486}
-  - component: {fileID: 33121956359633206}
-  - component: {fileID: 65168318873572878}
-  - component: {fileID: 23328609106536488}
-  - component: {fileID: 114440771069378002}
-  - component: {fileID: 54647526607011578}
-  - component: {fileID: 114266933807656092}
-  m_Layer: 16
+  - component: {fileID: 4673697317411410}
+  - component: {fileID: 33875558771700860}
+  - component: {fileID: 23308437536538100}
+  - component: {fileID: 114307012311324902}
+  m_Layer: 0
   m_Name: Railgun
-  m_TagString: StationWeapons
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &4516655490141486
+  m_IsActive: 1
+--- !u!4 &4673697317411410
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1350291593522620}
+  m_GameObject: {fileID: 1701036499629878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -140.1, y: 215.1, z: 70}
-  m_LocalScale: {x: 30, y: 25, z: 200}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23328609106536488
+--- !u!23 &23308437536538100
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1350291593522620}
+  m_GameObject: {fileID: 1701036499629878}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -67,7 +64,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
+  m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
@@ -79,110 +76,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33121956359633206
+--- !u!33 &33875558771700860
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1350291593522620}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54647526607011578
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1350291593522620}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &65168318873572878
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1350291593522620}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114266933807656092
+  m_GameObject: {fileID: 1701036499629878}
+  m_Mesh: {fileID: 4300000, guid: 35665bee1b96f284cb9d82b66ef6334e, type: 3}
+--- !u!114 &114307012311324902
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1350291593522620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67a5fc50cb592fe4f95457eb6d66e520, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Settings: {fileID: 0}
-  Icon: {fileID: 0}
-  RadarIcon:
-    IconSize: 1
-    IconColor: {r: 1, g: 0, b: 0, a: 1}
-    OverrideIcon: {fileID: 21300000, guid: 4d6d7a45bac15d046bbf787a35f83b71, type: 3}
-  CompassBarIcon:
-    IconSize: 16
-    IconColor: {r: 1, g: 1, b: 1, a: 1}
-    OverrideIcon: {fileID: 21300000, guid: b7d51971291b01846b99c3876e616e43, type: 3}
-  IndicatorIcon:
-    IconSize: 20
-    IconColor: {r: 1, g: 0, b: 0, a: 1}
-    OverrideIcon: {fileID: 21300000, guid: 518c5abafcb17004e8a0a788245fd66e, type: 3}
-  OffscreenIndicatorIcon:
-    IconSize: 15
-    IconColor: {r: 1, g: 0, b: 0, a: 1}
-    OverrideIcon: {fileID: 0}
-  HideInRadar: 0
-  HideInCompassBar: 0
-  IgnoreCompassBarRadius: 0
-  ShowIndicator: 1
-  IgnoreIndicatorRadius: 1
-  IndicatorOffset: {x: 0, y: 0, z: 0}
-  OnAppear:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: SickscoreGames.HUDNavigationSystem.NavigatonElementEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  OnDisappear:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: SickscoreGames.HUDNavigationSystem.NavigatonElementEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  OnEnterRadius:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: SickscoreGames.HUDNavigationSystem.NavigatonElementEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  OnLeaveRadius:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: SickscoreGames.HUDNavigationSystem.NavigatonElementEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  IsActive: 1
-  Distance: {fileID: 0}
-  IndicatorDistance: {fileID: 0}
-  RadarMarker: {fileID: 0}
-  CompassBarMarker: {fileID: 0}
-  Indicator: {fileID: 0}
-  IsInRadarRadius: 0
-  IsInCompassBarRadius: 0
-  IsInIndicatorRadius: 0
---- !u!114 &114440771069378002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1350291593522620}
+  m_GameObject: {fileID: 1701036499629878}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28a45dd7c98d2154c88fe4f8a9e1b4a9, type: 3}
@@ -190,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   projectile: {fileID: 1394817010049872, guid: b4225f5a292812d48a267efe44e6172a, type: 2}
-  firingRate: 60
+  firingRate: 6
   rotationSpeed: 0.025
   resAmount: 10
   moveSpeed: 2

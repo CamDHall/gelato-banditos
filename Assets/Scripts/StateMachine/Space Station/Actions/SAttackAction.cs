@@ -45,7 +45,7 @@ public class SAttackAction : StationAction {
     {
         for(int i = 0; i < 5; i++)
         {
-            Vector3 Pos = (controller.transform.parent.transform.position - (PlayerMovement.player.transform.forward * 250)) + Random.insideUnitSphere * 50;
+            Vector3 Pos = Random.insideUnitSphere * 450 + controller.transform.parent.transform.position;
             GameObject temp = Instantiate(controller.fighterPrefab, Pos, Quaternion.identity);
             temp.transform.LookAt(PlayerMovement.player.transform);
         }
