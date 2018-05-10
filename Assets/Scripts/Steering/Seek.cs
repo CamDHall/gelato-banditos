@@ -6,17 +6,12 @@ public class Seek : MonoBehaviour {
 
     public float maxSpeed;
     public float range;
-    public LineRenderer prefab_laser;
-    public float attackRate;
     LayerMask lm;
-
-    float attackTimer;
     Vector3 desiredVel, steering;
     Vector3 velocity, lastVelocity;
 
 	void Start () {
         lastVelocity = transform.position;
-        attackTimer = Time.timeSinceLevelLoad + attackRate;
     }
 
     void Update () {
@@ -34,12 +29,6 @@ public class Seek : MonoBehaviour {
         } else
         {
             transform.LookAt(PlayerMovement.player.transform);
-        }
-
-        if(attackTimer < Time.timeSinceLevelLoad)
-        {
-            Utilts.FireLaser(transform, prefab_laser);
-            attackTimer = Time.timeSinceLevelLoad + attackRate;
         }
     }
 }

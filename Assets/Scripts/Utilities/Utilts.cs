@@ -192,6 +192,9 @@ public class Utilts {
         foreach (RaycastHit hit in hits) {
             if (hit.transform.gameObject == obj.gameObject) continue;
 
+            Transform parent = hit.transform.parent;
+            if (parent != null && obj == parent) continue;
+
             laser.enabled = true;
             foundTarget = true;
 

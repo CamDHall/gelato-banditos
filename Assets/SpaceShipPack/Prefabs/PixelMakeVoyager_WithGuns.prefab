@@ -924,6 +924,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  prefab_laser: {fileID: 120543804758469194, guid: cfe745c5157013649b4b215bc765b870,
+    type: 2}
+  attackRate: 5
 --- !u!114 &114607559553286198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1001,6 +1004,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 1.25
   range: 100
-  prefab_laser: {fileID: 120543804758469194, guid: cfe745c5157013649b4b215bc765b870,
-    type: 2}
-  attackRate: 5

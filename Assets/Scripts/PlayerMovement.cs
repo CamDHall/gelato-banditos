@@ -221,4 +221,36 @@ public class PlayerMovement : MonoBehaviour {
         deflectionTimer = Time.timeSinceLevelLoad + 1;
         deflectedAngle = newAngle;
     }
+
+    private void OnTriggerEnter(Collider coll)
+    {
+        if (coll.gameObject.tag == "Projectile" || coll.gameObject.tag == "Laser")
+        {
+            Collider currentCol = coll.GetComponent<Collider>();
+            if (currentCol == colliders[1])
+            {
+                GameManager.Instance.Indicator("Left");
+            }
+            else if (currentCol == colliders[2])
+            {
+                GameManager.Instance.Indicator("Right");
+            }
+            else if (currentCol == colliders[3])
+            {
+                GameManager.Instance.Indicator("Front");
+            }
+            else if (currentCol == colliders[4])
+            {
+                GameManager.Instance.Indicator("Back");
+            }
+            else if (currentCol == colliders[5])
+            {
+                GameManager.Instance.Indicator("Top");
+            }
+            else
+            {
+                GameManager.Instance.Indicator("Bottom");
+            }
+        }
+    }
 }

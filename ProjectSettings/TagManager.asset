@@ -13,6 +13,7 @@ TagManager:
   - StationWeapons
   - SpaceStation
   - Cone
+  - Projectile
   layers:
   - Default
   - TransparentFX
