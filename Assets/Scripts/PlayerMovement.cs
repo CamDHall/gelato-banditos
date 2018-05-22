@@ -41,6 +41,11 @@ public class PlayerMovement : MonoBehaviour {
 
     Vector3 addedPos;
 
+    // Update saves
+    Vector2 stickInput;
+    float thrust;
+    bool dashRight = false, dashLeft = false, reversing = false;
+
 	void Awake () {
         accelRate *= 10;
 
@@ -56,6 +61,17 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update()
     {
+        // Inputs
+        stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
+        thrust = Input.GetAxis("Thrust");
+
+        if(Input.GetAxis("Thrust") > 0 && Input.GetButtonDown("DashLeft"))
+        {
+            reversing = true;
+        }
+
+        if (reversing && Input.GetAxis("Thrust") <= 0 || Input.GetButtonUp("DashLeft")) reversing = false;
+
         // Switch between rolling and camera
         if (Input.GetButton("CameraSwitch"))
         {
@@ -78,6 +94,9 @@ public class PlayerMovement : MonoBehaviour {
                 shield = startShield;
             }
         }
+
+        dashLeft = Input.GetButtonDown("DashLeft");
+        dashRight = Input.GetButtonDown("DashRight");
     }
 
     private void FixedUpdate()
@@ -92,7 +111,6 @@ public class PlayerMovement : MonoBehaviour {
                 rb.MovePosition(tempPos);
             }
             // Deadzone
-            Vector2 stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
             if (stickInput.magnitude <= deadZone)
             {
                 stickInput = Vector2.zero;
@@ -102,11 +120,17 @@ public class PlayerMovement : MonoBehaviour {
                 stickInput = stickInput.normalized * ((stickInput.magnitude - deadZone) / (1 - deadZone));
             }
 
-            if (Input.GetAxis("Thrust") != 0)
+            if (thrust != 0)
             {
                 if (acceleration < maxSpeed)
                 {
-                    acceleration += (accelRate * Time.deltaTime);
+                    if (!reversing)
+                    {
+                        acceleration += (accelRate * Time.deltaTime);
+                    } else
+                    {
+                        acceleration -= ((accelRate / 2) * Time.deltaTime);
+                    }
                 }
             }
             else
@@ -147,14 +171,14 @@ public class PlayerMovement : MonoBehaviour {
             }
 
             // Dash
-            if (Input.GetButtonDown("DashRight"))
+            if (dashRight && !reversing)
             {
                 if (remainingDash == 0)
                 {
                     remainingDash = dashAmount;
                 }
             }
-            if (Input.GetButtonDown("DashLeft"))
+            if (dashLeft && reversing)
             {
                 if (remainingDash == 0)
                 {

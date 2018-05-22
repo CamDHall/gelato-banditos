@@ -391,7 +391,7 @@ MonoBehaviour:
   yaw_speed: 0.6
   roll_speed: 2.5
   rotating: 0
-  accelRate: 1
+  accelRate: 2
   deccelTime: 0.75
   maxSpeed: 12
   acceleration: 0
