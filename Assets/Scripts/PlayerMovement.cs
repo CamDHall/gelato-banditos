@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 deflectedPos;
 
     Vector3 addedPos;
+    Quaternion rot;
 
     // Update saves
     Vector2 stickInput;
@@ -158,7 +159,14 @@ public class PlayerMovement : MonoBehaviour {
             {
                 roll = 0;
             }
-            Quaternion rot = Quaternion.Euler(pitch, yaw, roll);
+
+            if (GameManager.Instance.invert)
+            {
+                rot = Quaternion.Euler(pitch, yaw, -roll);
+            } else
+            {
+                rot = Quaternion.Euler(-pitch, yaw, roll);
+            }
             rb.MoveRotation(rb.rotation * rot);
 
             if (pitch == 0 && yaw == 0 && roll == 0)

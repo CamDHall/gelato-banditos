@@ -12,6 +12,7 @@ public class GameManager : SerializedMonoBehaviour
 
     public GameObject death;
     public Canvas ingame_menu;
+    public GameObject menu;
 
     public Image i_left, i_right, i_top, i_bottom;
 
@@ -28,9 +29,11 @@ public class GameManager : SerializedMonoBehaviour
 
     [HideInInspector] public SpaceStation nearestStation;
     //public Dictionary<Affilation, List<Flavors>> affilation_preferences = new Dictionary<Affilation, List<Flavors>>();
+    [HideInInspector] public bool invert = false;
 
 	void Start () {
         Instance = this;
+        invert = false;
 
         bc = i_left.color;
 	}
@@ -54,9 +57,16 @@ public class GameManager : SerializedMonoBehaviour
             Application.Quit();
         }
 
-        if (Input.GetButton("Start"))
+        if (Input.GetButtonUp("Start"))
         {
-            SceneManager.LoadScene("main");
+
+            if(menu.activeSelf)
+            {
+                menu.SetActive(false);
+            } else
+            {
+                menu.SetActive(true);
+            }
         }
 
         if (!game_over)

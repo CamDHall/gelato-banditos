@@ -36,4 +36,15 @@ public class UIManager : MonoBehaviour {
 
         SceneManager.LoadScene(clicked.name);
     }
+
+    public void InvertControls()
+    {
+        Debug.Log(GameManager.Instance.invert);
+        GameManager.Instance.invert = !GameManager.Instance.invert;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Juarez");
+    }
 }
