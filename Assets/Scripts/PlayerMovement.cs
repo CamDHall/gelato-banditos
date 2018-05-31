@@ -3,48 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-
+    // General
     public static PlayerMovement player;
     public Transform gelatoContainer;
-    public float startHealth, startShield;
-    public float thrustSpeed;
-
-    public float shieldTimerAmount;
-    public float rechargeRate;
-    float shieldTimer;
-
-    public float deadZone;
-
-    public float pitch_speed, yaw_speed, roll_speed;
-
-    public bool rotating = false;
-
-    float pitch, yaw, roll;
-    Vector3 vel;
-
-    public float accelRate, deccelTime, maxSpeed;
-    public float acceleration = 0;
-
-    // Dashing
-    [SerializeField] float remainingDash = 0;
-    [HideInInspector] public float health, shield;
-    public float dashAmount;
-
-    public Rigidbody rb;
-
+    [HideInInspector] public Rigidbody rb;
     public BoxCollider[] colliders;
-    public bool rolling = true;
 
+    // Movement
+
+    public float accelRate, deccelTime, maxSpeed, acceleration = 0;
+    public float deadZone;
+    public float pitch_speed, yaw_speed, roll_speed;
+    public bool rotating = false;
+    public float thrustSpeed;
+    [HideInInspector]public bool rolling = true;
+
+    float pitch, yaw, roll, thrust;
+    Vector3 vel, addedPos;
+    Vector2 stickInput;
+    Quaternion rot;
+
+    // Health & shield
+    public float shieldTimerAmount;
+    public float startHealth, startShield;
+    public float rechargeRate;
+    [HideInInspector] public float health, shield;
+
+    float shieldTimer;
+    
+    // Dashing
+    public float dashAmount;
+    float remainingDash = 0;
+   
+    // Deflection
     float deflectionTimer = 0;
     Quaternion deflectedAngle;
     Vector3 deflectedPos;
 
-    Vector3 addedPos;
-    Quaternion rot;
-
     // Update saves
-    Vector2 stickInput;
-    float thrust;
     bool dashRight = false, dashLeft = false, reversing = false;
 
 	void Awake () {
@@ -66,15 +62,13 @@ public class PlayerMovement : MonoBehaviour {
         stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
         thrust = Input.GetAxis("Thrust");
 
-        if(Input.GetAxis("Thrust") > 0 && Input.GetButtonDown("DashLeft"))
-        {
-            reversing = true;
-        }
+        if(Input.GetButton("LeftAnalogButton")) reversing = true;
+        if (Input.GetButtonUp("LeftAnalogButton")) reversing = false;
 
         if (reversing && Input.GetAxis("Thrust") <= 0 || Input.GetButtonUp("DashLeft")) reversing = false;
 
         // Switch between rolling and camera
-        if (Input.GetButton("CameraSwitch"))
+        if (Input.GetButton("CameraSwitch") && !reversing)
         {
             if (rolling)
                 rolling = false;
@@ -96,8 +90,11 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
-        dashLeft = Input.GetButtonDown("DashLeft");
-        dashRight = Input.GetButtonDown("DashRight");
+        if (remainingDash == 0)
+        {
+            dashLeft = Input.GetButtonDown("DashLeft");
+            dashRight = Input.GetButtonDown("DashRight");
+        }
     }
 
     private void FixedUpdate()
@@ -177,21 +174,15 @@ public class PlayerMovement : MonoBehaviour {
             {
                 rotating = false;
             }
-
             // Dash
-            if (dashRight && !reversing)
+            if (dashRight && remainingDash == 0)
             {
-                if (remainingDash == 0)
-                {
-                    remainingDash = dashAmount;
-                }
+                remainingDash = dashAmount;
             }
-            if (dashLeft && reversing)
+
+            if (dashLeft && remainingDash == 0)
             {
-                if (remainingDash == 0)
-                {
-                    remainingDash = -dashAmount;
-                }
+                remainingDash = -dashAmount;
             }
 
             if (remainingDash == 0)

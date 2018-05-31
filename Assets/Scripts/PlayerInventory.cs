@@ -16,9 +16,12 @@ public class PlayerInventory : SerializedMonoBehaviour
     public Dictionary<Ingredient, int> ingredientsHeld = new Dictionary<Ingredient, int>();
     public Dictionary<Affilation, int> standings = new Dictionary<Affilation, int>();
     public Dictionary<Flavors, int> gelato_inventory = new Dictionary<Flavors, int>();
-
+    public Dictionary<string, GameObject> weapons = new Dictionary<string, GameObject>();
     public GameObject gelatoContainer;
     Flavor[] flavors;
+
+    float dPadHorizontal = 0;
+    bool HorizontalPadInUse = false;
 
     void Awake()
     {
@@ -38,17 +41,35 @@ public class PlayerInventory : SerializedMonoBehaviour
         ingredientsHeld.Add(Ingredient.VanillaBean, 10);
         ingredientsHeld.Add(Ingredient.CocoaBean, 5);
 
-        GelatoCanon.Instance.UpdateCounter(Flavors.Lemon);
-        /// Temp
-        /// 
-
         flavors = gelatoContainer.GetComponents<Flavor>();
+        //weapons = new Dictionary<string, GameObject>();
+
+        GelatoCanon.Instance.UpdateCounter(0);
+        /// Temp
+        ///
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        dPadHorizontal = Input.GetAxis("DpadHorizontal");
 
+        if (!HorizontalPadInUse)
+        {
+            if (dPadHorizontal > 0)
+            {
+                GelatoCanon.Instance.UpdateCounter(1);
+                HorizontalPadInUse = true;
+            }
+            else if (dPadHorizontal < 0)
+            {
+                GelatoCanon.Instance.UpdateCounter(-1);
+                HorizontalPadInUse = true;
+            }
+        } else if(dPadHorizontal ==  0) 
+        {
+            HorizontalPadInUse = false;
+        }
     }
 }

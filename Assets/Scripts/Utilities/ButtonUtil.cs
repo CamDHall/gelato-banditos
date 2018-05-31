@@ -6,6 +6,6 @@ public class ButtonUtil : MonoBehaviour {
 
 	public void Test()
     {
-
+        Debug.Log("HERE");
     }
 }

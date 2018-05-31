@@ -217,6 +217,7 @@ public class Utilts {
                 IDamageable _IDamage = hit.transform.GetComponent<IDamageable>();
                 if(_IDamage == null)
                 {
+                    Debug.Log(hit.transform);
                     _IDamage = hit.transform.parent.GetComponent<IDamageable>();
                 }
 

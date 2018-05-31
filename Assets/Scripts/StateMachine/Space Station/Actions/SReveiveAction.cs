@@ -9,7 +9,7 @@ public class SReveiveAction : StationAction {
     {
         if (!CinematicUI.Instance.storePanel.gameObject.activeSelf)
         {
-            CinematicUI.Instance.SetupStore(controller.station_afil);
+            CinematicUI.Instance.SetupStore(controller);
         }
     }
 }

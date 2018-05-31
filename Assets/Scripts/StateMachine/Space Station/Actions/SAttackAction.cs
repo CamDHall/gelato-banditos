@@ -12,6 +12,7 @@ public class SAttackAction : StationAction {
             foreach(GameObject weapon in controller.stationObj.weapons)
             {
                 weapon.SetActive(true);
+                weapon.GetComponent<StationWeapon>().Enable();
             }
 
             controller.flockTimer = Time.timeSinceLevelLoad + 3;

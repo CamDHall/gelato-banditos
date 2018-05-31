@@ -8,7 +8,8 @@ public class Seek : MonoBehaviour {
     public float range;
     LayerMask lm;
     Vector3 desiredVel, steering;
-    Vector3 velocity, lastVelocity;
+    Vector3 velocity, lastVelocity, futurePos;
+    float T = 0;
 
 	void Start () {
         lastVelocity = transform.position;
@@ -18,7 +19,9 @@ public class Seek : MonoBehaviour {
         if (Vector3.Distance(PlayerMovement.player.transform.position, transform.position) > range)
         {
             velocity = (velocity - lastVelocity) * Time.deltaTime;
-            desiredVel = (PlayerMovement.player.transform.position - transform.position).normalized * maxSpeed;
+            T = Vector3.Distance(transform.position, PlayerMovement.player.transform.position) / maxSpeed;
+            futurePos = PlayerMovement.player.transform.position + (Camera.main.transform.forward * (PlayerMovement.player.acceleration * 3));
+            desiredVel = (futurePos - transform.position).normalized * maxSpeed;
             steering = desiredVel - velocity;
 
             velocity = velocity + steering;

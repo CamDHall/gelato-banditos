@@ -24,16 +24,15 @@ public class GameManager : SerializedMonoBehaviour
 
     public Dictionary<Affilation, Dictionary<FlavorQualities, int>> aff_prefs;
 
+    public bool invert;
     [HideInInspector]
     public List<GameObject> friends = new List<GameObject>();
 
     [HideInInspector] public SpaceStation nearestStation;
     //public Dictionary<Affilation, List<Flavors>> affilation_preferences = new Dictionary<Affilation, List<Flavors>>();
-    [HideInInspector] public bool invert = false;
 
 	void Start () {
         Instance = this;
-        invert = false;
 
         bc = i_left.color;
 	}

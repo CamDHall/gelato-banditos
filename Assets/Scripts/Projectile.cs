@@ -17,12 +17,16 @@ public class Projectile : MonoBehaviour {
 
     private void OnCollisionEnter(Collision coll)
     {
+        Debug.Log(coll.gameObject.name);
         if (coll.gameObject.tag == "Player")
         {
             PlayerMovement.player.TakeDamge(5);
             CamController.Instance.ShakeCamera(transform.position);
         }
-        else if(coll.gameObject.tag != "SpaceStation")
+        else if(coll.gameObject.tag == "SpaceStation")
+        {
+            coll.gameObject.GetComponent<IDamageable>().TakeDamage(5);
+        } else
         {
             Destroy(coll.gameObject);
         }

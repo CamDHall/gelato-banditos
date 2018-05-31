@@ -105,8 +105,12 @@ public class CinematicUI : MonoBehaviour {
         }
     }
 
-    public void SetupStore(Affilation affil)
+    public void SetupStore(StationController controller)
     {
+        Affilation affil = controller.station_afil;
+
+        List<GameObject> stationWeapons = controller.stationObj.GetComponent<SpaceStation>().weapons;
+
         CameraManager.Instance.mainCanvas.SetActive(false);
         CameraManager.Instance.cinematicCanvas.gameObject.SetActive(true);
         CinematicUI.Instance.storePanel.gameObject.SetActive(true);
@@ -138,6 +142,7 @@ public class CinematicUI : MonoBehaviour {
             StoreItemInfo si = temp.GetComponent<StoreItemInfo>();
             si.cost = cost;
             si.resType = res;
+            si.itemType = StoreItemType.Ingriedent;
 
             if (x < 1)
             {
@@ -176,6 +181,72 @@ public class CinematicUI : MonoBehaviour {
                 dp.AddOptions(num);
             }
         }
+
+
+        // Naming: sWeapon since right now there's only one type of weapon, must avoid local naming conflicts
+        RectTransform singleWeapon = Instantiate(storeItem as RectTransform);
+        singleWeapon.GetComponent<RectTransform>().SetParent(storePanel.transform, false);
+        singleWeapon.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 175, y * 100) + padding;
+
+        string name = stationWeapons[0].GetComponent<StationWeapon>().name;
+        singleWeapon.GetComponentInChildren<Text>().text = name;
+        singleWeapon.gameObject.name = name;
+
+        int sWeaponCost = Random.Range(5, 10);
+        string sWeaponResChoice = resList[0];
+
+        ResourceType sWeaponRes = (ResourceType)System.Enum.Parse(typeof(ResourceType), sWeaponResChoice);
+        int sWeaponAmountCanAfford = 0;
+
+        StoreItemInfo sWeaponSi = singleWeapon.GetComponent<StoreItemInfo>();
+        sWeaponSi.cost = sWeaponCost;
+        sWeaponSi.resType = sWeaponRes;
+        sWeaponSi.itemType = StoreItemType.StationWeapon;
+        sWeaponSi.obj = Instantiate(stationWeapons[0]);
+        sWeaponSi.name = name;
+
+        if (x < 1)
+        {
+            x++;
+        }
+        else
+        {
+            x = -2;
+            y++;
+        }
+
+        if (PlayerInventory.Instance.resources.ContainsKey(sWeaponRes))
+        {
+            sWeaponAmountCanAfford = Mathf.FloorToInt(PlayerInventory.Instance.resources[sWeaponRes] / sWeaponCost);
+        }
+
+        Dropdown sWeaponDp = singleWeapon.GetComponentInChildren<Dropdown>();
+        sWeaponDp.onValueChanged.AddListener(delegate { UpdateOptions(sWeaponDp.transform.parent.parent.gameObject, sWeaponDp); });
+
+        if (sWeaponAmountCanAfford == 0)
+        {
+            singleWeapon.GetComponent<Image>().color = Color.red;
+            sWeaponDp.enabled = false;
+        }
+        else
+        {
+            if(sWeaponAmountCanAfford > stationWeapons.Count / 2)
+            {
+                sWeaponAmountCanAfford = stationWeapons.Count / 2;
+            }
+
+            sWeaponDp.enabled = true;
+            sWeaponDp.ClearOptions();
+
+            List<string> num = new List<string>();
+
+            for (int i = 0; i < sWeaponAmountCanAfford; i++)
+            {
+                num.Add((i + 1).ToString());
+            }
+
+            sWeaponDp.AddOptions(num);
+        }
     }
 
     public void BuyItem()
@@ -187,17 +258,26 @@ public class CinematicUI : MonoBehaviour {
         {
             if (dp.enabled)
             {
-                Ingredient ing = (Ingredient)System.Enum.Parse(typeof(Ingredient), dp.transform.parent.name);
-                int amount = Utilts.GetDropDownVal(dp);
                 StoreItemInfo si = dp.transform.parent.GetComponent<StoreItemInfo>();
+
+                int amount = Utilts.GetDropDownVal(dp);
                 PlayerInventory.Instance.resources[si.resType] -= (si.cost * amount);
 
-                if(PlayerInventory.Instance.ingredientsHeld.ContainsKey(ing))
+                if (si.itemType == StoreItemType.Ingriedent)
                 {
-                    PlayerInventory.Instance.ingredientsHeld[ing] += amount;
-                } else
+                    Ingredient ing = (Ingredient)System.Enum.Parse(typeof(Ingredient), dp.transform.parent.name);
+
+                    if (PlayerInventory.Instance.ingredientsHeld.ContainsKey(ing))
+                    {
+                        PlayerInventory.Instance.ingredientsHeld[ing] += amount;
+                    }
+                    else
+                    {
+                        PlayerInventory.Instance.ingredientsHeld.Add(ing, amount);
+                    }
+                } else if(si.itemType == StoreItemType.StationWeapon)
                 {
-                    PlayerInventory.Instance.ingredientsHeld.Add(ing, amount);
+                    PlayerInventory.Instance.weapons.Add(si.name, si.obj);
                 }
             }
         }
