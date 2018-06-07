@@ -10,7 +10,7 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
     public List<GameObject> weapons;
     public int resValue;
 
-    StationController sc;
+    public StationController sc;
 
     bool leftArea = false;
     float leftTimer;
@@ -20,11 +20,13 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
 	}
 	
 	void Update () {
-		if(sc.aiActive && leftArea && leftTimer < Time.timeSinceLevelLoad)
+		/*if(sc.aiActive && leftArea && leftTimer < Time.timeSinceLevelLoad)
         {
             sc.cutScene = false;
             sc.aiActive = false;
-        }
+        }*/ 
+
+        /// COME BACK TO
 	}
 
     public void TakeDamage(int amount)
@@ -51,6 +53,7 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
         }
 
         Destroy(gameObject.transform.parent.gameObject);
+        GameManager.Instance.Win();
         Destroy(gameObject);
     }
 
@@ -71,6 +74,7 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
         if(coll.tag == "Player")
         {
             leftArea = true;
+            sc.aiActive = false;
             leftTimer = Time.timeSinceLevelLoad + 10;
         }
     }

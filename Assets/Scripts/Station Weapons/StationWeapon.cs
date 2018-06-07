@@ -40,15 +40,14 @@ public class StationWeapon : MonoBehaviour, IDamageable, IDeath {
     protected void Update()
     {
         if (!isEnabled) return;
-
-        if(friendly && (target == null || target == PlayerMovement.player.gameObject))
+        if (friendly && target == null)
         {
             bool targetFound = false;
-            Collider[] colls = Physics.OverlapSphere(transform.position, 800);
+            Collider[] colls = Physics.OverlapSphere(transform.position, 1000);
 
             foreach(Collider col in colls)
             {
-                if(col.transform.tag == "StationWeapons")
+                if(col.transform.tag == "StationWeapons" && col.transform != transform)
                 {
                     targetFound = true;
                     target = col.gameObject;
@@ -56,7 +55,23 @@ public class StationWeapon : MonoBehaviour, IDamageable, IDeath {
                 }
             }
 
-            if(!targetFound) target = colls[0].transform.gameObject;
+            if (!targetFound)
+            {
+                foreach (Collider col in colls)
+                {
+                    if (col.transform.tag == "Bandit" || col.transform.tag == "Fighter")
+                    {
+                        targetFound = true;
+                        target = col.gameObject;
+                        break;
+                    }
+                }
+            }
+
+            if(!targetFound && colls.Length > 0)
+            {
+                target = colls[0].gameObject;
+            }
         }
 
         ///

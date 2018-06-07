@@ -923,7 +923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffb178f9bce5a54ca404be7d1d64206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 1
   prefab_laser: {fileID: 120543804758469194, guid: cfe745c5157013649b4b215bc765b870,
     type: 2}
   attackRate: 5

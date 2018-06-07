@@ -10,7 +10,7 @@ public class GameManager : SerializedMonoBehaviour
 
     public static GameManager Instance;
 
-    public GameObject death;
+    public GameObject death, win;
     public Canvas ingame_menu;
     public GameObject menu;
 
@@ -29,7 +29,6 @@ public class GameManager : SerializedMonoBehaviour
     public List<GameObject> friends = new List<GameObject>();
 
     [HideInInspector] public SpaceStation nearestStation;
-    //public Dictionary<Affilation, List<Flavors>> affilation_preferences = new Dictionary<Affilation, List<Flavors>>();
 
 	void Start () {
         Instance = this;
@@ -119,6 +118,12 @@ public class GameManager : SerializedMonoBehaviour
     public void Death()
     {
         death.SetActive(true);
+        game_over = true;
+    }
+
+    public void Win()
+    {
+        win.SetActive(true);
         game_over = true;
     }
 

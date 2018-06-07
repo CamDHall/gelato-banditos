@@ -27,10 +27,8 @@ public class StationRailGun : StationWeapon {
     {
         base.Update();
         if (!isEnabled) return;
-
         if (target != null)
         {
-
             difAngle = Vector3.Angle(transform.forward, target.transform.forward);
             side = Utilts.AngleDir(transform.forward, target.transform.forward, transform.up);
 
@@ -137,6 +135,7 @@ public class StationRailGun : StationWeapon {
             if (clearShot)
             {
                 GameObject temp = Instantiate(projectile, transform.parent);
+                temp.GetComponent<Projectile>()._parent = transform;
                 temp.transform.position = transform.position + transform.forward * 50;
                 temp.transform.rotation = transform.rotation;
 

@@ -33,13 +33,12 @@ public class UIManager : MonoBehaviour {
     public void LoadGalaxy()
     {
         GameObject clicked = EventSystem.current.currentSelectedGameObject;
-
+        Debug.Log(clicked.name);
         SceneManager.LoadScene(clicked.name);
     }
 
     public void InvertControls()
     {
-        Debug.Log(GameManager.Instance.invert);
         GameManager.Instance.invert = !GameManager.Instance.invert;
     }
 

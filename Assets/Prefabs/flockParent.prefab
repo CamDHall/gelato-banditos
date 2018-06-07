@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bandit: {fileID: 1553384095788606, guid: 357a714cf15598049b136c8140d5782e, type: 2}
-  amount: 100
+  amount: 20
   flock: []
   leader: {fileID: 0}
   mat: {fileID: 2100000, guid: 2e601fc1a0dd5c342a22fe1eae01c721, type: 2}

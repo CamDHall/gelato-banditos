@@ -44,11 +44,8 @@ public class SAttackAction : StationAction {
 
     void SpawnFighters(StationController controller)
     {
-        for(int i = 0; i < 5; i++)
-        {
-            Vector3 Pos = Random.insideUnitSphere * 450 + controller.transform.parent.transform.position;
-            GameObject temp = Instantiate(controller.fighterPrefab, Pos, Quaternion.identity);
-            temp.transform.LookAt(PlayerMovement.player.transform);
-        }
+        Vector3 Pos = Random.insideUnitSphere * 450 + controller.transform.parent.transform.position;
+        GameObject temp = Instantiate(controller.fighterPrefab, Pos, Quaternion.identity);
+        temp.transform.LookAt(PlayerMovement.player.transform);
     }
 }

@@ -32,7 +32,7 @@ public class GelatoCanon : MonoBehaviour {
     }
 
     void Update () {
-		if(Input.GetButtonDown("Cannon") && inHand.Count > 0 && !holding)
+		if((Input.GetButtonDown("Cannon") || Input.GetKeyDown(KeyCode.Y)) && inHand.Count > 0 && !holding)
         {
             LaunchItem();
         }
@@ -65,16 +65,17 @@ public class GelatoCanon : MonoBehaviour {
         {
             currentItem.transform.SetParent(transform.parent.parent);
             currentItem.transform.localPosition = new Vector3(0, 0.25f, 0);
+            PlayerInventory.Instance.gelato_inventory[currentFlav]--;
         } else
         {
             currentItem.GetComponent<StationWeapon>().friendly = true;
+            currentItem.transform.position = PlayerMovement.player.transform.position + (PlayerMovement.player.transform.forward * 750);
             currentItem.transform.SetParent(null);
-            currentItem.transform.position = transform.position + (transform.forward * 500);
+            PlaceItem();
         }
         currentItem.transform.localRotation = Quaternion.identity;
 
         holding = true;
-        PlayerInventory.Instance.gelato_inventory[currentFlav]--;
     }
 
     public void UpdateCounter(int direction)
@@ -85,19 +86,40 @@ public class GelatoCanon : MonoBehaviour {
             return;
         }
 
+        if (direction + cannonIndex < 0) return;
+        int weaponCount = 0;
+
         flavorKeys = new List<Flavors>(PlayerInventory.Instance.gelato_inventory.Keys);
 
         if (PlayerInventory.Instance.weapons.Count > 0)
         {
             weaponKeys = new List<string>(PlayerInventory.Instance.weapons.Keys);
+            weaponCount = weaponKeys.Count;
         }
         string weaponKey = "";
         int num = 0;
 
-        if (direction + cannonIndex < flavorKeys.Count && direction + cannonIndex >= 0)
+        if(weaponKeys != null && weaponKeys.Count > cannonIndex + direction)
+        {
+            weaponKey = weaponKeys[(cannonIndex + direction)];
+
+            ClearHand();
+            for (int i = 0; i < weaponCount; i++)
+            {
+                string _tempName = PlayerInventory.Instance.weapons[weaponKey][0].name;
+                _tempName = Regex.Replace(_tempName, "(\\[.*\\])|(\".*\")|('.*')|(\\(.*\\))", "");
+                GameObject weapon = Instantiate(Resources.Load(_tempName) as GameObject, transform);
+                weapon.GetComponent<StationWeapon>().friendly = true;
+                weapon.GetComponent<StationWeapon>().Disable();
+                weapon.transform.rotation = Quaternion.Euler(0, 90, 0);
+                weapon.transform.localScale = new Vector3(0.006f, 0.006f, 0.006f);
+                weapon.SetActive(true);
+                inHand.Enqueue(weapon);
+            }
+        } else if (direction + cannonIndex < (flavorKeys.Count + weaponCount))
         {
             Flavors flav;
-            flav = flavorKeys[cannonIndex + direction];
+            flav = flavorKeys[cannonIndex + direction - weaponCount];
             num = PlayerInventory.Instance.gelato_inventory[flav];
 
             ClearHand();
@@ -110,26 +132,6 @@ public class GelatoCanon : MonoBehaviour {
 
                 inHand.Enqueue(temp);
             }
-        } else if(weaponKeys != null)
-        {
-            if (weaponKeys.Count <= (cannonIndex + direction) - flavorKeys.Count)
-            {
-                return;
-            }
-
-            weaponKey = weaponKeys[(cannonIndex + direction) - flavorKeys.Count];
-
-            ClearHand();
-            string _tempName = PlayerInventory.Instance.weapons[weaponKey].name;
-            _tempName = Regex.Replace(_tempName, "(\\[.*\\])|(\".*\")|('.*')|(\\(.*\\))", "");
-            GameObject weapon = Instantiate(Resources.Load(_tempName) as GameObject, transform);
-            weapon.GetComponent<StationWeapon>().friendly = true;
-            weapon.GetComponent<StationWeapon>().Disable();
-            Debug.Log(transform.parent.position);
-            //weapon.transform.localPosition = transform.localPosition;
-            weapon.SetActive(true);
-            weapon.transform.rotation = Quaternion.Euler(0, 90, 0);
-            inHand.Enqueue(weapon);
         }
 
         cannonIndex += direction;

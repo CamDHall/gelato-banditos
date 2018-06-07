@@ -66,7 +66,6 @@ public class Utilts {
         foreach(Flavors flavor in changes.Keys)
         {
             int difference = PlayerInventory.Instance.gelato_inventory[flavor] - changes[flavor];
-
             if(difference > 0)
             {
                 PlayerInventory.Instance.gelato_inventory[flavor] = difference;

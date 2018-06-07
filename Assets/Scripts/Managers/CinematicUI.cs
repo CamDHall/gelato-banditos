@@ -11,6 +11,7 @@ public class CinematicUI : MonoBehaviour {
     public RectTransform storeItem;
     public RectTransform givePanel;
     public RectTransform storePanel;
+    public RectTransform warning;
 
     Vector2 padding = new Vector2(100, 100);
 
@@ -27,18 +28,13 @@ public class CinematicUI : MonoBehaviour {
 
     public void Leave()
     {
-        float col_size = GameManager.Instance.nearestStation.GetComponent<SphereCollider>().radius;
-        Collider[] colls = Physics.OverlapSphere(PlayerMovement.player.transform.position, col_size);
-        PlayerMovement.player.transform.position += (PlayerMovement.player.transform.forward * -(col_size + 1500));
-
-        foreach(Collider col in colls)
-        {
-            if(col.gameObject.name.Contains("SpaceStation"))
-            {
-                PlayerMovement.player.transform.LookAt(col.gameObject.transform);
-                break;
-            }
-        }
+        PlayerMovement.player.transform.position += (PlayerMovement.player.transform.forward * -2500);
+        PlayerMovement.player.transform.LookAt(GameManager.Instance.nearestStation.gameObject.transform);
+        GameManager.Instance.nearestStation.sc.cutScene = false;
+        GameManager.Instance.nearestStation.sc.aiActive = false;
+        storePanel.gameObject.SetActive(false);
+        givePanel.gameObject.SetActive(false);
+        warning.gameObject.SetActive(true);
 
         CameraManager.Instance.Reset();
     }
@@ -55,7 +51,13 @@ public class CinematicUI : MonoBehaviour {
             int amount = int.Parse(drop.options[drop.value].text);
             Flavors flav = (Flavors)System.Enum.Parse(typeof(Flavors), parent.GetComponentInChildren<Text>().text);
 
-            temp.Add(flav, amount);
+            if (!temp.ContainsKey(flav))
+            {
+                temp.Add(flav, amount);
+            } else
+            {
+                temp[flav] += amount;
+            }
         }
 
         Affilation aff = GameManager.Instance.nearestStation.spaceStation_affil;
@@ -64,6 +66,10 @@ public class CinematicUI : MonoBehaviour {
         Utilts.RemoveGelato(temp);
 
         givePanel.gameObject.SetActive(false);
+
+        /// TEMP FIX PROBLEM LATER
+        /// 
+        GameManager.Instance.nearestStation.sc.cutScene = true;
     }
 
     public void GiveGelato()
@@ -277,7 +283,16 @@ public class CinematicUI : MonoBehaviour {
                     }
                 } else if(si.itemType == StoreItemType.StationWeapon)
                 {
-                    PlayerInventory.Instance.weapons.Add(si.name, si.obj);
+                    if (PlayerInventory.Instance.weapons.ContainsKey(si.name))
+                    {
+                        PlayerInventory.Instance.weapons[si.name].Add(si.obj);
+                    }
+                    else
+                    {
+                        List<GameObject> temp = new List<GameObject>();
+                        temp.Add(si.obj);
+                        PlayerInventory.Instance.weapons.Add(si.name, temp);
+                    }
                 }
             }
         }

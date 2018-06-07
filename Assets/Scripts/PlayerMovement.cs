@@ -62,8 +62,8 @@ public class PlayerMovement : MonoBehaviour {
         stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
         thrust = Input.GetAxis("Thrust");
 
-        if(Input.GetButton("LeftAnalogButton")) reversing = true;
-        if (Input.GetButtonUp("LeftAnalogButton")) reversing = false;
+        if(Input.GetAxis("DpadDown") < 0) reversing = true;
+        else reversing = false;
 
         if (reversing && Input.GetAxis("Thrust") <= 0 || Input.GetButtonUp("DashLeft")) reversing = false;
 

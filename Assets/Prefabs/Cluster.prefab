@@ -77,8 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46b403da5abf964b9763404a8076d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLow: 17000
-  numHigh: 17500
+  numLow: 6000
+  numHigh: 7000
   spawnChance: 1
   populated: 0
   astroid: {fileID: 1305643977014616, guid: 154fd8872cbed6c47b15f1dba1934471, type: 2}
