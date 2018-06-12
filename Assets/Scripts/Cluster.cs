@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cluster : AsteroidField {
 
-    public float xWidth, yWidth, zDepth;
+    public float clustRadius;
     public List<GameObject> astro_choices;
 
     private void Awake()
@@ -21,9 +21,6 @@ public class Cluster : AsteroidField {
     {
         base.Populate();
 
-        ///
-        /// The cluster is random, but I'm using xWidth, yWidth, and zDepth to modify the general shape so that it is wide and short
-        ///
         for (int i = 0; i < numAstroids; i++)
         {
             int choice = Random.Range(0, astro_choices.Count);
@@ -31,7 +28,7 @@ public class Cluster : AsteroidField {
             GameObject temp = Instantiate(astro_choices[choice]);
             temp.transform.SetParent( transform);
 
-            temp.transform.localPosition = AsteroidUtil.Placement(size);
+            temp.transform.localPosition = PlayerMovement.player.transform.position + (Random.insideUnitSphere * clustRadius);
 
             temp.transform.localRotation = AsteroidUtil.Rotation();
             temp.transform.localScale = AsteroidUtil.Scale();

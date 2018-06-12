@@ -7,9 +7,14 @@ public class Galaxy : MonoBehaviour {
 
     public GalaxyName galaxy;
     public GameObject cluster;
-
+    public int numClusters = 0;
     public List<GameObject> planets;
     public List<GameObject> spaceStations;
+
+    Vector3 newPos;
+    float size;
+    int counter;
+    Vector3[] positions;
 
     public GameObject loadingTxt;
 
@@ -18,9 +23,31 @@ public class Galaxy : MonoBehaviour {
         GunController.Instance.enabled = false;
         PlayerMovement.player.enabled = false;
 
-        GameObject temp = Instantiate(cluster);
-        temp.transform.SetParent(transform);
-        temp.GetComponent<Cluster>().Populate();
+        positions = new Vector3[numClusters];
+
+        size = cluster.GetComponent<Cluster>().size / 2.5f;
+
+        for (int i = 0; i < numClusters; i++)
+        {
+            if (i == 0)
+            {
+                positions[0] = new Vector3(Random.Range(-size, size), Random.Range(-size, size), Random.Range(-size, size));
+            } else {
+
+                counter = 0;
+                newPos = new Vector3(Random.Range(-size, size), Random.Range(-size, size), Random.Range(-size, size));
+                foreach (Vector3 pos in positions)
+                {
+                    if(Vector3.Distance(pos, newPos) < 1000)
+                    {
+                        newPos = new Vector3(Random.Range(-size, size), Random.Range(-size, size), Random.Range(-size, size));
+                    }
+                }
+            }
+
+            GameObject temp = Instantiate(cluster, newPos, Quaternion.identity, transform);
+            temp.GetComponent<Cluster>().Populate();
+        }
 
         foreach(GameObject planet in planets)
         {
