@@ -10,24 +10,24 @@ public class StationState : ScriptableObject {
 
 	public void UpdateState(StationController controller)
     {
-        DoActions(controller);
         CheckTransitions(controller);
+        DoActions(controller);
     }
 
     void DoActions(StationController controller)
     {
+        if (!controller.aiActive) return;
         foreach(StationAction action in actions)
         {
             action.Act(controller);
         }
     }
 
-    void CheckTransitions(StationController controller)
+    public void CheckTransitions(StationController controller)
     {
         foreach(StationTransition transition in transitions)
         {
             int val = transition.decision.StandingDecision(controller);
-
             if (val == 0)
             {
                 controller.TransitionToState(transition.gaurdState);

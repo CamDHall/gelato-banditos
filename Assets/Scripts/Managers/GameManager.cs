@@ -45,7 +45,7 @@ public class GameManager : SerializedMonoBehaviour
             }
             else
             {
-                PlayerMovement.player.acceleration = 0;
+                PlayerMovement.player.speedSetting = SpeedSetting.Idle;
                 ingame_menu.gameObject.SetActive(true);
             }
         }

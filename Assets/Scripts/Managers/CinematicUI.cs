@@ -30,7 +30,6 @@ public class CinematicUI : MonoBehaviour {
     {
         PlayerMovement.player.transform.position += (PlayerMovement.player.transform.forward * -2500);
         PlayerMovement.player.transform.LookAt(GameManager.Instance.nearestStation.gameObject.transform);
-        GameManager.Instance.nearestStation.sc.cutScene = false;
         GameManager.Instance.nearestStation.sc.aiActive = false;
         storePanel.gameObject.SetActive(false);
         givePanel.gameObject.SetActive(false);
@@ -66,10 +65,6 @@ public class CinematicUI : MonoBehaviour {
         Utilts.RemoveGelato(temp);
 
         givePanel.gameObject.SetActive(false);
-
-        /// TEMP FIX PROBLEM LATER
-        /// 
-        GameManager.Instance.nearestStation.sc.cutScene = true;
     }
 
     public void GiveGelato()

@@ -8,8 +8,10 @@ public class GunController : MonoBehaviour {
     public static GunController Instance;
     bool pressed = false;
     public float fire_cooldown = 0;
+    public int stationRange = 2000;
 
     float timer;
+    bool canHitStation;
 
     public Transform container;
     public Transform origin;
@@ -28,7 +30,7 @@ public class GunController : MonoBehaviour {
     }
 
     void Update () {
-        if(Input.GetAxis("Fire") != 0 && !GelatoCanon.Instance.holding)
+        if(Input.GetAxis("Fire") != 0)
         {
             if (!pressed && timer < Time.timeSinceLevelLoad)
             {
@@ -39,17 +41,30 @@ public class GunController : MonoBehaviour {
                 RaycastHit hit;
                 if(Physics.Raycast(ray, out hit))
                 {
+                    string hTag = hit.transform.tag;
+
+                    if (hTag == "SpaceStation")
+                    {
+                        if (Vector3.Distance(transform.position, hit.transform.position) < stationRange)
+                        {
+                            canHitStation = true;
+                            PlayerInventory.Instance.standings[hit.transform.GetComponent<SpaceStation>().sc.station_afil] -= 1;
+                        } else
+                        {
+                            canHitStation = false;
+                        }
+                    }
+
                     AudioManager.Instance.ChangeVolume(Vector3.Distance(hit.transform.position, transform.position));
                     laser.SetPosition(0, origin.position);
                     laser.SetPosition(1, hit.point);
-                    if (hit.transform.tag == "Bandito")
+                    if (hTag== "Bandito")
                     {
                         AudioManager.Instance.BanditoSplat();
                         hit.transform.GetComponent<Flocking>().Death();
                     }
-                    else
+                    else if(!(hTag == "SpaceStation" && !canHitStation))
                     {
-                        string hTag = hit.transform.tag;
 
                         if (hTag == "Astro" || hTag == "StationWeapons")
                         {
@@ -59,7 +74,7 @@ public class GunController : MonoBehaviour {
                         IDamageable Idamage = hit.transform.gameObject.GetComponent<IDamageable>();
                         
                         if(Idamage == null && hit.transform.parent != null)
-                        {
+                        { 
                             Idamage = hit.transform.parent.gameObject.GetComponent<IDamageable>();
                         }
 

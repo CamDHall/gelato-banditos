@@ -32,12 +32,13 @@ public class GelatoCanon : MonoBehaviour {
     }
 
     void Update () {
-		if((Input.GetButtonDown("Cannon") || Input.GetKeyDown(KeyCode.Y)) && inHand.Count > 0 && !holding)
+
+        if(!holding && Input.GetAxis("LT") > 0 && inHand.Count > 0)
         {
             LaunchItem();
         }
 
-        if(Input.GetButtonUp("Cannon") && holding)
+        if(Input.GetAxis("LT") == 0 && holding)
         {
             holding = false;
 

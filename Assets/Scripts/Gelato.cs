@@ -36,7 +36,7 @@ public class Gelato : MonoBehaviour {
                     markedForDeath = true;
                     Destroy(gameObject, 0.5f);
                 }
-                transform.position += (transform.forward * (speed + PlayerMovement.player.acceleration));
+                transform.position += (transform.forward * (speed + PlayerMovement.player.currentSpeed));
             }
         }
        }

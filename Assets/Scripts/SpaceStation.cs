@@ -32,7 +32,7 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
     public void TakeDamage(int amount)
     {
         health -= amount;
-
+        sc.currentState.CheckTransitions(sc);
         if(health <= 0)
         {
             Death();

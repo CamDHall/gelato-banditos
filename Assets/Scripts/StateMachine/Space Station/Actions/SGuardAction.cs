@@ -7,10 +7,7 @@ public class SGuardAction : StationAction
 {
     public override void Act(StationController controller)
     {
-        if(!controller.cutScene)
-        {
-            CameraManager.Instance.SpaceStationGuardScene(controller.gameObject);
-            controller.cutScene = true;
-        }
+        Debug.Log(controller.currentState);
+        CameraManager.Instance.SpaceStationGuardScene(controller.gameObject);
     }
 }

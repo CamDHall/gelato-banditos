@@ -70,13 +70,16 @@ public class CameraManager : MonoBehaviour {
 
         playGuardScene = false;
 
-        for(int i = 0; i < bandits.Length; i++)
+        if (bandits != null)
         {
-            Destroy(bandits[i]);
+            for (int i = 0; i < bandits.Length; i++)
+            {
+                Destroy(bandits[i]);
+            }
         }
 
         PlayerMovement.player.enabled = true;
-        PlayerMovement.player.acceleration = 0;
+        PlayerMovement.player.speedSetting = SpeedSetting.Idle;
         GunController.Instance.enabled = true;
     }
 }

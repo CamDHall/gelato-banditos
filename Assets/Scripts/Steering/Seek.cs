@@ -20,7 +20,7 @@ public class Seek : MonoBehaviour {
         {
             velocity = (velocity - lastVelocity) * Time.deltaTime;
             T = Vector3.Distance(transform.position, PlayerMovement.player.transform.position) / maxSpeed;
-            futurePos = PlayerMovement.player.transform.position + (Camera.main.transform.forward * (PlayerMovement.player.acceleration * 3));
+            futurePos = PlayerMovement.player.transform.position + (Camera.main.transform.forward * (PlayerMovement.player.currentSpeed * 3));
             desiredVel = (futurePos - transform.position).normalized * maxSpeed;
             steering = desiredVel - velocity;
 

@@ -9,13 +9,8 @@ public class SReveiveAction : StationAction {
     {
         if (!CinematicUI.Instance.storePanel.gameObject.activeSelf)
         {
-            if (controller.cutScene)
-            {
-                CinematicUI.Instance.SetupStore(controller);
-            } else
-            {
-                CameraManager.Instance.SpaceStationGuardScene(controller.gameObject);
-            }
+            CinematicUI.Instance.SetupStore(controller);
+            CameraManager.Instance.SpaceStationGuardScene(controller.gameObject);
         }
     }
 }

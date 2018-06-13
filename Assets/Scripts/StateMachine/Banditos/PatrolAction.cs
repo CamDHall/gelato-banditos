@@ -21,13 +21,13 @@ public class PatrolAction : Action
                 Vector3 newPos = Vector3.zero;
                 if (dist < controller.minRange)
                 {
-                    if (PlayerMovement.player.acceleration <= 0)
+                    if (PlayerMovement.player.currentSpeed <= 0)
                     {
                         newPos = controller.transform.forward * -1;
                     }
                     else
                     {
-                        newPos = controller.transform.forward * -PlayerMovement.player.acceleration;
+                        newPos = controller.transform.forward * -PlayerMovement.player.currentSpeed;
                     }
                 }
                 controller.rb.MovePosition(controller.rb.position + newPos + Strafe(controller));

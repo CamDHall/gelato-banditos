@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SpeedSetting { Idle, Slow, Fast, Reverse }
 public class PlayerMovement : MonoBehaviour {
     // General
     public static PlayerMovement player;
@@ -10,15 +11,14 @@ public class PlayerMovement : MonoBehaviour {
     public BoxCollider[] colliders;
 
     // Movement
-
-    public float accelRate, deccelTime, maxSpeed, acceleration = 0;
+    public float speed, maxSpeed, currentSpeed;
     public float deadZone;
     public float pitch_speed, yaw_speed, roll_speed;
     public bool rotating = false;
-    public float thrustSpeed;
     [HideInInspector]public bool rolling = true;
+    public SpeedSetting speedSetting;
 
-    float pitch, yaw, roll, thrust;
+    float pitch, yaw, roll;
     Vector3 vel, addedPos;
     Vector2 stickInput;
     Quaternion rot;
@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour {
     public float startHealth, startShield;
     public float rechargeRate;
     [HideInInspector] public float health, shield;
+    public ParticleSystem ps;
 
     float shieldTimer;
     
@@ -41,34 +42,40 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 deflectedPos;
 
     // Update saves
-    bool dashRight = false, dashLeft = false, reversing = false;
+    bool dashRight = false, dashLeft = false;
 
 	void Awake () {
-        accelRate *= 10;
 
         player = this;
         rb = GetComponent<Rigidbody>();
 
         colliders = GetComponents<BoxCollider>();
-
-        accelRate = thrustSpeed * Time.deltaTime;
+      
         health = startHealth;
         shield = startShield;
+        speedSetting = SpeedSetting.Idle;
     }
 
     private void Update()
     {
         // Inputs
         stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
-        thrust = Input.GetAxis("Thrust");
 
-        if(Input.GetAxis("DpadDown") < 0) reversing = true;
-        else reversing = false;
+        if(Input.GetButtonDown("AButton"))
+        {
+            if (speedSetting == SpeedSetting.Idle || speedSetting == SpeedSetting.Reverse) speedSetting = SpeedSetting.Slow;
+            else if (speedSetting == SpeedSetting.Slow) speedSetting = SpeedSetting.Fast;
+            else speedSetting = SpeedSetting.Slow;
+        }
 
-        if (reversing && Input.GetAxis("Thrust") <= 0 || Input.GetButtonUp("DashLeft")) reversing = false;
+        if (Input.GetButtonDown("BButton"))
+        {
+            if (speedSetting == SpeedSetting.Idle) speedSetting = SpeedSetting.Reverse;
+            else speedSetting = SpeedSetting.Idle;
+        }
 
         // Switch between rolling and camera
-        if (Input.GetButton("CameraSwitch") && !reversing)
+        if (Input.GetButton("CameraSwitch"))
         {
             if (rolling)
                 rolling = false;
@@ -118,33 +125,13 @@ public class PlayerMovement : MonoBehaviour {
                 stickInput = stickInput.normalized * ((stickInput.magnitude - deadZone) / (1 - deadZone));
             }
 
-            if (thrust != 0)
-            {
-                if (acceleration < maxSpeed)
-                {
-                    if (!reversing)
-                    {
-                        acceleration += (accelRate * Time.deltaTime);
-                    } else
-                    {
-                        acceleration -= ((accelRate / 2) * Time.deltaTime);
-                    }
-                }
-            }
-            else
-            {
-                if (acceleration > 0)
-                {
-                    if (acceleration < 0.01f)
-                    {
-                        acceleration = 0;
-                    }
-                    else
-                    {
-                        acceleration = Mathf.Lerp(acceleration, 0, deccelTime * Time.deltaTime);
-                    }
-                }
-            }
+            if (speedSetting == SpeedSetting.Reverse) currentSpeed = -speed;
+            else if (speedSetting == SpeedSetting.Idle) currentSpeed = 0;
+            else if (speedSetting == SpeedSetting.Slow) currentSpeed = speed;
+            else currentSpeed = maxSpeed;
+
+            if (speedSetting == SpeedSetting.Fast && !ps.isPlaying) ps.Play();
+            else if (speedSetting != SpeedSetting.Fast && ps.isPlaying) ps.Stop();
 
             pitch = stickInput.x * pitch_speed;
             yaw = stickInput.y * yaw_speed;
@@ -187,7 +174,7 @@ public class PlayerMovement : MonoBehaviour {
 
             if (remainingDash == 0)
             {
-                rb.MovePosition(rb.position + (transform.forward * acceleration));
+                rb.MovePosition(rb.position + (transform.forward * currentSpeed));
             }
             else
             {
@@ -226,7 +213,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         if(coll.gameObject.tag == "Astro")
         {
-            TakeDamge(1);
+            TakeDamge(Mathf.Abs(currentSpeed));
             Vector3 dir = coll.contacts[0].point - rb.position;
             dir = -dir.normalized;
             DeflectPlayer(dir);
@@ -235,7 +222,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void DeflectPlayer(Vector3 reflectPos)
     {
-        float scale = acceleration;
+        float scale = currentSpeed;
 
         Quaternion newAngle = Quaternion.Euler(rb.rotation.x * scale,
             rb.rotation.y * scale, rb.rotation.y * scale);
