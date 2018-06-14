@@ -17,6 +17,7 @@ public class SAttackAction : StationAction {
 
             controller.flockTimer = Time.timeSinceLevelLoad + 3;
             controller.fighterSpawnTimer = Time.timeSinceLevelLoad + 10;
+            CameraManager.Instance.Reset();
             controller.weaponsActive = true;
         }
 

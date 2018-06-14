@@ -18,6 +18,7 @@ public class CameraManager : MonoBehaviour {
 
     void Start () {
         cinematicCanvas.SetActive(false);
+        bandits = new GameObject[2];
 	}
 	
 	// Update is called once per frame
@@ -29,7 +30,6 @@ public class CameraManager : MonoBehaviour {
                 if (Vector3.Distance(cam.transform.position, bandit.transform.position) >= 15)
                 {
                     Vector3 newPos = (cam.transform.position - bandit.transform.position) * .10f;
-
                     bandit.transform.position += newPos;
                 }
             }
@@ -48,13 +48,14 @@ public class CameraManager : MonoBehaviour {
         cam.transform.position = (station.transform.position + PlayerMovement.player.transform.position) / 2;
         cam.transform.LookAt(station.transform.position);
 
-        bandits = new GameObject[2];
+        if (bandits[0] == null)
+        {
+            bandits[0] = Instantiate(Resources.Load("JuarezGangBandit") as GameObject, station.transform.parent);
+            bandits[1] = Instantiate(Resources.Load("JuarezGangBandit") as GameObject, station.transform.parent);
 
-        bandits[0] = Instantiate(Resources.Load("JuarezGangBandit") as GameObject, station.transform.parent);
-        bandits[1] = Instantiate(Resources.Load("JuarezGangBandit") as GameObject, station.transform.parent);
-
-        bandits[0].transform.localPosition = Vector3.zero + (bandits[0].transform.right * 200);
-        bandits[1].transform.localPosition = Vector3.zero + (bandits[1].transform.right * -200);
+            bandits[0].transform.localPosition = Vector3.zero + (bandits[0].transform.right * 200);
+            bandits[1].transform.localPosition = Vector3.zero + (bandits[1].transform.right * -200);
+        }
 
         bandits[0].transform.LookAt(cam.transform.position);
         bandits[1].transform.LookAt(cam.transform.position);
@@ -67,16 +68,16 @@ public class CameraManager : MonoBehaviour {
         cam.gameObject.SetActive(false);
         mainCanvas.SetActive(true);
         cinematicCanvas.SetActive(false);
-
-        playGuardScene = false;
-
-        if (bandits != null)
+        if (bandits[0] != null)
         {
-            for (int i = 0; i < bandits.Length; i++)
-            {
-                Destroy(bandits[i]);
-            }
+            bandits[0].transform.localPosition = Vector3.zero;
+            bandits[1].transform.localPosition = Vector3.zero;
+
+            bandits[0].SetActive(false);
+            bandits[1].SetActive(false);
+
         }
+        playGuardScene = false;
 
         PlayerMovement.player.enabled = true;
         PlayerMovement.player.speedSetting = SpeedSetting.Idle;

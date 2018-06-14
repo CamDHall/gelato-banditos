@@ -1,13 +1,15 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class GelatoCanon : MonoBehaviour {
+public class GelatoCanon : SerializedMonoBehaviour
+{
 
     Flavors currentFlav;
-    public GameObject lemonGelato;
+    public Dictionary<Flavors, GameObject> flavorObjects;
     Queue<GameObject> inHand = new Queue<GameObject>();
     //    List<GameObject> inHand = new List<GameObject>();
 
@@ -87,7 +89,8 @@ public class GelatoCanon : MonoBehaviour {
             return;
         }
 
-        if (direction + cannonIndex < 0) return;
+        int newIndex = direction + cannonIndex;
+
         int weaponCount = 0;
 
         flavorKeys = new List<Flavors>(PlayerInventory.Instance.gelato_inventory.Keys);
@@ -100,7 +103,14 @@ public class GelatoCanon : MonoBehaviour {
         string weaponKey = "";
         int num = 0;
 
-        if(weaponKeys != null && weaponKeys.Count > cannonIndex + direction)
+        if ((weaponCount != 0 && weaponCount + flavorKeys.Count < newIndex) || flavorKeys.Count - 1 < newIndex)
+            newIndex = 0;
+
+        if(cannonIndex == 0 && direction == -1)
+            newIndex = weaponCount + flavorKeys.Count - 1;
+
+
+        if(weaponKeys != null && weaponKeys.Count > newIndex)
         {
             weaponKey = weaponKeys[(cannonIndex + direction)];
 
@@ -117,16 +127,16 @@ public class GelatoCanon : MonoBehaviour {
                 weapon.SetActive(true);
                 inHand.Enqueue(weapon);
             }
-        } else if (direction + cannonIndex < (flavorKeys.Count + weaponCount))
+        } else if (newIndex < (flavorKeys.Count + weaponCount))
         {
             Flavors flav;
-            flav = flavorKeys[cannonIndex + direction - weaponCount];
+            flav = flavorKeys[newIndex - weaponCount];
             num = PlayerInventory.Instance.gelato_inventory[flav];
 
             ClearHand();
             for (int i = 0; i < num; i++)
             {
-                GameObject temp = Instantiate(lemonGelato, transform);
+                GameObject temp = Instantiate(flavorObjects[flav], transform);
                 temp.transform.localPosition = Vector3.zero;
                 temp.transform.rotation = Quaternion.Euler(Random.Range(-90, 90), Random.Range(-90, 90), Random.Range(-90, 90));
                 temp.GetComponent<Gelato>().flavor = flav;
@@ -135,7 +145,13 @@ public class GelatoCanon : MonoBehaviour {
             }
         }
 
-        cannonIndex += direction;
+        cannonIndex = newIndex;
+    }
+
+    public void RestCounter()
+    {
+        cannonIndex = 0;
+        UpdateCounter(0);
     }
 
     void ClearHand()

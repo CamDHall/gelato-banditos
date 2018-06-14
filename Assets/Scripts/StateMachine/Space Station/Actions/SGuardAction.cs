@@ -7,7 +7,6 @@ public class SGuardAction : StationAction
 {
     public override void Act(StationController controller)
     {
-        Debug.Log(controller.currentState);
         CameraManager.Instance.SpaceStationGuardScene(controller.gameObject);
     }
 }
