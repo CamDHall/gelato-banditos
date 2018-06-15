@@ -15,8 +15,8 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.15686275, g: 0.02745098, b: 0.21568628, a: 1}
-  m_FogMode: 2
+  m_FogColor: {r: 0.15686275, g: 0.02745098, b: 0.21568628, a: 0.28627452}
+  m_FogMode: 1
   m_FogDensity: 0.00025
   m_LinearFogStart: 3000
   m_LinearFogEnd: 10000
@@ -457,8 +457,8 @@ MonoBehaviour:
   gelatoContainer: {fileID: 1379284603}
   rb: {fileID: 0}
   colliders: []
-  speed: 2
-  maxSpeed: 20
+  speed: 4
+  maxSpeed: 24
   currentSpeed: 0
   deadZone: 0.4
   pitch_speed: 0.6
@@ -948,11 +948,11 @@ Camera:
   field of view: 30
   orthographic: 0
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: -2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294961119
-  m_RenderingPath: 3
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -10994,7 +10994,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e6403c5f1c3aa6348866d52b3734c57c, type: 2}
+  - {fileID: 2100000, guid: 3c320ba3bfd387d4aa4f9055c8f92632, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12495,11 +12495,11 @@ Camera:
   field of view: 30
   orthographic: 0
   orthographic size: 5
-  m_Depth: 1
+  m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: 3
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3

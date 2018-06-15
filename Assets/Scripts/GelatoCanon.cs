@@ -148,7 +148,7 @@ public class GelatoCanon : SerializedMonoBehaviour
         cannonIndex = newIndex;
     }
 
-    public void RestCounter()
+    public void ResetCounter()
     {
         cannonIndex = 0;
         UpdateCounter(0);
