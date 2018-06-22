@@ -11233,7 +11233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fire_cooldown: 0.75
-  stationRange: 2500
+  stationRange: 6000
   container: {fileID: 797958432}
   origin: {fileID: 826148256}
   crosshair: {fileID: 1749738690}

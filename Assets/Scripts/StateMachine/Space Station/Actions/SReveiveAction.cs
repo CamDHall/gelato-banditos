@@ -9,6 +9,7 @@ public class SReveiveAction : StationAction {
     {
         if (!CinematicUI.Instance.storePanel.gameObject.activeSelf)
         {
+            //Serializer.Save<PlayerInventory>("playerInventory.txt", PlayerInventory.Instance);
             CinematicUI.Instance.SetupStore(controller);
             CameraManager.Instance.SpaceStationGuardScene(controller.gameObject);
         }

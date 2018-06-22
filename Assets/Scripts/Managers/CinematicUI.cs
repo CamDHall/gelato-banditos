@@ -292,7 +292,7 @@ public class CinematicUI : MonoBehaviour {
             }
         }
 
-        GelatoCanon.Instance.ResetCounter();
+        GelatoCanon.Instance.ResetCounter(true);
         UpdateOptions(go);
     }
 

@@ -12,10 +12,15 @@ public class Gelato : MonoBehaviour {
     [HideInInspector] public BoxCollider bc;
 
     bool markedForDeath = false;
+
+    private void Awake()
+    {
+        bc = GetComponent<BoxCollider>();
+    }
+
     private void Start()
     {
         launched = false;
-        bc = GetComponent<BoxCollider>();
         bc.enabled = false;
         scaleSpeed *= Time.deltaTime;
         speed *= Time.deltaTime;

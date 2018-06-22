@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "com.unity.shadergraph": "1.1.9-preview",
-    "com.unity.render-pipelines.high-definition": "1.1.10-preview"
+    "com.unity.render-pipelines.high-definition": "1.1.10-preview",
+    "com.unity.probuilder": "3.0.9",
+    "com.unity.purchasing": "exclude",
+    "com.unity.ads": "exclude"
   }
 }

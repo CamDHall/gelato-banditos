@@ -8,7 +8,7 @@ public class GunController : MonoBehaviour {
     public static GunController Instance;
     bool pressed = false;
     public float fire_cooldown = 0;
-    public int stationRange = 2000;
+    public int stationRange;
 
     float timer;
     bool canHitStation;
@@ -48,7 +48,6 @@ public class GunController : MonoBehaviour {
                         if (Vector3.Distance(transform.position, hit.transform.position) < stationRange)
                         {
                             canHitStation = true;
-                            PlayerInventory.Instance.standings[hit.transform.GetComponent<SpaceStation>().sc.station_afil] -= 1;
                         } else
                         {
                             canHitStation = false;

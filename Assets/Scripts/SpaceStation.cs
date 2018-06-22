@@ -33,7 +33,8 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
     {
         health -= amount;
         sc.currentState.CheckTransitions(sc);
-        if(health <= 0)
+        PlayerInventory.Instance.standings[spaceStation_affil] -= amount * 15;
+        if (health <= 0)
         {
             Death();
         }
