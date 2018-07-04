@@ -17,8 +17,6 @@ public class StationController : MonoBehaviour {
     [HideInInspector] public Affilation station_afil;
     [HideInInspector] public float flockTimer, fighterSpawnTimer;
 
-    public bool hasSaved = false;
-
 	void Start () {
         stationObj = GetComponent<SpaceStation>();
         station_afil = stationObj.spaceStation_affil;
@@ -27,7 +25,8 @@ public class StationController : MonoBehaviour {
 	}
 	
 	void Update () {
-        currentState.UpdateState(this);
+        if (aiActive)
+            currentState.UpdateState(this);
 	}
 
     public void TransitionToState(StationState nextState)

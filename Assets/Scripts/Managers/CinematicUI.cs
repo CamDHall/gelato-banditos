@@ -22,7 +22,7 @@ public class CinematicUI : MonoBehaviour {
 
     public void Attack()
     {
-        PlayerInventory.Instance.playerData.standings[GameManager.Instance.nearestStation.GetComponent<SpaceStation>().spaceStation_affil] = -1;
+        PlayerInventory.Instance.pData.standings[GameManager.Instance.nearestStation.GetComponent<SpaceStation>().spaceStation_affil] = -1;
         CameraManager.Instance.Reset();
     }
 
@@ -61,7 +61,7 @@ public class CinematicUI : MonoBehaviour {
 
         Affilation aff = GameManager.Instance.nearestStation.spaceStation_affil;
 
-        PlayerInventory.Instance.playerData.standings[aff] = Utilts.ChangeInStanding(temp, aff);
+        PlayerInventory.Instance.pData.standings[aff] = Utilts.ChangeInStanding(temp, aff);
         Utilts.RemoveGelato(temp);
 
         givePanel.gameObject.SetActive(false);
@@ -71,7 +71,7 @@ public class CinematicUI : MonoBehaviour {
     {
         givePanel.gameObject.SetActive(true);
 
-        List<Flavors> flavors = new List<Flavors>(PlayerInventory.Instance.playerData.gelato_inventory.Keys);
+        List<Flavors> flavors = new List<Flavors>(PlayerInventory.Instance.pData.gelato_inventory.Keys);
 
         int count = 0;
 
@@ -92,7 +92,7 @@ public class CinematicUI : MonoBehaviour {
                 dp.ClearOptions();
                 List<string> num = new List<string>();
                 
-                for(int i = 0; i < PlayerInventory.Instance.playerData.gelato_inventory[flavors[count - 1]] + 1; i++)
+                for(int i = 0; i < PlayerInventory.Instance.pData.gelato_inventory[flavors[count - 1]] + 1; i++)
                 {
                     num.Add((i).ToString());
                 }
@@ -155,9 +155,9 @@ public class CinematicUI : MonoBehaviour {
                 y++;
             }
 
-            if (PlayerInventory.Instance.playerData.resources.ContainsKey(res))
+            if (PlayerInventory.Instance.pData.resources.ContainsKey(res))
             {
-                amountCanAfford = Mathf.FloorToInt(PlayerInventory.Instance.playerData.resources[res] / cost);
+                amountCanAfford = Mathf.FloorToInt(PlayerInventory.Instance.pData.resources[res] / cost);
             }
 
             Dropdown dp = temp.GetComponentInChildren<Dropdown>();
@@ -216,9 +216,9 @@ public class CinematicUI : MonoBehaviour {
             y++;
         }
 
-        if (PlayerInventory.Instance.playerData.resources.ContainsKey(sWeaponRes))
+        if (PlayerInventory.Instance.pData.resources.ContainsKey(sWeaponRes))
         {
-            sWeaponAmountCanAfford = Mathf.FloorToInt(PlayerInventory.Instance.playerData.resources[sWeaponRes] / sWeaponCost);
+            sWeaponAmountCanAfford = Mathf.FloorToInt(PlayerInventory.Instance.pData.resources[sWeaponRes] / sWeaponCost);
         }
 
         Dropdown sWeaponDp = singleWeapon.GetComponentInChildren<Dropdown>();
@@ -262,31 +262,31 @@ public class CinematicUI : MonoBehaviour {
                 StoreItemInfo si = dp.transform.parent.GetComponent<StoreItemInfo>();
 
                 int amount = Utilts.GetDropDownVal(dp);
-                PlayerInventory.Instance.playerData.resources[si.resType] -= (si.cost * amount);
+                PlayerInventory.Instance.pData.resources[si.resType] -= (si.cost * amount);
 
                 if (si.itemType == StoreItemType.Ingriedent)
                 {
                     Ingredient ing = (Ingredient)System.Enum.Parse(typeof(Ingredient), dp.transform.parent.name);
 
-                    if (PlayerInventory.Instance.playerData.ingredientsHeld.ContainsKey(ing))
+                    if (PlayerInventory.Instance.pData.ingredientsHeld.ContainsKey(ing))
                     {
-                        PlayerInventory.Instance.playerData.ingredientsHeld[ing] += amount;
+                        PlayerInventory.Instance.pData.ingredientsHeld[ing] += amount;
                     }
                     else
                     {
-                        PlayerInventory.Instance.playerData.ingredientsHeld.Add(ing, amount);
+                        PlayerInventory.Instance.pData.ingredientsHeld.Add(ing, amount);
                     }
                 } else if(si.itemType == StoreItemType.StationWeapon)
                 {
-                    if (PlayerInventory.Instance.playerData.weapons.ContainsKey(si.name))
+                    if (PlayerInventory.Instance.pData.weapons.ContainsKey(si.name))
                     {
-                        PlayerInventory.Instance.playerData.weapons[si.name].Add(si.obj);
+                        PlayerInventory.Instance.pData.weapons[si.name].Add(si.obj);
                     }
                     else
                     {
                         List<GameObject> temp = new List<GameObject>();
                         temp.Add(si.obj);
-                        PlayerInventory.Instance.playerData.weapons.Add(si.name, temp);
+                        PlayerInventory.Instance.pData.weapons.Add(si.name, temp);
                     }
                 }
             }
@@ -300,7 +300,7 @@ public class CinematicUI : MonoBehaviour {
     {
         Dropdown[] menus = parent.GetComponentsInChildren<Dropdown>();
 
-        Dictionary<ResourceType, int> tempResDict = PlayerInventory.Instance.playerData.resources;
+        Dictionary<ResourceType, int> tempResDict = PlayerInventory.Instance.pData.resources;
 
         foreach (Dropdown drop in menus)
         {
@@ -343,7 +343,7 @@ public class CinematicUI : MonoBehaviour {
     {
         Dropdown[] menus = parent.transform.parent.GetComponentsInChildren<Dropdown>();
 
-        Dictionary<ResourceType, int> tempResDict = PlayerInventory.Instance.playerData.resources;
+        Dictionary<ResourceType, int> tempResDict = PlayerInventory.Instance.pData.resources;
 
         foreach (Dropdown drop in menus)
         {

@@ -15,6 +15,9 @@ TagManager:
   - Cone
   - Projectile
   - SceneTrigger
+  - Character
+  - Basket
+  - GelatoContainer
   layers:
   - Default
   - TransparentFX

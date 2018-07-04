@@ -10,6 +10,9 @@ public class CharacterUI : MonoBehaviour {
     public static CharacterUI Instance;
     public Button exitToShip;
 
+    public Text gelatoWarning;
+    public GameObject gelatoGive;
+
     private void Awake()
     {
         Instance = this;
@@ -17,6 +20,7 @@ public class CharacterUI : MonoBehaviour {
 
     private void Start()
     {
+        gelatoWarning.gameObject.SetActive(false);
         exitToShip.gameObject.SetActive(false);
     }
 
@@ -38,5 +42,12 @@ public class CharacterUI : MonoBehaviour {
 
         string _name = EventSystem.current.currentSelectedGameObject.name;
         SceneManager.LoadScene(_name);
+    }
+
+    public void GelatoRequestScreen()
+    {
+        CharacterManager.Instance.character.enabled = false;
+        gelatoWarning.gameObject.SetActive(true);
+        //gelatoGive.gameObject.SetActive(true);
     }
 }

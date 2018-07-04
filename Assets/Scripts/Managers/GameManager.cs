@@ -22,8 +22,6 @@ public class GameManager : SerializedMonoBehaviour
     public GameObject bulletContainer;
     public bool game_over = false;
 
-    public Dictionary<Affilation, Dictionary<FlavorQualities, int>> aff_prefs;
-
     public bool invert;
     [HideInInspector]
     public List<GameObject> friends = new List<GameObject>();

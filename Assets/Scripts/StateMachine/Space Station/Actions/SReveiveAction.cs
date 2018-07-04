@@ -8,13 +8,7 @@ public class SReveiveAction : StationAction {
 
     public override void Act(StationController controller)
     {
-        if (!CinematicUI.Instance.storePanel.gameObject.activeSelf && !controller.hasSaved)
-        {
-            controller.hasSaved = true;
-            DataManager.Save(PlayerInventory.Instance.playerData);
-            SceneManager.LoadScene("SpaceStation");
-            //CinematicUI.Instance.SetupStore(controller);
-            //CameraManager.Instance.SpaceStationGuardScene(controller.gameObject);
-        }
+        DataManager.Save(PlayerInventory.Instance.pData);
+        SceneManager.LoadScene("SpaceStation");
     }
 }
