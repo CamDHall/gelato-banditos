@@ -3,7 +3,7 @@ using Sirenix.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 
 public enum Ingredient { VanillaBean, CocoaBean, Lemon, Mango, Strawberry }
 public enum ResourceType { Copper, Iron }
@@ -19,6 +19,11 @@ public class PlayerInventory : SerializedMonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        if(File.Exists("PlayerInventory.dat"))
+        {
+            playerData = DataManager.LoadCharacterData();
+        }
     }
 
     void Start()

@@ -38,43 +38,16 @@ public class DataManager
     }
 
     // Somewhere, a method to serialize data to json might look something like this
-    public static void Save()
+    public static void Save<T>(T data) where T : class
     {
-        // Save to Assets folder
         string path = Application.dataPath + "/Data/playerInventory.dat";
 
-        // Initialize some data
-        var originalData = new MyData();
-        originalData.reference = new MyData();
-        originalData.reference.reference = originalData;
-
-        // Unity should be allowed to handle serialization and deserialization of its own weird objects.
-        // So if your data-graph contains UnityEngine.Object types, you will need to provide Odin with 
-        // a list of UnityEngine.Object which it will then use as an external reference resolver.
         List<UnityEngine.Object> unityObjectReferences = new List<UnityEngine.Object>();
 
-        //DataFormat dataFormat = DataFormat.Binary;
         DataFormat dataFormat = DataFormat.Binary;
-        //DataFormat dataFormat = DataFormat.Nodes;
 
-        // Serialization
-        {
-            var bytes = SerializationUtility.SerializeValue(PlayerInventory.Instance.playerData, dataFormat, out unityObjectReferences);
-            File.WriteAllBytes(path, bytes);
-
-            // If you want the json string, use UTF8 encoding
-            // var jsonString = System.Text.Encoding.UTF8.GetString(bytes);
-        }
-
-        // Deserialization
-        {
-            var bytes = File.ReadAllBytes(path);
-
-            // If you have a string to deserialize, get the bytes using UTF8 encoding
-            // var bytes = System.Text.Encoding.UTF8.GetBytes(jsonString);
-
-            var data = SerializationUtility.DeserializeValue<MyData>(bytes, dataFormat, unityObjectReferences);
-        }
+        var bytes = SerializationUtility.SerializeValue(data, dataFormat, out unityObjectReferences);
+        File.WriteAllBytes(path, bytes);
     }
 
     public static PlayerData LoadCharacterData()

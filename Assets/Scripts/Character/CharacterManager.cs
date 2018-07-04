@@ -5,14 +5,29 @@ using Sirenix.OdinInspector;
 
 public class CharacterManager : SerializedMonoBehaviour {
 
+    public static CharacterManager Instance;
+
+    public CharacterMovement character;
     public PlayerData pData;
 
-	void Start () {
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    void Start () {
         pData = DataManager.LoadCharacterData();
-        Debug.Log(pData.resources.Count);
 	}
 	
 	void Update () {
 		
 	}
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if(col.tag == "SceneTrigger")
+        {
+            CharacterUI.Instance.LeaveScene();
+        }
+    }
 }

@@ -11,7 +11,7 @@ public class SReveiveAction : StationAction {
         if (!CinematicUI.Instance.storePanel.gameObject.activeSelf && !controller.hasSaved)
         {
             controller.hasSaved = true;
-            DataManager.Save();
+            DataManager.Save(PlayerInventory.Instance.playerData);
             SceneManager.LoadScene("SpaceStation");
             //CinematicUI.Instance.SetupStore(controller);
             //CameraManager.Instance.SpaceStationGuardScene(controller.gameObject);
