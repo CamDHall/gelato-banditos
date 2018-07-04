@@ -599,19 +599,23 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 265671578}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: playerData
+      Entry: 7
+      Data: 0|PlayerData, Assembly-CSharp
     - Name: resources
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[ResourceType, Assembly-CSharp],[System.Int32,
+      Data: 1|System.Collections.Generic.Dictionary`2[[ResourceType, Assembly-CSharp],[System.Int32,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.EqualityComparer`1+DefaultComparer[[ResourceType,
+      Data: 2|System.Collections.Generic.EqualityComparer`1+DefaultComparer[[ResourceType,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 8
@@ -626,69 +630,26 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: ingredientsHeld
-      Entry: 7
-      Data: 2|System.Collections.Generic.Dictionary`2[[Ingredient, Assembly-CSharp],[System.Int32,
-        mscorlib]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 3|System.Collections.Generic.EqualityComparer`1+DefaultComparer[[Ingredient,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: standings
-      Entry: 7
-      Data: 4|System.Collections.Generic.Dictionary`2[[Affilation, Assembly-CSharp],[System.Int32,
-        mscorlib]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 5|System.Collections.Generic.EqualityComparer`1+DefaultComparer[[Affilation,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: gelato_inventory
-      Entry: 7
-      Data: 6|System.Collections.Generic.Dictionary`2[[Flavors, Assembly-CSharp],[System.Int32,
-        mscorlib]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 7|System.Collections.Generic.EqualityComparer`1+DefaultComparer[[Flavors,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: weapons
       Entry: 6
       Data: 
-  gelatoContainer: {fileID: 265671578}
+    - Name: gelatoContainer
+      Entry: 10
+      Data: 0
+    - Name: flavors
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1 &51157720
 GameObject:
   m_ObjectHideFlags: 0
@@ -8796,6 +8757,7 @@ MonoBehaviour:
   station_afil: 0
   flockTimer: 0
   fighterSpawnTimer: 0
+  hasSaved: 0
 --- !u!23 &1111612795
 MeshRenderer:
   m_ObjectHideFlags: 0

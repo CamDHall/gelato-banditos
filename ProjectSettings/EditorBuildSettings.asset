@@ -14,3 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Juarez.unity
     guid: 9eeb2410f4e0ebc49aa62f5116adaecb
+  - enabled: 1
+    path: Assets/Scenes/SpaceStation.unity
+    guid: d8840dda81a767e4e957cb219a88f228
+  m_configObjects: {}

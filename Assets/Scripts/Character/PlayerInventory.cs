@@ -11,15 +11,7 @@ public enum ResourceType { Copper, Iron }
 public class PlayerInventory : SerializedMonoBehaviour
 {
     public static PlayerInventory Instance;
-
-    public Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
-
-    public Dictionary<Ingredient, int> ingredientsHeld = new Dictionary<Ingredient, int>();
-    public Dictionary<Affilation, int> standings = new Dictionary<Affilation, int>();
-    public Dictionary<Flavors, int> gelato_inventory = new Dictionary<Flavors, int>();
-    public Dictionary<string, List<GameObject>> weapons = new Dictionary<string, List<GameObject>>();
-    public GameObject gelatoContainer;
-    Flavor[] flavors;
+    public PlayerData playerData = new PlayerData();
 
     float dPadHorizontal = 0;
     bool HorizontalPadInUse = false;
@@ -32,18 +24,22 @@ public class PlayerInventory : SerializedMonoBehaviour
     void Start()
     {
         /// Temp
-        standings.Add(Affilation.ChihuahuaFederation, 0);
-        gelato_inventory.Add(Flavors.Lemon, 10);
-        gelato_inventory.Add(Flavors.Chocolate, 10);
-        gelato_inventory.Add(Flavors.Mango, 10);
-        gelato_inventory.Add(Flavors.Strawberry, 10);
-        gelato_inventory.Add(Flavors.Vanilla, 10);
+        playerData.standings = new Dictionary<Affilation, int>();
+        playerData.standings.Add(Affilation.ChihuahuaFederation, 0);
 
-        ingredientsHeld.Add(Ingredient.VanillaBean, 10);
-        ingredientsHeld.Add(Ingredient.CocoaBean, 5);
+        playerData.gelato_inventory = new Dictionary<Flavors, int>();
+        playerData.gelato_inventory.Add(Flavors.Lemon, 10);
+        playerData.gelato_inventory.Add(Flavors.Chocolate, 10);
+        playerData.gelato_inventory.Add(Flavors.Mango, 10);
+        playerData.gelato_inventory.Add(Flavors.Strawberry, 10);
+        playerData.gelato_inventory.Add(Flavors.Vanilla, 10);
 
-        flavors = gelatoContainer.GetComponents<Flavor>();
-        weapons = new Dictionary<string, List<GameObject>>();
+        playerData.ingredientsHeld = new Dictionary<Ingredient, int>();
+        playerData.ingredientsHeld.Add(Ingredient.VanillaBean, 10);
+        playerData.ingredientsHeld.Add(Ingredient.CocoaBean, 5);
+
+        playerData.flavors = playerData.gelatoContainer.GetComponents<Flavor>();
+        playerData.weapons = new Dictionary<string, List<GameObject>>();
 
         GelatoCanon.Instance.UpdateCounter(0, true);
         /// Temp
@@ -74,4 +70,16 @@ public class PlayerInventory : SerializedMonoBehaviour
             HorizontalPadInUse = false;
         }
     }
+}
+
+public class PlayerData
+{
+    public Dictionary<ResourceType, int> resources;
+
+    public Dictionary<Ingredient, int> ingredientsHeld;
+    public Dictionary<Affilation, int> standings;
+    public Dictionary<Flavors, int> gelato_inventory;
+    public Dictionary<string, List<GameObject>> weapons;
+    public GameObject gelatoContainer;
+    public Flavor[] flavors;
 }

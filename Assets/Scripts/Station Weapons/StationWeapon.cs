@@ -122,13 +122,13 @@ public class StationWeapon : MonoBehaviour, IDamageable, IDeath {
     {
         ResourceType res = (ResourceType)Random.Range(0, System.Enum.GetValues(typeof(ResourceType)).Length);
 
-        if (PlayerInventory.Instance.resources.ContainsKey(res))
+        if (PlayerInventory.Instance.playerData.resources.ContainsKey(res))
         {
-            PlayerInventory.Instance.resources[res] += resAmount;
+            PlayerInventory.Instance.playerData.resources[res] += resAmount;
         }
         else
         {
-            PlayerInventory.Instance.resources.Add(res, resAmount);
+            PlayerInventory.Instance.playerData.resources.Add(res, resAmount);
         }
 
         sp.weapons.Remove(gameObject);

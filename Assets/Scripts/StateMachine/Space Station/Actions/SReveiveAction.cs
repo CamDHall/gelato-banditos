@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(menuName = "Station AI/Actions/Receive")]
 public class SReveiveAction : StationAction {
 
     public override void Act(StationController controller)
     {
-        if (!CinematicUI.Instance.storePanel.gameObject.activeSelf)
+        if (!CinematicUI.Instance.storePanel.gameObject.activeSelf && !controller.hasSaved)
         {
-            //Serializer.Save<PlayerInventory>("playerInventory.txt", PlayerInventory.Instance);
-            CinematicUI.Instance.SetupStore(controller);
-            CameraManager.Instance.SpaceStationGuardScene(controller.gameObject);
+            controller.hasSaved = true;
+            DataManager.Save();
+            SceneManager.LoadScene("SpaceStation");
+            //CinematicUI.Instance.SetupStore(controller);
+            //CameraManager.Instance.SpaceStationGuardScene(controller.gameObject);
         }
     }
 }

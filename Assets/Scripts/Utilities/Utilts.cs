@@ -25,16 +25,16 @@ public class Utilts {
         string name = obj.name.Replace("(Clone)", "");
 
         ResourceType res = (ResourceType)System.Enum.Parse(typeof(ResourceType), name);
-        if (!PlayerInventory.Instance.resources.ContainsKey(res)) PlayerInventory.Instance.resources.Add(res, amount);
+        if (!PlayerInventory.Instance.playerData.resources.ContainsKey(res)) PlayerInventory.Instance.playerData.resources.Add(res, amount);
 
-        PlayerInventory.Instance.resources[res] += amount;
+        PlayerInventory.Instance.playerData.resources[res] += amount;
     }
 
     public static int ChangeInStanding(Dictionary<Flavors, int> changes, Affilation group)
     {
         int val = 0;
 
-        List<Flavor> flavClasses = PlayerInventory.Instance.gelatoContainer.GetComponents<Flavor>().ToList();
+        List<Flavor> flavClasses = PlayerInventory.Instance.playerData.flavors.ToList();
 
         foreach(Flavors flavor in changes.Keys)
         {
@@ -65,13 +65,13 @@ public class Utilts {
     {
         foreach(Flavors flavor in changes.Keys)
         {
-            int difference = PlayerInventory.Instance.gelato_inventory[flavor] - changes[flavor];
+            int difference = PlayerInventory.Instance.playerData.gelato_inventory[flavor] - changes[flavor];
             if(difference > 0)
             {
-                PlayerInventory.Instance.gelato_inventory[flavor] = difference;
+                PlayerInventory.Instance.playerData.gelato_inventory[flavor] = difference;
             } else if(difference == 0)
             {
-                PlayerInventory.Instance.gelato_inventory.Remove(flavor);
+                PlayerInventory.Instance.playerData.gelato_inventory.Remove(flavor);
             }
         }
     }
@@ -99,9 +99,9 @@ public class Utilts {
     {
         Dictionary<Ingredient, int> temp = new Dictionary<Ingredient, int>();
 
-        foreach(Ingredient ing in PlayerInventory.Instance.ingredientsHeld.Keys)
+        foreach(Ingredient ing in PlayerInventory.Instance.playerData.ingredientsHeld.Keys)
         {
-            temp.Add(ing, PlayerInventory.Instance.ingredientsHeld[ing]);
+            temp.Add(ing, PlayerInventory.Instance.playerData.ingredientsHeld[ing]);
         }
 
         int amount = 0;

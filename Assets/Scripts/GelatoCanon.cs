@@ -68,7 +68,7 @@ public class GelatoCanon : SerializedMonoBehaviour
         {
             currentItem.transform.SetParent(transform.parent.parent);
             currentItem.transform.localPosition = new Vector3(0, 0.25f, 0);
-            PlayerInventory.Instance.gelato_inventory[currentFlav]--;
+            PlayerInventory.Instance.playerData.gelato_inventory[currentFlav]--;
         } else
         {
             currentItem.GetComponent<StationWeapon>().friendly = true;
@@ -93,11 +93,11 @@ public class GelatoCanon : SerializedMonoBehaviour
         if(newItem)
         {
             ClearHand();
-            if (PlayerInventory.Instance.weapons != null && PlayerInventory.Instance.weapons.Count > 0)
+            if (PlayerInventory.Instance.playerData.weapons != null && PlayerInventory.Instance.playerData.weapons.Count > 0)
             {
-                foreach (string weaponName in PlayerInventory.Instance.weapons.Keys)
+                foreach (string weaponName in PlayerInventory.Instance.playerData.weapons.Keys)
                 {
-                    len = PlayerInventory.Instance.weapons[weaponName].Count;
+                    len = PlayerInventory.Instance.playerData.weapons[weaponName].Count;
                     List<GameObject> newItems = new List<GameObject>();
 
                     for (i = 0; i < len; i++)
@@ -118,16 +118,16 @@ public class GelatoCanon : SerializedMonoBehaviour
                 }
             }
 
-            if(PlayerInventory.Instance.gelato_inventory != null && PlayerInventory.Instance.gelato_inventory.Count > 0)
+            if(PlayerInventory.Instance.playerData.gelato_inventory != null && PlayerInventory.Instance.playerData.gelato_inventory.Count > 0)
             {
-                int num = PlayerInventory.Instance.gelato_inventory.Count;
+                int num = PlayerInventory.Instance.playerData.gelato_inventory.Count;
 
-                foreach(Flavors flav in PlayerInventory.Instance.gelato_inventory.Keys)
+                foreach(Flavors flav in PlayerInventory.Instance.playerData.gelato_inventory.Keys)
                 {
-                    len = PlayerInventory.Instance.gelato_inventory[flav];
+                    len = PlayerInventory.Instance.playerData.gelato_inventory[flav];
                     List<GameObject> newItems = new List<GameObject>();
 
-                    for (i = 0; i < PlayerInventory.Instance.gelato_inventory[flav]; i++)
+                    for (i = 0; i < PlayerInventory.Instance.playerData.gelato_inventory[flav]; i++)
                     {
                         GameObject temp = Instantiate(flavorObjects[flav], transform);
                         temp.transform.localPosition = Vector3.zero;

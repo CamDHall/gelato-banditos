@@ -79,9 +79,9 @@ public class MenuManager : MonoBehaviour {
     {
         string info = "";
 
-        foreach (Flavors flav in PlayerInventory.Instance.gelato_inventory.Keys)
+        foreach (Flavors flav in PlayerInventory.Instance.playerData.gelato_inventory.Keys)
         {
-            info += flav.ToString() + "\t" + PlayerInventory.Instance.gelato_inventory[flav] + "\t\t";
+            info += flav.ToString() + "\t" + PlayerInventory.Instance.playerData.gelato_inventory[flav] + "\t\t";
         }
 
         gelatoInfo.text = info;
@@ -131,12 +131,12 @@ public class MenuManager : MonoBehaviour {
         {
             flav = (Flavors)System.Enum.Parse(typeof(Flavors), name);
 
-            if (PlayerInventory.Instance.gelato_inventory.ContainsKey(flav))
+            if (PlayerInventory.Instance.playerData.gelato_inventory.ContainsKey(flav))
             {
-                PlayerInventory.Instance.gelato_inventory[flav] += amount;
+                PlayerInventory.Instance.playerData.gelato_inventory[flav] += amount;
             } else
             {
-                PlayerInventory.Instance.gelato_inventory.Add(flav, amount);
+                PlayerInventory.Instance.playerData.gelato_inventory.Add(flav, amount);
             }
         } catch
         {
@@ -150,14 +150,14 @@ public class MenuManager : MonoBehaviour {
         foreach(Ingredient ing in ingredients)
         {
             int removeAmount = flavClass.ingredientsNeeded[ing] * amount;
-            int amountHeld = PlayerInventory.Instance.ingredientsHeld[ing];
+            int amountHeld = PlayerInventory.Instance.playerData.ingredientsHeld[ing];
 
             if(amountHeld - removeAmount == 0)
             {
-                PlayerInventory.Instance.ingredientsHeld.Remove(ing);
+                PlayerInventory.Instance.playerData.ingredientsHeld.Remove(ing);
             } else
             {
-                PlayerInventory.Instance.ingredientsHeld[ing] -= removeAmount;
+                PlayerInventory.Instance.playerData.ingredientsHeld[ing] -= removeAmount;
             }
         }
 
