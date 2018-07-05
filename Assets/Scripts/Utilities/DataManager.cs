@@ -29,14 +29,6 @@ public class DataManager
         return default(T);
     }
 
-    public class MyData
-    {
-        public string str = new string(Enumerable.Range(0, 20).Select(i => (char)UnityEngine.Random.Range(50, 150)).ToArray());
-        public List<float> numbers = new List<float>(Enumerable.Range(0, 10).Select(i => UnityEngine.Random.Range(0f, 100f)));
-        public GameObject unityObjectReference = UnityEngine.Object.FindObjectOfType<UnityEngine.GameObject>();
-        public MyData reference;
-    }
-
     // Somewhere, a method to serialize data to json might look something like this
     public static void Save<T>(T data) where T : class
     {

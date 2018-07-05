@@ -24,23 +24,18 @@ public class Utilts {
         int amount = Mathf.CeilToInt(obj.transform.localScale.x + obj.transform.localScale.y + obj.transform.localScale.z);
         string name = obj.name.Replace("(Clone)", "");
 
-        if (PlayerInventory.Instance.pData.resources == null) PlayerInventory.Instance.pData.resources = new Dictionary<ResourceType, int>();
+        if (CharacterManager.Instance.pData.resources == null) CharacterManager.Instance.pData.resources = new Dictionary<ResourceType, int>();
 
         ResourceType res = (ResourceType)System.Enum.Parse(typeof(ResourceType), name);
-        if (!PlayerInventory.Instance.pData.resources.ContainsKey(res)) PlayerInventory.Instance.pData.resources.Add(res, amount);
+        if (!CharacterManager.Instance.pData.resources.ContainsKey(res)) CharacterManager.Instance.pData.resources.Add(res, amount);
 
-        PlayerInventory.Instance.pData.resources[res] += amount;
+        CharacterManager.Instance.pData.resources[res] += amount;
     }
 
     public static int ChangeInStanding(Dictionary<Flavors, int> changes, Affilation group)
     {
         int val = 0;
-        List<Flavor> flavClasses;
-
-        if (PlayerInventory.Instance != null)
-            flavClasses = PlayerInventory.Instance.pData.flavors.ToList();
-        else
-            flavClasses = CharacterManager.Instance.pData.flavors.ToList();
+        List<Flavor> flavClasses = CharacterManager.Instance.pData.flavors.ToList();
 
         foreach(Flavors flavor in changes.Keys)
         {
@@ -57,10 +52,7 @@ public class Utilts {
 
             foreach(FlavorQualities fv in tempFlavClass.flavQualities)
             {
-                if (PlayerInventory.Instance != null)
-                    val += PlayerInventory.Instance.pData.aff_prefs[group][fv] * changes[flavor];
-                else
-                    val += CharacterManager.Instance.pData.aff_prefs[group][fv] * changes[flavor];
+                val += CharacterManager.Instance.pData.aff_prefs[group][fv] * changes[flavor];
             }
 
             flavClasses.Remove(tempFlavClass);
@@ -74,13 +66,13 @@ public class Utilts {
     {
         foreach(Flavors flavor in changes.Keys)
         {
-            int difference = PlayerInventory.Instance.pData.gelato_inventory[flavor] - changes[flavor];
+            int difference = CharacterManager.Instance.pData.gelato_inventory[flavor] - changes[flavor];
             if(difference > 0)
             {
-                PlayerInventory.Instance.pData.gelato_inventory[flavor] = difference;
+                CharacterManager.Instance.pData.gelato_inventory[flavor] = difference;
             } else if(difference == 0)
             {
-                PlayerInventory.Instance.pData.gelato_inventory.Remove(flavor);
+                CharacterManager.Instance.pData.gelato_inventory.Remove(flavor);
             }
         }
     }
@@ -108,9 +100,9 @@ public class Utilts {
     {
         Dictionary<Ingredient, int> temp = new Dictionary<Ingredient, int>();
 
-        foreach(Ingredient ing in PlayerInventory.Instance.pData.ingredientsHeld.Keys)
+        foreach(Ingredient ing in CharacterManager.Instance.pData.ingredientsHeld.Keys)
         {
-            temp.Add(ing, PlayerInventory.Instance.pData.ingredientsHeld[ing]);
+            temp.Add(ing, CharacterManager.Instance.pData.ingredientsHeld[ing]);
         }
 
         int amount = 0;

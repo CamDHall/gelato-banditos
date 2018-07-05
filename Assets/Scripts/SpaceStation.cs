@@ -31,7 +31,7 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
 
     public void TakeDamage(int amount)
     {
-        PlayerInventory.Instance.pData.standings[spaceStation_affil] -= amount * 15;
+        CharacterManager.Instance.pData.standings[spaceStation_affil] -= amount * 15;
         health -= amount;
         sc.currentState.CheckTransitions(sc);
         sc.aiActive = true;
@@ -45,13 +45,13 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
     {
         ResourceType res = (ResourceType)Random.Range(0, System.Enum.GetValues(typeof(ResourceType)).Length);
 
-        if (PlayerInventory.Instance.pData.resources.ContainsKey(res))
+        if (CharacterManager.Instance.pData.resources.ContainsKey(res))
         {
-            PlayerInventory.Instance.pData.resources[res] += resValue;
+            CharacterManager.Instance.pData.resources[res] += resValue;
         }
         else
         {
-            PlayerInventory.Instance.pData.resources.Add(res, resValue);
+            CharacterManager.Instance.pData.resources.Add(res, resValue);
         }
 
         Destroy(gameObject.transform.parent.gameObject);

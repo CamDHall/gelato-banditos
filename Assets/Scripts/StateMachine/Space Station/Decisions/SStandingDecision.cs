@@ -7,7 +7,7 @@ public class SStandingDecision : StationDecision {
 
     public override int StandingDecision(StationController controller)
     {
-        int val = PlayerInventory.Instance.pData.standings[controller.station_afil];
+        int val = CharacterManager.Instance.pData.standings[controller.station_afil];
         if (val == 0) return 0;
         else if (val < 0) return -1;
 

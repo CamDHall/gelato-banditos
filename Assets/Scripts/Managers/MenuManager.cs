@@ -79,9 +79,9 @@ public class MenuManager : MonoBehaviour {
     {
         string info = "";
 
-        foreach (Flavors flav in PlayerInventory.Instance.pData.gelato_inventory.Keys)
+        foreach (Flavors flav in CharacterManager.Instance.pData.gelato_inventory.Keys)
         {
-            info += flav.ToString() + "\t" + PlayerInventory.Instance.pData.gelato_inventory[flav] + "\t\t";
+            info += flav.ToString() + "\t" + CharacterManager.Instance.pData.gelato_inventory[flav] + "\t\t";
         }
 
         gelatoInfo.text = info;
@@ -131,12 +131,12 @@ public class MenuManager : MonoBehaviour {
         {
             flav = (Flavors)System.Enum.Parse(typeof(Flavors), name);
 
-            if (PlayerInventory.Instance.pData.gelato_inventory.ContainsKey(flav))
+            if (CharacterManager.Instance.pData.gelato_inventory.ContainsKey(flav))
             {
-                PlayerInventory.Instance.pData.gelato_inventory[flav] += amount;
+                CharacterManager.Instance.pData.gelato_inventory[flav] += amount;
             } else
             {
-                PlayerInventory.Instance.pData.gelato_inventory.Add(flav, amount);
+                CharacterManager.Instance.pData.gelato_inventory.Add(flav, amount);
             }
         } catch
         {
@@ -150,14 +150,14 @@ public class MenuManager : MonoBehaviour {
         foreach(Ingredient ing in ingredients)
         {
             int removeAmount = flavClass.ingredientsNeeded[ing] * amount;
-            int amountHeld = PlayerInventory.Instance.pData.ingredientsHeld[ing];
+            int amountHeld = CharacterManager.Instance.pData.ingredientsHeld[ing];
 
             if(amountHeld - removeAmount == 0)
             {
-                PlayerInventory.Instance.pData.ingredientsHeld.Remove(ing);
+                CharacterManager.Instance.pData.ingredientsHeld.Remove(ing);
             } else
             {
-                PlayerInventory.Instance.pData.ingredientsHeld[ing] -= removeAmount;
+                CharacterManager.Instance.pData.ingredientsHeld[ing] -= removeAmount;
             }
         }
 

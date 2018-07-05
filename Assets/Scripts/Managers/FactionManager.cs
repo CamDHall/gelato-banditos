@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class FactionManager : MonoBehaviour {
 
-    public Affilation factionAffil;
+    public Affilation afil;
+    public static Affilation factionAffil;
+
+    private void Awake()
+    {
+        factionAffil = afil;
+    }
 }

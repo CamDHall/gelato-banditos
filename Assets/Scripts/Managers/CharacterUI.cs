@@ -26,8 +26,6 @@ public class CharacterUI : MonoBehaviour {
 
     public void LeaveScene()
     {
-        CharacterManager.Instance.character.enabled = false;
-
         string sceneName = SceneManager.GetActiveScene().name;
 
         if (sceneName == "SpaceStation")
@@ -44,10 +42,8 @@ public class CharacterUI : MonoBehaviour {
         SceneManager.LoadScene(_name);
     }
 
-    public void GelatoRequestScreen()
+    public void Reset()
     {
-        CharacterManager.Instance.character.enabled = false;
-        gelatoWarning.gameObject.SetActive(true);
-        //gelatoGive.gameObject.SetActive(true);
+        exitToShip.gameObject.SetActive(false);
     }
 }

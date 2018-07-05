@@ -67,4 +67,20 @@ public class CharacterMovement : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
     }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == "SceneTrigger")
+        {
+            CharacterUI.Instance.LeaveScene();
+        }
+    }
+
+    private void OnTriggerExit(Collider coll)
+    {
+        if(coll.tag == "SceneTrigger")
+        {
+            CharacterUI.Instance.Reset();
+        }
+    }
 }

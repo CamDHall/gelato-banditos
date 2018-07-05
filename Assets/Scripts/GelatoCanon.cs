@@ -19,10 +19,9 @@ public class GelatoCanon : SerializedMonoBehaviour
 
     public static GelatoCanon Instance;
 
-    public bool holding = false, isCharacter;
+    public bool holding = false;
     public Material mat;
     GameObject currentItem;
-    PlayerData pd;
 
     int cannonIndex = 0;
 
@@ -30,32 +29,20 @@ public class GelatoCanon : SerializedMonoBehaviour
     {
         Instance = this;
         inventory = new List<List<GameObject>>();
-
-        if (PlayerInventory.Instance == null)
-        {
-            pd = CharacterManager.Instance.pData;
-            inHand = new Dictionary<Flavors, int>();
-            toGive = new List<GameObject>();
-            isCharacter = true;
-        }
-        else
-        {
-            pd = PlayerInventory.Instance.pData;
-            isCharacter = false;
-        }
+        inHand = new Dictionary<Flavors, int>();
+        toGive = new List<GameObject>();
     }
 
     void Update () {
-
-        if(!holding && Input.GetAxis("LT") > 0 && inventory.Count > 0 && !isCharacter)
+        if(!CharacterManager.Instance.inStation && !holding && Input.GetAxis("LT") > 0 && inventory.Count > 0)
         {
             LaunchItem();
-        } else if(Input.GetAxis("LT") > 0 && inHand.Count > 0)
+        } else if(CharacterManager.Instance.inStation && Input.GetAxis("LT") > 0 && inHand.Count > 0)
         {
             GiveGelato();
         }
 
-        if(Input.GetAxis("LT") == 0 && holding && !isCharacter)
+        if(Input.GetAxis("LT") == 0 && holding && !CharacterManager.Instance.inStation)
         {
             holding = false;
 
@@ -68,7 +55,7 @@ public class GelatoCanon : SerializedMonoBehaviour
             }
         }
 
-        if(isCharacter && Input.GetButtonDown("Y"))
+        if(CharacterManager.Instance.inStation && Input.GetButtonDown("Y"))
         {
             AddToHand();
         }
@@ -84,9 +71,7 @@ public class GelatoCanon : SerializedMonoBehaviour
             {
                 if(col.tag == "Basket")
                 {
-                    CharacterManager.Instance.pData.standings[DialogueManager.Instance.currentAffil] = Utilts.ChangeInStanding(inHand, DialogueManager.Instance.currentAffil);
-
-                    Debug.Log(CharacterManager.Instance.pData.standings[DialogueManager.Instance.currentAffil]);
+                    CharacterManager.Instance.pData.standings[FactionManager.factionAffil] += Utilts.ChangeInStanding(inHand, FactionManager.factionAffil);
 
                     int len = toGive.Count;
 
@@ -128,7 +113,7 @@ public class GelatoCanon : SerializedMonoBehaviour
 
             toGive.Add(currentItem);
 
-            pd.gelato_inventory[currentFlav]--;
+            CharacterManager.Instance.pData.gelato_inventory[currentFlav]--;
         }
 
         holding = true;
@@ -154,7 +139,7 @@ public class GelatoCanon : SerializedMonoBehaviour
         {
             currentItem.transform.SetParent(transform.parent.parent);
             currentItem.transform.localPosition = new Vector3(0, 0.25f, 0);
-            pd.gelato_inventory[currentFlav]--;
+            CharacterManager.Instance.pData.gelato_inventory[currentFlav]--;
         } else
         {
             currentItem.GetComponent<StationWeapon>().friendly = true;
@@ -180,11 +165,11 @@ public class GelatoCanon : SerializedMonoBehaviour
         {
             ClearHand();
 
-            if (pd.weapons != null && pd.weapons.Count > 0)
+            if (!CharacterManager.Instance.inStation && CharacterManager.Instance.pData.weapons != null && CharacterManager.Instance.pData.weapons.Count > 0)
             {
-                foreach (string weaponName in PlayerInventory.Instance.pData.weapons.Keys)
+                foreach (string weaponName in CharacterManager.Instance.pData.weapons.Keys)
                 {
-                    len = pd.weapons[weaponName].Count;
+                    len = CharacterManager.Instance.pData.weapons[weaponName].Count;
                     List<GameObject> newItems = new List<GameObject>();
 
                     for (i = 0; i < len; i++)
@@ -205,16 +190,16 @@ public class GelatoCanon : SerializedMonoBehaviour
                 }
             }
 
-            if(pd.gelato_inventory != null && pd.gelato_inventory.Count > 0)
+            if(CharacterManager.Instance.pData.gelato_inventory != null && CharacterManager.Instance.pData.gelato_inventory.Count > 0)
             {
-                int num = pd.gelato_inventory.Count;
+                int num = CharacterManager.Instance.pData.gelato_inventory.Count;
 
-                foreach(Flavors flav in pd.gelato_inventory.Keys)
+                foreach(Flavors flav in CharacterManager.Instance.pData.gelato_inventory.Keys)
                 {
-                    len = pd.gelato_inventory[flav];
+                    len = CharacterManager.Instance.pData.gelato_inventory[flav];
                     List<GameObject> newItems = new List<GameObject>();
 
-                    for (i = 0; i < pd.gelato_inventory[flav]; i++)
+                    for (i = 0; i < CharacterManager.Instance.pData.gelato_inventory[flav]; i++)
                     {
                         GameObject temp = Instantiate(flavorObjects[flav], transform);
                         temp.transform.localPosition = Vector3.zero;

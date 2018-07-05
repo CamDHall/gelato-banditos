@@ -8,7 +8,7 @@ public class SReveiveAction : StationAction {
 
     public override void Act(StationController controller)
     {
-        DataManager.Save(PlayerInventory.Instance.pData);
+        DataManager.Save(CharacterManager.Instance.pData);
         SceneManager.LoadScene("SpaceStation");
     }
 }

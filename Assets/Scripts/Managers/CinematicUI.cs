@@ -13,6 +13,9 @@ public class CinematicUI : MonoBehaviour {
     public RectTransform storePanel;
     public RectTransform warning;
 
+    // Randomize later
+    public List<GameObject> weaponPrefabs;
+
     Vector2 padding = new Vector2(100, 100);
 
     private void Awake()
@@ -20,89 +23,145 @@ public class CinematicUI : MonoBehaviour {
         Instance = this;
     }
 
-    public void Attack()
-    {
-        PlayerInventory.Instance.pData.standings[GameManager.Instance.nearestStation.GetComponent<SpaceStation>().spaceStation_affil] = -1;
-        CameraManager.Instance.Reset();
-    }
-
     public void Leave()
     {
-        PlayerMovement.player.transform.position += (PlayerMovement.player.transform.forward * -2500);
-        PlayerMovement.player.transform.LookAt(GameManager.Instance.nearestStation.gameObject.transform);
-        GameManager.Instance.nearestStation.sc.aiActive = false;
+        CharacterManager.Instance.character.transform.position = CharacterManager.Instance.transform.position + new Vector3(0, 0, 5);
+        CharacterManager.Instance.character.enabled = true;
         storePanel.gameObject.SetActive(false);
-        givePanel.gameObject.SetActive(false);
-        warning.gameObject.SetActive(true);
-
-        CameraManager.Instance.Reset();
     }
 
-    public void GiveAmount()
+    public void SetupStore()
     {
-        Dropdown[] dropDowns = CameraManager.Instance.cinematicCanvas.GetComponentsInChildren<Dropdown>();
+        Affilation affil = FactionManager.factionAffil;
 
-        Dictionary<Flavors, int> temp = new Dictionary<Flavors, int>();
+        CinematicUI.Instance.storePanel.gameObject.SetActive(true);
 
-        foreach(Dropdown drop in dropDowns)
+        /// Temp
+        /// Repalce with affil specific items
+        /// 
+
+        string[] ing = System.Enum.GetNames(typeof(Ingredient));
+        string[] resList = System.Enum.GetNames(typeof(ResourceType));
+        int x = -2;
+        int y = -2;
+
+        foreach (string s in ing)
         {
-            RectTransform parent = drop.GetComponentInParent<RectTransform>().parent.GetComponentInChildren<RectTransform>();
-            int amount = int.Parse(drop.options[drop.value].text);
-            Flavors flav = (Flavors)System.Enum.Parse(typeof(Flavors), parent.GetComponentInChildren<Text>().text);
+            RectTransform temp = Instantiate(storeItem as RectTransform);
+            temp.GetComponent<RectTransform>().SetParent(storePanel.transform, false);
+            temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 175, y * 100) + padding;
 
-            if (!temp.ContainsKey(flav))
+            temp.GetComponentInChildren<Text>().text = s;
+            temp.gameObject.name = s;
+
+            int cost = Random.Range(1, 3);
+            string resChoice = resList[0];
+
+            ResourceType res = (ResourceType)System.Enum.Parse(typeof(ResourceType), resChoice);
+            int amountCanAfford = 0;
+
+            StoreItemInfo si = temp.GetComponent<StoreItemInfo>();
+            si.cost = cost;
+            si.resType = res;
+            si.itemType = StoreItemType.Ingriedent;
+
+            if (x < 1)
             {
-                temp.Add(flav, amount);
-            } else
-            {
-                temp[flav] += amount;
+                x++;
             }
-        }
-
-        Affilation aff = GameManager.Instance.nearestStation.spaceStation_affil;
-
-        PlayerInventory.Instance.pData.standings[aff] = Utilts.ChangeInStanding(temp, aff);
-        Utilts.RemoveGelato(temp);
-
-        givePanel.gameObject.SetActive(false);
-    }
-
-    public void GiveGelato()
-    {
-        givePanel.gameObject.SetActive(true);
-
-        List<Flavors> flavors = new List<Flavors>(PlayerInventory.Instance.pData.gelato_inventory.Keys);
-
-        int count = 0;
-
-        Vector2 padding = new Vector2(100, 50);
-
-        for(int y = -2; y < 2; y++)
-        {
-            for(int x = -2; x < 2; x++)
+            else
             {
-                count++;
-                RectTransform temp = (RectTransform)Instantiate(flavor_prefab);
-                temp.transform.SetParent(givePanel.transform, false);
-                temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 150, y * 100) + padding;
+                x = -2;
+                y++;
+            }
 
-                temp.GetComponentInChildren<Text>().text = flavors[count - 1].ToString();
+            if (CharacterManager.Instance.pData.resources.ContainsKey(res))
+            {
+                amountCanAfford = Mathf.FloorToInt(CharacterManager.Instance.pData.resources[res] / cost);
+            }
 
-                Dropdown dp = temp.GetComponentInChildren<Dropdown>();
+            Dropdown dp = temp.GetComponentInChildren<Dropdown>();
+            dp.onValueChanged.AddListener(delegate { UpdateOptions(dp.transform.parent.parent.gameObject, dp); });
+
+            if (amountCanAfford == 0)
+            {
+                temp.GetComponent<Image>().color = Color.red;
+                dp.enabled = false;
+            }
+            else
+            {
+                dp.enabled = true;
                 dp.ClearOptions();
+
                 List<string> num = new List<string>();
-                
-                for(int i = 0; i < PlayerInventory.Instance.pData.gelato_inventory[flavors[count - 1]] + 1; i++)
+
+                for (int i = 0; i < amountCanAfford; i++)
                 {
-                    num.Add((i).ToString());
+                    num.Add((i + 1).ToString());
                 }
 
                 dp.AddOptions(num);
+            }
+        }
 
-                if (count >= flavors.Count) break;
+        // Naming: sWeapon since right now there's only one type of weapon, must avoid local naming conflicts
+        RectTransform singleWeapon = Instantiate(storeItem as RectTransform);
+        singleWeapon.GetComponent<RectTransform>().SetParent(storePanel.transform, false);
+        singleWeapon.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 175, y * 100) + padding;
+
+        string name = weaponPrefabs[0].GetComponent<StationWeapon>().name;
+        singleWeapon.GetComponentInChildren<Text>().text = name;
+        singleWeapon.gameObject.name = name;
+
+        int sWeaponCost = Random.Range(5, 10);
+        string sWeaponResChoice = resList[0];
+
+        ResourceType sWeaponRes = (ResourceType)System.Enum.Parse(typeof(ResourceType), sWeaponResChoice);
+        int sWeaponAmountCanAfford = 0;
+
+        StoreItemInfo sWeaponSi = singleWeapon.GetComponent<StoreItemInfo>();
+        sWeaponSi.cost = sWeaponCost;
+        sWeaponSi.resType = sWeaponRes;
+        sWeaponSi.itemType = StoreItemType.StationWeapon;
+        sWeaponSi.obj = Instantiate(weaponPrefabs[0]);
+        sWeaponSi.name = name;
+
+        if (x < 1)
+        {
+            x++;
+        }
+        else
+        {
+            x = -2;
+            y++;
+        }
+
+        if (CharacterManager.Instance.pData.resources.ContainsKey(sWeaponRes))
+        {
+            sWeaponAmountCanAfford = Mathf.FloorToInt(CharacterManager.Instance.pData.resources[sWeaponRes] / sWeaponCost);
+        }
+
+        Dropdown sWeaponDp = singleWeapon.GetComponentInChildren<Dropdown>();
+        sWeaponDp.onValueChanged.AddListener(delegate { UpdateOptions(sWeaponDp.transform.parent.parent.gameObject, sWeaponDp); });
+
+        if (sWeaponAmountCanAfford == 0)
+        {
+            singleWeapon.GetComponent<Image>().color = Color.red;
+            sWeaponDp.enabled = false;
+        }
+        else
+        {
+            sWeaponDp.enabled = true;
+            sWeaponDp.ClearOptions();
+
+            List<string> num = new List<string>();
+
+            for (int i = 0; i < sWeaponAmountCanAfford; i++)
+            {
+                num.Add((i + 1).ToString());
             }
 
-            if (count >= flavors.Count) break;
+            sWeaponDp.AddOptions(num);
         }
     }
 
@@ -155,9 +214,9 @@ public class CinematicUI : MonoBehaviour {
                 y++;
             }
 
-            if (PlayerInventory.Instance.pData.resources.ContainsKey(res))
+            if (CharacterManager.Instance.pData.resources.ContainsKey(res))
             {
-                amountCanAfford = Mathf.FloorToInt(PlayerInventory.Instance.pData.resources[res] / cost);
+                amountCanAfford = Mathf.FloorToInt(CharacterManager.Instance.pData.resources[res] / cost);
             }
 
             Dropdown dp = temp.GetComponentInChildren<Dropdown>();
@@ -216,9 +275,9 @@ public class CinematicUI : MonoBehaviour {
             y++;
         }
 
-        if (PlayerInventory.Instance.pData.resources.ContainsKey(sWeaponRes))
+        if (CharacterManager.Instance.pData.resources.ContainsKey(sWeaponRes))
         {
-            sWeaponAmountCanAfford = Mathf.FloorToInt(PlayerInventory.Instance.pData.resources[sWeaponRes] / sWeaponCost);
+            sWeaponAmountCanAfford = Mathf.FloorToInt(CharacterManager.Instance.pData.resources[sWeaponRes] / sWeaponCost);
         }
 
         Dropdown sWeaponDp = singleWeapon.GetComponentInChildren<Dropdown>();
@@ -262,31 +321,31 @@ public class CinematicUI : MonoBehaviour {
                 StoreItemInfo si = dp.transform.parent.GetComponent<StoreItemInfo>();
 
                 int amount = Utilts.GetDropDownVal(dp);
-                PlayerInventory.Instance.pData.resources[si.resType] -= (si.cost * amount);
+                CharacterManager.Instance.pData.resources[si.resType] -= (si.cost * amount);
 
                 if (si.itemType == StoreItemType.Ingriedent)
                 {
                     Ingredient ing = (Ingredient)System.Enum.Parse(typeof(Ingredient), dp.transform.parent.name);
 
-                    if (PlayerInventory.Instance.pData.ingredientsHeld.ContainsKey(ing))
+                    if (CharacterManager.Instance.pData.ingredientsHeld.ContainsKey(ing))
                     {
-                        PlayerInventory.Instance.pData.ingredientsHeld[ing] += amount;
+                        CharacterManager.Instance.pData.ingredientsHeld[ing] += amount;
                     }
                     else
                     {
-                        PlayerInventory.Instance.pData.ingredientsHeld.Add(ing, amount);
+                        CharacterManager.Instance.pData.ingredientsHeld.Add(ing, amount);
                     }
                 } else if(si.itemType == StoreItemType.StationWeapon)
                 {
-                    if (PlayerInventory.Instance.pData.weapons.ContainsKey(si.name))
+                    if (CharacterManager.Instance.pData.weapons.ContainsKey(si.name))
                     {
-                        PlayerInventory.Instance.pData.weapons[si.name].Add(si.obj);
+                        CharacterManager.Instance.pData.weapons[si.name].Add(si.obj);
                     }
                     else
                     {
                         List<GameObject> temp = new List<GameObject>();
                         temp.Add(si.obj);
-                        PlayerInventory.Instance.pData.weapons.Add(si.name, temp);
+                        CharacterManager.Instance.pData.weapons.Add(si.name, temp);
                     }
                 }
             }
@@ -300,7 +359,7 @@ public class CinematicUI : MonoBehaviour {
     {
         Dropdown[] menus = parent.GetComponentsInChildren<Dropdown>();
 
-        Dictionary<ResourceType, int> tempResDict = PlayerInventory.Instance.pData.resources;
+        Dictionary<ResourceType, int> tempResDict = CharacterManager.Instance.pData.resources;
 
         foreach (Dropdown drop in menus)
         {
@@ -343,7 +402,7 @@ public class CinematicUI : MonoBehaviour {
     {
         Dropdown[] menus = parent.transform.parent.GetComponentsInChildren<Dropdown>();
 
-        Dictionary<ResourceType, int> tempResDict = PlayerInventory.Instance.pData.resources;
+        Dictionary<ResourceType, int> tempResDict = CharacterManager.Instance.pData.resources;
 
         foreach (Dropdown drop in menus)
         {
