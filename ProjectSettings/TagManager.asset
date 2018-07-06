@@ -9,6 +9,15 @@ TagManager:
   - Bandito
   - Quad
   - Cluster
+  - Planet
+  - StationWeapons
+  - SpaceStation
+  - Cone
+  - Projectile
+  - SceneTrigger
+  - Character
+  - Basket
+  - GelatoContainer
   layers:
   - Default
   - TransparentFX
@@ -22,12 +31,12 @@ TagManager:
   - Player
   - Bandito
   - Laser
-  - Cluster
   - Front
-  - 
-  - 
-  - 
-  - 
+  - Planet
+  - Cluster
+  - Projectile
+  - Weapon
+  - EnemyFighter
   - 
   - 
   - 

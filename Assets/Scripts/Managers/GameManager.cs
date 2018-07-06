@@ -1,18 +1,18 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : SerializedMonoBehaviour
+{
 
     public static GameManager Instance;
-    public Text timeLeft;
-    public float timeGoal;
 
-    public GameObject finalScore, death;
-
-    public int score;
+    public GameObject death, win;
+    public Canvas ingame_menu;
+    public GameObject menu;
 
     public Image i_left, i_right, i_top, i_bottom;
 
@@ -22,11 +22,11 @@ public class GameManager : MonoBehaviour {
     public GameObject bulletContainer;
     public bool game_over = false;
 
+    public bool invert;
     [HideInInspector]
-    // Using a queue so that the Galto is FIFO
-    public Queue<GameObject> cones = new Queue<GameObject>();
-    public Cluster currentCluser;
     public List<GameObject> friends = new List<GameObject>();
+
+    [HideInInspector] public SpaceStation nearestStation;
 
 	void Start () {
         Instance = this;
@@ -35,24 +35,38 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (Input.GetButton("Quit"))
+        if (Input.GetButtonDown("Back"))
+        {
+            if (ingame_menu.gameObject.activeSelf)
+            {
+                ingame_menu.gameObject.SetActive(false);
+            }
+            else
+            {
+                PlayerMovement.player.speedSetting = SpeedSetting.Idle;
+                ingame_menu.gameObject.SetActive(true);
+            }
+        }
+
+        if(Input.GetKeyUp(KeyCode.Q))
         {
             Application.Quit();
         }
 
-        if (Input.GetButton("Start"))
+        if (Input.GetButtonUp("Start"))
         {
-            SceneManager.LoadScene("main");
+
+            if(menu.activeSelf)
+            {
+                menu.SetActive(false);
+            } else
+            {
+                menu.SetActive(true);
+            }
         }
 
         if (!game_over)
         {
-            timeLeft.text = "Time: " + System.Math.Round(timeGoal - Time.timeSinceLevelLoad, 2);
-            if (timeGoal < Time.timeSinceLevelLoad)
-            {
-                End();
-            }
-
             if (leftActive && i_left.color.a > 0)
             {
                 i_left.color = new Color(bc.r, bc.g, bc.b, i_left.color.a - Time.deltaTime);
@@ -91,20 +105,23 @@ public class GameManager : MonoBehaviour {
 
     void End()
     {
-        finalScore.GetComponent<Text>().text = "Final score: " + score;
-        finalScore.SetActive(true);
         game_over = true;
     }
 
     public void StartGame()
     {
-        timeGoal += Time.timeSinceLevelLoad;
         PlayerMovement.player.enabled = true;
     }
 
     public void Death()
     {
         death.SetActive(true);
+        game_over = true;
+    }
+
+    public void Win()
+    {
+        win.SetActive(true);
         game_over = true;
     }
 

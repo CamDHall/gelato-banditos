@@ -20,9 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4786738542274718}
   - component: {fileID: 114529915571845048}
-  - component: {fileID: 65397538317911758}
   - component: {fileID: 114325977108872618}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cluster
   m_TagString: Cluster
   m_Icon: {fileID: 0}
@@ -42,18 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65397538317911758
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1693798285929202}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12000, y: 12000, z: 12000}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114325977108872618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c577af03bcc9d841814f64e6b6d2f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  galaxyMap: {fileID: 0}
 --- !u!114 &114529915571845048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,14 +64,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46b403da5abf964b9763404a8076d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLow: 18000
-  numHigh: 19000
+  numLow: 25
+  numHigh: 50
   spawnChance: 1
-  clustSize: 14000
   populated: 0
-  astroid: {fileID: 1536017236734666, guid: 0346c028ab9a19340aa2da3432eb2b75, type: 2}
-  bigAstro: {fileID: 1860803422955760, guid: 8d0c0cb69266f8140bd21fb5c3c0cf44, type: 2}
+  astroid: {fileID: 1305643977014616, guid: 154fd8872cbed6c47b15f1dba1934471, type: 2}
+  size: 20000
   enemies: []
-  xWidth: 1.8
-  yWidth: 1.8
-  zDepth: 1.8
+  clustRadius: 3000
+  astro_choices:
+  - {fileID: 1695658754500540, guid: 819aaf4cb9054734cb72f5cfef03fd21, type: 2}
+  - {fileID: 1088672847223136, guid: 4dceb9f61d55ec8428f1cffabbbbc249, type: 2}

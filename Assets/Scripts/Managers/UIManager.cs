@@ -11,12 +11,13 @@ public class UIManager : MonoBehaviour {
     public Image health;
     public Image shield;
 
+    public Image indicator;
+
 	void Start () {
 		
 	}
 	
 	void Update () {
-        coneCount.text = "x" + GameManager.Instance.cones.Count;
 
         if (PlayerMovement.player.shield > 0)
         {
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour {
         }
         else
         {
+            shield.fillAmount = 0;
             health.fillAmount = PlayerMovement.player.health / PlayerMovement.player.startHealth;
         }
 	}
@@ -31,7 +33,17 @@ public class UIManager : MonoBehaviour {
     public void LoadGalaxy()
     {
         GameObject clicked = EventSystem.current.currentSelectedGameObject;
-
+        Debug.Log(clicked.name);
         SceneManager.LoadScene(clicked.name);
+    }
+
+    public void InvertControls()
+    {
+        GameManager.Instance.invert = !GameManager.Instance.invert;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Juarez");
     }
 }

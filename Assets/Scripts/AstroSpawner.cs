@@ -65,7 +65,6 @@ public class AstroSpawner : MonoBehaviour {
         } else
         {
             Destroy(astro);
-            GameManager.Instance.score++;
         }
     }
 }

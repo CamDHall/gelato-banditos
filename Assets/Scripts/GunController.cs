@@ -5,17 +5,24 @@ using UnityEngine.UI;
 
 public class GunController : MonoBehaviour {
 
+    public static GunController Instance;
     bool pressed = false;
     public float fire_cooldown = 0;
+    public int stationRange;
 
     float timer;
+    bool canHitStation;
 
     public Transform container;
     public Transform origin;
     public GameObject crosshair;
-    public GameObject laser;
     
     public LineRenderer prefab_laser;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -23,7 +30,7 @@ public class GunController : MonoBehaviour {
     }
 
     void Update () {
-        if(Input.GetAxis("Fire") != 0 && !GelatoCanon.Instance.holding)
+        if(Input.GetAxis("Fire") != 0)
         {
             if (!pressed && timer < Time.timeSinceLevelLoad)
             {
@@ -32,26 +39,56 @@ public class GunController : MonoBehaviour {
                 laser.transform.SetParent(transform);
                 Ray ray = new Ray(transform.position, transform.forward);
                 RaycastHit hit;
-                if(Physics.Raycast(transform.position, transform.forward, out hit))
+                if(Physics.Raycast(ray, out hit))
                 {
+                    string hTag = hit.transform.tag;
+
+                    if (hTag == "SpaceStation")
+                    {
+                        if (Vector3.Distance(transform.position, hit.transform.position) < stationRange)
+                        {
+                            canHitStation = true;
+                        } else
+                        {
+                            canHitStation = false;
+                        }
+                    }
+
                     AudioManager.Instance.ChangeVolume(Vector3.Distance(hit.transform.position, transform.position));
                     laser.SetPosition(0, origin.position);
                     laser.SetPosition(1, hit.point);
-                    if (hit.transform.tag == "Bandito")
+                    if (hTag== "Bandito")
                     {
                         AudioManager.Instance.BanditoSplat();
-                        hit.transform.GetComponent<StateController>().Die();
-                        GameManager.Instance.score += 5;
+                        hit.transform.GetComponent<Flocking>().Death();
                     }
-                    else
+                    else if(!(hTag == "SpaceStation" && !canHitStation))
                     {
-                        if(hit.transform.tag == "Astro")
+
+                        if (hTag == "Astro" || hTag == "StationWeapons")
                         {
-                            GameManager.Instance.score++;
                             AudioManager.Instance.AstroCrack();
                         }
-                        Destroy(hit.transform.gameObject, Time.deltaTime * 5);
+
+                        IDamageable Idamage = hit.transform.gameObject.GetComponent<IDamageable>();
+                        
+                        if(Idamage == null && hit.transform.parent != null)
+                        { 
+                            Idamage = hit.transform.parent.gameObject.GetComponent<IDamageable>();
+                        }
+
+                        if(Idamage!= null)
+                        {
+                            Idamage.TakeDamage(1);
+                        }
+
+                        if (hTag == "Astro")
+                        {
+                            Destroy(hit.transform.gameObject, Time.deltaTime * 5);
+                            Utilts.GetResources(hit.transform.gameObject);
+                        }
                     }
+
                     laser.enabled = true;
                 } else
                 {

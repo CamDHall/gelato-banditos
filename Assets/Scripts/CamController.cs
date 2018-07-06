@@ -10,6 +10,7 @@ public class CamController : MonoBehaviour {
     public float deadZone;
     public float shakeLength, shakeInt;
     float shakeTimer = 0;
+    Vector2 stickInput;
 
     Quaternion newRotation;
     Vector3 _hitPos;
@@ -17,6 +18,7 @@ public class CamController : MonoBehaviour {
     private void Start()
     {
         Instance = this;
+        stickInput = Vector2.zero;
     }
 
     private void Update()
@@ -38,7 +40,7 @@ public class CamController : MonoBehaviour {
         if (!PlayerMovement.player.rolling)
         {
             // Deadzone
-            Vector2 stickInput = new Vector2(Input.GetAxis("CameraPitch"), Input.GetAxis("CameraYaw"));
+            stickInput = new Vector2(Input.GetAxis("CameraPitch"), Input.GetAxis("CameraYaw"));
             if (stickInput.magnitude <= deadZone) stickInput = Vector2.zero;
 
 
