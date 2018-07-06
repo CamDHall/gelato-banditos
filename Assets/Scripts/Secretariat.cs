@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-public class Secretariat : MonoBehaviour {
+using Sirenix.OdinInspector;
+
+public class Secretariat : SerializedMonoBehaviour {
 
     public Affilation affil;
     public GameObject greeting;
-
+    public Dictionary<string, Dictionary<ChatMessage, string>> messages;
 
 	void Start () {
         greeting.SetActive(false);
@@ -30,7 +31,7 @@ public class Secretariat : MonoBehaviour {
             Greet();
         } else
         {
-            Debug.Log("GUARDS!");
+            ChatBot.Instance.DisplayMessage(messages["NotAllie"]);
         }
     }
 }
