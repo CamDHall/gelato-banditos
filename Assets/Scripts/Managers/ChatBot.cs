@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// I'm using an enum instead of passing an array of colors for two reasons
@@ -29,6 +31,10 @@ public class ChatBot : MonoBehaviour {
     bool containsNews, containsWarning, containsGoodNews, containsRegular;
 
     float timer;
+    Dictionary<string, string> keywords;
+    string currentQuestion;
+
+    string[] resourceNames, flavorNames, ingredienNames;
 
     private void Awake()
     {
@@ -38,9 +44,23 @@ public class ChatBot : MonoBehaviour {
         _goodNewsColor = ColorUtility.ToHtmlStringRGB(goodNewsColor);
         _newsColor = ColorUtility.ToHtmlStringRGB(newsColor);
         _regularColor = ColorUtility.ToHtmlStringRGB(regularColor);
+
+        string filename = Application.dataPath + "/Data/Game Info/keywords.txt";
+        keywords = new Dictionary<string, string>();
+
+        string[] temp = File.ReadAllLines(filename);
+
+        foreach(string line in temp)
+        {
+            string[] pair = line.Split(',');
+            keywords.Add(pair[0].ToLower(), pair[1]);
+        }
     }
 
     void Start () {
+        resourceNames = System.Enum.GetNames(typeof(ResourceType));
+        flavorNames = System.Enum.GetNames(typeof(Flavors));
+        ingredienNames = System.Enum.GetNames(typeof(Ingredient));
         Collapse();
 	}
 	
@@ -91,5 +111,122 @@ public class ChatBot : MonoBehaviour {
         }
 
         text.text = str;
+    }
+
+    public void Question(InputField input)
+    {
+        input.text = input.text.ToLower();
+
+        foreach(string key in keywords.Keys)
+        {
+            if(input.text.Contains(key))
+            {
+                currentQuestion = input.text;
+                Invoke(keywords[key], 0);
+                break;
+            }
+        }
+    }
+
+    void amount()
+    {
+        Dictionary<ChatMessage, string> result = new Dictionary<ChatMessage, string>();
+
+        int amount = 0;
+        string message = "";
+
+        // Resources
+        foreach(string resource in resourceNames)
+        {
+            if(currentQuestion.Contains(resource.ToLower()))
+            {
+                ResourceType rType =(ResourceType)System.Enum.Parse(typeof(ResourceType), resource);
+                result.Add(ChatMessage.Regular, "You currently have: ");
+
+                if (CharacterManager.Instance.pData.resources.ContainsKey(rType))
+                {
+                    amount = CharacterManager.Instance.pData.resources[rType];
+                    message = amount.ToString() + " " + resource;
+
+                    if (amount > 0)
+                        result.Add(ChatMessage.GoodNews, message);
+                    else
+                        result.Add(ChatMessage.Warning, message);
+
+                    DisplayMessage(result);
+                    return;
+                }
+
+                // Display because they ask for a valid resource, but they have none (not 0)
+                message = amount.ToString() + " " + resource;
+                result.Add(ChatMessage.Warning, message);
+                DisplayMessage(result);
+                return;
+            }
+        }
+
+        // Gelato
+        if (currentQuestion.Contains("gelato"))
+        {
+            foreach (string flavor in flavorNames)
+            {
+                if (currentQuestion.Contains(flavor.ToLower()))
+                {
+                    Flavors fType = (Flavors)System.Enum.Parse(typeof(Flavors), flavor);
+                    result.Add(ChatMessage.Regular, "You currently have: ");
+
+                    if (CharacterManager.Instance.pData.gelato_inventory.ContainsKey(fType))
+                    {
+                        amount = CharacterManager.Instance.pData.gelato_inventory[fType];
+                        message = amount.ToString() + " " + flavor + " Gelato Cones";
+
+                        if (amount > 0)
+                            result.Add(ChatMessage.GoodNews, message);
+                        else
+                            result.Add(ChatMessage.Warning, message);
+                        DisplayMessage(result);
+                        return;
+                    }
+
+                    // Display because they ask for a valid resource, but they have none (not 0)
+                    message = amount.ToString() + " " + flavor;
+                    result.Add(ChatMessage.Warning, message);
+                    DisplayMessage(result);
+                    return;
+                }
+            }
+        }
+
+        // Ingredients
+        foreach (string ingredient in ingredienNames)
+        {
+            if (currentQuestion.Contains(ingredient.ToLower()))
+            {
+                Ingredient iType = (Ingredient)System.Enum.Parse(typeof(Ingredient), ingredient);
+                result.Add(ChatMessage.Regular, "You currently have: ");
+
+                if (CharacterManager.Instance.pData.ingredientsHeld.ContainsKey(iType))
+                {
+                    amount = CharacterManager.Instance.pData.ingredientsHeld[iType];
+                    message = amount.ToString() + " " + ingredient;
+
+                    if (amount > 0)
+                        result.Add(ChatMessage.GoodNews, message);
+                    else
+                        result.Add(ChatMessage.Warning, message);
+                    DisplayMessage(result);
+                    return;
+                }
+
+                // Display because they ask for a valid resource, but they have none (not 0)
+                message = amount.ToString() + " " + ingredient;
+                result.Add(ChatMessage.Warning, message);
+                DisplayMessage(result);
+                return;
+            }
+        }
+
+        result.Add(ChatMessage.News, "Sorry, I don't know what that is.");
+        DisplayMessage(result);
     }
 }

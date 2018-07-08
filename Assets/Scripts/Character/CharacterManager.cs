@@ -4,8 +4,8 @@ using UnityEngine;
 using System.IO;
 using Sirenix.OdinInspector;
 
-public enum Ingredient { VanillaBean, CocoaBean, Lemon, Mango, Strawberry }
-public enum ResourceType { Copper, Iron }
+public enum Ingredient { Vanilla, Cocoa, Lemon, Mango, Strawberry }
+public enum ResourceType { Copper, Iron, Steel }
 public class CharacterManager : SerializedMonoBehaviour {
 
     public bool resetData;
