@@ -7,9 +7,20 @@ public class Secretariat : SerializedMonoBehaviour {
 
     public Affilation affil;
     public GameObject greeting;
-    public Dictionary<string, Dictionary<ChatMessage, string>> messages;
+    public Dictionary<string, List<ChatMessage>> messages;
 
-	void Start () {
+    private void Awake()
+    {
+        foreach (string key in messages.Keys)
+        {
+            foreach (ChatMessage message in messages[key])
+            {
+                message.GenerateFinalMessage(true);
+            }
+        }
+    }
+
+    void Start () {
         greeting.SetActive(false);
 	}
 	
@@ -31,7 +42,7 @@ public class Secretariat : SerializedMonoBehaviour {
             Greet();
         } else
         {
-            ChatBot.Instance.DisplayMessage(messages["NotAllie"]);
+            ChatBot.Instance.DisplayMessage(messages["NotAllies"], true);
         }
     }
 }

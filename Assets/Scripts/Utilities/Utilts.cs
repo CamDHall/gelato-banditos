@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
@@ -237,5 +235,38 @@ public class Utilts {
             laser.SetPosition(0, obj.position);
             laser.SetPosition(1, ray.GetPoint(10000));
         }
+    }
+}
+
+public class ChatMessage
+{
+    public Color color;
+    public string colorStr;
+    public string messageTxt;
+
+    public string finalMessage;
+
+    public ChatMessage(Color incolor, string inmessage)
+    {
+        color = incolor;
+        messageTxt = inmessage;
+
+        GenerateFinalMessage(true);
+    }
+
+    public ChatMessage(string finalColor, string inmessage)
+    {
+        colorStr = finalColor;
+        messageTxt = inmessage;
+
+        GenerateFinalMessage(false);
+    }
+
+    public void GenerateFinalMessage(bool colorNeedsCalculated)
+    {
+        if(colorNeedsCalculated)
+            colorStr = "#" + ColorUtility.ToHtmlStringRGBA(color);
+
+        finalMessage = string.Format("<color={0}>{1}</color>", colorStr, messageTxt);
     }
 }
