@@ -25,6 +25,7 @@ public class ChatBot : MonoBehaviour {
     string currentQuestion;
 
     string[] resourceNames, flavorNames, ingredientNames;
+    ResourceType[] resources;
     string currentMessage;
 
     private void Awake()
@@ -67,7 +68,7 @@ public class ChatBot : MonoBehaviour {
     public void DisplayMessage(List<ChatMessage> messages, bool isTimed)
     {
         
-        uiController.Expand(true);
+        uiController.Expand(isTimed);
 
         string result = "";
 

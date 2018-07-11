@@ -30,6 +30,7 @@ public class ChatBotUI : MonoBehaviour {
     {
         if (timed && Time.timeSinceLevelLoad > timer)
         {
+            Debug.Log("WTF 2");
             Collapse();
             timed = false;
         }
@@ -64,6 +65,7 @@ public class ChatBotUI : MonoBehaviour {
     // Buttons
     public void Question(InputField input)
     {
+        Debug.Log("WTF");
         input.text = input.text.ToLower();
         ChatBot.Instance.Question(input.text);
     }
