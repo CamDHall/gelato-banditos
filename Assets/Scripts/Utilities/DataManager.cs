@@ -1,12 +1,9 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using Sirenix.Serialization;
-using System.Linq;
-
 public class DataManager
 {
     public static T Load<T>(string filename) where T : class

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 using System.Linq;
-using System.Text.RegularExpressions;
-
 /// <summary>
 /// I'm using an enum instead of passing an array of colors for two reasons
 /// 1. When creating messages I should be thinking about the order of importance, not color
@@ -24,8 +23,7 @@ public class ChatBot : MonoBehaviour {
     Dictionary<string, string> keywords;
     string currentQuestion;
 
-    string[] resourceNames, flavorNames, ingredientNames;
-    ResourceType[] resources;
+    Array allFlavors, allIngredients, allResources;
     string currentMessage;
 
     private void Awake()
@@ -37,7 +35,7 @@ public class ChatBot : MonoBehaviour {
 
         string[] temp = File.ReadAllLines(filename);
 
-        foreach(string line in temp)
+        foreach (string line in temp)
         {
             string[] pair = line.Split(',');
             keywords.Add(pair[0].ToLower(), pair[1]);
@@ -47,13 +45,15 @@ public class ChatBot : MonoBehaviour {
     }
 
     void Start () {
-        resourceNames = System.Enum.GetNames(typeof(ResourceType));
-        flavorNames = System.Enum.GetNames(typeof(Flavors));
-        ingredientNames = System.Enum.GetNames(typeof(Ingredient));
-	}
+        allFlavors = Enum.GetValues(typeof(Flavors));
+        allResources = Enum.GetValues(typeof(ResourceType));
+        allIngredients = Enum.GetValues(typeof(Ingredient));
+    }
 
     public void Question(string text)
     {
+        if (text.Contains("bean")) text = text.Replace(" bean", "bean");
+
         foreach (string key in keywords.Keys)
         {
             if (text.Contains(key))
@@ -82,150 +82,67 @@ public class ChatBot : MonoBehaviour {
 
     void amount()
     {
-        List<ChatMessage> messages = new List<ChatMessage>();
-        int amount = 0;
-        string message = "";
-        string color = "";
-        bool hadResource = false;
-        
+        bool containedResource = false, containedGelato = false, containedIngredient = false;
         // Resources
-        foreach (string resource in resourceNames)
-        {
-            amount = 0;
-            if(currentQuestion.Contains(resource.ToLower()))
-            {
-                messages.Add(new ChatMessage(data.NEWS_COLOR, "Resources: " + "\n\n"));
-                messages.Add(new ChatMessage(data.REGULAR_COLOR, resource + ": " ));
-                ResourceType rType =(ResourceType)System.Enum.Parse(typeof(ResourceType), resource);
-
-                if (CharacterManager.Instance.pData.resources.ContainsKey(rType))
-                {
-                    amount = CharacterManager.Instance.pData.resources[rType];
-                }
-
-                if (amount > 0)
-                    color = data.GOOD_NEWS_COLOR;
-                else
-                    color = data.WARNING_COLOR;
-
-                messages.Add(new ChatMessage(color, amount.ToString()));
-                DisplayMessage(messages, false);
-                return;
-            }
-        }
-
         if (currentQuestion.Contains("resource") || currentQuestion.Contains("resources"))
-        {
-            messages.Add(new ChatMessage(data.NEWS_COLOR, "Resources: " + "\n\n"));
+            containedResource = true;
 
-            foreach(ResourceType rType in CharacterManager.Instance.pData.resources.Keys)
-            {
-                int rAmount = CharacterManager.Instance.pData.resources[rType];
-
-                messages.Add(new ChatMessage(data.REGULAR_COLOR, rType.ToString() + ": " + "\t\t"));
-
-                if (rAmount <= 0) messages.Add(new ChatMessage(data.WARNING_COLOR, rAmount.ToString() + "\n"));
-                else messages.Add(new ChatMessage(data.GOOD_NEWS_COLOR, rAmount.ToString() + "\n"));
-            }
-
-            DisplayMessage(messages, false);
-            return;
-        }
-        
-        // Gelato
-        if (currentQuestion.Contains("gelato"))
-        {
-            messages.Add(new ChatMessage(data.NEWS_COLOR, "Your current Gelato holdings: \n\n"));
-            foreach (string flavor in flavorNames)
-            {
-                amount = 0;
-
-                if (currentQuestion.Contains(flavor.ToLower()))
-                {
-                    Flavors fType = (Flavors)System.Enum.Parse(typeof(Flavors), flavor);
-                    messages.Add(new ChatMessage(data.REGULAR_COLOR, flavor + ": \t\t"));
-
-                    if (CharacterManager.Instance.pData.gelato_inventory.ContainsKey(fType))
-                    {
-                        amount = CharacterManager.Instance.pData.gelato_inventory[fType];
-                    }
-
-                    if (amount > 0) color = data.GOOD_NEWS_COLOR;
-                    else color = data.WARNING_COLOR;
-
-                    messages.Add(new ChatMessage(data.WARNING_COLOR, amount.ToString()));
-                    DisplayMessage(messages, false);
-                    return;
-                }
-            }
-
-            foreach (string flavor in flavorNames)
-            {
-                amount = 0;
-                Flavors fType = (Flavors)System.Enum.Parse(typeof(Flavors), flavor);
-                messages.Add(new ChatMessage(data.REGULAR_COLOR, flavor + ": \t\t"));
-
-                if (CharacterManager.Instance.pData.gelato_inventory.ContainsKey(fType))
-                {
-                    amount = CharacterManager.Instance.pData.gelato_inventory[fType];
-                }
-
-                if (amount > 0) color = data.GOOD_NEWS_COLOR;
-                else color = data.WARNING_COLOR;
-
-                messages.Add(new ChatMessage(data.WARNING_COLOR, amount.ToString() + "\n"));
-                DisplayMessage(messages, false);
-            }
-
-            return;
-        }
+        if (AmountInfo(allResources, CharacterManager.Instance.pData.resources, "Resources", containedResource)) return;
 
         // Ingredients
-        foreach (string ingredient in ingredientNames)
-        {
-            amount = 0; // should move these outside of foor loop when looking for single elements
-            if (currentQuestion.Contains(ingredient.ToLower()))
-            {
-                messages.Add(new ChatMessage(data.NEWS_COLOR, "Your current Ingredients: \n\n"));
-                Ingredient iType = (Ingredient)System.Enum.Parse(typeof(Ingredient), ingredient);
+        if (currentQuestion.Contains("ingredient") || currentQuestion.Contains("ingredients"))
+            containedIngredient = true;
+        if (AmountInfo(allIngredients, CharacterManager.Instance.pData.ingredientsHeld, "Ingredients", containedIngredient)) return;
 
-                if (CharacterManager.Instance.pData.ingredientsHeld.ContainsKey(iType))
-                {
-                    amount = CharacterManager.Instance.pData.ingredientsHeld[iType];
-                }
+        // Gelato
+        if (currentQuestion.Contains("gelato"))
+            containedGelato = true;
 
-                if (amount <= 0) color = data.WARNING_COLOR;
-                else color = data.GOOD_NEWS_COLOR;
+        if (AmountInfo(allFlavors, CharacterManager.Instance.pData.gelato_inventory, "Gelato", containedGelato)) return;
 
-                messages.Add(new ChatMessage(data.REGULAR_COLOR, ingredient + ": \t\t"));
-                messages.Add(new ChatMessage(color, amount.ToString()));
-                DisplayMessage(messages, false);
-                return;
-            }
-        }
-
-        if(currentQuestion.Contains("ingredient") || currentQuestion.Contains("ingredients"))
-        {
-            messages.Add(new ChatMessage(data.NEWS_COLOR, "Your current Ingredients: \n\n"));
-
-            foreach(Ingredient ing in CharacterManager.Instance.pData.ingredientsHeld.Keys)
-            {
-                amount = 0;
-                if(CharacterManager.Instance.pData.ingredientsHeld.ContainsKey(ing))
-                    amount = CharacterManager.Instance.pData.ingredientsHeld[ing];
-
-                if (amount <= 0) color = data.WARNING_COLOR;
-                else color = data.GOOD_NEWS_COLOR;
-
-                messages.Add(new ChatMessage(data.REGULAR_COLOR, ing + ": \t\t"));
-                messages.Add(new ChatMessage(color, amount.ToString() + "\n"));
-            }
-
-            DisplayMessage(messages, false);
-            return;
-        }
-
+        List<ChatMessage> messages = new List<ChatMessage>();
         messages.Add(new ChatMessage(data.REGULAR_COLOR, "Sorry, I don't know what that is."));
         DisplayMessage(messages, false);
+    }
+
+    bool AmountInfo(Array allVar, IDictionary refDict, string elementName, bool checkAll)
+    {
+        int amount = 0;
+        string color = "";
+        List<ChatMessage> messages = new List<ChatMessage>();
+
+        messages.Add(new ChatMessage(data.NEWS_COLOR, elementName + ": \n\n"));
+
+        foreach (Enum vType in allVar)
+        {
+            amount = 0;
+            if (refDict.Contains(vType))
+                amount = (int)refDict[vType];
+
+            if (amount <= 0) color = data.WARNING_COLOR;
+            else color = data.GOOD_NEWS_COLOR;
+
+            string vString = vType.ToString();
+
+            messages.Add(new ChatMessage(data.REGULAR_COLOR, vString + ": \t\t"));
+
+            if (currentQuestion.Contains(vString.ToLower()))
+            {
+                messages.Clear();
+                messages.Add(new ChatMessage(data.NEWS_COLOR, elementName + ": \n\n"));
+                messages.Add(new ChatMessage(data.REGULAR_COLOR, vString + ": \t\t"));
+
+                messages.Add(new ChatMessage(color, amount.ToString()));
+                DisplayMessage(messages, false);
+                return true;
+            }
+
+            if(checkAll)
+                messages.Add(new ChatMessage(color, amount.ToString() + "\n"));
+        }
+
+        if (checkAll) DisplayMessage(messages, false);
+
+        return checkAll;
     }
 }
