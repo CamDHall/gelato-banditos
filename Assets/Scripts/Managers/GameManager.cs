@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class GameManager : SerializedMonoBehaviour
 {
-
     public static GameManager Instance;
 
     public GameObject death, win;

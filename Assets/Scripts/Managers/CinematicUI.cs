@@ -32,7 +32,7 @@ public class CinematicUI : MonoBehaviour {
 
     public void SetupStore()
     {
-        Affilation affil = FactionManager.factionAffil;
+        Faction affil = FactionManager.factionAffil;
 
         CinematicUI.Instance.storePanel.gameObject.SetActive(true);
 
@@ -167,7 +167,7 @@ public class CinematicUI : MonoBehaviour {
 
     public void SetupStore(StationController controller)
     {
-        Affilation affil = controller.station_afil;
+        Faction affil = controller.station_afil;
 
         List<GameObject> stationWeapons = controller.stationObj.GetComponent<SpaceStation>().weapons;
 

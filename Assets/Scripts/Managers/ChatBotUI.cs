@@ -65,6 +65,7 @@ public class ChatBotUI : MonoBehaviour {
     // Buttons
     public void Question(InputField input)
     {
+        Debug.Log(input.text);
         input.text = input.text.ToLower();
         ChatBot.Instance.Question(input.text);
     }

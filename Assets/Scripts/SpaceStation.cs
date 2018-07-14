@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Affilation { ChihuahuaFederation, Juarez }
 public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
 
-    public Affilation spaceStation_affil;
+    public Faction spaceStation_affil;
     public float health;
     public List<GameObject> weapons;
     public int resValue;

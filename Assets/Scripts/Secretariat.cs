@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 public class Secretariat : SerializedMonoBehaviour {
 
-    public Affilation affil;
+    public Faction faction;
     public GameObject greeting;
     public Dictionary<string, List<ChatMessage>> messages;
 
@@ -37,7 +37,7 @@ public class Secretariat : SerializedMonoBehaviour {
 
     private void OnTriggerEnter(Collider coll)
     {
-        if(coll.tag == "Character" && CharacterManager.Instance.pData.standings[affil] > 0)
+        if(coll.tag == "Character" && CharacterManager.Instance.pData.standings[faction] > 0)
         {
             Greet();
         } else

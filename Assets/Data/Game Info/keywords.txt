@@ -1,2 +1,4 @@
 how much,amount
 how many,amount
+standing,standing
+standings,standing

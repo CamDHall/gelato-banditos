@@ -30,7 +30,7 @@ public class Utilts {
         CharacterManager.Instance.pData.resources[res] += amount;
     }
 
-    public static int ChangeInStanding(Dictionary<Flavors, int> changes, Affilation group)
+    public static int ChangeInStanding(Dictionary<Flavors, int> changes, Faction group)
     {
         int val = 0;
         List<Flavor> flavClasses = CharacterManager.Instance.pData.flavors.ToList();

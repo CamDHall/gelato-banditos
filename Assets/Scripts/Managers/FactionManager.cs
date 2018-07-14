@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Faction { ChihuahuaFederation, Juarez }
 public class FactionManager : MonoBehaviour {
 
-    public Affilation afil;
-    public static Affilation factionAffil;
+    public Faction faction;
+    public static Faction factionAffil;
 
     private void Awake()
     {
-        factionAffil = afil;
+        factionAffil = faction;
     }
 }

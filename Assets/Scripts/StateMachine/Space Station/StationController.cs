@@ -14,7 +14,7 @@ public class StationController : MonoBehaviour {
     [HideInInspector] public bool aiActive;
     [HideInInspector] public bool weaponsActive;
     [HideInInspector] public SpaceStation stationObj;
-    [HideInInspector] public Affilation station_afil;
+    [HideInInspector] public Faction station_afil;
     [HideInInspector] public float flockTimer, fighterSpawnTimer;
 
 	void Start () {
