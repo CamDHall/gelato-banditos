@@ -10,12 +10,18 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
     public int resValue;
 
     public StationController sc;
+    List<ChatMessage> deathMessage;
 
     bool leftArea = false;
     float leftTimer;
 
 	void Start () {
         sc = GetComponent<StationController>();
+
+        deathMessage = new List<ChatMessage>();
+        deathMessage.Add(new ChatMessage(ChatBot.Instance.data.GOOD_NEWS_COLOR, "Congratulations, you destoryed a Space Station belonging to the "
+            + spaceStation_affil.ToString() + " Faction.\n\n"));
+        deathMessage.Add(new ChatMessage(ChatBot.Instance.data.NEWS_COLOR, "Remeber: You can often resolve conflcits without violence."));
 	}
 	
 	void Update () {
@@ -53,8 +59,8 @@ public class SpaceStation : MonoBehaviour, IDamageable, IDeath {
             CharacterManager.Instance.pData.resources.Add(res, resValue);
         }
 
+        ChatBot.Instance.DisplayMessage(deathMessage, true, 12);
         Destroy(gameObject.transform.parent.gameObject);
-        GameManager.Instance.Win();
         Destroy(gameObject);
     }
 

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ChatBotUI : MonoBehaviour {
@@ -10,7 +8,7 @@ public class ChatBotUI : MonoBehaviour {
 
     public Color warningColor, goodNewsColor, newsColor, regularColor;
 
-    public float timerLength;
+    public float defaultTimerLength;
 
     bool showing, timed;
     float timer;
@@ -52,15 +50,34 @@ public class ChatBotUI : MonoBehaviour {
         if (isTimed)
         {
             timed = true;
+            timer = Time.timeSinceLevelLoad + defaultTimerLength;
+        }
+    }
+
+    public void Expand(bool isTimed, float timerLength)
+    {
+        expand.SetActive(false);
+        chatBot.gameObject.SetActive(true);
+        showing = true;
+
+        if (isTimed)
+        {
+            timed = true;
             timer = Time.timeSinceLevelLoad + timerLength;
         }
+    }
+
+    public void DisplayMessage(string message, bool isTimed, float timerLength)
+    {
+        text.text = message;
+        Expand(isTimed, timerLength);
     }
 
     public void DisplayMessage(string message, bool isTimed)
     {
         text.text = message;
         Expand(isTimed);
-    } 
+    }
 
     // Buttons
     public void Question(InputField input)

@@ -66,14 +66,28 @@ public class ChatBot : MonoBehaviour {
         }
     }
 
-    public void DisplayMessage(List<ChatMessage> messages, bool isTimed)
+    public void DisplayMessage(List<ChatMessage> messages, bool isTimed, float timerLength)
     {
-        
-        uiController.Expand(isTimed);
+        uiController.Expand(isTimed, timerLength);
 
         string result = "";
 
         foreach(ChatMessage message in messages)
+        {
+            result += message.finalMessage + " ";
+        }
+
+        uiController.DisplayMessage(result, isTimed, timerLength);
+    }
+
+    public void DisplayMessage(List<ChatMessage> messages, bool isTimed)
+    {
+
+        uiController.Expand(isTimed);
+
+        string result = "";
+
+        foreach (ChatMessage message in messages)
         {
             result += message.finalMessage + " ";
         }
