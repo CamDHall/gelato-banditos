@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.16487625, g: 0.10864479, b: 0.22398311, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -118,7 +118,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh16372
+  m_Name: pb_Mesh18168
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -259,80 +259,6 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!1 &154327479
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 154327480}
-  - component: {fileID: 154327482}
-  - component: {fileID: 154327481}
-  m_Layer: 5
-  m_Name: Warning
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &154327480
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 154327479}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1581490515}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035, y: -176}
-  m_SizeDelta: {x: 292.5, y: 58.5}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &154327481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 154327479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: ee5107b58c7d06e419c880a5be12d29e, type: 3}
-    m_FontSize: 18
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Halt! Only emissaries bearing gifts may talk to the Commander!
---- !u!222 &154327482
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 154327479}
 --- !u!1 &157064357
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +318,7 @@ MonoBehaviour:
   goodNewsColor: {r: 0.11485406, g: 0.8396226, b: 0.15256642, a: 0}
   newsColor: {r: 0.52184254, g: 0.83153856, b: 0.9338235, a: 1}
   regularColor: {r: 0, g: 0, b: 0, a: 0}
-  timerLength: 5
+  defaultTimerLength: 0
 --- !u!1 &179717418
 GameObject:
   m_ObjectHideFlags: 0
@@ -9567,7 +9493,6 @@ GameObject:
   - component: {fileID: 882898042}
   - component: {fileID: 882898041}
   - component: {fileID: 882898043}
-  - component: {fileID: 882898045}
   m_Layer: 0
   m_Name: ManagerContainer
   m_TagString: Untagged
@@ -9587,7 +9512,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exitToShip: {fileID: 1704789154}
-  gelatoWarning: {fileID: 154327481}
   gelatoGive: {fileID: 0}
 --- !u!4 &882898042
 Transform:
@@ -9624,18 +9548,6 @@ MonoBehaviour:
   - {fileID: 1701036499629878, guid: 52d0a32b029626a4cb846a9d20c7b926, type: 2}
   - {fileID: 1701036499629878, guid: 52d0a32b029626a4cb846a9d20c7b926, type: 2}
   - {fileID: 1701036499629878, guid: 52d0a32b029626a4cb846a9d20c7b926, type: 2}
---- !u!114 &882898045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 882898040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdb0bc9da2d026e4a8474d46659fecba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  faction: 0
 --- !u!43 &970993591
 Mesh:
   m_ObjectHideFlags: 0
@@ -9867,7 +9779,7 @@ Prefab:
       value: '"path":"messages.{\"NotAllies\"}","value":{"$id":0,"$type":"System.Collections.Generic.List`1[[ChatMessage,
         Assembly-CSharp]], mscorlib","$rlength":1,"$rcontent":[{"$id":1,"$type":"ChatMessage,
         Assembly-CSharp","color":{"$type":"UnityEngine.Color, UnityEngine.CoreModule",0,0,0,0},"colorStr":null,"messageTxt":"You
-        are not allied with this faction. Gift them gelato to inscrease your standing.","finalMessage":null}]}'
+        are not allied with this Faction. Gift them Gelato to gain their support.","finalMessage":null}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114266999785061068, guid: cf96be53388b8f64d9fdcba8d6e56b01,
         type: 2}
@@ -9879,13 +9791,13 @@ Prefab:
       propertyPath: serializationData.PrefabModifications.Array.data[4]
       value: '"path":"messages.{\"NotAllies\"}.[0]","value":{"$id":0,"$type":"ChatMessage,
         Assembly-CSharp","color":{"$type":"UnityEngine.Color, UnityEngine.CoreModule",0,0,0,0},"colorStr":null,"messageTxt":"You
-        are not allied with this faction. Gift them gelato to inscrease your standing.","finalMessage":null}'
+        are not allied with this Faction. Gift them Gelato to gain their support.","finalMessage":null}'
       objectReference: {fileID: 0}
     - target: {fileID: 114266999785061068, guid: cf96be53388b8f64d9fdcba8d6e56b01,
         type: 2}
       propertyPath: serializationData.PrefabModifications.Array.data[5]
       value: '"path":"messages.{\"NotAllies\"}.[0].color","value":{"$id":0,"$type":"UnityEngine.Color,
-        UnityEngine.CoreModule",0,0,0,1}'
+        UnityEngine.CoreModule",0,0,0,0}'
       objectReference: {fileID: 0}
     - target: {fileID: 114266999785061068, guid: cf96be53388b8f64d9fdcba8d6e56b01,
         type: 2}
@@ -9901,8 +9813,8 @@ Prefab:
         type: 2}
       propertyPath: serializationData.PrefabModifications.Array.data[8]
       value: '"path":"messages.{\"NotAllies\"}.[0].messageTxt","value":{"$id":0,"$type":"System.String,
-        mscorlib","You are not allied with this faction. Gift them gelato to inscrease
-        your standing."}'
+        mscorlib","You are not allied with this Faction. Gift them Gelato to gain
+        their support."}'
       objectReference: {fileID: 0}
     - target: {fileID: 114266999785061068, guid: cf96be53388b8f64d9fdcba8d6e56b01,
         type: 2}
@@ -9930,7 +9842,7 @@ Prefab:
         type: 2}
       propertyPath: serializationData.PrefabModifications.Array.data[13]
       value: '"path":"messages.{\"NotAllies\"}.[1].messageTxt","value":{"$id":0,"$type":"System.String,
-        mscorlib","But be warned, they''re all picky eaters."}'
+        mscorlib","But beware, they are picky eaters.."}'
       objectReference: {fileID: 0}
     - target: {fileID: 114266999785061068, guid: cf96be53388b8f64d9fdcba8d6e56b01,
         type: 2}
@@ -14446,6 +14358,16 @@ Prefab:
         type: 2}
       propertyPath: serializationData.SerializedBytes.Array.data[828]
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266999785061068, guid: cf96be53388b8f64d9fdcba8d6e56b01,
+        type: 2}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: b79049442e96fcb41b4b198f988218cb,
+        type: 2}
+    - target: {fileID: 1531531405087728, guid: cf96be53388b8f64d9fdcba8d6e56b01, type: 2}
+      propertyPath: m_TagString
+      value: Secretariat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf96be53388b8f64d9fdcba8d6e56b01, type: 2}
@@ -23202,9 +23124,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1704789157}
-  - {fileID: 154327480}
-  - {fileID: 723621102}
   - {fileID: 1928280093}
+  - {fileID: 723621102}
   - {fileID: 2028229268}
   m_Father: {fileID: 1295825063}
   m_RootOrder: 1
@@ -24052,7 +23973,7 @@ Transform:
   - {fileID: 1921157504}
   - {fileID: 721262198}
   m_Father: {fileID: 1581490515}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1962559794
 GameObject:
@@ -24157,7 +24078,7 @@ RectTransform:
   m_LocalScale: {x: 0.41666707, y: 0.41666707, z: 0.41666687}
   m_Children: []
   m_Father: {fileID: 1581490515}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

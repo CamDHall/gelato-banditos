@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StationRailGun : StationWeapon {
-
     public float moveSpeed;
     float difAngle;
     int side;
@@ -139,7 +138,7 @@ public class StationRailGun : StationWeapon {
                 temp.transform.position = transform.position + transform.forward * 50;
                 temp.transform.rotation = transform.rotation;
 
-                timer = Time.timeSinceLevelLoad + firingRate;
+                timer = Time.timeSinceLevelLoad + Random.Range(lowFiringRate, highFiringRate);
             }
         }
 	}

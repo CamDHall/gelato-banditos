@@ -1,13 +1,13 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using Sirenix.Serialization;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum StoreItemType { Ingriedent, StationWeapon }
-public class StoreItemInfo : MonoBehaviour {
-
-    public int cost;
-    public ResourceType resType;
-    public StoreItemType itemType;
-    public GameObject obj;
-    public string name;
+[CreateAssetMenu(fileName = "Inventory", menuName ="Inventory/FactionInventory", order = 1)]
+public class StoreItemInfo : SerializedScriptableObject
+{
+    public Dictionary<GameObject, Dictionary<ResourceType, int>> weapons;
+    public Dictionary<Ingredient, Dictionary<ResourceType, int>> ingredients;
 }

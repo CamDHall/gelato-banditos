@@ -9,21 +9,21 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1284137887557914}
+  m_RootGameObject: {fileID: 1464321348546220}
   m_IsPrefabParent: 1
---- !u!1 &1284137887557914
+--- !u!1 &1464321348546220
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4225257138185994}
-  - component: {fileID: 33931646437938154}
-  - component: {fileID: 23419096179786750}
-  - component: {fileID: 114255471302855200}
-  - component: {fileID: 65891804947534158}
-  - component: {fileID: 54308146950009724}
+  - component: {fileID: 4401202149878846}
+  - component: {fileID: 33569140179318962}
+  - component: {fileID: 23688199755776836}
+  - component: {fileID: 114809415167372394}
+  - component: {fileID: 54196565271326618}
+  - component: {fileID: 65930775269464934}
   m_Layer: 16
   m_Name: Railgun
   m_TagString: StationWeapons
@@ -31,25 +31,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &4225257138185994
+--- !u!4 &4401202149878846
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1284137887557914}
+  m_GameObject: {fileID: 1464321348546220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -140.1, y: 215.1, z: 70}
+  m_LocalPosition: {x: 141.4, y: 215.1, z: 77.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23419096179786750
+--- !u!23 &23688199755776836
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1284137887557914}
+  m_GameObject: {fileID: 1464321348546220}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -79,19 +79,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33931646437938154
+--- !u!33 &33569140179318962
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1284137887557914}
+  m_GameObject: {fileID: 1464321348546220}
   m_Mesh: {fileID: 4300000, guid: 35665bee1b96f284cb9d82b66ef6334e, type: 3}
---- !u!54 &54308146950009724
+--- !u!54 &54196565271326618
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1284137887557914}
+  m_GameObject: {fileID: 1464321348546220}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -101,24 +101,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65891804947534158
+--- !u!65 &65930775269464934
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1284137887557914}
+  m_GameObject: {fileID: 1464321348546220}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 41.53139, y: 46.68469, z: 155.0096}
   m_Center: {x: 0, y: -0.0000019073486, z: 0}
---- !u!114 &114255471302855200
+--- !u!114 &114809415167372394
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1284137887557914}
+  m_GameObject: {fileID: 1464321348546220}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28a45dd7c98d2154c88fe4f8a9e1b4a9, type: 3}
@@ -126,7 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   projectile: {fileID: 1394817010049872, guid: b4225f5a292812d48a267efe44e6172a, type: 2}
-  firingRate: 6
+  lowFiringRate: 6
+  highFiringRate: 10
   rotationSpeed: 0.025
   resAmount: 10
   name: Railgun

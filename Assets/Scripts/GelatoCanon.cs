@@ -72,7 +72,6 @@ public class GelatoCanon : SerializedMonoBehaviour
                 if(col.tag == "Basket")
                 {
                     CharacterManager.Instance.pData.standings[FactionManager.factionAffil] += Utilts.ChangeInStanding(inHand, FactionManager.factionAffil);
-
                     int len = toGive.Count;
 
                     for(int i = 0; i < len; i++)

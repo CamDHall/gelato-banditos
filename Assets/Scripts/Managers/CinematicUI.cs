@@ -18,6 +18,8 @@ public class CinematicUI : MonoBehaviour {
 
     Vector2 padding = new Vector2(100, 100);
 
+    int xCoord, yCoord;
+
     private void Awake()
     {
         Instance = this;
@@ -30,322 +32,121 @@ public class CinematicUI : MonoBehaviour {
         storePanel.gameObject.SetActive(false);
     }
 
-    public void SetupStore()
+    public void SetupStore(Secretariat sec)
     {
-        Faction affil = FactionManager.factionAffil;
+        Faction affil = sec.faction;
 
         CinematicUI.Instance.storePanel.gameObject.SetActive(true);
 
         /// Temp
         /// Repalce with affil specific items
         /// 
+        xCoord = -2;
+        yCoord = -2;
 
-        string[] ing = System.Enum.GetNames(typeof(Ingredient));
-        string[] resList = System.Enum.GetNames(typeof(ResourceType));
-        int x = -2;
-        int y = -2;
-
-        foreach (string s in ing)
+        foreach(Ingredient ingredient in sec.inventory.ingredients.Keys)
         {
-            RectTransform temp = Instantiate(storeItem as RectTransform);
-            temp.GetComponent<RectTransform>().SetParent(storePanel.transform, false);
-            temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 175, y * 100) + padding;
-
-            temp.GetComponentInChildren<Text>().text = s;
-            temp.gameObject.name = s;
-
-            int cost = Random.Range(1, 3);
-            string resChoice = resList[0];
-
-            ResourceType res = (ResourceType)System.Enum.Parse(typeof(ResourceType), resChoice);
-            int amountCanAfford = 0;
-
-            StoreItemInfo si = temp.GetComponent<StoreItemInfo>();
-            si.cost = cost;
-            si.resType = res;
-            si.itemType = StoreItemType.Ingriedent;
-
-            if (x < 1)
-            {
-                x++;
-            }
-            else
-            {
-                x = -2;
-                y++;
-            }
-
-            if (CharacterManager.Instance.pData.resources.ContainsKey(res))
-            {
-                amountCanAfford = Mathf.FloorToInt(CharacterManager.Instance.pData.resources[res] / cost);
-            }
-
-            Dropdown dp = temp.GetComponentInChildren<Dropdown>();
-            dp.onValueChanged.AddListener(delegate { UpdateOptions(dp.transform.parent.parent.gameObject, dp); });
-
-            if (amountCanAfford == 0)
-            {
-                temp.GetComponent<Image>().color = Color.red;
-                dp.enabled = false;
-            }
-            else
-            {
-                dp.enabled = true;
-                dp.ClearOptions();
-
-                List<string> num = new List<string>();
-
-                for (int i = 0; i < amountCanAfford; i++)
-                {
-                    num.Add((i + 1).ToString());
-                }
-
-                dp.AddOptions(num);
-            }
+            CreateStoreItem(sec.inventory.ingredients[ingredient], ingredient.ToString());
         }
 
-        // Naming: sWeapon since right now there's only one type of weapon, must avoid local naming conflicts
-        RectTransform singleWeapon = Instantiate(storeItem as RectTransform);
-        singleWeapon.GetComponent<RectTransform>().SetParent(storePanel.transform, false);
-        singleWeapon.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 175, y * 100) + padding;
-
-        string name = weaponPrefabs[0].GetComponent<StationWeapon>().name;
-        singleWeapon.GetComponentInChildren<Text>().text = name;
-        singleWeapon.gameObject.name = name;
-
-        int sWeaponCost = Random.Range(5, 10);
-        string sWeaponResChoice = resList[0];
-
-        ResourceType sWeaponRes = (ResourceType)System.Enum.Parse(typeof(ResourceType), sWeaponResChoice);
-        int sWeaponAmountCanAfford = 0;
-
-        StoreItemInfo sWeaponSi = singleWeapon.GetComponent<StoreItemInfo>();
-        sWeaponSi.cost = sWeaponCost;
-        sWeaponSi.resType = sWeaponRes;
-        sWeaponSi.itemType = StoreItemType.StationWeapon;
-        sWeaponSi.obj = Instantiate(weaponPrefabs[0]);
-        sWeaponSi.name = name;
-
-        if (x < 1)
+        foreach(GameObject weapon in sec.inventory.weapons.Keys)
         {
-            x++;
-        }
-        else
-        {
-            x = -2;
-            y++;
-        }
-
-        if (CharacterManager.Instance.pData.resources.ContainsKey(sWeaponRes))
-        {
-            sWeaponAmountCanAfford = Mathf.FloorToInt(CharacterManager.Instance.pData.resources[sWeaponRes] / sWeaponCost);
-        }
-
-        Dropdown sWeaponDp = singleWeapon.GetComponentInChildren<Dropdown>();
-        sWeaponDp.onValueChanged.AddListener(delegate { UpdateOptions(sWeaponDp.transform.parent.parent.gameObject, sWeaponDp); });
-
-        if (sWeaponAmountCanAfford == 0)
-        {
-            singleWeapon.GetComponent<Image>().color = Color.red;
-            sWeaponDp.enabled = false;
-        }
-        else
-        {
-            sWeaponDp.enabled = true;
-            sWeaponDp.ClearOptions();
-
-            List<string> num = new List<string>();
-
-            for (int i = 0; i < sWeaponAmountCanAfford; i++)
-            {
-                num.Add((i + 1).ToString());
-            }
-
-            sWeaponDp.AddOptions(num);
+            CreateStoreItem(sec.inventory.weapons[weapon], weapon.name);
         }
     }
 
-    public void SetupStore(StationController controller)
+    void CreateStoreItem(Dictionary<ResourceType, int> cost, string itemName)
     {
-        Faction affil = controller.station_afil;
+        RectTransform temp = Instantiate(storeItem as RectTransform);
+        temp.GetComponent<RectTransform>().SetParent(storePanel.transform, false);
+        temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(xCoord * 175, yCoord * 100) + padding;
 
-        List<GameObject> stationWeapons = controller.stationObj.GetComponent<SpaceStation>().weapons;
+        temp.GetComponentInChildren<Text>().text = itemName;
+        temp.gameObject.name = itemName;
 
-        CameraManager.Instance.mainCanvas.SetActive(false);
-        CameraManager.Instance.cinematicCanvas.gameObject.SetActive(true);
-        CinematicUI.Instance.storePanel.gameObject.SetActive(true);
+        int amountCanAfford = Utilts.DictionaryMod(CharacterManager.Instance.pData.resources, cost);
 
-        /// Temp
-        /// Repalce with affil specific items
-        /// 
-
-        string[] ing = System.Enum.GetNames(typeof(Ingredient));
-        string[] resList = System.Enum.GetNames(typeof(ResourceType));
-        int x = -2;
-        int y = -2;
-
-        foreach(string s in ing)
+        if (xCoord < 1)
         {
-            RectTransform temp = Instantiate(storeItem as RectTransform);
-            temp.GetComponent<RectTransform>().SetParent(storePanel.transform, false);
-            temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 175, y * 100) + padding;
-
-            temp.GetComponentInChildren<Text>().text = s;
-            temp.gameObject.name = s;
-
-            int cost = Random.Range(1, 3);
-            string resChoice = resList[0];
-
-            ResourceType res = (ResourceType)System.Enum.Parse(typeof(ResourceType), resChoice);
-            int amountCanAfford = 0;
-
-            StoreItemInfo si = temp.GetComponent<StoreItemInfo>();
-            si.cost = cost;
-            si.resType = res;
-            si.itemType = StoreItemType.Ingriedent;
-
-            if (x < 1)
-            {
-                x++;
-            }
-            else
-            {
-                x = -2;
-                y++;
-            }
-
-            if (CharacterManager.Instance.pData.resources.ContainsKey(res))
-            {
-                amountCanAfford = Mathf.FloorToInt(CharacterManager.Instance.pData.resources[res] / cost);
-            }
-
-            Dropdown dp = temp.GetComponentInChildren<Dropdown>();
-            dp.onValueChanged.AddListener(delegate { UpdateOptions(dp.transform.parent.parent.gameObject, dp); });
-
-            if (amountCanAfford == 0)
-            {
-                temp.GetComponent<Image>().color = Color.red;
-                dp.enabled = false;
-            } else
-            {
-                dp.enabled = true;
-                dp.ClearOptions();
-
-                List<string> num = new List<string>();
-
-                for(int i = 0; i < amountCanAfford; i++)
-                {
-                    num.Add((i + 1).ToString());
-                }
-
-                dp.AddOptions(num);
-            }
-        }
-
-
-        // Naming: sWeapon since right now there's only one type of weapon, must avoid local naming conflicts
-        RectTransform singleWeapon = Instantiate(storeItem as RectTransform);
-        singleWeapon.GetComponent<RectTransform>().SetParent(storePanel.transform, false);
-        singleWeapon.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * 175, y * 100) + padding;
-
-        string name = stationWeapons[0].GetComponent<StationWeapon>().name;
-        singleWeapon.GetComponentInChildren<Text>().text = name;
-        singleWeapon.gameObject.name = name;
-
-        int sWeaponCost = Random.Range(5, 10);
-        string sWeaponResChoice = resList[0];
-
-        ResourceType sWeaponRes = (ResourceType)System.Enum.Parse(typeof(ResourceType), sWeaponResChoice);
-        int sWeaponAmountCanAfford = 0;
-
-        StoreItemInfo sWeaponSi = singleWeapon.GetComponent<StoreItemInfo>();
-        sWeaponSi.cost = sWeaponCost;
-        sWeaponSi.resType = sWeaponRes;
-        sWeaponSi.itemType = StoreItemType.StationWeapon;
-        sWeaponSi.obj = Instantiate(stationWeapons[0]);
-        sWeaponSi.name = name;
-
-        if (x < 1)
-        {
-            x++;
+            xCoord++;
         }
         else
         {
-            x = -2;
-            y++;
+            xCoord = -2;
+            yCoord++;
         }
 
-        if (CharacterManager.Instance.pData.resources.ContainsKey(sWeaponRes))
-        {
-            sWeaponAmountCanAfford = Mathf.FloorToInt(CharacterManager.Instance.pData.resources[sWeaponRes] / sWeaponCost);
-        }
+        Dropdown dp = temp.GetComponentInChildren<Dropdown>();
+        dp.onValueChanged.AddListener(delegate { UpdateOptions(dp.transform.parent.parent.gameObject, dp); });
 
-        Dropdown sWeaponDp = singleWeapon.GetComponentInChildren<Dropdown>();
-        sWeaponDp.onValueChanged.AddListener(delegate { UpdateOptions(sWeaponDp.transform.parent.parent.gameObject, sWeaponDp); });
+        dp.gameObject.AddComponent<ItemInfo>();
+        dp.gameObject.GetComponent<ItemInfo>().itemCost = cost;
 
-        if (sWeaponAmountCanAfford == 0)
+        if (amountCanAfford == 0)
         {
-            singleWeapon.GetComponent<Image>().color = Color.red;
-            sWeaponDp.enabled = false;
+            temp.GetComponent<Image>().color = Color.red;
+            dp.enabled = false;
         }
         else
         {
-            if(sWeaponAmountCanAfford > stationWeapons.Count / 2)
-            {
-                sWeaponAmountCanAfford = stationWeapons.Count / 2;
-            }
-
-            sWeaponDp.enabled = true;
-            sWeaponDp.ClearOptions();
+            dp.enabled = true;
+            dp.ClearOptions();
 
             List<string> num = new List<string>();
 
-            for (int i = 0; i < sWeaponAmountCanAfford; i++)
+            for (int i = 0; i < amountCanAfford; i++)
             {
                 num.Add((i + 1).ToString());
             }
 
-            sWeaponDp.AddOptions(num);
+            dp.AddOptions(num);
+
         }
     }
 
     public void BuyItem()
     {
         GameObject go = EventSystem.current.currentSelectedGameObject;
+        ///
+        /// Find a better way to get the correct sec when there are multiple in scene
+        ///
+
+        Secretariat sec = GameObject.FindGameObjectWithTag("Secretariat").GetComponent<Secretariat>();
+
         Dropdown[] lst = go.transform.parent.GetComponentsInChildren<Dropdown>(true);
 
         foreach (Dropdown dp in lst)
         {
             if (dp.enabled)
             {
-                StoreItemInfo si = dp.transform.parent.GetComponent<StoreItemInfo>();
-
                 int amount = Utilts.GetDropDownVal(dp);
-                CharacterManager.Instance.pData.resources[si.resType] -= (si.cost * amount);
+                ItemInfo itemInfo = dp.gameObject.GetComponent<ItemInfo>();
 
-                if (si.itemType == StoreItemType.Ingriedent)
+                foreach(ResourceType rType in itemInfo.itemCost.Keys)
                 {
-                    Ingredient ing = (Ingredient)System.Enum.Parse(typeof(Ingredient), dp.transform.parent.name);
+                    CharacterManager.Instance.pData.resources[rType] -= itemInfo.itemCost[rType];
+                } 
 
-                    if (CharacterManager.Instance.pData.ingredientsHeld.ContainsKey(ing))
-                    {
-                        CharacterManager.Instance.pData.ingredientsHeld[ing] += amount;
-                    }
-                    else
-                    {
-                        CharacterManager.Instance.pData.ingredientsHeld.Add(ing, amount);
-                    }
-                } else if(si.itemType == StoreItemType.StationWeapon)
+                if(itemInfo.ingredient != Ingredient.NULL)
                 {
-                    if (CharacterManager.Instance.pData.weapons.ContainsKey(si.name))
+                    if(CharacterManager.Instance.pData.ingredientsHeld.ContainsKey(itemInfo.ingredient))
                     {
-                        CharacterManager.Instance.pData.weapons[si.name].Add(si.obj);
+                        CharacterManager.Instance.pData.ingredientsHeld[itemInfo.ingredient] += amount;
+                    } else
+                    {
+                        CharacterManager.Instance.pData.ingredientsHeld.Add(itemInfo.ingredient, amount);
+                    }
+                } else if(itemInfo.weapon != null)
+                {
+                    if (CharacterManager.Instance.pData.weapons.ContainsKey(itemInfo.weapon.name))
+                    {
+                        CharacterManager.Instance.pData.weapons[itemInfo.weapon.name].Add(itemInfo.weapon);
                     }
                     else
                     {
                         List<GameObject> temp = new List<GameObject>();
-                        temp.Add(si.obj);
-                        CharacterManager.Instance.pData.weapons.Add(si.name, temp);
+                        temp.Add(itemInfo.weapon);
+                        CharacterManager.Instance.pData.weapons.Add(itemInfo.weapon.name, temp);
                     }
                 }
             }
@@ -365,11 +166,15 @@ public class CinematicUI : MonoBehaviour {
         {
             if(drop.value > 0)
             {
-                StoreItemInfo si = drop.transform.parent.GetComponent<StoreItemInfo>();
+                ItemInfo itemInfo = drop.transform.GetComponent<ItemInfo>();
 
-                tempResDict[si.resType] -= (drop.value * si.cost);
+                foreach(ResourceType rType in itemInfo.itemCost.Keys)
+                {
+                    Debug.Log(itemInfo);
+                    tempResDict[rType] -= (drop.value * itemInfo.itemCost[rType]);
 
-                if (tempResDict[si.resType] == 0) tempResDict.Remove(si.resType);
+                    if (tempResDict[rType] == 0) tempResDict.Remove(rType);
+                }
             }
         }
 
@@ -377,11 +182,18 @@ public class CinematicUI : MonoBehaviour {
         {
             if (dp != null && drop == dp) continue;
 
-            StoreItemInfo si = drop.transform.parent.GetComponent<StoreItemInfo>();
+            ItemInfo itemInfo = drop.transform.parent.GetComponent<ItemInfo>();
 
-            int amountCanAfford = Mathf.FloorToInt(tempResDict[si.resType] / si.cost);
+            int amountCanAfford = Utilts.DictionaryMod(tempResDict, itemInfo.itemCost);
             List<string> num = new List<string>();
             drop.ClearOptions();
+
+            if (amountCanAfford <= 0)
+            {
+                drop.transform.parent.GetComponent<Image>().color = Color.red;
+                drop.enabled = false;
+                continue;
+            }
 
             for (int i = 0; i < amountCanAfford; i++)
             {
@@ -389,12 +201,6 @@ public class CinematicUI : MonoBehaviour {
             }
 
             drop.AddOptions(num);
-
-            if (tempResDict[si.resType] < si.cost)
-            {
-                drop.transform.parent.GetComponent<Image>().color = Color.red;
-                drop.enabled = false;
-            }
         }
     }
 
@@ -408,21 +214,31 @@ public class CinematicUI : MonoBehaviour {
         {
             if (drop.value > 0)
             {
-                StoreItemInfo si = drop.transform.parent.GetComponent<StoreItemInfo>();
+                ItemInfo itemInfo= drop.transform.parent.GetComponent<ItemInfo>();
 
-                tempResDict[si.resType] -= (drop.value * si.cost);
+                foreach(ResourceType rType in itemInfo.itemCost.Keys)
+                {
+                    tempResDict[rType] -= (drop.value * itemInfo.itemCost[rType]);
 
-                if (tempResDict[si.resType] == 0) tempResDict.Remove(si.resType);
+                    if (tempResDict[rType] == 0) tempResDict.Remove(rType);
+                }
             }
         }
 
         foreach (Dropdown drop in menus)
         {
-            StoreItemInfo si = drop.transform.parent.GetComponent<StoreItemInfo>();
+            ItemInfo itemInfo = drop.transform.GetComponent<ItemInfo>();
 
-            int amountCanAfford = Mathf.FloorToInt(tempResDict[si.resType] / si.cost);
+            int amountCanAfford = Utilts.DictionaryMod(tempResDict, itemInfo.itemCost);
             List<string> num = new List<string>();
             drop.ClearOptions();
+
+            if (amountCanAfford <= 0)
+            {
+                drop.transform.parent.GetComponent<Image>().color = Color.red;
+                drop.enabled = false;
+                continue;
+            }
 
             for (int i = 0; i < amountCanAfford; i++)
             {
@@ -430,12 +246,6 @@ public class CinematicUI : MonoBehaviour {
             }
 
             drop.AddOptions(num);
-
-            if (tempResDict[si.resType] < si.cost)
-            {
-                drop.transform.parent.GetComponent<Image>().color = Color.red;
-                drop.enabled = false;
-            }
         }
     }
 }

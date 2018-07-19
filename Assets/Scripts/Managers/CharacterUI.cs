@@ -10,7 +10,6 @@ public class CharacterUI : MonoBehaviour {
     public static CharacterUI Instance;
     public Button exitToShip;
 
-    public Text gelatoWarning;
     public GameObject gelatoGive;
 
     private void Awake()
@@ -20,7 +19,6 @@ public class CharacterUI : MonoBehaviour {
 
     private void Start()
     {
-        gelatoWarning.gameObject.SetActive(false);
         exitToShip.gameObject.SetActive(false);
     }
 

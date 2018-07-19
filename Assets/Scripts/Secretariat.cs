@@ -8,6 +8,7 @@ public class Secretariat : SerializedMonoBehaviour {
     public Faction faction;
     public GameObject greeting;
     public Dictionary<string, List<ChatMessage>> messages;
+    public StoreItemInfo inventory;
 
     private void Awake()
     {
@@ -23,16 +24,12 @@ public class Secretariat : SerializedMonoBehaviour {
     void Start () {
         greeting.SetActive(false);
 	}
-	
-	void Update () {
-		
-	}
 
     void Greet()
     {
         CharacterManager.Instance.character.enabled = false;
         greeting.SetActive(true);
-        CinematicUI.Instance.SetupStore();
+        CinematicUI.Instance.SetupStore(this);
     }
 
     private void OnTriggerEnter(Collider coll)

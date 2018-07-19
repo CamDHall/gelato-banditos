@@ -18,6 +18,7 @@ TagManager:
   - Character
   - Basket
   - GelatoContainer
+  - Secretariat
   layers:
   - Default
   - TransparentFX

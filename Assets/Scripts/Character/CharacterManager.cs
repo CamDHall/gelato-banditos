@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using Sirenix.OdinInspector;
 
-public enum Ingredient { VanillaBean, CocoaBean, Lemon, Mango, Strawberry }
+public enum Ingredient { VanillaBean, CocoaBean, Lemon, Mango, Strawberry, NULL }
 public enum ResourceType { Copper, Iron, Steel }
 public enum StandingType { ENEMY, UNFRIENDLY, NEUTRAL, FRIENDLY, ALLIED}
 public class CharacterManager : SerializedMonoBehaviour {

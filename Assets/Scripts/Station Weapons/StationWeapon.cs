@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
+[ShowOdinSerializedPropertiesInInspector]
 public class StationWeapon : MonoBehaviour, IDamageable, IDeath {
 
     public float health;
     public GameObject projectile;
-    public float firingRate;
+    public float lowFiringRate, highFiringRate;
     public float rotationSpeed;
 
     public int resAmount;
     public string name;
     public bool friendly;
+
+    [Sirenix.Serialization.OdinSerialize] public Dictionary<ResourceType, int> cost;
 
     protected float timer;
     protected Quaternion targetRot;

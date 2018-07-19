@@ -2,9 +2,29 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-using Sirenix.OdinInspector.Editor;
+using System.Collections;
 
 public class Utilts {
+
+    public static int DictionaryMod(Dictionary<ResourceType, int> numerators, Dictionary<ResourceType, int> denominators)
+    {
+        int amount = 0;
+
+        foreach(ResourceType numerator in numerators.Keys)
+        {
+            if (!denominators.ContainsKey(numerator))
+            {
+                continue;
+            }
+
+            int result = (int)numerators[numerator] % (int)denominators[numerator];
+
+            if (result > amount) amount = result; 
+        }
+
+
+        return amount;
+    }
 
     public static void ClearField(Vector3 pos, float radius)
     {

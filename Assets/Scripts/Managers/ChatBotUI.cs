@@ -28,7 +28,6 @@ public class ChatBotUI : MonoBehaviour {
     {
         if (timed && Time.timeSinceLevelLoad > timer)
         {
-            Debug.Log("WTF 2");
             Collapse();
             timed = false;
         }

@@ -57,6 +57,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 2e601fc1a0dd5c342a22fe1eae01c721, type: 2}
   m_StaticBatchInfo:
@@ -125,7 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   projectile: {fileID: 1394817010049872, guid: b4225f5a292812d48a267efe44e6172a, type: 2}
-  firingRate: 6
+  lowFiringRate: 6
+  highFiringRate: 10
   rotationSpeed: 0.025
   resAmount: 10
   name: Railgun
