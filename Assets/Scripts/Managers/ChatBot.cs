@@ -30,7 +30,7 @@ public class ChatBot : MonoBehaviour {
     {
         Instance = this;
 
-        string filename = Application.dataPath + "/Data/Game Info/keywords.txt";
+        string filename = Application.streamingAssetsPath + "/Data/Game Info/keywords.txt";
         keywords = new Dictionary<string, string>();
 
         string[] temp = File.ReadAllLines(filename);

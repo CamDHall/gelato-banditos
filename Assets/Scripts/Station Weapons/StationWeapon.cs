@@ -107,6 +107,7 @@ public class StationWeapon : MonoBehaviour, IDamageable, IDeath {
             Death();
         }
 
+        Debug.Log(hitTimerAmount);
         hitTimer = Time.timeSinceLevelLoad + hitTimerAmount;
     }
 

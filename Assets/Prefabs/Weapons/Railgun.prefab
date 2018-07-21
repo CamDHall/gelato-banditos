@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114307012311324902}
   - component: {fileID: 54930759891633396}
   - component: {fileID: 65104205804909232}
+  - component: {fileID: 114577443389993394}
   m_Layer: 16
   m_Name: Railgun
   m_TagString: StationWeapons
@@ -108,7 +109,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1701036499629878}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 41.53139, y: 46.68469, z: 155.0096}
@@ -133,3 +134,67 @@ MonoBehaviour:
   name: Railgun
   friendly: 0
   moveSpeed: 2
+--- !u!114 &114577443389993394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701036499629878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a5fc50cb592fe4f95457eb6d66e520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Settings: {fileID: 0}
+  Icon: {fileID: 0}
+  RadarIcon:
+    IconSize: 1
+    IconColor: {r: 1, g: 0, b: 0, a: 1}
+    OverrideIcon: {fileID: 21300000, guid: 4d6d7a45bac15d046bbf787a35f83b71, type: 3}
+  CompassBarIcon:
+    IconSize: 16
+    IconColor: {r: 1, g: 1, b: 1, a: 1}
+    OverrideIcon: {fileID: 21300000, guid: b7d51971291b01846b99c3876e616e43, type: 3}
+  IndicatorIcon:
+    IconSize: 20
+    IconColor: {r: 1, g: 0, b: 0, a: 1}
+    OverrideIcon: {fileID: 21300000, guid: 518c5abafcb17004e8a0a788245fd66e, type: 3}
+  OffscreenIndicatorIcon:
+    IconSize: 15
+    IconColor: {r: 1, g: 0, b: 0, a: 1}
+    OverrideIcon: {fileID: 0}
+  HideInRadar: 0
+  HideInCompassBar: 0
+  IgnoreCompassBarRadius: 0
+  ShowIndicator: 1
+  IgnoreIndicatorRadius: 1
+  IndicatorOffset: {x: 0, y: 0, z: 0}
+  OnAppear:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: SickscoreGames.HUDNavigationSystem.NavigatonElementEvent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnDisappear:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: SickscoreGames.HUDNavigationSystem.NavigatonElementEvent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnEnterRadius:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: SickscoreGames.HUDNavigationSystem.NavigatonElementEvent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnLeaveRadius:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: SickscoreGames.HUDNavigationSystem.NavigatonElementEvent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  IsActive: 1
+  Distance: {fileID: 0}
+  IndicatorDistance: {fileID: 0}
+  RadarMarker: {fileID: 0}
+  CompassBarMarker: {fileID: 0}
+  Indicator: {fileID: 0}
+  IsInRadarRadius: 0
+  IsInCompassBarRadius: 0
+  IsInIndicatorRadius: 0

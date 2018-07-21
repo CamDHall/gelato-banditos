@@ -29,7 +29,7 @@ public class DataManager
     // Somewhere, a method to serialize data to json might look something like this
     public static void Save<T>(T data) where T : class
     {
-        string path = Application.dataPath + "/Data/playerInventory.dat";
+        string path = Application.streamingAssetsPath + "/Data/playerInventory.dat";
 
         List<UnityEngine.Object> unityObjectReferences = new List<UnityEngine.Object>();
 
@@ -41,13 +41,19 @@ public class DataManager
 
     public static PlayerData LoadCharacterData()
     {
-        string path = Application.dataPath + "/Data/playerInventory.dat";
+        string path = Application.streamingAssetsPath + "/Data/playerInventory.dat";
+        if (!File.Exists(path))
+        {
+            Save<PlayerData>(CharacterManager.Instance.pData);
+        }
+
         DataFormat df = DataFormat.Binary;
         List<UnityEngine.Object> objs = new List<UnityEngine.Object>();
 
         var bytes = File.ReadAllBytes(path);
         PlayerData data = SerializationUtility.DeserializeValue<PlayerData>(bytes, df, objs);
-
         return data;
     }
+
+
 }

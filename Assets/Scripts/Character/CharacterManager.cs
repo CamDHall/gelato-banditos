@@ -17,7 +17,7 @@ public class CharacterManager : SerializedMonoBehaviour {
     public PlayerData pData;
 
     float dPadHorizontal = 0;
-    bool horizontalPadInUse = false;
+    bool horizontalPadInUse = false, tempPad;
 
     public bool inStation = false;
 
@@ -39,24 +39,27 @@ public class CharacterManager : SerializedMonoBehaviour {
 
     void Update () {
         dPadHorizontal = Input.GetAxis("DpadHorizontal");
-        bool tempPad = Input.GetKeyDown(KeyCode.RightArrow);
+        tempPad = Input.GetKeyDown(KeyCode.RightArrow);
 
-        if (!horizontalPadInUse)
+        if (Input.GetButton("X"))
         {
-            if (dPadHorizontal > 0 || tempPad)
+            if (!horizontalPadInUse)
             {
-                GelatoCanon.Instance.UpdateCounter(1, false);
-                horizontalPadInUse = true;
+                if (dPadHorizontal > 0 || tempPad)
+                {
+                    GelatoCanon.Instance.UpdateCounter(1, false);
+                    horizontalPadInUse = true;
+                }
+                else if (dPadHorizontal < 0)
+                {
+                    GelatoCanon.Instance.UpdateCounter(-1, false);
+                    horizontalPadInUse = true;
+                }
             }
-            else if (dPadHorizontal < 0)
+            else if (dPadHorizontal == 0)
             {
-                GelatoCanon.Instance.UpdateCounter(-1, false);
-                horizontalPadInUse = true;
+                horizontalPadInUse = false;
             }
-        }
-        else if (dPadHorizontal == 0)
-        {
-            horizontalPadInUse = false;
         }
     }
 }

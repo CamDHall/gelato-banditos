@@ -64,7 +64,6 @@ public class GunController : MonoBehaviour {
                     }
                     else if(!(hTag == "SpaceStation" && !canHitStation))
                     {
-
                         if (hTag == "Astro" || hTag == "StationWeapons")
                         {
                             AudioManager.Instance.AstroCrack();

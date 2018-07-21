@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 
 public class Secretariat : SerializedMonoBehaviour {
 
     public Faction faction;
     public GameObject greeting;
-    public Dictionary<string, List<ChatMessage>> messages;
+    [SerializeField] public Dictionary<string, List<ChatMessage>> messages;
     public StoreItemInfo inventory;
 
     private void Awake()

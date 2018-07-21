@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
+using System;
 
 public class Utilts {
 
@@ -259,6 +260,7 @@ public class Utilts {
     }
 }
 
+[Serializable]
 public class ChatMessage
 {
     public Color color;
@@ -286,7 +288,7 @@ public class ChatMessage
     public void GenerateFinalMessage(bool colorNeedsCalculated)
     {
         if(colorNeedsCalculated)
-            colorStr = "#" + ColorUtility.ToHtmlStringRGBA(color);
+            colorStr = "#" + ColorUtility.ToHtmlStringRGB(color);
 
         finalMessage = string.Format("<color={0}>{1}</color>", colorStr, messageTxt);
     }

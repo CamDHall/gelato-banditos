@@ -14,9 +14,11 @@ public class PlayerMovement : MonoBehaviour {
     public float speed, maxSpeed, currentSpeed;
     public float deadZone;
     public float pitch_speed, yaw_speed, roll_speed;
+    public float strafeSpeed;
     public bool rotating = false;
     [HideInInspector]public bool rolling = true;
     public SpeedSetting speedSetting;
+    float dPadHorizontal = 0, dPadVertical = 0;
 
     float pitch, yaw, roll;
     Vector3 vel, addedPos;
@@ -60,8 +62,26 @@ public class PlayerMovement : MonoBehaviour {
     {
         // Inputs
         stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
+        dPadHorizontal = Input.GetAxis("DpadHorizontal");
+        dPadVertical = Input.GetAxis("DpadVertical");
 
-        if(Input.GetButtonDown("AButton"))
+        if(dPadHorizontal > 0)
+        {
+            transform.Translate(Vector3.right * strafeSpeed);
+        } else if(dPadHorizontal < 0)
+        {
+            transform.Translate(-Vector3.right * strafeSpeed);
+        }
+
+        if(dPadVertical > 0)
+        {
+            transform.Translate(-Vector3.down * strafeSpeed);
+        } else if(dPadVertical < 0)
+        {
+            transform.Translate(Vector3.down * strafeSpeed);
+        }
+
+        if (Input.GetButtonDown("AButton"))
         {
             if (speedSetting == SpeedSetting.Idle || speedSetting == SpeedSetting.Reverse) speedSetting = SpeedSetting.Slow;
             else if (speedSetting == SpeedSetting.Slow) speedSetting = SpeedSetting.Fast;
@@ -129,9 +149,6 @@ public class PlayerMovement : MonoBehaviour {
             else if (speedSetting == SpeedSetting.Idle) currentSpeed = 0;
             else if (speedSetting == SpeedSetting.Slow) currentSpeed = speed;
             else currentSpeed = maxSpeed;
-
-            /*if (speedSetting == SpeedSetting.Fast && !ps.isPlaying) ps.Play();
-            else if (speedSetting != SpeedSetting.Fast && ps.isPlaying) ps.Stop();*/
 
             pitch = stickInput.x * pitch_speed;
             yaw = stickInput.y * yaw_speed;

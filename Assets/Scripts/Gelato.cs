@@ -63,13 +63,4 @@ public class Gelato : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-
-    /*void Place()
-    {
-        transform.SetParent(PlayerMovement.player.gelatoContainer);
-        transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
-        transform.position = PlayerMovement.player.gelatoContainer.position;
-
-        PlayerInventory.Instance.cones.Remove(gameObject);
-    }*/
 }
