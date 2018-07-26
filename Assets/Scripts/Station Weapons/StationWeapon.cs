@@ -14,6 +14,7 @@ public class StationWeapon : MonoBehaviour, IDamageable, IDeath {
     public int resAmount;
     public string name;
     public bool friendly;
+    public bool isTethered;
 
     [Sirenix.Serialization.OdinSerialize] public Dictionary<ResourceType, int> cost;
 
@@ -43,7 +44,7 @@ public class StationWeapon : MonoBehaviour, IDamageable, IDeath {
 
     protected void Update()
     {
-        if (!isEnabled) return;
+        if (!isEnabled || isTethered) return;
         if (friendly && target == null)
         {
             bool targetFound = false;
@@ -107,7 +108,6 @@ public class StationWeapon : MonoBehaviour, IDamageable, IDeath {
             Death();
         }
 
-        Debug.Log(hitTimerAmount);
         hitTimer = Time.timeSinceLevelLoad + hitTimerAmount;
     }
 

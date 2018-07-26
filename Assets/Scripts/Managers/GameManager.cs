@@ -25,14 +25,35 @@ public class GameManager : SerializedMonoBehaviour
     public List<GameObject> friends = new List<GameObject>();
 
     [HideInInspector] public SpaceStation nearestStation;
+    bool inStation = false;
 
 	void Start () {
         Instance = this;
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SpaceStation")
+        {
+            inStation = true;
+            return;
+        }
 
         bc = i_left.color;
 	}
 	
 	void Update () {
+        if (Input.GetButtonUp("Start"))
+        {
+
+            if(menu.activeSelf)
+            {
+                menu.SetActive(false);
+            } else
+            {
+                menu.SetActive(true);
+            }
+        }
+
+        if (inStation) return;
+
         if (Input.GetButtonDown("Back"))
         {
             if (ingame_menu.gameObject.activeSelf)
@@ -43,23 +64,6 @@ public class GameManager : SerializedMonoBehaviour
             {
                 PlayerMovement.player.speedSetting = SpeedSetting.Idle;
                 ingame_menu.gameObject.SetActive(true);
-            }
-        }
-
-        if(Input.GetKeyUp(KeyCode.Q))
-        {
-            Application.Quit();
-        }
-
-        if (Input.GetButtonUp("Start"))
-        {
-
-            if(menu.activeSelf)
-            {
-                menu.SetActive(false);
-            } else
-            {
-                menu.SetActive(true);
             }
         }
 
@@ -147,6 +151,31 @@ public class GameManager : SerializedMonoBehaviour
         {
             i_bottom.color = new Color(bc.r, bc.g, bc.b, 1);
             bottomActive = true;
+        }
+    }
+
+    public void DisablePlayer()
+    {
+        if(!inStation)
+        {
+            GunController.Instance.enabled = false;
+            PlayerMovement.player.enabled = false;
+        } else
+        {
+            CharacterManager.Instance.character.enabled = false;
+        }
+    }
+
+    public void EnablePlayer()
+    {
+        if (!inStation)
+        {
+            GunController.Instance.enabled = true;
+            PlayerMovement.player.enabled = true;
+        }
+        else
+        {
+            CharacterManager.Instance.character.enabled = true;
         }
     }
 }

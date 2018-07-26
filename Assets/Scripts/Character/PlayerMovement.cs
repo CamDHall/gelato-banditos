@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
     [HideInInspector]public bool rolling = true;
     public SpeedSetting speedSetting;
     float dPadHorizontal = 0, dPadVertical = 0;
+    bool xButton;
 
     float pitch, yaw, roll;
     Vector3 vel, addedPos;
@@ -64,21 +65,27 @@ public class PlayerMovement : MonoBehaviour {
         stickInput = new Vector2(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"));
         dPadHorizontal = Input.GetAxis("DpadHorizontal");
         dPadVertical = Input.GetAxis("DpadVertical");
+        xButton = Input.GetButton("X");
 
-        if(dPadHorizontal > 0)
+        if (!xButton)
         {
-            transform.Translate(Vector3.right * strafeSpeed);
-        } else if(dPadHorizontal < 0)
-        {
-            transform.Translate(-Vector3.right * strafeSpeed);
-        }
+            if (dPadHorizontal > 0)
+            {
+                transform.Translate(Vector3.right * strafeSpeed);
+            }
+            else if (dPadHorizontal < 0)
+            {
+                transform.Translate(-Vector3.right * strafeSpeed);
+            }
 
-        if(dPadVertical > 0)
-        {
-            transform.Translate(-Vector3.down * strafeSpeed);
-        } else if(dPadVertical < 0)
-        {
-            transform.Translate(Vector3.down * strafeSpeed);
+            if (dPadVertical > 0)
+            {
+                transform.Translate(-Vector3.down * strafeSpeed);
+            }
+            else if (dPadVertical < 0)
+            {
+                transform.Translate(Vector3.down * strafeSpeed);
+            }
         }
 
         if (Input.GetButtonDown("AButton"))

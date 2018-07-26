@@ -13,11 +13,18 @@ public class UIManager : MonoBehaviour {
 
     public Image indicator;
 
-	void Start () {
-		
-	}
+    bool inStation = false;
+
+    void Start () {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SpaceStation")
+        {
+            inStation = true;
+            return;
+        }
+    }
 	
 	void Update () {
+        if (inStation) return;
 
         if (PlayerMovement.player.shield > 0)
         {
@@ -45,5 +52,10 @@ public class UIManager : MonoBehaviour {
     public void Restart()
     {
         SceneManager.LoadScene("Juarez");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

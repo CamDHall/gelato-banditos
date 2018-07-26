@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class Test : MonoBehaviour {
 
-
-    public float deadZone;
-    private CharacterController controller;
-    private Vector3 currentRot;
-
-    // Deadzone
-    Vector2 leftStick, rightStick;
-    // Use this for initialization
     void Start () {
 
 	}
